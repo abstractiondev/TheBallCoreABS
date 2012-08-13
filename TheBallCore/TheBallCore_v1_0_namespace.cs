@@ -122,6 +122,12 @@ namespace TheBallCore_v1_0 {
         
         private string designDescField;
         
+        private bool isCollectionField;
+        
+        public InformationObjectType() {
+            this.isCollectionField = false;
+        }
+        
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("InformationItems", typeof(InformationItemsType))]
         [System.Xml.Serialization.XmlElementAttribute("InformationObjectContent", typeof(InformationObjectContentType))]
@@ -153,6 +159,18 @@ namespace TheBallCore_v1_0 {
             }
             set {
                 this.designDescField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        [System.ComponentModel.DefaultValueAttribute(false)]
+        public bool isCollection {
+            get {
+                return this.isCollectionField;
+            }
+            set {
+                this.isCollectionField = value;
             }
         }
     }

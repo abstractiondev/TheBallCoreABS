@@ -2,23 +2,16 @@
 <!-- edited with XMLSpy v2011 rel. 2 sp1 (http://www.altova.com) by Kalle Launiala (Citrus Solutions Oy) -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" id="TheBallCore_v1_0">
 	<xs:element name="TheBallCoreAbstraction" type="TheBallCoreAbstractionType"/>
-	<xs:complexType name="InformationModelType">
-		<xs:sequence>
-			<xs:element name="InformationObject" type="InformationObjectType" maxOccurs="unbounded"/>
-		</xs:sequence>
-	</xs:complexType>
 	<xs:complexType name="ClassModelAbstractionType">
 		<xs:sequence>
 			<xs:element name="Classes" type="InformationModelType" maxOccurs="unbounded"/>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="InformationObjectType">
-		<xs:choice>
-			<xs:element name="InformationItems" type="InformationItemsType"/>
-			<xs:element name="InformationObjectContent" type="InformationObjectContentType"/>
-		</xs:choice>
-		<xs:attribute name="name" type="xs:string" use="required"/>
-		<xs:attribute name="designDesc" type="xs:string" use="required"/>
+	<xs:complexType name="CustomMonitoringCycleType">
+		<xs:sequence>
+			<xs:element name="OperationParameter" type="OperationParameterType" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="frequencyOperationName"/>
 	</xs:complexType>
 	<xs:complexType name="ExecutionType">
 		<xs:sequence>
@@ -40,9 +33,76 @@
 			</xs:extension>
 		</xs:simpleContent>
 	</xs:complexType>
+	<xs:complexType name="InformationItemsType">
+		<xs:sequence>
+			<xs:element name="InformationItem" type="InformationItemType" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="InformationItemTargetType">
+		<xs:attribute name="objectName" type="xs:string" use="required"/>
+		<xs:attribute name="itemName" type="xs:string" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="InformationItemType">
+		<xs:attribute name="name" type="xs:string" use="required"/>
+		<xs:attribute name="logicalDataType" use="required">
+			<xs:annotation>
+				<xs:documentation>Datatype for the information. The physical data type that is used for the storage.</xs:documentation>
+			</xs:annotation>
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="TrueOrFalse_Boolean"/>
+					<xs:enumeration value="Text_SingleCharacter"/>
+					<xs:enumeration value="Text_Normal"/>
+					<xs:enumeration value="Text_Huge"/>
+					<xs:enumeration value="Number_Integer"/>
+					<xs:enumeration value="Number_ExactDecimal"/>
+					<xs:enumeration value="Number_ApproxDecimal"/>
+					<xs:enumeration value="Number_CustomFormat"/>
+					<xs:enumeration value="Time_Date"/>
+					<xs:enumeration value="Time_Time"/>
+					<xs:enumeration value="Time_DateTime"/>
+					<xs:enumeration value="Data_Binary"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="InformationModelType">
+		<xs:sequence>
+			<xs:element name="InformationObject" type="InformationObjectType" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="InformationObjectContentType">
 		<xs:attribute name="fileExtension" type="xs:string" use="required"/>
 		<xs:attribute name="originalFileName" type="xs:string"/>
+	</xs:complexType>
+	<xs:complexType name="InformationObjectTargetType">
+		<xs:attribute name="objectName" type="xs:string" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="InformationObjectType">
+		<xs:choice>
+			<xs:element name="InformationItems" type="InformationItemsType"/>
+			<xs:element name="InformationObjectContent" type="InformationObjectContentType"/>
+		</xs:choice>
+		<xs:attribute name="name" type="xs:string" use="required"/>
+		<xs:attribute name="designDesc" type="xs:string" use="required"/>
+		<xs:attribute name="isCollection" type="xs:boolean" use="optional" default="false">
+			<xs:annotation>
+				<xs:documentation>(Opt = false) Is object type a collection. Collections are stored and handled differently.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="InstanceOfTheBallType">
+		<xs:sequence>
+			<xs:element name="InformationModel" type="InformationModelType"/>
+			<xs:element name="Operations" type="OperationsType"/>
+			<xs:element name="Subscriptions" type="SubscriptionsType"/>
+			<xs:element name="Monitoring" type="MonitoringType"/>
+		</xs:sequence>
+		<xs:attribute name="semanticDomainName" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>Semantic domain name of the classes.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
 	</xs:complexType>
 	<xs:complexType name="LogicalInformationType">
 		<xs:attribute name="name" type="xs:string" use="required"/>
@@ -76,6 +136,37 @@
 		<xs:attribute name="name" type="xs:string" use="required"/>
 		<xs:attributeGroup ref="DesignAttributes"/>
 	</xs:complexType>
+	<xs:complexType name="MonitoringFrequencyType">
+		<xs:choice>
+			<xs:element name="RegularMonitoringCycle" type="RegularMonitoringCycleType"/>
+			<xs:element name="CustomMonitoringCycle" type="CustomMonitoringCycleType">
+				<xs:annotation>
+					<xs:documentation>Calls custom operation to retrieve the next calling cycle of the monitor.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:choice>
+		<xs:attribute name="utcTimeStampToStart" type="xs:dateTime">
+			<xs:annotation>
+				<xs:documentation>(Opt) Start time for frequency unit. Makes usually sense starting from Hours and upwards units.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="MonitoringType">
+		<xs:sequence>
+			<xs:element name="Monitor" type="MonitorType" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="MonitorType">
+		<xs:sequence>
+			<xs:choice>
+				<xs:element name="MonitoredInformationItem" type="InformationItemTargetType"/>
+				<xs:element name="MonitoredObjectContent" type="InformationObjectTargetType"/>
+			</xs:choice>
+			<xs:element name="MonitoringFrequency" type="MonitoringFrequencyType" maxOccurs="unbounded"/>
+			<xs:element name="OperationParameter" type="OperationParameterType" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="monitoringOperationName" type="xs:string" use="required"/>
+	</xs:complexType>
 	<xs:complexType name="OperationExecuteType">
 		<xs:sequence>
 			<xs:element name="OperationSignature" type="OperationSignatureType" minOccurs="0">
@@ -92,6 +183,19 @@ This is required for operations that take part of requirement and provider depen
 		<xs:attribute name="name" type="xs:string" use="required"/>
 		<xs:attribute name="targetOperationName" type="xs:string" use="required"/>
 		<xs:attributeGroup ref="DesignAttributes"/>
+	</xs:complexType>
+	<xs:complexType name="OperationParameterType">
+		<xs:attribute name="name" type="xs:string" use="required"/>
+		<xs:attribute name="informationObjectName" type="xs:string" use="required"/>
+		<xs:attribute name="informationItemName" type="xs:string" use="required"/>
+		<xs:attribute name="informationItemSource" use="required">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="TriggeringObject"/>
+					<xs:enumeration value="SubscribingObject"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
 	</xs:complexType>
 	<xs:complexType name="OperationReturnValuesType">
 		<xs:sequence>
@@ -112,6 +216,11 @@ This is required for operations that take part of requirement and provider depen
 		<xs:sequence>
 			<xs:element name="Requirements" type="RequirementsType" minOccurs="0"/>
 			<xs:element name="Description" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="OperationsType">
+		<xs:sequence>
+			<xs:element name="Operation" type="OperationType" maxOccurs="unbounded"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="OperationType">
@@ -177,34 +286,22 @@ This is required for operations that take part of requirement and provider depen
 			<xs:element name="Validation" type="ValidationType" maxOccurs="unbounded"/>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="InformationItemsType">
-		<xs:sequence>
-			<xs:element name="InformationItem" type="InformationItemType" maxOccurs="unbounded"/>
-		</xs:sequence>
-	</xs:complexType>
-	<xs:complexType name="InformationItemType">
-		<xs:attribute name="name" type="xs:string" use="required"/>
-		<xs:attribute name="logicalDataType" use="required">
-			<xs:annotation>
-				<xs:documentation>Datatype for the information. The physical data type that is used for the storage.</xs:documentation>
-			</xs:annotation>
+	<xs:complexType name="RegularMonitoringCycleType">
+		<xs:attribute name="frequencyUnit" use="required">
 			<xs:simpleType>
 				<xs:restriction base="xs:string">
-					<xs:enumeration value="TrueOrFalse_Boolean"/>
-					<xs:enumeration value="Text_SingleCharacter"/>
-					<xs:enumeration value="Text_Normal"/>
-					<xs:enumeration value="Text_Huge"/>
-					<xs:enumeration value="Number_Integer"/>
-					<xs:enumeration value="Number_ExactDecimal"/>
-					<xs:enumeration value="Number_ApproxDecimal"/>
-					<xs:enumeration value="Number_CustomFormat"/>
-					<xs:enumeration value="Time_Date"/>
-					<xs:enumeration value="Time_Time"/>
-					<xs:enumeration value="Time_DateTime"/>
-					<xs:enumeration value="Data_Binary"/>
+					<xs:enumeration value="Millisecond"/>
+					<xs:enumeration value="Second"/>
+					<xs:enumeration value="Minute"/>
+					<xs:enumeration value="Hour"/>
+					<xs:enumeration value="Day"/>
+					<xs:enumeration value="Week"/>
+					<xs:enumeration value="Month"/>
+					<xs:enumeration value="Year"/>
 				</xs:restriction>
 			</xs:simpleType>
 		</xs:attribute>
+		<xs:attribute name="monitorEveryXthOfUnit" type="xs:int" use="required"/>
 	</xs:complexType>
 	<xs:complexType name="RequirementsType">
 		<xs:sequence>
@@ -339,6 +436,21 @@ The requirement definition is done separately, but some categories (such as Perf
 			<xs:element name="TargetDefinition" type="TargetDefinitionType"/>
 		</xs:choice>
 	</xs:complexType>
+	<xs:complexType name="SubscriptionsType">
+		<xs:sequence>
+			<xs:element name="Subscription" type="SubscriptionType" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SubscriptionType">
+		<xs:sequence>
+			<xs:choice>
+				<xs:element name="TriggeringInformationItem" type="InformationItemTargetType"/>
+				<xs:element name="TriggeringObjectContent" type="InformationObjectTargetType"/>
+			</xs:choice>
+			<xs:element name="OperationParameter" type="OperationParameterType" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="triggeredOperationName" type="xs:string" use="required"/>
+	</xs:complexType>
 	<xs:complexType name="TargetDefinitionType">
 		<xs:sequence>
 			<xs:element name="Parameter" type="TargetType" minOccurs="0" maxOccurs="unbounded"/>
@@ -350,6 +462,11 @@ The requirement definition is done separately, but some categories (such as Perf
 	</xs:complexType>
 	<xs:complexType name="TargetType">
 		<xs:attribute name="name" type="xs:string" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="TheBallCoreAbstractionType">
+		<xs:sequence>
+			<xs:element name="InstanceOfTheBall" type="InstanceOfTheBallType"/>
+		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="ValidationType">
 		<xs:sequence>
@@ -382,116 +499,4 @@ Depending on the process, the "designApproved" might come from separate auditing
 			</xs:simpleType>
 		</xs:attribute>
 	</xs:attributeGroup>
-	<xs:complexType name="OperationParameterType">
-		<xs:attribute name="name" type="xs:string" use="required"/>
-		<xs:attribute name="informationObjectName" type="xs:string" use="required"/>
-		<xs:attribute name="informationItemName" type="xs:string" use="required"/>
-		<xs:attribute name="informationItemSource" use="required">
-			<xs:simpleType>
-				<xs:restriction base="xs:string">
-					<xs:enumeration value="TriggeringObject"/>
-					<xs:enumeration value="SubscribingObject"/>
-				</xs:restriction>
-			</xs:simpleType>
-		</xs:attribute>
-	</xs:complexType>
-	<xs:complexType name="CustomMonitoringCycleType">
-		<xs:sequence>
-			<xs:element name="OperationParameter" type="OperationParameterType" maxOccurs="unbounded"/>
-		</xs:sequence>
-		<xs:attribute name="frequencyOperationName"/>
-	</xs:complexType>
-	<xs:complexType name="RegularMonitoringCycleType">
-		<xs:attribute name="frequencyUnit" use="required">
-			<xs:simpleType>
-				<xs:restriction base="xs:string">
-					<xs:enumeration value="Millisecond"/>
-					<xs:enumeration value="Second"/>
-					<xs:enumeration value="Minute"/>
-					<xs:enumeration value="Hour"/>
-					<xs:enumeration value="Day"/>
-					<xs:enumeration value="Week"/>
-					<xs:enumeration value="Month"/>
-					<xs:enumeration value="Year"/>
-				</xs:restriction>
-			</xs:simpleType>
-		</xs:attribute>
-		<xs:attribute name="monitorEveryXthOfUnit" type="xs:int" use="required"/>
-	</xs:complexType>
-	<xs:complexType name="MonitoringFrequencyType">
-		<xs:choice>
-			<xs:element name="RegularMonitoringCycle" type="RegularMonitoringCycleType"/>
-			<xs:element name="CustomMonitoringCycle" type="CustomMonitoringCycleType">
-				<xs:annotation>
-					<xs:documentation>Calls custom operation to retrieve the next calling cycle of the monitor.</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-		</xs:choice>
-		<xs:attribute name="utcTimeStampToStart" type="xs:dateTime">
-			<xs:annotation>
-				<xs:documentation>(Opt) Start time for frequency unit. Makes usually sense starting from Hours and upwards units.</xs:documentation>
-			</xs:annotation>
-		</xs:attribute>
-	</xs:complexType>
-	<xs:complexType name="InformationItemTargetType">
-		<xs:attribute name="objectName" type="xs:string" use="required"/>
-		<xs:attribute name="itemName" type="xs:string" use="required"/>
-	</xs:complexType>
-	<xs:complexType name="InformationObjectTargetType">
-		<xs:attribute name="objectName" type="xs:string" use="required"/>
-	</xs:complexType>
-	<xs:complexType name="MonitorType">
-		<xs:sequence>
-			<xs:choice>
-				<xs:element name="MonitoredInformationItem" type="InformationItemTargetType"/>
-				<xs:element name="MonitoredObjectContent" type="InformationObjectTargetType"/>
-			</xs:choice>
-			<xs:element name="MonitoringFrequency" type="MonitoringFrequencyType" maxOccurs="unbounded"/>
-			<xs:element name="OperationParameter" type="OperationParameterType" maxOccurs="unbounded"/>
-		</xs:sequence>
-		<xs:attribute name="monitoringOperationName" type="xs:string" use="required"/>
-	</xs:complexType>
-	<xs:complexType name="MonitoringType">
-		<xs:sequence>
-			<xs:element name="Monitor" type="MonitorType" maxOccurs="unbounded"/>
-		</xs:sequence>
-	</xs:complexType>
-	<xs:complexType name="SubscriptionType">
-		<xs:sequence>
-			<xs:choice>
-				<xs:element name="TriggeringInformationItem" type="InformationItemTargetType"/>
-				<xs:element name="TriggeringObjectContent" type="InformationObjectTargetType"/>
-			</xs:choice>
-			<xs:element name="OperationParameter" type="OperationParameterType" maxOccurs="unbounded"/>
-		</xs:sequence>
-		<xs:attribute name="triggeredOperationName" type="xs:string" use="required"/>
-	</xs:complexType>
-	<xs:complexType name="SubscriptionsType">
-		<xs:sequence>
-			<xs:element name="Subscription" type="SubscriptionType" maxOccurs="unbounded"/>
-		</xs:sequence>
-	</xs:complexType>
-	<xs:complexType name="OperationsType">
-		<xs:sequence>
-			<xs:element name="Operation" type="OperationType" maxOccurs="unbounded"/>
-		</xs:sequence>
-	</xs:complexType>
-	<xs:complexType name="InstanceOfTheBallType">
-		<xs:sequence>
-			<xs:element name="InformationModel" type="InformationModelType"/>
-			<xs:element name="Operations" type="OperationsType"/>
-			<xs:element name="Subscriptions" type="SubscriptionsType"/>
-			<xs:element name="Monitoring" type="MonitoringType"/>
-		</xs:sequence>
-		<xs:attribute name="semanticDomainName" type="xs:string" use="required">
-			<xs:annotation>
-				<xs:documentation>Semantic domain name of the classes.</xs:documentation>
-			</xs:annotation>
-		</xs:attribute>
-	</xs:complexType>
-	<xs:complexType name="TheBallCoreAbstractionType">
-		<xs:sequence>
-			<xs:element name="InstanceOfTheBall" type="InstanceOfTheBallType"/>
-		</xs:sequence>
-	</xs:complexType>
 </xs:schema>
