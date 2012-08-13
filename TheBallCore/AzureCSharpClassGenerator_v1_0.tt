@@ -1,0 +1,151 @@
+﻿<#@ template debug="true" hostSpecific="true" #>
+<#@ output extension="?" #>
+<#@ Assembly Name="System.Core.dll" #>
+<#@ Assembly Name="System.Xml.dll" #>
+<#@ Assembly Name="System.Xml.Linq.dll" #>
+<#@ Assembly Name="System.Windows.Forms.dll" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Xml" #>
+<#@ import namespace="System.Xml.Serialization" #>
+<#@ import namespace="System.Diagnostics" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Xml.Linq" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #> 
+<#@ include file="..\..\abscommon\CommonInclude\Common\CommonCodeblocks.ttinclude" #>
+<#@ include file="TheBallCore_v1_0.ttinclude" #>
+<#   
+	// Set abstraction specific type and single file specific extension
+	//TransformGenerator< ClassModelAbstractionType >(GenerateRoot, ".designer.cs");	
+	GenerateRoot();
+#>
+<#+ 
+	public Tuple<string, string>[] GetGeneratorContent(params string[] xmlFileNames)
+	{
+		List<Tuple<string, string>> result = new List<Tuple<string, string>>();
+		foreach(string xmlFileName in xmlFileNames)
+		{
+			TheBallCoreAbstractionType abs = LoadXml<TheBallCoreAbstractionType>(xmlFileName);
+			CurrentAbstraction = abs;
+			string content = TransformText();
+			string outputFile = Path.GetFileNameWithoutExtension(xmlFileName) + ".designer.cs";
+			result.Add(Tuple.Create(outputFile, content));
+		}
+		return result.ToArray();
+	}
+	
+	void SetCurrentAbstraction(object abs)
+	{
+		CurrentAbstraction = ( TheBallCoreAbstractionType ) abs;
+	}
+	
+	TheBallCoreAbstractionType CurrentAbstraction;
+	InstanceOfTheBallType CurrInstance;
+	
+	void GenerateRoot()
+	{
+		GenerateAbstraction(CurrentAbstraction);
+	}
+	
+	void GenerateAbstraction(TheBallCoreAbstractionType abstraction)
+	{
+		InstanceOfTheBallType instance = abstraction.InstanceOfTheBall;
+		CurrInstance = instance;
+		GenerateInstance(instance);
+	}	
+
+	void GenerateInstance(InstanceOfTheBallType instance)
+	{
+#>
+using System;
+using Microsoft.WindowsAzure.StorageClient;
+
+<#+
+		BeginNamespace(instance.semanticDomainName);
+		foreach(var informationObject in instance.InformationModel)
+			GenerateInformationObject(informationObject);
+
+		EndBlock(); // namespace
+#>
+
+<#+
+	}
+	
+	void GenerateInformationObject(InformationObjectType informationObject)
+	{
+		string partitionKeyPrefix = CurrInstance.semanticDomainName;
+		string rowKeyPrefix = informationObject.name;
+		string className = informationObject.name;
+#>
+			public partial class <#= className #> : TableServiceEntity
+			{
+				public <#= className #>() 
+				{
+					this.PartitionKey = "<#= partitionKeyPrefix #>" + Guid.NewGuid().ToString();
+					this.RowKey = "<#= rowKeyPrefix #>" + Guid.NewGuid().ToString();
+				}
+<#+
+		GenerateInformationObjectChoice(informationObject.Item);
+#>			
+			}
+<#+
+	}
+
+	void GenerateInformationObjectChoice(object contentItem)
+	{
+		InformationItemsType informationItems = contentItem as InformationItemsType;
+		InformationObjectContentType objectContent = contentItem as InformationObjectContentType;
+		if(informationItems != null)
+			GenerateInformationItems(informationItems.InformationItem);
+		if(objectContent != null)
+			GenerateInformationObjectContent(objectContent);
+	}
+
+	void GenerateInformationObjectContent(InformationObjectContentType objectContent)
+	{
+#>
+		// Properties to map to handle the file: <#= objectContent.originalFileName #>.<#= objectContent.fileExtension #>
+<#+
+	}
+	
+	void GenerateInformationItems(InformationItemType[] informationItems)
+	{
+		foreach(var item in informationItems)
+		{
+			string dataType = GetPhysicalDataTypeFromLogical(item.logicalDataType);
+		#>
+			public <#= dataType #> <#= item.name #> { get; set; }
+		<#+
+		}
+	}
+
+	string GetPhysicalDataTypeFromLogical(InformationItemTypeLogicalDataType logicalDataType)
+	{
+		switch(logicalDataType)
+		{
+			case InformationItemTypeLogicalDataType.Data_Binary:
+				return "byte[]";
+			case InformationItemTypeLogicalDataType.Number_ApproxDecimal:
+				return "double";
+			case InformationItemTypeLogicalDataType.Number_CustomFormat:
+				return "string";
+			case InformationItemTypeLogicalDataType.Number_ExactDecimal:
+				return "double";
+			case InformationItemTypeLogicalDataType.Number_Integer:
+				return "long";
+			case InformationItemTypeLogicalDataType.Text_Huge:
+			case InformationItemTypeLogicalDataType.Text_Normal:
+			case InformationItemTypeLogicalDataType.Text_SingleCharacter:
+				return "string";
+			case InformationItemTypeLogicalDataType.Time_Date:
+			case InformationItemTypeLogicalDataType.Time_DateTime:
+			case InformationItemTypeLogicalDataType.Time_Time:
+				return "DateTime";
+			case InformationItemTypeLogicalDataType.TrueOrFalse_Boolean:
+				return "bool";
+			default:
+				throw new NotSupportedException("Logical data type not recognized: " + logicalDataType.ToString());
+		}
+	}
+#>

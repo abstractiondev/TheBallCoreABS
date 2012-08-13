@@ -20,14 +20,13 @@ namespace TheBallCore_v1_0 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
-    [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=false)]
-    public partial class TheBallCoreAbstraction {
+    [System.Xml.Serialization.XmlRootAttribute("TheBallCoreAbstraction", Namespace="", IsNullable=false)]
+    public partial class TheBallCoreAbstractionType {
         
-        private TheBallCoreAbstractionInstanceOfTheBall instanceOfTheBallField;
+        private InstanceOfTheBallType instanceOfTheBallField;
         
         /// <remarks/>
-        public TheBallCoreAbstractionInstanceOfTheBall InstanceOfTheBall {
+        public InstanceOfTheBallType InstanceOfTheBall {
             get {
                 return this.instanceOfTheBallField;
             }
@@ -42,22 +41,21 @@ namespace TheBallCore_v1_0 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
-    public partial class TheBallCoreAbstractionInstanceOfTheBall {
+    public partial class InstanceOfTheBallType {
         
-        private ClassType[] informationModelField;
+        private InformationObjectType[] informationModelField;
         
         private OperationType[] operationsField;
         
-        private TheBallCoreAbstractionInstanceOfTheBallSubscription[] subscriptionsField;
+        private SubscriptionType[] subscriptionsField;
         
-        private TheBallCoreAbstractionInstanceOfTheBallMonitor[] monitoringField;
+        private MonitorType[] monitoringField;
         
         private string semanticDomainNameField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlArrayItemAttribute("InformationObject", IsNullable=false)]
-        public ClassType[] InformationModel {
+        public InformationObjectType[] InformationModel {
             get {
                 return this.informationModelField;
             }
@@ -79,7 +77,7 @@ namespace TheBallCore_v1_0 {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlArrayItemAttribute("Subscription", IsNullable=false)]
-        public TheBallCoreAbstractionInstanceOfTheBallSubscription[] Subscriptions {
+        public SubscriptionType[] Subscriptions {
             get {
                 return this.subscriptionsField;
             }
@@ -90,7 +88,7 @@ namespace TheBallCore_v1_0 {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlArrayItemAttribute("Monitor", IsNullable=false)]
-        public TheBallCoreAbstractionInstanceOfTheBallMonitor[] Monitoring {
+        public MonitorType[] Monitoring {
             get {
                 return this.monitoringField;
             }
@@ -116,7 +114,7 @@ namespace TheBallCore_v1_0 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class ClassType {
+    public partial class InformationObjectType {
         
         private object itemField;
         
@@ -125,7 +123,7 @@ namespace TheBallCore_v1_0 {
         private string designDescField;
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("InformationItems", typeof(PropertiesType))]
+        [System.Xml.Serialization.XmlElementAttribute("InformationItems", typeof(InformationItemsType))]
         [System.Xml.Serialization.XmlElementAttribute("InformationObjectContent", typeof(InformationObjectContentType))]
         public object Item {
             get {
@@ -164,13 +162,13 @@ namespace TheBallCore_v1_0 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class PropertiesType {
+    public partial class InformationItemsType {
         
-        private PropertyType[] informationItemField;
+        private InformationItemType[] informationItemField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("InformationItem")]
-        public PropertyType[] InformationItem {
+        public InformationItemType[] InformationItem {
             get {
                 return this.informationItemField;
             }
@@ -185,11 +183,11 @@ namespace TheBallCore_v1_0 {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class PropertyType {
+    public partial class InformationItemType {
         
         private string nameField;
         
-        private string logicalDataTypeField;
+        private InformationItemTypeLogicalDataType logicalDataTypeField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
@@ -204,12 +202,439 @@ namespace TheBallCore_v1_0 {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string logicalDataType {
+        public InformationItemTypeLogicalDataType logicalDataType {
             get {
                 return this.logicalDataTypeField;
             }
             set {
                 this.logicalDataTypeField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.3038")]
+    [System.SerializableAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
+    public enum InformationItemTypeLogicalDataType {
+        
+        /// <remarks/>
+        TrueOrFalse_Boolean,
+        
+        /// <remarks/>
+        Text_SingleCharacter,
+        
+        /// <remarks/>
+        Text_Normal,
+        
+        /// <remarks/>
+        Text_Huge,
+        
+        /// <remarks/>
+        Number_Integer,
+        
+        /// <remarks/>
+        Number_ExactDecimal,
+        
+        /// <remarks/>
+        Number_ApproxDecimal,
+        
+        /// <remarks/>
+        Number_CustomFormat,
+        
+        /// <remarks/>
+        Time_Date,
+        
+        /// <remarks/>
+        Time_Time,
+        
+        /// <remarks/>
+        Time_DateTime,
+        
+        /// <remarks/>
+        Data_Binary,
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.3038")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class CustomMonitoringCycleType {
+        
+        private OperationParameterType[] operationParameterField;
+        
+        private string frequencyOperationNameField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("OperationParameter")]
+        public OperationParameterType[] OperationParameter {
+            get {
+                return this.operationParameterField;
+            }
+            set {
+                this.operationParameterField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string frequencyOperationName {
+            get {
+                return this.frequencyOperationNameField;
+            }
+            set {
+                this.frequencyOperationNameField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.3038")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class OperationParameterType {
+        
+        private string nameField;
+        
+        private string informationObjectNameField;
+        
+        private string informationItemNameField;
+        
+        private OperationParameterTypeInformationItemSource informationItemSourceField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string name {
+            get {
+                return this.nameField;
+            }
+            set {
+                this.nameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string informationObjectName {
+            get {
+                return this.informationObjectNameField;
+            }
+            set {
+                this.informationObjectNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string informationItemName {
+            get {
+                return this.informationItemNameField;
+            }
+            set {
+                this.informationItemNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public OperationParameterTypeInformationItemSource informationItemSource {
+            get {
+                return this.informationItemSourceField;
+            }
+            set {
+                this.informationItemSourceField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.3038")]
+    [System.SerializableAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
+    public enum OperationParameterTypeInformationItemSource {
+        
+        /// <remarks/>
+        TriggeringObject,
+        
+        /// <remarks/>
+        SubscribingObject,
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.3038")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class RegularMonitoringCycleType {
+        
+        private RegularMonitoringCycleTypeFrequencyUnit frequencyUnitField;
+        
+        private int monitorEveryXthOfUnitField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public RegularMonitoringCycleTypeFrequencyUnit frequencyUnit {
+            get {
+                return this.frequencyUnitField;
+            }
+            set {
+                this.frequencyUnitField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public int monitorEveryXthOfUnit {
+            get {
+                return this.monitorEveryXthOfUnitField;
+            }
+            set {
+                this.monitorEveryXthOfUnitField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.3038")]
+    [System.SerializableAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
+    public enum RegularMonitoringCycleTypeFrequencyUnit {
+        
+        /// <remarks/>
+        Millisecond,
+        
+        /// <remarks/>
+        Second,
+        
+        /// <remarks/>
+        Minute,
+        
+        /// <remarks/>
+        Hour,
+        
+        /// <remarks/>
+        Day,
+        
+        /// <remarks/>
+        Week,
+        
+        /// <remarks/>
+        Month,
+        
+        /// <remarks/>
+        Year,
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.3038")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class MonitoringFrequencyType {
+        
+        private object itemField;
+        
+        private System.DateTime utcTimeStampToStartField;
+        
+        private bool utcTimeStampToStartFieldSpecified;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("CustomMonitoringCycle", typeof(CustomMonitoringCycleType))]
+        [System.Xml.Serialization.XmlElementAttribute("RegularMonitoringCycle", typeof(RegularMonitoringCycleType))]
+        public object Item {
+            get {
+                return this.itemField;
+            }
+            set {
+                this.itemField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public System.DateTime utcTimeStampToStart {
+            get {
+                return this.utcTimeStampToStartField;
+            }
+            set {
+                this.utcTimeStampToStartField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool utcTimeStampToStartSpecified {
+            get {
+                return this.utcTimeStampToStartFieldSpecified;
+            }
+            set {
+                this.utcTimeStampToStartFieldSpecified = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.3038")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class MonitorType {
+        
+        private object itemField;
+        
+        private MonitoringFrequencyType[] monitoringFrequencyField;
+        
+        private OperationParameterType[] operationParameterField;
+        
+        private string monitoringOperationNameField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("MonitoredInformationItem", typeof(InformationItemTargetType))]
+        [System.Xml.Serialization.XmlElementAttribute("MonitoredObjectContent", typeof(InformationObjectTargetType))]
+        public object Item {
+            get {
+                return this.itemField;
+            }
+            set {
+                this.itemField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("MonitoringFrequency")]
+        public MonitoringFrequencyType[] MonitoringFrequency {
+            get {
+                return this.monitoringFrequencyField;
+            }
+            set {
+                this.monitoringFrequencyField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("OperationParameter")]
+        public OperationParameterType[] OperationParameter {
+            get {
+                return this.operationParameterField;
+            }
+            set {
+                this.operationParameterField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string monitoringOperationName {
+            get {
+                return this.monitoringOperationNameField;
+            }
+            set {
+                this.monitoringOperationNameField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.3038")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class InformationItemTargetType {
+        
+        private string objectNameField;
+        
+        private string itemNameField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string objectName {
+            get {
+                return this.objectNameField;
+            }
+            set {
+                this.objectNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string itemName {
+            get {
+                return this.itemNameField;
+            }
+            set {
+                this.itemNameField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.3038")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class InformationObjectTargetType {
+        
+        private string objectNameField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string objectName {
+            get {
+                return this.objectNameField;
+            }
+            set {
+                this.objectNameField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.3038")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class SubscriptionType {
+        
+        private object itemField;
+        
+        private OperationParameterType[] operationParameterField;
+        
+        private string triggeredOperationNameField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("TriggeringInformationItem", typeof(InformationItemTargetType))]
+        [System.Xml.Serialization.XmlElementAttribute("TriggeringObjectContent", typeof(InformationObjectTargetType))]
+        public object Item {
+            get {
+                return this.itemField;
+            }
+            set {
+                this.itemField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("OperationParameter")]
+        public OperationParameterType[] OperationParameter {
+            get {
+                return this.operationParameterField;
+            }
+            set {
+                this.operationParameterField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string triggeredOperationName {
+            get {
+                return this.triggeredOperationNameField;
+            }
+            set {
+                this.triggeredOperationNameField = value;
             }
         }
     }
@@ -1322,326 +1747,5 @@ namespace TheBallCore_v1_0 {
                 this.originalFileNameField = value;
             }
         }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.3038")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
-    public partial class TheBallCoreAbstractionInstanceOfTheBallSubscription {
-        
-        private object itemField;
-        
-        private TheBallCoreAbstractionInstanceOfTheBallSubscriptionOperationParameter[] operationParameterField;
-        
-        private string triggeredOperationNameField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("TriggeringInformationItem", typeof(TheBallCoreAbstractionInstanceOfTheBallSubscriptionTriggeringInformationItem))]
-        [System.Xml.Serialization.XmlElementAttribute("TriggeringObjectContent", typeof(TheBallCoreAbstractionInstanceOfTheBallSubscriptionTriggeringObjectContent))]
-        public object Item {
-            get {
-                return this.itemField;
-            }
-            set {
-                this.itemField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("OperationParameter")]
-        public TheBallCoreAbstractionInstanceOfTheBallSubscriptionOperationParameter[] OperationParameter {
-            get {
-                return this.operationParameterField;
-            }
-            set {
-                this.operationParameterField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string triggeredOperationName {
-            get {
-                return this.triggeredOperationNameField;
-            }
-            set {
-                this.triggeredOperationNameField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.3038")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
-    public partial class TheBallCoreAbstractionInstanceOfTheBallSubscriptionTriggeringInformationItem {
-        
-        private string nameField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string name {
-            get {
-                return this.nameField;
-            }
-            set {
-                this.nameField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.3038")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
-    public partial class TheBallCoreAbstractionInstanceOfTheBallSubscriptionTriggeringObjectContent {
-        
-        private string nameField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string name {
-            get {
-                return this.nameField;
-            }
-            set {
-                this.nameField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.3038")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
-    public partial class TheBallCoreAbstractionInstanceOfTheBallSubscriptionOperationParameter {
-        
-        private string nameField;
-        
-        private string informationItemNameField;
-        
-        private TheBallCoreAbstractionInstanceOfTheBallSubscriptionOperationParameterInformationItemSource informationItemSourceField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string name {
-            get {
-                return this.nameField;
-            }
-            set {
-                this.nameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string informationItemName {
-            get {
-                return this.informationItemNameField;
-            }
-            set {
-                this.informationItemNameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public TheBallCoreAbstractionInstanceOfTheBallSubscriptionOperationParameterInformationItemSource informationItemSource {
-            get {
-                return this.informationItemSourceField;
-            }
-            set {
-                this.informationItemSourceField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.3038")]
-    [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
-    public enum TheBallCoreAbstractionInstanceOfTheBallSubscriptionOperationParameterInformationItemSource {
-        
-        /// <remarks/>
-        TriggeringObject,
-        
-        /// <remarks/>
-        SubscribingObject,
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.3038")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
-    public partial class TheBallCoreAbstractionInstanceOfTheBallMonitor {
-        
-        private object itemField;
-        
-        private TheBallCoreAbstractionInstanceOfTheBallMonitorOperationParameter[] operationParameterField;
-        
-        private string monitoringOperationNameField;
-        
-        private int monitoringFrequencyInSecondsField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("MonitoredInformationItem", typeof(TheBallCoreAbstractionInstanceOfTheBallMonitorMonitoredInformationItem))]
-        [System.Xml.Serialization.XmlElementAttribute("MonitoredObjectContent", typeof(TheBallCoreAbstractionInstanceOfTheBallMonitorMonitoredObjectContent))]
-        public object Item {
-            get {
-                return this.itemField;
-            }
-            set {
-                this.itemField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("OperationParameter")]
-        public TheBallCoreAbstractionInstanceOfTheBallMonitorOperationParameter[] OperationParameter {
-            get {
-                return this.operationParameterField;
-            }
-            set {
-                this.operationParameterField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string monitoringOperationName {
-            get {
-                return this.monitoringOperationNameField;
-            }
-            set {
-                this.monitoringOperationNameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public int monitoringFrequencyInSeconds {
-            get {
-                return this.monitoringFrequencyInSecondsField;
-            }
-            set {
-                this.monitoringFrequencyInSecondsField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.3038")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
-    public partial class TheBallCoreAbstractionInstanceOfTheBallMonitorMonitoredInformationItem {
-        
-        private string nameField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string name {
-            get {
-                return this.nameField;
-            }
-            set {
-                this.nameField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.3038")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
-    public partial class TheBallCoreAbstractionInstanceOfTheBallMonitorMonitoredObjectContent {
-        
-        private string nameField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string name {
-            get {
-                return this.nameField;
-            }
-            set {
-                this.nameField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.3038")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
-    public partial class TheBallCoreAbstractionInstanceOfTheBallMonitorOperationParameter {
-        
-        private string nameField;
-        
-        private string informationItemNameField;
-        
-        private TheBallCoreAbstractionInstanceOfTheBallMonitorOperationParameterInformationItemSource informationItemSourceField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string name {
-            get {
-                return this.nameField;
-            }
-            set {
-                this.nameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string informationItemName {
-            get {
-                return this.informationItemNameField;
-            }
-            set {
-                this.informationItemNameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public TheBallCoreAbstractionInstanceOfTheBallMonitorOperationParameterInformationItemSource informationItemSource {
-            get {
-                return this.informationItemSourceField;
-            }
-            set {
-                this.informationItemSourceField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.3038")]
-    [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
-    public enum TheBallCoreAbstractionInstanceOfTheBallMonitorOperationParameterInformationItemSource {
-        
-        /// <remarks/>
-        TriggeringObject,
-        
-        /// <remarks/>
-        SubscribingObject,
     }
 }
