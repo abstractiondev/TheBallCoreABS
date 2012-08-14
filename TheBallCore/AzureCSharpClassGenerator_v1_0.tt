@@ -60,16 +60,21 @@
 #>
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Runtime.Serialization;
 using Microsoft.WindowsAzure.StorageClient;
+using TheBall;
 
 <#+
 		BeginNamespace(instance.semanticDomainName);
 #>
     public interface IInformationObject
     {
+        Guid OwnerID { get; set; }
         string ID { get; set; }
-		string Name { get; }
+        string RelativeLocation { get; set; }
+        string SemanticDomainName { get; set; }
+        string Name { get; set; }
     }
 
 <#+
@@ -84,8 +89,8 @@ using Microsoft.WindowsAzure.StorageClient;
 	
 	void GenerateInformationObject(InformationObjectType informationObject)
 	{
-		string domainIDPrefix = CurrInstance.semanticDomainName;
-		string objectIDPrefix = informationObject.name;
+		string semanticDomainName = CurrInstance.semanticDomainName;
+		string objectName = informationObject.name;
 		string informationObjectName = informationObject.name;
 		bool isCollection = informationObject.Item is CollectionForType;
 
@@ -95,27 +100,36 @@ using Microsoft.WindowsAzure.StorageClient;
 			{
 				public <#= informationObjectName #>()
 				{
-					this.ID = "<#= domainIDPrefix #>.<#= objectIDPrefix #>" + "." + Guid.NewGuid().ToString();
+					this.ID = Guid.NewGuid().ToString();
+				    this.OwnerID = AzureSupport.ActiveOwnerID;
+				    this.SemanticDomainName = "<#= semanticDomainName #>";
+				    this.Name = "<#= objectName #>";
+                    RelativeLocation = Path.Combine("<#= semanticDomainName #>", "<#= objectName #>", ID).Replace("\\", "/");
 				}
 
 				[DataMember]
 				public string ID { get; set; }
 
-                [IgnoreDataMember]
-				public string Name
-			    {
-                    get { return "<#= informationObjectName #>"; }
-			    }
+                [DataMember]
+                public Guid OwnerID { get; set; }
 
+                [DataMember]
+                public string RelativeLocation { get; set; }
 
-				public string GetBlobPath()
+                [DataMember]
+                public string Name { get; set; }
+
+                [DataMember]
+                public string SemanticDomainName { get; set; }
+
+				public void SetRelativeLocationTo(IInformationObject masterObject)
 				{
-					return GetBlobPath(this.ID);
+					RelativeLocation = GetRelativeLocationTo(masterObject);
 				}
 
-				public static string GetBlobPath(string id)
+				public static string GetRelativeLocationTo(IInformationObject masterObject)
 				{
-					return id;
+					return Path.Combine("<#= semanticDomainName #>", "<#= objectName #>", masterObject.RelativeLocation).Replace("\\", "/"); 
 				}
 
 <#+
