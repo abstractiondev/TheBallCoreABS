@@ -72,9 +72,11 @@ using TheBall;
     {
         Guid OwnerID { get; set; }
         string ID { get; set; }
+        string ETag { get; set;  }
         string RelativeLocation { get; set; }
         string SemanticDomainName { get; set; }
         string Name { get; set; }
+		void InitializeDefaultSubscribers();
     }
 
 <#+
@@ -101,14 +103,28 @@ using TheBall;
 				public <#= informationObjectName #>()
 				{
 					this.ID = Guid.NewGuid().ToString();
-				    this.OwnerID = AzureSupport.ActiveOwnerID;
+				    this.OwnerID = StorageSupport.ActiveOwnerID;
 				    this.SemanticDomainName = "<#= semanticDomainName #>";
 				    this.Name = "<#= objectName #>";
                     RelativeLocation = Path.Combine("<#= semanticDomainName #>", "<#= objectName #>", ID).Replace("\\", "/");
 				}
 
+                public static <#= informationObjectName #> Retrieve<#= informationObjectName #>(string relativeLocation)
+                {
+                    var result = (<#= informationObjectName #>) StorageSupport.RetrieveInformation(relativeLocation, typeof(<#= informationObjectName #>));
+                    return result;
+                }
+
+			    public void InitializeDefaultSubscribers()
+			    {
+			    }
+
+
 				[DataMember]
 				public string ID { get; set; }
+
+			    [IgnoreDataMember]
+                public string ETag { get; set; }
 
                 [DataMember]
                 public Guid OwnerID { get; set; }
