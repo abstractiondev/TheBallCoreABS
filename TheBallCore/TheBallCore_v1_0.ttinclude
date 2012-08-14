@@ -123,13 +123,8 @@ public partial class InformationObjectType {
     
     private string designDescField;
     
-    private bool isCollectionField;
-    
-    public InformationObjectType() {
-        this.isCollectionField = false;
-    }
-    
     /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute("CollectionFor", typeof(CollectionForType))]
     [System.Xml.Serialization.XmlElementAttribute("InformationItems", typeof(InformationItemsType))]
     [System.Xml.Serialization.XmlElementAttribute("InformationObjectContent", typeof(InformationObjectContentType))]
     public object Item {
@@ -162,18 +157,6 @@ public partial class InformationObjectType {
             this.designDescField = value;
         }
     }
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlAttributeAttribute()]
-    [System.ComponentModel.DefaultValueAttribute(false)]
-    public bool isCollection {
-        get {
-            return this.isCollectionField;
-        }
-        set {
-            this.isCollectionField = value;
-        }
-    }
 }
 
 /// <remarks/>
@@ -181,97 +164,20 @@ public partial class InformationObjectType {
 [System.SerializableAttribute()]
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
-public partial class InformationItemsType {
+public partial class CollectionForType {
     
-    private InformationItemType[] informationItemField;
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute("InformationItem")]
-    public InformationItemType[] InformationItem {
-        get {
-            return this.informationItemField;
-        }
-        set {
-            this.informationItemField = value;
-        }
-    }
-}
-
-/// <remarks/>
-[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.3038")]
-[System.SerializableAttribute()]
-[System.Diagnostics.DebuggerStepThroughAttribute()]
-[System.ComponentModel.DesignerCategoryAttribute("code")]
-public partial class InformationItemType {
-    
-    private string nameField;
-    
-    private InformationItemTypeLogicalDataType logicalDataTypeField;
+    private string contentInformationObjectNameField;
     
     /// <remarks/>
     [System.Xml.Serialization.XmlAttributeAttribute()]
-    public string name {
+    public string contentInformationObjectName {
         get {
-            return this.nameField;
+            return this.contentInformationObjectNameField;
         }
         set {
-            this.nameField = value;
+            this.contentInformationObjectNameField = value;
         }
     }
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlAttributeAttribute()]
-    public InformationItemTypeLogicalDataType logicalDataType {
-        get {
-            return this.logicalDataTypeField;
-        }
-        set {
-            this.logicalDataTypeField = value;
-        }
-    }
-}
-
-/// <remarks/>
-[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.3038")]
-[System.SerializableAttribute()]
-[System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
-public enum InformationItemTypeLogicalDataType {
-    
-    /// <remarks/>
-    TrueOrFalse_Boolean,
-    
-    /// <remarks/>
-    Text_SingleCharacter,
-    
-    /// <remarks/>
-    Text_Normal,
-    
-    /// <remarks/>
-    Text_Huge,
-    
-    /// <remarks/>
-    Number_Integer,
-    
-    /// <remarks/>
-    Number_ExactDecimal,
-    
-    /// <remarks/>
-    Number_ApproxDecimal,
-    
-    /// <remarks/>
-    Number_CustomFormat,
-    
-    /// <remarks/>
-    Time_Date,
-    
-    /// <remarks/>
-    Time_Time,
-    
-    /// <remarks/>
-    Time_DateTime,
-    
-    /// <remarks/>
-    Data_Binary,
 }
 
 /// <remarks/>
@@ -1766,5 +1672,124 @@ public partial class InformationObjectContentType {
             this.originalFileNameField = value;
         }
     }
+}
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.3038")]
+[System.SerializableAttribute()]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
+public partial class InformationItemsType {
+    
+    private InformationItemType[] informationItemField;
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute("InformationItem")]
+    public InformationItemType[] InformationItem {
+        get {
+            return this.informationItemField;
+        }
+        set {
+            this.informationItemField = value;
+        }
+    }
+}
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.3038")]
+[System.SerializableAttribute()]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
+public partial class InformationItemType {
+    
+    private string nameField;
+    
+    private InformationItemTypeLogicalDataType logicalDataTypeField;
+    
+    private string informationObjectNameField;
+    
+    public InformationItemType() {
+        this.informationObjectNameField = "";
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    public string name {
+        get {
+            return this.nameField;
+        }
+        set {
+            this.nameField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    public InformationItemTypeLogicalDataType logicalDataType {
+        get {
+            return this.logicalDataTypeField;
+        }
+        set {
+            this.logicalDataTypeField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    [System.ComponentModel.DefaultValueAttribute("")]
+    public string informationObjectName {
+        get {
+            return this.informationObjectNameField;
+        }
+        set {
+            this.informationObjectNameField = value;
+        }
+    }
+}
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.3038")]
+[System.SerializableAttribute()]
+[System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
+public enum InformationItemTypeLogicalDataType {
+    
+    /// <remarks/>
+    TrueOrFalse_Boolean,
+    
+    /// <remarks/>
+    Text_SingleCharacter,
+    
+    /// <remarks/>
+    Text_Normal,
+    
+    /// <remarks/>
+    Text_Huge,
+    
+    /// <remarks/>
+    Number_Integer,
+    
+    /// <remarks/>
+    Number_ExactDecimal,
+    
+    /// <remarks/>
+    Number_ApproxDecimal,
+    
+    /// <remarks/>
+    Number_CustomFormat,
+    
+    /// <remarks/>
+    Time_Date,
+    
+    /// <remarks/>
+    Time_Time,
+    
+    /// <remarks/>
+    Time_DateTime,
+    
+    /// <remarks/>
+    Data_Binary,
+    
+    /// <remarks/>
+    InformationObject,
 }
 #>

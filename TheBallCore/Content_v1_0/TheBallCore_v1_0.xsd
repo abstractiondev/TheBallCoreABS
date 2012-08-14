@@ -62,8 +62,14 @@
 					<xs:enumeration value="Time_Time"/>
 					<xs:enumeration value="Time_DateTime"/>
 					<xs:enumeration value="Data_Binary"/>
+					<xs:enumeration value="InformationObject"/>
 				</xs:restriction>
 			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="informationObjectName" type="xs:string" default="">
+			<xs:annotation>
+				<xs:documentation>(Opt = "") If logical data type is referencing InformationObject, this is the name for the object.</xs:documentation>
+			</xs:annotation>
 		</xs:attribute>
 	</xs:complexType>
 	<xs:complexType name="InformationModelType">
@@ -81,15 +87,11 @@
 	<xs:complexType name="InformationObjectType">
 		<xs:choice>
 			<xs:element name="InformationItems" type="InformationItemsType"/>
+			<xs:element name="CollectionFor" type="CollectionForType"/>
 			<xs:element name="InformationObjectContent" type="InformationObjectContentType"/>
 		</xs:choice>
 		<xs:attribute name="name" type="xs:string" use="required"/>
 		<xs:attribute name="designDesc" type="xs:string" use="required"/>
-		<xs:attribute name="isCollection" type="xs:boolean" use="optional" default="false">
-			<xs:annotation>
-				<xs:documentation>(Opt = false) Is object type a collection. Collections are stored and handled differently.</xs:documentation>
-			</xs:annotation>
-		</xs:attribute>
 	</xs:complexType>
 	<xs:complexType name="InstanceOfTheBallType">
 		<xs:sequence>
@@ -499,4 +501,7 @@ Depending on the process, the "designApproved" might come from separate auditing
 			</xs:simpleType>
 		</xs:attribute>
 	</xs:attributeGroup>
+	<xs:complexType name="CollectionForType">
+		<xs:attribute name="contentInformationObjectName" type="xs:string" use="required"/>
+	</xs:complexType>
 </xs:schema>

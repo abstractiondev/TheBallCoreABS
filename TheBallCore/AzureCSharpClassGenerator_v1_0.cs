@@ -107,6 +107,21 @@ this.Write("using System;\r\nusing System.Collections.Generic;\r\nusing System.R
         #line 66 "C:\work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 
 		BeginNamespace(instance.semanticDomainName);
+
+        
+        #line default
+        #line hidden
+        
+        #line 68 "C:\work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+this.Write("    public interface IInformationObject\r\n    {\r\n        string ID { get; set; }\r\n" +
+        "\t\tstring Name { get; }\r\n    }\r\n\r\n");
+
+        
+        #line default
+        #line hidden
+        
+        #line 75 "C:\work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+
 		foreach(var informationObject in instance.InformationModel)
 			GenerateInformationObject(informationObject);
 
@@ -116,225 +131,143 @@ this.Write("using System;\r\nusing System.Collections.Generic;\r\nusing System.R
         #line default
         #line hidden
         
-        #line 74 "C:\work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 82 "C:\work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 
 	}
 	
 	void GenerateInformationObject(InformationObjectType informationObject)
 	{
-		string partitionKeyPrefix = CurrInstance.semanticDomainName;
-		string rowKeyPrefix = informationObject.name;
-		string className = informationObject.name;
-		bool isCollection = informationObject.isCollection;
-		if(isCollection) {
+		string domainIDPrefix = CurrInstance.semanticDomainName;
+		string objectIDPrefix = informationObject.name;
+		string informationObjectName = informationObject.name;
+		bool isCollection = informationObject.Item is CollectionForType;
+
 
         
         #line default
         #line hidden
         
-        #line 84 "C:\work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
-this.Write("\t\t\tpublic partial class ");
+        #line 92 "C:\work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+this.Write("\t\t\t[DataContract]\r\n\t\t\tpublic partial class ");
 
         
         #line default
         #line hidden
         
-        #line 85 "C:\work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
-this.Write(this.ToStringHelper.ToStringWithCulture(className));
+        #line 94 "C:\work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+this.Write(this.ToStringHelper.ToStringWithCulture(informationObjectName));
 
         
         #line default
         #line hidden
         
-        #line 85 "C:\work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
-this.Write("Collection\r\n\t\t\t{\r\n\t\t\t\tpublic ");
+        #line 94 "C:\work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+this.Write(" : IInformationObject\r\n\t\t\t{\r\n\t\t\t\tpublic ");
 
         
         #line default
         #line hidden
         
-        #line 87 "C:\work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
-this.Write(this.ToStringHelper.ToStringWithCulture(className));
+        #line 96 "C:\work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+this.Write(this.ToStringHelper.ToStringWithCulture(informationObjectName));
 
         
         #line default
         #line hidden
         
-        #line 87 "C:\work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
-this.Write("Collection()\r\n\t\t\t\t{\r\n\t\t\t\t\tthis.PartitionKey = \"");
+        #line 96 "C:\work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+this.Write("()\r\n\t\t\t\t{\r\n\t\t\t\t\tthis.ID = \"");
 
         
         #line default
         #line hidden
         
-        #line 89 "C:\work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
-this.Write(this.ToStringHelper.ToStringWithCulture(partitionKeyPrefix));
+        #line 98 "C:\work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+this.Write(this.ToStringHelper.ToStringWithCulture(domainIDPrefix));
 
         
         #line default
         #line hidden
         
-        #line 89 "C:\work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
-this.Write("\" + Guid.NewGuid().ToString();\r\n\t\t\t\t\tthis.RowKey = \"");
+        #line 98 "C:\work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+this.Write(".");
 
         
         #line default
         #line hidden
         
-        #line 90 "C:\work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
-this.Write(this.ToStringHelper.ToStringWithCulture(rowKeyPrefix));
+        #line 98 "C:\work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+this.Write(this.ToStringHelper.ToStringWithCulture(objectIDPrefix));
 
         
         #line default
         #line hidden
         
-        #line 90 "C:\work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
-this.Write(@""" + Guid.NewGuid().ToString();
-				}
-				[IgnoreDataMember]
-				public string PartitionKey { get; set; }
-				[IgnoreDataMember]
-				public string RowKey { get; set; }
-
-				public string GetBlobPath()
-                {
-                    return GetBlobPath(this.PartitionKey, this.RowKey);
-                }
-
-                public static string GetBlobPath(string partitionKey, string rowKey)
-                {
-                    return partitionKey + ""_"" + rowKey;
-                }
-
-
-				[DataMember] public List<");
+        #line 98 "C:\work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+this.Write("\" + \".\" + Guid.NewGuid().ToString();\r\n\t\t\t\t}\r\n\r\n\t\t\t\t[DataMember]\r\n\t\t\t\tpublic strin" +
+        "g ID { get; set; }\r\n\r\n                [IgnoreDataMember]\r\n\t\t\t\tpublic string Name" +
+        "\r\n\t\t\t    {\r\n                    get { return \"");
 
         
         #line default
         #line hidden
         
-        #line 108 "C:\work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
-this.Write(this.ToStringHelper.ToStringWithCulture(className));
+        #line 107 "C:\work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+this.Write(this.ToStringHelper.ToStringWithCulture(informationObjectName));
 
         
         #line default
         #line hidden
         
-        #line 108 "C:\work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
-this.Write("> CollectionContent = new List<");
-
-        
-        #line default
-        #line hidden
-        
-        #line 108 "C:\work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
-this.Write(this.ToStringHelper.ToStringWithCulture(className));
-
-        
-        #line default
-        #line hidden
-        
-        #line 108 "C:\work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
-this.Write(">();\r\n\r\n\t\t\t}\r\n\r\n\t\t\t[DataContract]\r\n\t\t\tpublic partial class ");
-
-        
-        #line default
-        #line hidden
-        
-        #line 113 "C:\work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
-this.Write(this.ToStringHelper.ToStringWithCulture(className));
-
-        
-        #line default
-        #line hidden
-        
-        #line 113 "C:\work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
-this.Write("\r\n\t\t\t{\r\n\t\t\t\tpublic ");
-
-        
-        #line default
-        #line hidden
-        
-        #line 115 "C:\work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
-this.Write(this.ToStringHelper.ToStringWithCulture(className));
-
-        
-        #line default
-        #line hidden
-        
-        #line 115 "C:\work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
-this.Write("()\r\n\t\t\t\t{\r\n\t\t\t\t}\r\n\r\n");
-
-        
-        #line default
-        #line hidden
-        
-        #line 119 "C:\work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
-
-		} else {
+        #line 107 "C:\work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+this.Write("\"; }\r\n\t\t\t    }\r\n\r\n\r\n\t\t\t\tpublic string GetBlobPath()\r\n\t\t\t\t{\r\n\t\t\t\t\treturn GetBlobPa" +
+        "th(this.ID);\r\n\t\t\t\t}\r\n\r\n\t\t\t\tpublic static string GetBlobPath(string id)\r\n\t\t\t\t{\r\n\t" +
+        "\t\t\t\treturn id;\r\n\t\t\t\t}\r\n\r\n");
 
         
         #line default
         #line hidden
         
         #line 121 "C:\work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
-this.Write("\t\t\tpublic partial class ");
+
+		if(isCollection) {
+			CollectionForType collectionItem = informationObject.Item as CollectionForType;
+			string contentObjectName = collectionItem.contentInformationObjectName;
 
         
         #line default
         #line hidden
         
-        #line 122 "C:\work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
-this.Write(this.ToStringHelper.ToStringWithCulture(className));
-
-        
-        #line default
-        #line hidden
-        
-        #line 122 "C:\work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
-this.Write(" : TableServiceEntity\r\n\t\t\t{\r\n\t\t\t\tpublic ");
-
-        
-        #line default
-        #line hidden
-        
-        #line 124 "C:\work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
-this.Write(this.ToStringHelper.ToStringWithCulture(className));
-
-        
-        #line default
-        #line hidden
-        
-        #line 124 "C:\work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
-this.Write("() \r\n\t\t\t\t{\r\n\t\t\t\t\tthis.PartitionKey = \"");
-
-        
-        #line default
-        #line hidden
-        
-        #line 126 "C:\work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
-this.Write(this.ToStringHelper.ToStringWithCulture(partitionKeyPrefix));
-
-        
-        #line default
-        #line hidden
-        
-        #line 126 "C:\work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
-this.Write("\" + Guid.NewGuid().ToString();\r\n\t\t\t\t\tthis.RowKey = \"");
+        #line 125 "C:\work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+this.Write("\r\n\t\t\t\t[DataMember] public List<");
 
         
         #line default
         #line hidden
         
         #line 127 "C:\work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
-this.Write(this.ToStringHelper.ToStringWithCulture(rowKeyPrefix));
+this.Write(this.ToStringHelper.ToStringWithCulture(contentObjectName));
 
         
         #line default
         #line hidden
         
         #line 127 "C:\work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
-this.Write("\" + Guid.NewGuid().ToString();\r\n\t\t\t\t}\r\n");
+this.Write("> CollectionContent = new List<");
+
+        
+        #line default
+        #line hidden
+        
+        #line 127 "C:\work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+this.Write(this.ToStringHelper.ToStringWithCulture(contentObjectName));
+
+        
+        #line default
+        #line hidden
+        
+        #line 127 "C:\work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+this.Write(">();\r\n\r\n");
 
         
         #line default
@@ -342,145 +275,132 @@ this.Write("\" + Guid.NewGuid().ToString();\r\n\t\t\t\t}\r\n");
         
         #line 129 "C:\work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 
+		} else {
+			GenerateInformationObjectChoice(informationObject.Item);
 		}
-		GenerateInformationObjectChoice(informationObject.Item, isCollection);
 
         
         #line default
         #line hidden
         
-        #line 132 "C:\work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 133 "C:\work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write("\t\t\t\r\n\t\t\t}\r\n");
 
         
         #line default
         #line hidden
         
-        #line 134 "C:\work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 135 "C:\work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 
 	}
 
-	void GenerateInformationObjectChoice(object contentItem, bool isCollection)
+	void GenerateInformationObjectChoice(object contentItem)
 	{
 		InformationItemsType informationItems = contentItem as InformationItemsType;
 		InformationObjectContentType objectContent = contentItem as InformationObjectContentType;
 		if(informationItems != null)
-			GenerateInformationItems(informationItems.InformationItem, isCollection);
+			GenerateInformationItems(informationItems.InformationItem);
 		if(objectContent != null)
-			GenerateInformationObjectContent(objectContent, isCollection);
+			GenerateInformationObjectContent(objectContent);
 	}
 
-	void GenerateInformationObjectContent(InformationObjectContentType objectContent, bool isCollection)
+	void GenerateInformationObjectContent(InformationObjectContentType objectContent)
 	{
 
         
         #line default
         #line hidden
         
-        #line 149 "C:\work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 150 "C:\work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write("\t\t// Properties to map to handle the file: ");
 
         
         #line default
         #line hidden
         
-        #line 150 "C:\work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 151 "C:\work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(objectContent.originalFileName));
 
         
         #line default
         #line hidden
         
-        #line 150 "C:\work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 151 "C:\work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(".");
 
         
         #line default
         #line hidden
         
-        #line 150 "C:\work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 151 "C:\work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(objectContent.fileExtension));
 
         
         #line default
         #line hidden
         
-        #line 150 "C:\work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 151 "C:\work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write("\r\n\t\t// TODO: Handle object collections\r\n");
 
         
         #line default
         #line hidden
         
-        #line 152 "C:\work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 153 "C:\work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 
 	}
 	
-	void GenerateInformationItems(InformationItemType[] informationItems, bool isCollection)
+	void GenerateInformationItems(InformationItemType[] informationItems)
 	{
 		foreach(var item in informationItems)
 		{
-			string dataType = GetPhysicalDataTypeFromLogical(item.logicalDataType);
-
-        
-        #line default
-        #line hidden
-        
-        #line 160 "C:\work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
-this.Write("\t\t\t");
+			string dataType = GetPhysicalDataTypeFromLogical(item.logicalDataType, item.informationObjectName);
 
         
         #line default
         #line hidden
         
         #line 161 "C:\work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
-this.Write(this.ToStringHelper.ToStringWithCulture(isCollection ? "[DataMember]" : ""));
+this.Write("\t\t\t[DataMember]\r\n\t\t\tpublic ");
 
         
         #line default
         #line hidden
         
-        #line 161 "C:\work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
-this.Write(" public ");
-
-        
-        #line default
-        #line hidden
-        
-        #line 161 "C:\work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 163 "C:\work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(dataType));
 
         
         #line default
         #line hidden
         
-        #line 161 "C:\work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 163 "C:\work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(" ");
 
         
         #line default
         #line hidden
         
-        #line 161 "C:\work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 163 "C:\work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(item.name));
 
         
         #line default
         #line hidden
         
-        #line 161 "C:\work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 163 "C:\work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(" { get; set; }\r\n");
 
         
         #line default
         #line hidden
         
-        #line 162 "C:\work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 164 "C:\work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 
 		}
 	}
 
-	string GetPhysicalDataTypeFromLogical(InformationItemTypeLogicalDataType logicalDataType)
+	string GetPhysicalDataTypeFromLogical(InformationItemTypeLogicalDataType logicalDataType, string informationObjectName)
 	{
 		switch(logicalDataType)
 		{
@@ -504,6 +424,8 @@ this.Write(" { get; set; }\r\n");
 				return "DateTime";
 			case InformationItemTypeLogicalDataType.TrueOrFalse_Boolean:
 				return "bool";
+			case InformationItemTypeLogicalDataType.InformationObject:
+				return informationObjectName;
 			default:
 				throw new NotSupportedException("Logical data type not recognized: " + logicalDataType.ToString());
 		}
@@ -894,13 +816,8 @@ public partial class InformationObjectType {
     
     private string designDescField;
     
-    private bool isCollectionField;
-    
-    public InformationObjectType() {
-        this.isCollectionField = false;
-    }
-    
     /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute("CollectionFor", typeof(CollectionForType))]
     [System.Xml.Serialization.XmlElementAttribute("InformationItems", typeof(InformationItemsType))]
     [System.Xml.Serialization.XmlElementAttribute("InformationObjectContent", typeof(InformationObjectContentType))]
     public object Item {
@@ -933,18 +850,6 @@ public partial class InformationObjectType {
             this.designDescField = value;
         }
     }
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlAttributeAttribute()]
-    [System.ComponentModel.DefaultValueAttribute(false)]
-    public bool isCollection {
-        get {
-            return this.isCollectionField;
-        }
-        set {
-            this.isCollectionField = value;
-        }
-    }
 }
 
 /// <remarks/>
@@ -952,97 +857,20 @@ public partial class InformationObjectType {
 [System.SerializableAttribute()]
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
-public partial class InformationItemsType {
+public partial class CollectionForType {
     
-    private InformationItemType[] informationItemField;
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute("InformationItem")]
-    public InformationItemType[] InformationItem {
-        get {
-            return this.informationItemField;
-        }
-        set {
-            this.informationItemField = value;
-        }
-    }
-}
-
-/// <remarks/>
-[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.3038")]
-[System.SerializableAttribute()]
-[System.Diagnostics.DebuggerStepThroughAttribute()]
-[System.ComponentModel.DesignerCategoryAttribute("code")]
-public partial class InformationItemType {
-    
-    private string nameField;
-    
-    private InformationItemTypeLogicalDataType logicalDataTypeField;
+    private string contentInformationObjectNameField;
     
     /// <remarks/>
     [System.Xml.Serialization.XmlAttributeAttribute()]
-    public string name {
+    public string contentInformationObjectName {
         get {
-            return this.nameField;
+            return this.contentInformationObjectNameField;
         }
         set {
-            this.nameField = value;
+            this.contentInformationObjectNameField = value;
         }
     }
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlAttributeAttribute()]
-    public InformationItemTypeLogicalDataType logicalDataType {
-        get {
-            return this.logicalDataTypeField;
-        }
-        set {
-            this.logicalDataTypeField = value;
-        }
-    }
-}
-
-/// <remarks/>
-[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.3038")]
-[System.SerializableAttribute()]
-[System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
-public enum InformationItemTypeLogicalDataType {
-    
-    /// <remarks/>
-    TrueOrFalse_Boolean,
-    
-    /// <remarks/>
-    Text_SingleCharacter,
-    
-    /// <remarks/>
-    Text_Normal,
-    
-    /// <remarks/>
-    Text_Huge,
-    
-    /// <remarks/>
-    Number_Integer,
-    
-    /// <remarks/>
-    Number_ExactDecimal,
-    
-    /// <remarks/>
-    Number_ApproxDecimal,
-    
-    /// <remarks/>
-    Number_CustomFormat,
-    
-    /// <remarks/>
-    Time_Date,
-    
-    /// <remarks/>
-    Time_Time,
-    
-    /// <remarks/>
-    Time_DateTime,
-    
-    /// <remarks/>
-    Data_Binary,
 }
 
 /// <remarks/>
@@ -2537,6 +2365,125 @@ public partial class InformationObjectContentType {
             this.originalFileNameField = value;
         }
     }
+}
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.3038")]
+[System.SerializableAttribute()]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
+public partial class InformationItemsType {
+    
+    private InformationItemType[] informationItemField;
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute("InformationItem")]
+    public InformationItemType[] InformationItem {
+        get {
+            return this.informationItemField;
+        }
+        set {
+            this.informationItemField = value;
+        }
+    }
+}
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.3038")]
+[System.SerializableAttribute()]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
+public partial class InformationItemType {
+    
+    private string nameField;
+    
+    private InformationItemTypeLogicalDataType logicalDataTypeField;
+    
+    private string informationObjectNameField;
+    
+    public InformationItemType() {
+        this.informationObjectNameField = "";
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    public string name {
+        get {
+            return this.nameField;
+        }
+        set {
+            this.nameField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    public InformationItemTypeLogicalDataType logicalDataType {
+        get {
+            return this.logicalDataTypeField;
+        }
+        set {
+            this.logicalDataTypeField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    [System.ComponentModel.DefaultValueAttribute("")]
+    public string informationObjectName {
+        get {
+            return this.informationObjectNameField;
+        }
+        set {
+            this.informationObjectNameField = value;
+        }
+    }
+}
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.3038")]
+[System.SerializableAttribute()]
+[System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
+public enum InformationItemTypeLogicalDataType {
+    
+    /// <remarks/>
+    TrueOrFalse_Boolean,
+    
+    /// <remarks/>
+    Text_SingleCharacter,
+    
+    /// <remarks/>
+    Text_Normal,
+    
+    /// <remarks/>
+    Text_Huge,
+    
+    /// <remarks/>
+    Number_Integer,
+    
+    /// <remarks/>
+    Number_ExactDecimal,
+    
+    /// <remarks/>
+    Number_ApproxDecimal,
+    
+    /// <remarks/>
+    Number_CustomFormat,
+    
+    /// <remarks/>
+    Time_Date,
+    
+    /// <remarks/>
+    Time_Time,
+    
+    /// <remarks/>
+    Time_DateTime,
+    
+    /// <remarks/>
+    Data_Binary,
+    
+    /// <remarks/>
+    InformationObject,
 }
 
         

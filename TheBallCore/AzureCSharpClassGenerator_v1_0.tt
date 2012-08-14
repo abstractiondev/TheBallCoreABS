@@ -65,6 +65,14 @@ using Microsoft.WindowsAzure.StorageClient;
 
 <#+
 		BeginNamespace(instance.semanticDomainName);
+#>
+    public interface IInformationObject
+    {
+        string ID { get; set; }
+		string Name { get; }
+    }
+
+<#+
 		foreach(var informationObject in instance.InformationModel)
 			GenerateInformationObject(informationObject);
 
@@ -76,75 +84,68 @@ using Microsoft.WindowsAzure.StorageClient;
 	
 	void GenerateInformationObject(InformationObjectType informationObject)
 	{
-		string partitionKeyPrefix = CurrInstance.semanticDomainName;
-		string rowKeyPrefix = informationObject.name;
-		string className = informationObject.name;
-		bool isCollection = informationObject.isCollection;
-		if(isCollection) {
+		string domainIDPrefix = CurrInstance.semanticDomainName;
+		string objectIDPrefix = informationObject.name;
+		string informationObjectName = informationObject.name;
+		bool isCollection = informationObject.Item is CollectionForType;
+
 #>
-			public partial class <#= className #>Collection
+			[DataContract]
+			public partial class <#= informationObjectName #> : IInformationObject
 			{
-				public <#= className #>Collection()
+				public <#= informationObjectName #>()
 				{
-					this.PartitionKey = "<#= partitionKeyPrefix #>" + Guid.NewGuid().ToString();
-					this.RowKey = "<#= rowKeyPrefix #>" + Guid.NewGuid().ToString();
+					this.ID = "<#= domainIDPrefix #>.<#= objectIDPrefix #>" + "." + Guid.NewGuid().ToString();
 				}
-				[IgnoreDataMember]
-				public string PartitionKey { get; set; }
-				[IgnoreDataMember]
-				public string RowKey { get; set; }
+
+				[DataMember]
+				public string ID { get; set; }
+
+                [IgnoreDataMember]
+				public string Name
+			    {
+                    get { return "<#= informationObjectName #>"; }
+			    }
+
 
 				public string GetBlobPath()
-                {
-                    return GetBlobPath(this.PartitionKey, this.RowKey);
-                }
-
-                public static string GetBlobPath(string partitionKey, string rowKey)
-                {
-                    return partitionKey + "_" + rowKey;
-                }
-
-
-				[DataMember] public List<<#= className #>> CollectionContent = new List<<#= className #>>();
-
-			}
-
-			[DataContract]
-			public partial class <#= className #>
-			{
-				public <#= className #>()
 				{
+					return GetBlobPath(this.ID);
 				}
+
+				public static string GetBlobPath(string id)
+				{
+					return id;
+				}
+
+<#+
+		if(isCollection) {
+			CollectionForType collectionItem = informationObject.Item as CollectionForType;
+			string contentObjectName = collectionItem.contentInformationObjectName;
+#>
+
+				[DataMember] public List<<#= contentObjectName #>> CollectionContent = new List<<#= contentObjectName #>>();
 
 <#+
 		} else {
-#>
-			public partial class <#= className #> : TableServiceEntity
-			{
-				public <#= className #>() 
-				{
-					this.PartitionKey = "<#= partitionKeyPrefix #>" + Guid.NewGuid().ToString();
-					this.RowKey = "<#= rowKeyPrefix #>" + Guid.NewGuid().ToString();
-				}
-<#+
+			GenerateInformationObjectChoice(informationObject.Item);
 		}
-		GenerateInformationObjectChoice(informationObject.Item, isCollection);
 #>			
 			}
 <#+
 	}
 
-	void GenerateInformationObjectChoice(object contentItem, bool isCollection)
+	void GenerateInformationObjectChoice(object contentItem)
 	{
 		InformationItemsType informationItems = contentItem as InformationItemsType;
 		InformationObjectContentType objectContent = contentItem as InformationObjectContentType;
 		if(informationItems != null)
-			GenerateInformationItems(informationItems.InformationItem, isCollection);
+			GenerateInformationItems(informationItems.InformationItem);
 		if(objectContent != null)
-			GenerateInformationObjectContent(objectContent, isCollection);
+			GenerateInformationObjectContent(objectContent);
 	}
 
-	void GenerateInformationObjectContent(InformationObjectContentType objectContent, bool isCollection)
+	void GenerateInformationObjectContent(InformationObjectContentType objectContent)
 	{
 #>
 		// Properties to map to handle the file: <#= objectContent.originalFileName #>.<#= objectContent.fileExtension #>
@@ -152,18 +153,19 @@ using Microsoft.WindowsAzure.StorageClient;
 <#+
 	}
 	
-	void GenerateInformationItems(InformationItemType[] informationItems, bool isCollection)
+	void GenerateInformationItems(InformationItemType[] informationItems)
 	{
 		foreach(var item in informationItems)
 		{
-			string dataType = GetPhysicalDataTypeFromLogical(item.logicalDataType);
+			string dataType = GetPhysicalDataTypeFromLogical(item.logicalDataType, item.informationObjectName);
 #>
-			<#= isCollection ? "[DataMember]" : "" #> public <#= dataType #> <#= item.name #> { get; set; }
+			[DataMember]
+			public <#= dataType #> <#= item.name #> { get; set; }
 <#+
 		}
 	}
 
-	string GetPhysicalDataTypeFromLogical(InformationItemTypeLogicalDataType logicalDataType)
+	string GetPhysicalDataTypeFromLogical(InformationItemTypeLogicalDataType logicalDataType, string informationObjectName)
 	{
 		switch(logicalDataType)
 		{
@@ -187,6 +189,8 @@ using Microsoft.WindowsAzure.StorageClient;
 				return "DateTime";
 			case InformationItemTypeLogicalDataType.TrueOrFalse_Boolean:
 				return "bool";
+			case InformationItemTypeLogicalDataType.InformationObject:
+				return informationObjectName;
 			default:
 				throw new NotSupportedException("Logical data type not recognized: " + logicalDataType.ToString());
 		}
