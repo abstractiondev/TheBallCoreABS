@@ -203,15 +203,14 @@ using TheBall;
 				return "byte[]";
 			case InformationItemTypeLogicalDataType.Number_ApproxDecimal:
 				return "double";
-			case InformationItemTypeLogicalDataType.Number_CustomFormat:
-				return "string";
+			//case InformationItemTypeLogicalDataType.Number_CustomFormat:
+			//	return "string";
 			case InformationItemTypeLogicalDataType.Number_ExactDecimal:
 				return "double";
 			case InformationItemTypeLogicalDataType.Number_Integer:
 				return "long";
-			case InformationItemTypeLogicalDataType.Text_Huge:
-			case InformationItemTypeLogicalDataType.Text_Normal:
-			case InformationItemTypeLogicalDataType.Text_SingleCharacter:
+			case InformationItemTypeLogicalDataType.Text_Short:
+			case InformationItemTypeLogicalDataType.Text_Long:
 				return "string";
 			case InformationItemTypeLogicalDataType.Time_Date:
 			case InformationItemTypeLogicalDataType.Time_DateTime:

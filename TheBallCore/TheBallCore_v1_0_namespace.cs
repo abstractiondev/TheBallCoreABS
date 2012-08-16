@@ -1756,13 +1756,10 @@ namespace TheBallCore_v1_0 {
         TrueOrFalse_Boolean,
         
         /// <remarks/>
-        Text_SingleCharacter,
+        Text_Short,
         
         /// <remarks/>
-        Text_Normal,
-        
-        /// <remarks/>
-        Text_Huge,
+        Text_Long,
         
         /// <remarks/>
         Number_Integer,
@@ -1772,9 +1769,6 @@ namespace TheBallCore_v1_0 {
         
         /// <remarks/>
         Number_ApproxDecimal,
-        
-        /// <remarks/>
-        Number_CustomFormat,
         
         /// <remarks/>
         Time_Date,

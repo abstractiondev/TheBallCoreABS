@@ -51,13 +51,11 @@
 			<xs:simpleType>
 				<xs:restriction base="xs:string">
 					<xs:enumeration value="TrueOrFalse_Boolean"/>
-					<xs:enumeration value="Text_SingleCharacter"/>
-					<xs:enumeration value="Text_Normal"/>
-					<xs:enumeration value="Text_Huge"/>
+					<xs:enumeration value="Text_Short"/>
+					<xs:enumeration value="Text_Long"/>
 					<xs:enumeration value="Number_Integer"/>
 					<xs:enumeration value="Number_ExactDecimal"/>
 					<xs:enumeration value="Number_ApproxDecimal"/>
-					<xs:enumeration value="Number_CustomFormat"/>
 					<xs:enumeration value="Time_Date"/>
 					<xs:enumeration value="Time_Time"/>
 					<xs:enumeration value="Time_DateTime"/>
