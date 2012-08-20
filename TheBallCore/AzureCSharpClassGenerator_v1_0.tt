@@ -119,7 +119,6 @@ using TheBall;
 			    {
 			    }
 
-
 				[DataMember]
 				public string ID { get; set; }
 
@@ -154,23 +153,30 @@ using TheBall;
 			string contentObjectName = collectionItem.contentInformationObjectName;
 #>
 
+				public static <#= informationObjectName #> CreateDefault()
+				{
+					return new <#= informationObjectName #>();
+				}
+
 				[DataMember] public List<<#= contentObjectName #>> CollectionContent = new List<<#= contentObjectName #>>();
 
 <#+
 		} else {
-			GenerateInformationObjectChoice(informationObject.Item);
+			GenerateInformationObjectChoice(informationObjectName, informationObject.Item);
 		}
 #>			
 			}
 <#+
 	}
 
-	void GenerateInformationObjectChoice(object contentItem)
+	void GenerateInformationObjectChoice(string informationObjectName, object contentItem)
 	{
 		InformationItemsType informationItems = contentItem as InformationItemsType;
 		InformationObjectContentType objectContent = contentItem as InformationObjectContentType;
-		if(informationItems != null)
+		if(informationItems != null) {
+			GenerateDefaultCreateForItems(informationObjectName, informationItems.InformationItem);
 			GenerateInformationItems(informationItems.InformationItem);
+		}
 		if(objectContent != null)
 			GenerateInformationObjectContent(objectContent);
 	}
@@ -183,6 +189,28 @@ using TheBall;
 <#+
 	}
 	
+	void GenerateDefaultCreateForItems(string informationObjectName, InformationItemType[] informationItems)
+	{
+		
+#>
+				public static <#= informationObjectName #> CreateDefault()
+				{
+					var result = new <#= informationObjectName #>();
+<#+
+		foreach(var informationItem in informationItems)
+		{
+			if(informationItem.logicalDataType != InformationItemTypeLogicalDataType.InformationObject)
+				continue;
+#>
+					result.<#= informationItem.name #> = <#= informationItem.informationObjectName #>.CreateDefault();
+<#+
+		}
+#>				
+					return result;
+				}
+<#+
+	}
+
 	void GenerateInformationItems(InformationItemType[] informationItems)
 	{
 		foreach(var item in informationItems)
