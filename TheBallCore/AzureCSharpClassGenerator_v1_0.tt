@@ -97,7 +97,6 @@ using TheBall;
 		string objectName = informationObject.name;
 		string informationObjectName = informationObject.name;
 		bool isCollection = informationObject.Item is CollectionForType;
-
 #>
 			[DataContract]
 			public partial class <#= informationObjectName #> : IInformationObject
@@ -138,11 +137,11 @@ using TheBall;
 			    }
 
 
-			    private object FindObjectByID(string objectId)
+			    public object FindObjectByID(string objectId)
 			    {
                     if (objectId == ID)
                         return this;
-			        return null;
+			        return FindFromObjectTree(objectId);
 			    }
 
 
@@ -187,6 +186,18 @@ using TheBall;
 
 				[DataMember] public List<<#= contentObjectName #>> CollectionContent = new List<<#= contentObjectName #>>();
 
+				private object FindFromObjectTree(string objectId)
+				{
+					foreach(var item in CollectionContent)
+					{
+						object result = item.FindObjectByID(objectId);
+						if(result != null)
+							return result;
+					}
+					return null;
+				}
+
+
 <#+
 		} else {
 			GenerateInformationObjectChoice(informationObjectName, informationObject.Item);
@@ -202,17 +213,78 @@ using TheBall;
 		InformationObjectContentType objectContent = contentItem as InformationObjectContentType;
 		if(informationItems != null) {
 			GenerateDefaultCreateForItems(informationObjectName, informationItems.InformationItem);
+			GenerateInformationItemsMethods(informationItems.InformationItem);
 			GenerateInformationItems(informationItems.InformationItem);
 		}
 		if(objectContent != null)
-			GenerateInformationObjectContent(objectContent);
+			GenerateInformationObjectContent(informationObjectName, objectContent);
 	}
 
-	void GenerateInformationObjectContent(InformationObjectContentType objectContent)
+	void GenerateInformationObjectContent(string informationObjectName, InformationObjectContentType objectContent)
 	{
 #>
-		// Properties to map to handle the file: <#= objectContent.originalFileName #>.<#= objectContent.fileExtension #>
-		// TODO: Handle object collections
+				// Properties to map to handle the file: <#= objectContent.originalFileName #>.<#= objectContent.fileExtension #>
+				// TODO: Handle object collections
+				private object FindFromObjectTree(string objectId)
+				{
+					return null;
+				}
+
+				public static <#= informationObjectName #> CreateDefault()
+				{
+					var result = new <#= informationObjectName #>();
+					return result;
+				}
+
+<#+
+	}
+
+	void GenerateInformationItemsMethods(InformationItemType[] informationItems)
+	{
+		InformationItemType[] informationObjects = informationItems.Where(item => String.IsNullOrEmpty(item.informationObjectName) == false).ToArray();
+		InformationItemType[] primitiveItems = informationItems.Where(item => String.IsNullOrEmpty(item.informationObjectName)).ToArray();
+#>
+				private object FindFromObjectTree(string objectId)
+				{
+<#+
+		foreach(InformationItemType informationItem in informationObjects)
+		{
+#>
+					{
+						var item = <#= informationItem.name #>;
+						object result = item.FindObjectByID(objectId);
+						if(result != null)
+							return result;
+					}
+<#+ 
+		}
+#>
+					return null;
+				}
+
+				public void ParsePropertyValue(string propertyName, string value)
+				{
+					switch (propertyName)
+					{
+<#+
+		foreach(InformationItemType item in primitiveItems)
+		{
+			string physicalType = GetPhysicalDataTypeFromLogical(item.logicalDataType, item.informationObjectName);
+			if(physicalType == "byte[]")
+				continue;
+			bool isStringType = physicalType == "string";
+			string parseExpression = isStringType ? "value" : physicalType + ".Parse(value)";
+#>
+						case "<#= item.name #>":
+							<#= item.name #> = <#= parseExpression #>;
+							break;
+<#+
+		}
+#>
+						default:
+							throw new InvalidDataException("Primitive parseable data type property not found: " + propertyName);
+					}
+	        }
 <#+
 	}
 	
