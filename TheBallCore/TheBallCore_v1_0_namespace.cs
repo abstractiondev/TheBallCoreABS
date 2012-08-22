@@ -43,6 +43,8 @@ namespace TheBallCore_v1_0 {
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class InstanceOfTheBallType {
         
+        private CoreInfrastructureType coreInfrastructureField;
+        
         private InformationObjectType[] informationModelField;
         
         private OperationType[] operationsField;
@@ -52,6 +54,16 @@ namespace TheBallCore_v1_0 {
         private MonitorType[] monitoringField;
         
         private string semanticDomainNameField;
+        
+        /// <remarks/>
+        public CoreInfrastructureType CoreInfrastructure {
+            get {
+                return this.coreInfrastructureField;
+            }
+            set {
+                this.coreInfrastructureField = value;
+            }
+        }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlArrayItemAttribute("InformationObject", IsNullable=false)]
@@ -105,6 +117,53 @@ namespace TheBallCore_v1_0 {
             }
             set {
                 this.semanticDomainNameField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.3038")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class CoreInfrastructureType {
+        
+        private InformationObjectType[] informationModelField;
+        
+        private OperationType[] operationsField;
+        
+        private SubscriptionType[] subscriptionsField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayItemAttribute("InformationObject", IsNullable=false)]
+        public InformationObjectType[] InformationModel {
+            get {
+                return this.informationModelField;
+            }
+            set {
+                this.informationModelField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayItemAttribute("Operation", IsNullable=false)]
+        public OperationType[] Operations {
+            get {
+                return this.operationsField;
+            }
+            set {
+                this.operationsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayItemAttribute("Subscription", IsNullable=false)]
+        public SubscriptionType[] Subscriptions {
+            get {
+                return this.subscriptionsField;
+            }
+            set {
+                this.subscriptionsField = value;
             }
         }
     }
