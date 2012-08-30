@@ -107,8 +107,25 @@ using TheBall;
 				    this.OwnerID = StorageSupport.ActiveOwnerID;
 				    this.SemanticDomainName = "<#= semanticDomainName #>";
 				    this.Name = "<#= objectName #>";
-                    RelativeLocation = Path.Combine("<#= semanticDomainName #>", "<#= objectName #>", ID).Replace("\\", "/");
+					RelativeLocation = GetRelativeLocationFromID(ID);
 				}
+
+                public static string GetRelativeLocationFromID(string id)
+                {
+                    return Path.Combine("<#= semanticDomainName #>", "<#= objectName #>", id).Replace("\\", "/");
+                }
+
+				public void UpdateRelativeLocationFromID()
+				{
+					RelativeLocation = GetRelativeLocationFromID(ID);
+				}
+
+				public static <#= informationObjectName #> RetrieveFromDefaultLocation(string id)
+				{
+					string relativeLocation = GetRelativeLocationFromID(id);
+					return Retrieve<#= informationObjectName #>(relativeLocation);
+				}
+
 
                 public static <#= informationObjectName #> Retrieve<#= informationObjectName #>(string relativeLocation)
                 {
