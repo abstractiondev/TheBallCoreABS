@@ -77,8 +77,10 @@ using TheBall;
         string RelativeLocation { get; set; }
         string SemanticDomainName { get; set; }
         string Name { get; set; }
-		void InitializeDefaultSubscribers();
+		void InitializeDefaultSubscribers(IContainerOwner owner);
 		void SetValuesToObjects(NameValueCollection form);
+		void PostStoringExecute(IContainerOwner owner);
+		void PostDeleteExecute(IContainerOwner owner);
     }
 
 <#+
@@ -120,22 +122,40 @@ using TheBall;
 					RelativeLocation = GetRelativeLocationFromID(ID);
 				}
 
-				public static <#= informationObjectName #> RetrieveFromDefaultLocation(string id)
+				public static <#= informationObjectName #> RetrieveFromDefaultLocation(string id, IContainerOwner owner = null)
 				{
 					string relativeLocation = GetRelativeLocationFromID(id);
-					return Retrieve<#= informationObjectName #>(relativeLocation);
+					return Retrieve<#= informationObjectName #>(relativeLocation, owner);
 				}
 
 
-                public static <#= informationObjectName #> Retrieve<#= informationObjectName #>(string relativeLocation)
+                public static <#= informationObjectName #> Retrieve<#= informationObjectName #>(string relativeLocation, IContainerOwner owner = null)
                 {
-                    var result = (<#= informationObjectName #>) StorageSupport.RetrieveInformation(relativeLocation, typeof(<#= informationObjectName #>));
+                    var result = (<#= informationObjectName #>) StorageSupport.RetrieveInformation(relativeLocation, typeof(<#= informationObjectName #>), null, owner);
                     return result;
                 }
 
-			    public void InitializeDefaultSubscribers()
+				partial void DoInitializeDefaultSubscribers(IContainerOwner owner);
+
+			    public void InitializeDefaultSubscribers(IContainerOwner owner)
 			    {
+					DoInitializeDefaultSubscribers(owner);
 			    }
+
+				partial void DoPostStoringExecute(IContainerOwner owner);
+
+				public void PostStoringExecute(IContainerOwner owner)
+				{
+					DoPostStoringExecute(owner);
+				}
+
+				partial void DoPostDeleteExecute(IContainerOwner owner);
+
+				public void PostDeleteExecute(IContainerOwner owner)
+				{
+					DoPostDeleteExecute(owner);
+				}
+
 
 			    public void SetValuesToObjects(NameValueCollection nameValueCollection)
 			    {
