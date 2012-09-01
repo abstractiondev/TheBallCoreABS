@@ -99,6 +99,7 @@ using TheBall;
 		string objectName = informationObject.name;
 		string informationObjectName = informationObject.name;
 		bool isCollection = informationObject.Item is CollectionForType;
+		bool provideDefaultCreate = informationObject.provideCreateMethod;
 #>
 			[DataContract]
 			public partial class <#= informationObjectName #> : IInformationObject
@@ -216,10 +217,14 @@ using TheBall;
 			string contentObjectName = collectionItem.contentInformationObjectName;
 #>
 
+				
+		<#+ if(provideDefaultCreate) { #>
+
 				public static <#= informationObjectName #> CreateDefault()
 				{
 					return new <#= informationObjectName #>();
 				}
+		<#+ } #>
 
 				[DataMember] public List<<#= contentObjectName #>> CollectionContent = new List<<#= contentObjectName #>>();
 
@@ -237,27 +242,27 @@ using TheBall;
 
 <#+
 		} else {
-			GenerateInformationObjectChoice(informationObjectName, informationObject.Item);
+			GenerateInformationObjectChoice(informationObject, informationObjectName, informationObject.Item);
 		}
 #>			
 			}
 <#+
 	}
 
-	void GenerateInformationObjectChoice(string informationObjectName, object contentItem)
+	void GenerateInformationObjectChoice(InformationObjectType informationObject, string informationObjectName, object contentItem)
 	{
 		InformationItemsType informationItems = contentItem as InformationItemsType;
 		InformationObjectContentType objectContent = contentItem as InformationObjectContentType;
 		if(informationItems != null) {
-			GenerateDefaultCreateForItems(informationObjectName, informationItems.InformationItem);
+			GenerateDefaultCreateForItems(informationObject, informationObjectName, informationItems.InformationItem);
 			GenerateInformationItemsMethods(informationItems.InformationItem);
 			GenerateInformationItems(informationItems.InformationItem);
 		}
 		if(objectContent != null)
-			GenerateInformationObjectContent(informationObjectName, objectContent);
+			GenerateInformationObjectContent(informationObject, informationObjectName, objectContent);
 	}
 
-	void GenerateInformationObjectContent(string informationObjectName, InformationObjectContentType objectContent)
+	void GenerateInformationObjectContent(InformationObjectType informationObject, string informationObjectName, InformationObjectContentType objectContent)
 	{
 #>
 				// Properties to map to handle the file: <#= objectContent.originalFileName #>.<#= objectContent.fileExtension #>
@@ -266,7 +271,7 @@ using TheBall;
 				{
 					return null;
 				}
-
+<#+		if(informationObject.provideCreateMethod) {  #>
 				public static <#= informationObjectName #> CreateDefault()
 				{
 					var result = new <#= informationObjectName #>();
@@ -274,6 +279,7 @@ using TheBall;
 				}
 
 <#+
+		}
 	}
 
 	void GenerateInformationItemsMethods(InformationItemType[] informationItems)
@@ -325,9 +331,10 @@ using TheBall;
 <#+
 	}
 	
-	void GenerateDefaultCreateForItems(string informationObjectName, InformationItemType[] informationItems)
+	void GenerateDefaultCreateForItems(InformationObjectType informationObject, string informationObjectName, InformationItemType[] informationItems)
 	{
-		
+		if(informationObject.provideCreateMethod == false)
+			return;
 #>
 				public static <#= informationObjectName #> CreateDefault()
 				{

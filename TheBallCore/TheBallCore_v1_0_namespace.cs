@@ -181,6 +181,12 @@ namespace TheBallCore_v1_0 {
         
         private string designDescField;
         
+        private bool provideCreateMethodField;
+        
+        public InformationObjectType() {
+            this.provideCreateMethodField = true;
+        }
+        
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("CollectionFor", typeof(CollectionForType))]
         [System.Xml.Serialization.XmlElementAttribute("InformationItems", typeof(InformationItemsType))]
@@ -213,6 +219,18 @@ namespace TheBallCore_v1_0 {
             }
             set {
                 this.designDescField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        [System.ComponentModel.DefaultValueAttribute(true)]
+        public bool provideCreateMethod {
+            get {
+                return this.provideCreateMethodField;
+            }
+            set {
+                this.provideCreateMethodField = value;
             }
         }
     }
