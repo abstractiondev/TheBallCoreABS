@@ -62,6 +62,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.IO;
+using System.Xml;
 using System.Runtime.Serialization;
 using Microsoft.WindowsAzure.StorageClient;
 using TheBall;
@@ -81,6 +82,7 @@ using TheBall;
 		void SetValuesToObjects(NameValueCollection form);
 		void PostStoringExecute(IContainerOwner owner);
 		void PostDeleteExecute(IContainerOwner owner);
+		void SetLocationRelativeToRoot(string rootLocation);
     }
 
 <#+
@@ -182,6 +184,31 @@ using TheBall;
 			        return FindFromObjectTree(objectId);
 			    }
 
+				public string SerializeToXml(bool noFormatting = false)
+				{
+					DataContractSerializer serializer = new DataContractSerializer(typeof(<#= informationObjectName #>));
+					using (var output = new StringWriter())
+					{
+						using (var writer = new XmlTextWriter(output))
+						{
+                            if(noFormatting == false)
+						        writer.Formatting = Formatting.Indented;
+							serializer.WriteObject(writer, this);
+						}
+						return output.GetStringBuilder().ToString();
+					}
+				}
+
+				public static <#= informationObjectName #> DeserializeFromXml(string xmlString)
+				{
+					DataContractSerializer serializer = new DataContractSerializer(typeof(<#= informationObjectName #>));
+					using(StringReader reader = new StringReader(xmlString))
+					{
+						using (var xmlReader = new XmlTextReader(reader))
+							return (<#= informationObjectName #>) serializer.ReadObject(xmlReader);
+					}
+            
+				}
 
 				[DataMember]
 				public string ID { get; set; }
@@ -201,15 +228,21 @@ using TheBall;
                 [DataMember]
                 public string SemanticDomainName { get; set; }
 
-				public void SetRelativeLocationTo(IInformationObject masterObject)
+				public void SetRelativeLocationAsMetadataTo(IInformationObject masterObject)
 				{
-					RelativeLocation = GetRelativeLocationTo(masterObject);
+					RelativeLocation = GetRelativeLocationAsMetadataTo(masterObject);
 				}
 
-				public static string GetRelativeLocationTo(IInformationObject masterObject)
+				public static string GetRelativeLocationAsMetadataTo(IInformationObject masterObject)
 				{
 					return Path.Combine("<#= semanticDomainName #>", "<#= objectName #>", masterObject.RelativeLocation).Replace("\\", "/"); 
 				}
+
+				public void SetLocationRelativeToRoot(string masterLocation)
+				{
+					RelativeLocation = Path.Combine(masterLocation, "<#= semanticDomainName #>", "<#= objectName #>", ID).Replace("\\", "/");
+				}
+
 
 <#+
 		if(isCollection) {
