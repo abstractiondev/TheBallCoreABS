@@ -255,8 +255,19 @@ using TheBall;
 
 				public static <#= informationObjectName #> CreateDefault()
 				{
-					return new <#= informationObjectName #>();
+					var result = new <#= informationObjectName #>();
+					return result;
 				}
+
+				public static <#= informationObjectName #> CreateDemoDefault()
+				{
+					var result = new <#= informationObjectName #>();
+					result.CollectionContent.Add(<#= contentObjectName #>.CreateDemoDefault());
+					result.CollectionContent.Add(<#= contentObjectName #>.CreateDemoDefault());
+					result.CollectionContent.Add(<#= contentObjectName #>.CreateDemoDefault());
+					return result;
+				}
+
 		<#+ } #>
 
 				[DataMember] public List<<#= contentObjectName #>> CollectionContent = new List<<#= contentObjectName #>>();
@@ -310,6 +321,13 @@ using TheBall;
 					var result = new <#= informationObjectName #>();
 					return result;
 				}
+
+				public static <#= informationObjectName #> CreateDemoDefault()
+				{
+					var result = new <#= informationObjectName #>();
+					return result;
+				}
+
 
 <#+
 		}
@@ -369,17 +387,48 @@ using TheBall;
 		if(informationObject.provideCreateMethod == false)
 			return;
 #>
+
 				public static <#= informationObjectName #> CreateDefault()
 				{
 					var result = new <#= informationObjectName #>();
 <#+
 		foreach(var informationItem in informationItems)
 		{
-			if(informationItem.logicalDataType != InformationItemTypeLogicalDataType.InformationObject)
-				continue;
+			if(informationItem.logicalDataType == InformationItemTypeLogicalDataType.InformationObject)
+			{
 #>
 					result.<#= informationItem.name #> = <#= informationItem.informationObjectName #>.CreateDefault();
 <#+
+			}
+		}
+#>
+					return result;
+				}
+
+				public static <#= informationObjectName #> CreateDemoDefault()
+				{
+					var result = new <#= informationObjectName #>();
+<#+
+		foreach(var informationItem in informationItems)
+		{
+			if(informationItem.logicalDataType == InformationItemTypeLogicalDataType.InformationObject)
+			{
+#>
+					result.<#= informationItem.name #> = <#= informationItem.informationObjectName #>.CreateDemoDefault();
+<#+
+			}
+			if(informationItem.logicalDataType == InformationItemTypeLogicalDataType.Text_Short ||
+				informationItem.logicalDataType == InformationItemTypeLogicalDataType.Text_Long)
+			{
+				string placeHolderText = informationObject.name + "." + informationItem.name;
+				if(informationItem.logicalDataType == InformationItemTypeLogicalDataType.Text_Long)
+					placeHolderText = string.Format("{0}{1}{0}{1}{0}{1}{0}{1}{0}{1}", placeHolderText, Environment.NewLine);
+
+#>
+					result.<#= informationItem.name #> = @"<#= placeHolderText #>";
+
+<#+
+			}
 		}
 #>				
 					return result;
