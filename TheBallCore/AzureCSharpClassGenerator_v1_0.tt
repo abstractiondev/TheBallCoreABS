@@ -82,7 +82,8 @@ using TheBall;
 		void SetValuesToObjects(NameValueCollection form);
 		void PostStoringExecute(IContainerOwner owner);
 		void PostDeleteExecute(IContainerOwner owner);
-		void SetLocationRelativeToRoot(string rootLocation);
+		void SetLocationRelativeToContentRoot(string referenceLocation, string sourceName);
+		string GetLocationRelativeToContentRoot(string referenceLocation, string sourceName);
     }
 
 <#+
@@ -238,10 +239,20 @@ using TheBall;
 					return Path.Combine("<#= semanticDomainName #>", "<#= objectName #>", masterObject.RelativeLocation).Replace("\\", "/"); 
 				}
 
-				public void SetLocationRelativeToRoot(string masterLocation)
+				public void SetLocationRelativeToContentRoot(string referenceLocation, string sourceName)
 				{
-					RelativeLocation = Path.Combine(masterLocation, "<#= semanticDomainName #>", "<#= objectName #>", ID).Replace("\\", "/");
+				    RelativeLocation = GetLocationRelativeToContentRoot(referenceLocation, sourceName);
 				}
+
+                public string GetLocationRelativeToContentRoot(string referenceLocation, string sourceName)
+                {
+                    string relativeLocation;
+                    if (String.IsNullOrEmpty(sourceName))
+                        sourceName = "default";
+                    string contentRootLocation = StorageSupport.GetContentRootLocation(referenceLocation);
+                    relativeLocation = Path.Combine(contentRootLocation, "<#= semanticDomainName #>", "<#= objectName #>", sourceName).Replace("\\", "/");
+                    return relativeLocation;
+                }
 
 
 <#+
