@@ -139,6 +139,13 @@ using TheBall;
                     return result;
                 }
 
+				public static <#= informationObjectName #> RetrieveFromOwnerContent(IContainerOwner containerOwner, string contentName)
+				{
+					var result = <#= informationObjectName #>.Retrieve<#= informationObjectName #>("Content/<#= semanticDomainName #>/<#= informationObjectName #>/" + contentName, containerOwner);
+					return result;
+				}
+
+
 				partial void DoInitializeDefaultSubscribers(IContainerOwner owner);
 
 			    public void InitializeDefaultSubscribers(IContainerOwner owner)
@@ -165,18 +172,19 @@ using TheBall;
 			    {
                     foreach(string key in nameValueCollection.AllKeys)
                     {
-                        if (key.StartsWith("RootObject"))
+                        if (key.StartsWith("Root"))
                             continue;
                         int indexOfUnderscore = key.IndexOf("_");
                         string objectID = key.Substring(0, indexOfUnderscore);
+                        object targetObject = FindObjectByID(objectID);
+                        if (targetObject == null)
+                            continue;
                         string propertyName = key.Substring(indexOfUnderscore + 1);
                         string propertyValue = nameValueCollection[key];
-                        object targetObject = FindObjectByID(objectID);
                         dynamic dyn = targetObject;
                         dyn.ParsePropertyValue(propertyName, propertyValue);
                     }
 			    }
-
 
 			    public object FindObjectByID(string objectId)
 			    {
@@ -229,14 +237,14 @@ using TheBall;
                 [DataMember]
                 public string SemanticDomainName { get; set; }
 
-				public void SetRelativeLocationAsMetadataTo(IInformationObject masterObject)
+				public void SetRelativeLocationAsMetadataTo(string masterRelativeLocation)
 				{
-					RelativeLocation = GetRelativeLocationAsMetadataTo(masterObject);
+					RelativeLocation = GetRelativeLocationAsMetadataTo(masterRelativeLocation);
 				}
 
-				public static string GetRelativeLocationAsMetadataTo(IInformationObject masterObject)
+				public static string GetRelativeLocationAsMetadataTo(string masterRelativeLocation)
 				{
-					return Path.Combine("<#= semanticDomainName #>", "<#= objectName #>", masterObject.RelativeLocation).Replace("\\", "/"); 
+					return Path.Combine("<#= semanticDomainName #>", "<#= objectName #>", masterRelativeLocation).Replace("\\", "/"); 
 				}
 
 				public void SetLocationRelativeToContentRoot(string referenceLocation, string sourceName)
