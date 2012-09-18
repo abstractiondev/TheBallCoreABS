@@ -84,6 +84,7 @@ using TheBall;
 		void PostDeleteExecute(IContainerOwner owner);
 		void SetLocationRelativeToContentRoot(string referenceLocation, string sourceName);
 		string GetLocationRelativeToContentRoot(string referenceLocation, string sourceName);
+		void SetMediaContent(IContainerOwner containerOwner, string contentObjectID, object mediaContent);
     }
 
 <#+
@@ -277,6 +278,14 @@ using TheBall;
 			string contentObjectName = collectionItem.contentInformationObjectName;
 #>
 
+                public void SetMediaContent(IContainerOwner containerOwner, string contentObjectID, object mediaContent)
+                {
+                    IInformationObject targetObject = (IInformationObject) FindObjectByID(contentObjectID);
+                    if (targetObject == null)
+                        return;
+                    targetObject.SetMediaContent(containerOwner, contentObjectID, mediaContent);
+                }
+
 				
 		<#+ if(provideDefaultCreate) { #>
 
@@ -373,6 +382,14 @@ using TheBall;
 		InformationItemType[] informationObjects = informationItems.Where(item => String.IsNullOrEmpty(item.informationObjectName) == false).ToArray();
 		InformationItemType[] primitiveItems = informationItems.Where(item => String.IsNullOrEmpty(item.informationObjectName)).ToArray();
 #>
+                public void SetMediaContent(IContainerOwner containerOwner, string contentObjectID, object mediaContent)
+                {
+                    IInformationObject targetObject = (IInformationObject) FindObjectByID(contentObjectID);
+                    if (targetObject == null)
+                        return;
+                    targetObject.SetMediaContent(containerOwner, contentObjectID, mediaContent);
+                }
+
 				private object FindFromObjectTree(string objectId)
 				{
 <#+
