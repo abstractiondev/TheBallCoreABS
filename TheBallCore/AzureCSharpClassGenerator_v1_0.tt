@@ -117,6 +117,23 @@ using TheBall;
 					RelativeLocation = GetRelativeLocationFromID(ID);
 				}
 
+				public static IInformationObject[] RetrieveCollectionFromOwnerContent(IContainerOwner owner)
+				{
+					//string contentTypeName = ""; // SemanticDomainName + "." + Name
+					string contentTypeName = "<#= semanticDomainName #>/<#= objectName #>/";
+					List<IInformationObject> informationObjects = new List<IInformationObject>();
+					var blobListing = StorageSupport.GetContentBlobListing(owner, contentType: contentTypeName);
+					foreach(CloudBlockBlob blob in blobListing)
+					{
+						if (blob.GetBlobInformationType() != StorageSupport.InformationType_InformationObjectValue)
+							continue;
+						IInformationObject informationObject = StorageSupport.RetrieveInformation(blob.Name, typeof(<#= objectName #>), null, owner);
+						informationObjects.Add(informationObject);
+					}
+					return informationObjects.ToArray();
+				}
+
+
                 public static string GetRelativeLocationFromID(string id)
                 {
                     return Path.Combine("<#= semanticDomainName #>", "<#= objectName #>", id).Replace("\\", "/");
@@ -398,9 +415,12 @@ using TheBall;
 #>
 					{
 						var item = <#= informationItem.name #>;
-						object result = item.FindObjectByID(objectId);
-						if(result != null)
-							return result;
+						if(item != null)
+						{
+							object result = item.FindObjectByID(objectId);
+							if(result != null)
+								return result;
+						}
 					}
 <#+ 
 		}
