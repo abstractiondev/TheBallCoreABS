@@ -47,6 +47,33 @@
 	{
 		GenerateAbstraction(CurrentAbstraction);
 	}
+
+	InformationObjectType GetInformationObjectByName(string informationObjectName)
+    {
+		var result = CurrInstance.InformationModel.FirstOrDefault(candidate => candidate.name == informationObjectName);
+		if(result == null)
+			throw new ArgumentException("Information object not found with name: " + informationObjectName);
+		return result;
+    }
+
+	bool IsItemIndependentMaster(InformationItemType itemType)
+    {
+		if(string.IsNullOrEmpty(itemType.informationObjectName))
+			return false;
+		return IsObjectIndependentMaster(itemType.informationObjectName);
+    }
+
+	bool IsItemMasterCollection(InformationItemType itemType)
+    {
+		var masterColl = GetMasterCollectionByName(CurrInstance, itemType.informationObjectName);
+		return masterColl != null;
+    }
+
+	bool IsObjectIndependentMaster(string informationObjectName)
+    {
+		var iObject = GetInformationObjectByName(informationObjectName);
+		return iObject.isIndependentMaster;
+    }
 	
 	void GenerateAbstraction(TheBallCoreAbstractionType abstraction)
 	{
@@ -63,6 +90,7 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.IO;
 using System.Xml;
+using System.Linq;
 using System.Runtime.Serialization;
 using Microsoft.WindowsAzure.StorageClient;
 using TheBall;
@@ -70,14 +98,26 @@ using TheBall;
 <#+
 		BeginNamespace(instance.semanticDomainName);
 #>
+	public interface IInformationCollection
+    {
+        string GetItemDirectory();
+        void RefreshContent();
+        void SubscribeToContentSource();
+		bool IsMasterCollection { get; }
+		string GetMasterLocation();
+		IInformationCollection GetMasterInstance();
+    }
+
     public interface IInformationObject
     {
         Guid OwnerID { get; set; }
         string ID { get; set; }
         string ETag { get; set;  }
+		string MasterETag { get; set; }
         string RelativeLocation { get; set; }
         string SemanticDomainName { get; set; }
         string Name { get; set; }
+		bool IsIndependentMaster { get; }
 		void InitializeDefaultSubscribers(IContainerOwner owner);
 		void SetValuesToObjects(NameValueCollection form);
 		void PostStoringExecute(IContainerOwner owner);
@@ -85,28 +125,97 @@ using TheBall;
 		void SetLocationRelativeToContentRoot(string referenceLocation, string sourceName);
 		string GetLocationRelativeToContentRoot(string referenceLocation, string sourceName);
 		void SetMediaContent(IContainerOwner containerOwner, string contentObjectID, object mediaContent);
+		void ReplaceObjectInTree(IInformationObject replacingObject);
+		Dictionary<string, IInformationObject> CollectMasterObjects(Predicate<IInformationObject> filterOnFalse = null);
+		void CollectMasterObjectsFromTree(Dictionary<string, IInformationObject> result, Predicate<IInformationObject> filterOnFalse = null);
+		IInformationObject RetrieveMaster(bool initiateIfMissing);
+		IInformationObject RetrieveMaster(bool initiateIfMissing, out bool initiated);
+		bool IsInstanceTreeModified { get; }
+		void SetInstanceTreeValuesAsUnmodified();
+		void UpdateMasterValueTreeFromOtherInstance(IInformationObject sourceInstance);
+		void FindObjectsFromTree(List<IInformationObject> result, Predicate<IInformationObject> filterOnFalse, bool searchWithinCurrentMasterOnly);
+		void UpdateCollections(IInformationCollection masterInstance);
     }
 
 <#+
+		GenerateDomainInitializer(instance);
 		foreach(var informationObject in instance.InformationModel)
+        {
 			GenerateInformationObject(informationObject);
 
+        }
 		EndBlock(); // namespace
 #>
 
 <#+
 	}
 	
+	void GenerateDomainInitializer(InstanceOfTheBallType instance)
+    {
+		var masterCollections = GetMasterCollections(instance);
+#>
+		public static class DomainInformationSupport
+		{
+            public static void EnsureMasterCollections(this IContainerOwner owner)
+            {
+<#+
+		foreach(var masterColl in masterCollections)
+        {
+			string masterCollName = masterColl.name;
+#>
+                {
+                    var masterCollection = <#= masterCollName #>.GetMasterCollectionInstance(owner);
+                    if(masterCollection == null)
+                    {
+                        masterCollection = <#= masterCollName #>.CreateDefault();
+                        masterCollection.RelativeLocation =
+                            <#= masterCollName #>.GetMasterCollectionLocation(owner);
+                        StorageSupport.StoreInformation(masterCollection, owner);
+                    }
+					IInformationCollection collection = masterCollection;
+					collection.SubscribeToContentSource();
+                }
+<#+
+        }
+#>
+            }
+
+            public static void RefreshMasterCollections(this IContainerOwner owner)
+            {
+<#+
+		foreach(var masterColl in masterCollections)
+        {
+			string masterCollName = masterColl.name;
+#>
+                {
+                    IInformationCollection masterCollection = <#= masterCollName #>.GetMasterCollectionInstance(owner);
+                    if (masterCollection == null)
+                        throw new InvalidDataException("Master collection <#= masterCollName #> missing for owner");
+                    masterCollection.RefreshContent();
+                    StorageSupport.StoreInformation((IInformationObject) masterCollection, owner);
+                }
+<#+
+        }
+#>
+            }
+		}
+<#+
+
+    }
+
 	void GenerateInformationObject(InformationObjectType informationObject)
 	{
 		string semanticDomainName = CurrInstance.semanticDomainName;
 		string objectName = informationObject.name;
 		string informationObjectName = informationObject.name;
-		bool isCollection = informationObject.Item is CollectionForType;
+		CollectionForType collType = informationObject.Item as CollectionForType;
+		bool isCollection = collType != null;
+
 		bool provideDefaultCreate = informationObject.provideCreateMethod;
+		bool isIndependentMaster = informationObject.isIndependentMaster;
 #>
 			[DataContract]
-			public partial class <#= informationObjectName #> : IInformationObject
+			public partial class <#= informationObjectName #> : IInformationObject <#= isCollection ? ", IInformationCollection" : "" #>
 			{
 				public <#= informationObjectName #>()
 				{
@@ -133,7 +242,6 @@ using TheBall;
 					return informationObjects.ToArray();
 				}
 
-
                 public static string GetRelativeLocationFromID(string id)
                 {
                     return Path.Combine("<#= semanticDomainName #>", "<#= objectName #>", id).Replace("\\", "/");
@@ -148,6 +256,31 @@ using TheBall;
 				{
 					string relativeLocation = GetRelativeLocationFromID(id);
 					return Retrieve<#= informationObjectName #>(relativeLocation, owner);
+				}
+
+				IInformationObject IInformationObject.RetrieveMaster(bool initiateIfMissing, out bool initiated)
+				{
+					IInformationObject iObject = (IInformationObject) this;
+					if(iObject.IsIndependentMaster == false)
+						throw new NotSupportedException("Cannot retrieve master for non-master type: <#= informationObjectName #>");
+					initiated = false;
+					VirtualOwner owner = VirtualOwner.FigureOwner(this);
+					var master = StorageSupport.RetrieveInformation(RelativeLocation, typeof(<#= informationObjectName #>), null, owner);
+					if(master == null && initiateIfMissing)
+					{
+						StorageSupport.StoreInformation(this, owner);
+						master = this;
+						initiated = true;
+					}
+					return master;
+				}
+
+
+				IInformationObject IInformationObject.RetrieveMaster(bool initiateIfMissing)
+				{
+					bool initiated;
+					IInformationObject iObject = this;
+					return iObject.RetrieveMaster(initiateIfMissing, out initiated);
 				}
 
 
@@ -199,6 +332,8 @@ using TheBall;
                         if (key.StartsWith("Root"))
                             continue;
                         int indexOfUnderscore = key.IndexOf("_");
+						if (indexOfUnderscore < 0) // >
+                            continue;
                         string objectID = key.Substring(0, indexOfUnderscore);
                         object targetObject = FindObjectByID(objectID);
                         if (targetObject == null)
@@ -216,6 +351,35 @@ using TheBall;
                         return this;
 			        return FindFromObjectTree(objectId);
 			    }
+
+				bool IInformationObject.IsIndependentMaster { 
+					get {
+						return <#= isIndependentMaster ? "true" : "false"  #>;
+					}
+				}
+
+				void IInformationObject.UpdateMasterValueTreeFromOtherInstance(IInformationObject sourceMaster)
+				{
+					if (sourceMaster == null)
+						throw new ArgumentNullException("sourceMaster");
+					if (GetType() != sourceMaster.GetType())
+						throw new InvalidDataException("Type mismatch in UpdateMasterValueTree");
+					IInformationObject iObject = this;
+					if(iObject.IsIndependentMaster == false)
+						throw new InvalidDataException("UpdateMasterValueTree called on non-master type");
+					if(ID != sourceMaster.ID)
+						throw new InvalidDataException("UpdateMasterValueTree is supported only on masters with same ID");
+					CopyContentFrom((<#= informationObjectName #>) sourceMaster);
+				}
+
+
+				Dictionary<string, IInformationObject> IInformationObject.CollectMasterObjects(Predicate<IInformationObject> filterOnFalse)
+				{
+					Dictionary<string, IInformationObject> result = new Dictionary<string, IInformationObject>();
+					IInformationObject iObject = (IInformationObject) this;
+					iObject.CollectMasterObjectsFromTree(result, filterOnFalse);
+					return result;
+				}
 
 				public string SerializeToXml(bool noFormatting = false)
 				{
@@ -261,6 +425,9 @@ using TheBall;
                 [DataMember]
                 public string SemanticDomainName { get; set; }
 
+				[DataMember]
+				public string MasterETag { get; set; }
+
 				public void SetRelativeLocationAsMetadataTo(string masterRelativeLocation)
 				{
 					RelativeLocation = GetRelativeLocationAsMetadataTo(masterRelativeLocation);
@@ -268,7 +435,7 @@ using TheBall;
 
 				public static string GetRelativeLocationAsMetadataTo(string masterRelativeLocation)
 				{
-					return Path.Combine("<#= semanticDomainName #>", "<#= objectName #>", masterRelativeLocation).Replace("\\", "/"); 
+					return Path.Combine("<#= semanticDomainName #>", "<#= objectName #>", masterRelativeLocation + ".metadata").Replace("\\", "/"); 
 				}
 
 				public void SetLocationRelativeToContentRoot(string referenceLocation, string sourceName)
@@ -293,13 +460,146 @@ using TheBall;
 		if(isCollection) {
 			CollectionForType collectionItem = informationObject.Item as CollectionForType;
 			string contentObjectName = collectionItem.contentInformationObjectName;
+			bool isContentItemMaster = IsObjectIndependentMaster(contentObjectName);
+
+			bool isMasterCollection = collectionItem.collectionType == CollectionForTypeCollectionType.Master;
+			bool isDerivedCollection = collectionItem.collectionType == CollectionForTypeCollectionType.DerivedFromMaster;
+			bool isIndependentCollection = collectionItem.collectionType == CollectionForTypeCollectionType.Independent;
+			string derivedMasterCollName = collectionItem.contentInformationObjectName + "Collection";
+
 #>
+				
+				void IInformationObject.UpdateCollections(IInformationCollection masterInstance)
+				{
+<#+			if(isContentItemMaster == false) { #>
+					foreach(IInformationObject item in CollectionContent)
+					{
+						if(item != null)
+							item.UpdateCollections(masterInstance);
+					}
+<#+			} #>
+				}
+
+
+
+				bool IInformationCollection.IsMasterCollection {
+					get {
+						return <#= isMasterCollection.ToString().ToLower() #>;
+					}
+				}
+
+				string IInformationCollection.GetMasterLocation()
+				{
+<#+			if(isMasterCollection) { #>
+					VirtualOwner owner = VirtualOwner.FigureOwner(this);
+					return GetMasterCollectionLocation(owner);
+<#+			} else { #>
+					throw new NotSupportedException("Master collection location only supported for master collections");
+<#+			} #>
+					
+				}
+
+				IInformationCollection IInformationCollection.GetMasterInstance()
+				{
+<#+			if(isMasterCollection) { #>
+					VirtualOwner owner = VirtualOwner.FigureOwner(this);
+					return GetMasterCollectionInstance(owner);
+<#+			} else { #>
+					throw new NotSupportedException("Master collection instance only supported for master collections");
+<#+			} #>
+					
+				}
+
+
+				public string GetItemDirectory()
+				{
+					string dummyItemLocation = <#= contentObjectName #>.GetRelativeLocationFromID("dummy");
+					string nonOwnerDirectoryLocation = SubscribeSupport.GetParentDirectoryTarget(dummyItemLocation);
+					VirtualOwner owner = VirtualOwner.FigureOwner(this);
+					string ownerDirectoryLocation = StorageSupport.GetBlobOwnerAddress(owner, nonOwnerDirectoryLocation);
+					return ownerDirectoryLocation;
+				}
+
+				public void RefreshContent()
+				{
+<#+
+			if(isMasterCollection)
+            {
+#>
+					// DirectoryToMaster
+					string itemDirectory = GetItemDirectory();
+					IInformationObject[] informationObjects = StorageSupport.RetrieveInformationObjects(itemDirectory,
+																								 typeof(<#= contentObjectName #>));
+					CollectionContent.Clear();
+					CollectionContent.AddRange(informationObjects.Select(obj => (<#= contentObjectName #>) obj));
+            
+<#+
+            } else if(isDerivedCollection) {
+#>
+					// CollectionToCollection
+					VirtualOwner owner = VirtualOwner.FigureOwner(this);
+					var masterCollection = <#= derivedMasterCollName #>.GetMasterCollectionInstance(owner);
+					this.RefreshContentFromMaster(masterCollection);
+<#+
+            }
+#>
+				}
+
+<#+
+			if(isMasterCollection)
+            {
+#>
+				public static <#= informationObjectName #> GetMasterCollectionInstance(IContainerOwner owner)
+				{
+					return <#= informationObjectName #>.RetrieveFromOwnerContent(owner, "MasterCollection");
+				}
+<#+
+            }
+#>
+
+				public void SubscribeToContentSource()
+				{
+<#+
+			if(isMasterCollection)
+            {
+#>
+					// DirectoryToCollection
+					string itemDirectory = GetItemDirectory();
+					SubscribeSupport.AddSubscriptionToObject(itemDirectory, RelativeLocation,
+															 SubscribeSupport.SubscribeType_DirectoryToCollection, null, typeof(<#= informationObjectName #>).FullName);
+<#+
+            } else if(isDerivedCollection) {
+#>
+					// CollectionToCollection
+					VirtualOwner owner = VirtualOwner.FigureOwner(this);
+					string masterLocation = GetMasterCollectionLocation(owner);
+					SubscribeSupport.AddSubscriptionToObject(masterLocation, RelativeLocation, SubscribeSupport.SubscribeType_CollectionToCollectionUpdate);
+<#+
+            }
+#>
+				}
+
+<#+
+			if(isMasterCollection)
+            {
+#>
+				public static string GetMasterCollectionLocation(IContainerOwner owner)
+				{
+					return StorageSupport.GetBlobOwnerAddress(owner, "<#= semanticDomainName #>/<#= informationObjectName #>/" + "MasterCollection");
+				}
+<#+
+            }
+#>
+
+
 
                 public void SetMediaContent(IContainerOwner containerOwner, string contentObjectID, object mediaContent)
                 {
                     IInformationObject targetObject = (IInformationObject) FindObjectByID(contentObjectID);
                     if (targetObject == null)
                         return;
+					if(targetObject == this)
+						throw new InvalidDataException("SetMediaContent referring to self (not media container)");
                     targetObject.SetMediaContent(containerOwner, contentObjectID, mediaContent);
                 }
 
@@ -328,7 +628,58 @@ using TheBall;
 		<#+ } #>
 
 				[DataMember] public List<<#= contentObjectName #>> CollectionContent = new List<<#= contentObjectName #>>();
+				private <#= contentObjectName #>[] _unmodified_CollectionContent;
 
+				void IInformationObject.ReplaceObjectInTree(IInformationObject replacingObject)
+				{
+					for(int i = 0; i < CollectionContent.Count; i++) // >
+					{
+						if(CollectionContent[i].ID == replacingObject.ID)
+							CollectionContent[i] = (<#= contentObjectName #> )replacingObject;
+						else { // Cannot have circular reference, so can be in else branch
+							IInformationObject iObject = CollectionContent[i];
+							iObject.ReplaceObjectInTree(replacingObject);
+						}
+					}
+				}
+
+				
+				bool IInformationObject.IsInstanceTreeModified {
+					get {
+						bool collectionModified = CollectionContent.SequenceEqual(_unmodified_CollectionContent) == false;
+						if(collectionModified)
+							return true;
+<#+
+	if(isContentItemMaster == false)
+    {
+#>
+						// For non-master content
+						foreach(IInformationObject item in CollectionContent)
+						{
+							bool itemTreeModified = item.IsInstanceTreeModified;
+							if(itemTreeModified)
+								return true;
+						}
+							
+<#+
+    }
+#>
+						return false;
+					}
+				}
+				void IInformationObject.SetInstanceTreeValuesAsUnmodified()
+				{
+					_unmodified_CollectionContent = CollectionContent.ToArray();
+					foreach(IInformationObject iObject in CollectionContent)
+						iObject.SetInstanceTreeValuesAsUnmodified();
+				}
+
+				private void CopyContentFrom(<#= informationObjectName #> sourceObject)
+				{
+					CollectionContent = sourceObject.CollectionContent;
+					_unmodified_CollectionContent = sourceObject._unmodified_CollectionContent;
+				}
+				
 				private object FindFromObjectTree(string objectId)
 				{
 					foreach(var item in CollectionContent)
@@ -338,6 +689,48 @@ using TheBall;
 							return result;
 					}
 					return null;
+				}
+
+				void IInformationObject.FindObjectsFromTree(List<IInformationObject> result, Predicate<IInformationObject> filterOnFalse, bool searchWithinCurrentMasterOnly)
+				{
+					if(filterOnFalse(this))
+						result.Add(this);
+<#+
+	if(isContentItemMaster == false)
+    {
+
+#>
+					foreach(IInformationObject iObject in CollectionContent)
+						iObject.FindObjectsFromTree(result, filterOnFalse, searchWithinCurrentMasterOnly);
+<#+
+    } else { // Content item is master, thus we need to filter
+#>
+					if(searchWithinCurrentMasterOnly == false) {
+						foreach(IInformationObject iObject in CollectionContent)
+							iObject.FindObjectsFromTree(result, filterOnFalse, searchWithinCurrentMasterOnly);
+					}
+<#+
+    }
+#>
+				}
+
+
+				void IInformationObject.CollectMasterObjectsFromTree(Dictionary<string, IInformationObject> result, Predicate<IInformationObject> filterOnFalse)
+				{
+					IInformationObject iObject = (IInformationObject) this;
+					if(iObject.IsIndependentMaster)
+					{
+						bool doAdd = true;
+						if(filterOnFalse != null)
+							doAdd = filterOnFalse(iObject);
+						if(doAdd)
+							result.Add(iObject.ID, iObject);
+					}
+					foreach(IInformationObject item in CollectionContent)
+					{
+						if(item != null)
+							item.CollectMasterObjectsFromTree(result, filterOnFalse);
+					}
 				}
 
 
@@ -356,7 +749,7 @@ using TheBall;
 		InformationObjectContentType objectContent = contentItem as InformationObjectContentType;
 		if(informationItems != null) {
 			GenerateDefaultCreateForItems(informationObject, informationObjectName, informationItems.InformationItem);
-			GenerateInformationItemsMethods(informationItems.InformationItem);
+			GenerateInformationItemsMethods(informationObjectName, informationItems.InformationItem);
 			GenerateInformationItems(informationItems.InformationItem);
 		}
 		if(objectContent != null)
@@ -372,6 +765,50 @@ using TheBall;
 				{
 					return null;
 				}
+
+				void IInformationObject.UpdateCollections(IInformationCollection masterInstance)
+				{
+				}
+
+
+				void IInformationObject.FindObjectsFromTree(List<IInformationObject> result, Predicate<IInformationObject> filterOnFalse, bool searchWithinCurrentMasterOnly)
+				{
+					if(filterOnFalse(this))
+						result.Add(this);
+				}
+
+				bool IInformationObject.IsInstanceTreeModified {
+					get {
+						// Currently is always false
+						return false;
+					}
+				}
+				void IInformationObject.SetInstanceTreeValuesAsUnmodified()
+				{
+					// Reflected to IsModified above, no action right now
+				}
+
+				void IInformationObject.ReplaceObjectInTree(IInformationObject replacingObject)
+				{
+					// Cannot replace self, doesn't contain subitems, nothing to do
+				}
+
+				void IInformationObject.CollectMasterObjectsFromTree(Dictionary<string, IInformationObject> result, Predicate<IInformationObject> filterOnFalse)
+				{
+					IInformationObject iObject = (IInformationObject) this;
+					if(iObject.IsIndependentMaster)
+					{
+						if(filterOnFalse == null || filterOnFalse(iObject))
+							result.Add(iObject.ID, iObject);
+					}
+				}
+
+				private void CopyContentFrom(<#= informationObjectName #> sourceObject)
+				{
+					throw new NotImplementedException("Media masters are not currently supported");
+				}
+
+
 <#+		if(informationObject.provideCreateMethod) {  #>
 				public static <#= informationObjectName #> CreateDefault()
 				{
@@ -394,18 +831,90 @@ using TheBall;
 		}
 	}
 
-	void GenerateInformationItemsMethods(InformationItemType[] informationItems)
+	void GenerateInformationItemsMethods(string informationObjectName, InformationItemType[] informationItems)
 	{
 		InformationItemType[] informationObjects = informationItems.Where(item => String.IsNullOrEmpty(item.informationObjectName) == false).ToArray();
+		InformationItemType[] nonMasterInformationObjects = informationObjects.Where(iObject => IsObjectIndependentMaster(iObject.informationObjectName) == false).ToArray();
+		InformationItemType[] masterInformationObjects = informationObjects.Where(iObject => IsObjectIndependentMaster(iObject.informationObjectName) == true).ToArray();
 		InformationItemType[] primitiveItems = informationItems.Where(item => String.IsNullOrEmpty(item.informationObjectName)).ToArray();
 #>
+
+				void IInformationObject.UpdateCollections(IInformationCollection masterInstance)
+				{
+					//Type collType = masterInstance.GetType();
+					//string typeName = collType.Name;
+<#+
+		foreach(InformationItemType informationItem in nonMasterInformationObjects)
+		{
+			//var childItem = GetInformationObjectByName(informationItem.informationObjectName);
+			string itemName = informationItem.name;
+			string itemTypeName = informationItem.informationObjectName;
+			bool isMasterCollItem = IsItemMasterCollection(informationItem);
+			if(isMasterCollItem) {
+#>
+					if(masterInstance is <#= itemTypeName #>) {
+						CollectionUpdateImplementation.Update_<#= informationObjectName #>_<#= itemName #>(this, localCollection:<#= itemName #>, masterCollection:(<#= itemTypeName #>) masterInstance);
+					} else if(<#= itemName  #> != null) {
+						((IInformationObject) <#= itemName #>).UpdateCollections(masterInstance);
+					}
+<#+			} else { #>
+					if(<#= itemName  #> != null) {
+						((IInformationObject) <#= itemName #>).UpdateCollections(masterInstance);
+					}
+
+<#+			} #>
+<#+		} #>
+				}
+
+
                 public void SetMediaContent(IContainerOwner containerOwner, string contentObjectID, object mediaContent)
                 {
                     IInformationObject targetObject = (IInformationObject) FindObjectByID(contentObjectID);
                     if (targetObject == null)
                         return;
+					if(targetObject == this)
+						throw new InvalidDataException("SetMediaContent referring to self (not media container)");
                     targetObject.SetMediaContent(containerOwner, contentObjectID, mediaContent);
                 }
+
+				void IInformationObject.FindObjectsFromTree(List<IInformationObject> result, Predicate<IInformationObject> filterOnFalse, bool searchWithinCurrentMasterOnly)
+				{
+					if(filterOnFalse(this))
+						result.Add(this);
+<#+
+		foreach(InformationItemType informationItem in nonMasterInformationObjects)
+		{
+#>
+					{ // Scoping block for variable name reusability
+						IInformationObject item = <#= informationItem.name #>;
+						if(item != null)
+						{
+							item.FindObjectsFromTree(result, filterOnFalse, searchWithinCurrentMasterOnly);
+						}
+					} // Scoping block end
+
+<#+ 
+		}
+#>
+					if(searchWithinCurrentMasterOnly == false)
+					{
+<#+
+		foreach(InformationItemType informationItem in masterInformationObjects)
+		{
+#>
+						{
+							IInformationObject item = <#= informationItem.name #>;
+							if(item != null)
+							{
+								item.FindObjectsFromTree(result, filterOnFalse, searchWithinCurrentMasterOnly);
+							}
+						}
+<#+ 
+		}
+#>
+					}					
+				}
+
 
 				private object FindFromObjectTree(string objectId)
 				{
@@ -427,6 +936,122 @@ using TheBall;
 #>
 					return null;
 				}
+
+				void IInformationObject.CollectMasterObjectsFromTree(Dictionary<string, IInformationObject> result, Predicate<IInformationObject> filterOnFalse)
+				{
+					IInformationObject iObject = (IInformationObject) this;
+					if(iObject.IsIndependentMaster)
+					{
+						if(filterOnFalse == null || filterOnFalse(iObject))
+							result.Add(iObject.ID, iObject);
+					}
+<#+
+		foreach(InformationItemType informationItem in informationObjects)
+		{
+#>
+					{
+						var item = (IInformationObject) <#= informationItem.name #>;
+						if(item != null)
+							item.CollectMasterObjectsFromTree(result, filterOnFalse);
+					}
+<#+ 
+		}
+#>
+
+				}
+
+				bool IInformationObject.IsInstanceTreeModified {
+					get {
+<#+
+		foreach(var item in informationItems)
+		{
+#>
+						if(<#= item.name #> != _unmodified_<#= item.name #>)
+							return true;
+<#+
+		}
+		foreach(var nonMasterItem in nonMasterInformationObjects)
+        {
+#>
+						{
+							IInformationObject item = (IInformationObject) <#= nonMasterItem.name #>;
+							if(item != null) 
+							{
+								bool isItemTreeModified = item.IsInstanceTreeModified;
+								if(isItemTreeModified)
+									return true;
+							}
+						}
+<#+
+        }
+
+#>				
+						return false;
+					}
+				}
+
+				void IInformationObject.ReplaceObjectInTree(IInformationObject replacingObject)
+				{
+<#+
+		foreach(InformationItemType item in informationObjects)
+		{
+
+#>
+					if(<#= item.name #> != null) {
+						if(<#= item.name #>.ID == replacingObject.ID)
+							<#= item.name #> = (<#= item.informationObjectName #>) replacingObject;
+						else {
+							IInformationObject iObject = <#= item.name #>;
+							iObject.ReplaceObjectInTree(replacingObject);
+						}
+					}
+<#+
+        }
+#>
+				}
+
+
+				private void CopyContentFrom(<#= informationObjectName #> sourceObject)
+				{
+<#+
+		foreach(var item in informationItems)
+		{
+#>
+					<#= item.name #> = sourceObject.<#= item.name #>;
+<#+
+		}
+#>
+				}
+				
+
+
+				void IInformationObject.SetInstanceTreeValuesAsUnmodified()
+				{
+<#+
+		foreach(var item in primitiveItems)
+		{
+			
+#>
+					_unmodified_<#= item.name #> = <#= item.name #>;
+<#+
+		}
+#>				
+<#+
+		foreach(var item in informationObjects)
+		{
+			
+#>
+					_unmodified_<#= item.name #> = <#= item.name #>;
+					if(<#= item.name #> != null)
+						((IInformationObject) <#= item.name #>).SetInstanceTreeValuesAsUnmodified();
+
+<#+
+		}
+#>				
+				}
+
+
+
 
 				public void ParsePropertyValue(string propertyName, string value)
 				{
@@ -509,6 +1134,7 @@ using TheBall;
 #>				
 					return result;
 				}
+
 <#+
 	}
 
@@ -520,6 +1146,7 @@ using TheBall;
 #>
 			[DataMember]
 			public <#= dataType #> <#= item.name #> { get; set; }
+			private <#= dataType #> _unmodified_<#= item.name #>;
 <#+
 		}
 	}
@@ -553,4 +1180,38 @@ using TheBall;
 				throw new NotSupportedException("Logical data type not recognized: " + logicalDataType.ToString());
 		}
 	}
+
+	InformationObjectType[] GetMasterCollections(InstanceOfTheBallType instance)
+    {
+		var results = instance.InformationModel.Where(obj => {
+				CollectionForType coll = obj.Item as CollectionForType;
+				return coll != null && coll.collectionType == CollectionForTypeCollectionType.Master;
+			}).ToArray();
+		return results;
+    }
+
+	InformationObjectType GetMasterCollectionByName(InstanceOfTheBallType instance, string name)
+    {
+		return GetMasterCollections(instance).FirstOrDefault(coll => coll.name == name);
+    }
+
+	InformationObjectType[] GetDerivedFromMasterCollections(InstanceOfTheBallType instance)
+    {
+		var results = instance.InformationModel.Where(obj => {
+				CollectionForType coll = obj.Item as CollectionForType;
+				return coll != null && coll.collectionType == CollectionForTypeCollectionType.DerivedFromMaster;
+			}).ToArray();
+		return results;
+    }
+
+	InformationObjectType GetMasterCollectionForItem(InstanceOfTheBallType instance, string collItemName)
+    {
+		var result = instance.InformationModel.FirstOrDefault(obj => {
+				CollectionForType coll = obj.Item as CollectionForType;
+				return coll != null && coll.collectionType == CollectionForTypeCollectionType.Master && coll.contentInformationObjectName == collItemName;
+			});
+		return result;
+    }
+
+
 #>

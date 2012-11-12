@@ -183,8 +183,11 @@ namespace TheBallCore_v1_0 {
         
         private bool provideCreateMethodField;
         
+        private bool isIndependentMasterField;
+        
         public InformationObjectType() {
             this.provideCreateMethodField = true;
+            this.isIndependentMasterField = false;
         }
         
         /// <remarks/>
@@ -233,6 +236,18 @@ namespace TheBallCore_v1_0 {
                 this.provideCreateMethodField = value;
             }
         }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        [System.ComponentModel.DefaultValueAttribute(false)]
+        public bool isIndependentMaster {
+            get {
+                return this.isIndependentMasterField;
+            }
+            set {
+                this.isIndependentMasterField = value;
+            }
+        }
     }
     
     /// <remarks/>
@@ -244,6 +259,12 @@ namespace TheBallCore_v1_0 {
         
         private string contentInformationObjectNameField;
         
+        private CollectionForTypeCollectionType collectionTypeField;
+        
+        public CollectionForType() {
+            this.collectionTypeField = CollectionForTypeCollectionType.Independent;
+        }
+        
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public string contentInformationObjectName {
@@ -254,6 +275,34 @@ namespace TheBallCore_v1_0 {
                 this.contentInformationObjectNameField = value;
             }
         }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        [System.ComponentModel.DefaultValueAttribute(CollectionForTypeCollectionType.Independent)]
+        public CollectionForTypeCollectionType collectionType {
+            get {
+                return this.collectionTypeField;
+            }
+            set {
+                this.collectionTypeField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.3038")]
+    [System.SerializableAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
+    public enum CollectionForTypeCollectionType {
+        
+        /// <remarks/>
+        Independent,
+        
+        /// <remarks/>
+        Master,
+        
+        /// <remarks/>
+        DerivedFromMaster,
     }
     
     /// <remarks/>

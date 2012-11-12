@@ -97,6 +97,11 @@
 Useful to NOT have in system-internal objects such as queue operations where the null has meaning of NOT having the operation.</xs:documentation>
 			</xs:annotation>
 		</xs:attribute>
+		<xs:attribute name="isIndependentMaster" type="xs:boolean" default="false">
+			<xs:annotation>
+				<xs:documentation>(Opt = false) Is object independent master data object. Independent master is treated master-first-order in data storing and comparison against existing data.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
 	</xs:complexType>
 	<xs:complexType name="InstanceOfTheBallType">
 		<xs:sequence>
@@ -509,6 +514,25 @@ Depending on the process, the "designApproved" might come from separate auditing
 	</xs:attributeGroup>
 	<xs:complexType name="CollectionForType">
 		<xs:attribute name="contentInformationObjectName" type="xs:string" use="required"/>
+		<xs:attribute name="collectionType" default="Independent">
+			<xs:annotation>
+				<xs:documentation>(Opt = Independent)
+
+Collection type:
+Independent = Not refined
+
+Master = Collection from Master objects
+
+DerivedFromMaster = Derived from master object collection (filter or alike)</xs:documentation>
+			</xs:annotation>
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="Independent"/>
+					<xs:enumeration value="Master"/>
+					<xs:enumeration value="DerivedFromMaster"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
 	</xs:complexType>
 	<xs:complexType name="CoreInfrastructureType">
 		<xs:sequence>
