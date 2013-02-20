@@ -28,6 +28,7 @@
 		{
 			TheBallCoreAbstractionType abs = LoadXml<TheBallCoreAbstractionType>(xmlFileName);
 			CurrentAbstraction = abs;
+			this.GenerationEnvironment.Clear();
 			string content = TransformText();
 			string outputFile = Path.GetFileNameWithoutExtension(xmlFileName) + ".designer.cs";
 			result.Add(Tuple.Create(outputFile, content));
@@ -85,6 +86,9 @@
 	void GenerateInstance(InstanceOfTheBallType instance)
 	{
 #>
+<#+
+		BeginNamespace(instance.semanticDomainName);
+#>
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -94,10 +98,10 @@ using System.Linq;
 using System.Runtime.Serialization;
 using Microsoft.WindowsAzure.StorageClient;
 using TheBall;
+using TheBall.CORE;
 
-<#+
-		BeginNamespace(instance.semanticDomainName);
-#>
+
+/*
 	public interface IInformationCollection
     {
         string GetItemDirectory();
@@ -126,8 +130,8 @@ using TheBall;
 		string GetLocationRelativeToContentRoot(string referenceLocation, string sourceName);
 		void SetMediaContent(IContainerOwner containerOwner, string contentObjectID, object mediaContent);
 		void ReplaceObjectInTree(IInformationObject replacingObject);
-		Dictionary<string, IInformationObject> CollectMasterObjects(Predicate<IInformationObject> filterOnFalse = null);
-		void CollectMasterObjectsFromTree(Dictionary<string, IInformationObject> result, Predicate<IInformationObject> filterOnFalse = null);
+		Dictionary<string, List<IInformationObject>> CollectMasterObjects(Predicate<IInformationObject> filterOnFalse = null);
+		void CollectMasterObjectsFromTree(Dictionary<string, List<IInformationObject>> result, Predicate<IInformationObject> filterOnFalse = null);
 		IInformationObject RetrieveMaster(bool initiateIfMissing);
 		IInformationObject RetrieveMaster(bool initiateIfMissing, out bool initiated);
 		bool IsInstanceTreeModified { get; }
@@ -136,6 +140,7 @@ using TheBall;
 		void FindObjectsFromTree(List<IInformationObject> result, Predicate<IInformationObject> filterOnFalse, bool searchWithinCurrentMasterOnly);
 		void UpdateCollections(IInformationCollection masterInstance);
     }
+	*/
 
 <#+
 		GenerateDomainInitializer(instance);
@@ -373,9 +378,9 @@ using TheBall;
 				}
 
 
-				Dictionary<string, IInformationObject> IInformationObject.CollectMasterObjects(Predicate<IInformationObject> filterOnFalse)
+				Dictionary<string, List<IInformationObject>> IInformationObject.CollectMasterObjects(Predicate<IInformationObject> filterOnFalse)
 				{
-					Dictionary<string, IInformationObject> result = new Dictionary<string, IInformationObject>();
+					Dictionary<string, List<IInformationObject>> result = new Dictionary<string, List<IInformationObject>>();
 					IInformationObject iObject = (IInformationObject) this;
 					iObject.CollectMasterObjectsFromTree(result, filterOnFalse);
 					return result;
@@ -630,6 +635,59 @@ using TheBall;
 				[DataMember] public List<<#= contentObjectName #>> CollectionContent = new List<<#= contentObjectName #>>();
 				private <#= contentObjectName #>[] _unmodified_CollectionContent;
 
+				[DataMember] public bool IsCollectionFiltered;
+				private bool _unmodified_IsCollectionFiltered;
+				
+				[DataMember] public List<string> OrderFilterIDList = new List<string>();
+				private string[] _unmodified_OrderFilterIDList;
+
+				public string SelectedIDCommaSeparated
+				{
+					get
+					{
+						string[] sourceArray;
+						if (OrderFilterIDList != null)
+							sourceArray = OrderFilterIDList.ToArray();
+						else
+							sourceArray = CollectionContent.Select(item => item.ID).ToArray();
+						return String.Join(",", sourceArray);
+					}
+					set 
+					{
+						if (value == null)
+							return;
+						string[] valueArray = value.Split(',');
+						OrderFilterIDList = new List<string>();
+						OrderFilterIDList.AddRange(valueArray);
+						OrderFilterIDList.RemoveAll(item => CollectionContent.Any(colItem => colItem.ID == item) == false);
+					}
+				}
+
+				public <#= contentObjectName #>[] GetIDSelectedArray()
+				{
+					if (IsCollectionFiltered == false || this.OrderFilterIDList == null)
+						return CollectionContent.ToArray();
+					return
+						this.OrderFilterIDList.Select(id => CollectionContent.FirstOrDefault(item => item.ID == id)).ToArray();
+				}
+
+
+				public void ParsePropertyValue(string propertyName, string propertyValue)
+				{
+					switch(propertyName)
+					{
+						case "SelectedIDCommaSeparated":
+							SelectedIDCommaSeparated = propertyValue;
+							break;
+						case "IsCollectionFiltered":
+							IsCollectionFiltered = bool.Parse(propertyValue);
+							break;
+						default:
+							throw new NotSupportedException("No ParsePropertyValue supported for property: " + propertyName);
+					}
+				}
+
+
 				void IInformationObject.ReplaceObjectInTree(IInformationObject replacingObject)
 				{
 					for(int i = 0; i < CollectionContent.Count; i++) // >
@@ -648,6 +706,9 @@ using TheBall;
 					get {
 						bool collectionModified = CollectionContent.SequenceEqual(_unmodified_CollectionContent) == false;
 						if(collectionModified)
+							return true;
+						//if((OrderFilterIDList == null && _unmodified_OrderFilterIDList != null) || _unmodified_OrderFilterIDList
+						if(IsCollectionFiltered != _unmodified_IsCollectionFiltered)
 							return true;
 <#+
 	if(isContentItemMaster == false)
@@ -670,6 +731,11 @@ using TheBall;
 				void IInformationObject.SetInstanceTreeValuesAsUnmodified()
 				{
 					_unmodified_CollectionContent = CollectionContent.ToArray();
+					_unmodified_IsCollectionFiltered = IsCollectionFiltered;
+					if(OrderFilterIDList == null)
+						_unmodified_OrderFilterIDList = null;
+					else
+						_unmodified_OrderFilterIDList = OrderFilterIDList.ToArray();
 					foreach(IInformationObject iObject in CollectionContent)
 						iObject.SetInstanceTreeValuesAsUnmodified();
 				}
@@ -715,7 +781,7 @@ using TheBall;
 				}
 
 
-				void IInformationObject.CollectMasterObjectsFromTree(Dictionary<string, IInformationObject> result, Predicate<IInformationObject> filterOnFalse)
+				void IInformationObject.CollectMasterObjectsFromTree(Dictionary<string, List<IInformationObject>> result, Predicate<IInformationObject> filterOnFalse)
 				{
 					IInformationObject iObject = (IInformationObject) this;
 					if(iObject.IsIndependentMaster)
@@ -723,8 +789,16 @@ using TheBall;
 						bool doAdd = true;
 						if(filterOnFalse != null)
 							doAdd = filterOnFalse(iObject);
-						if(doAdd)
-							result.Add(iObject.ID, iObject);
+						if(doAdd) {
+							string key = iObject.ID;
+							List<IInformationObject> existingValue;
+							bool keyFound = result.TryGetValue(key, out existingValue);
+							if(keyFound == false) {
+								existingValue = new List<IInformationObject>();
+								result.Add(key, existingValue);
+							}
+							existingValue.Add(iObject);
+						}
 					}
 					foreach(IInformationObject item in CollectionContent)
 					{
@@ -793,13 +867,22 @@ using TheBall;
 					// Cannot replace self, doesn't contain subitems, nothing to do
 				}
 
-				void IInformationObject.CollectMasterObjectsFromTree(Dictionary<string, IInformationObject> result, Predicate<IInformationObject> filterOnFalse)
+				void IInformationObject.CollectMasterObjectsFromTree(Dictionary<string, List<IInformationObject>> result, Predicate<IInformationObject> filterOnFalse)
 				{
 					IInformationObject iObject = (IInformationObject) this;
 					if(iObject.IsIndependentMaster)
 					{
-						if(filterOnFalse == null || filterOnFalse(iObject))
-							result.Add(iObject.ID, iObject);
+						if(filterOnFalse == null || filterOnFalse(iObject)) 
+						{
+							string key = iObject.ID;
+							List<IInformationObject> existingValue;
+							bool keyFound = result.TryGetValue(key, out existingValue);
+							if(keyFound == false) {
+								existingValue = new List<IInformationObject>();
+								result.Add(key, existingValue);
+							}
+							existingValue.Add(iObject);
+						}
 					}
 				}
 
@@ -937,13 +1020,22 @@ using TheBall;
 					return null;
 				}
 
-				void IInformationObject.CollectMasterObjectsFromTree(Dictionary<string, IInformationObject> result, Predicate<IInformationObject> filterOnFalse)
+				void IInformationObject.CollectMasterObjectsFromTree(Dictionary<string, List<IInformationObject>> result, Predicate<IInformationObject> filterOnFalse)
 				{
 					IInformationObject iObject = (IInformationObject) this;
 					if(iObject.IsIndependentMaster)
 					{
-						if(filterOnFalse == null || filterOnFalse(iObject))
-							result.Add(iObject.ID, iObject);
+						if(filterOnFalse == null || filterOnFalse(iObject)) 
+						{
+							string key = iObject.ID;
+							List<IInformationObject> existingValue;
+							bool keyFound = result.TryGetValue(key, out existingValue);
+							if(keyFound == false) {
+								existingValue = new List<IInformationObject>();
+								result.Add(key, existingValue);
+							}
+							existingValue.Add(iObject);
+						}
 					}
 <#+
 		foreach(InformationItemType informationItem in informationObjects)
