@@ -23,9 +23,9 @@ namespace TheBallCoreABS.TheBallCore
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\DustTemplateViewGenerator_v1_0.tt"
+    #line 1 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\KBObservableModelTypeScriptGenerator_v1_0.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "11.0.0.0")]
-    public partial class DustTemplateViewGenerator_v1_0 : DustTemplateViewGenerator_v1_0Base
+    public partial class KBObservableModelTypeScriptGenerator_v1_0 : KBObservableModelTypeScriptGenerator_v1_0Base
     {
 #line hidden
         /// <summary>
@@ -36,7 +36,7 @@ namespace TheBallCoreABS.TheBallCore
             this.Write(" \r\n");
             this.Write("\r\n");
             
-            #line 18 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\DustTemplateViewGenerator_v1_0.tt"
+            #line 18 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\KBObservableModelTypeScriptGenerator_v1_0.tt"
    
 	// Set abstraction specific type and single file specific extension
 	//TransformGenerator< ClassModelAbstractionType >(GenerateRoot, ".designer.cs");	
@@ -63,7 +63,7 @@ namespace TheBallCoreABS.TheBallCore
             }
         }
         
-        #line 23 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\DustTemplateViewGenerator_v1_0.tt"
+        #line 23 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\KBObservableModelTypeScriptGenerator_v1_0.tt"
  
 	public Tuple<string, string>[] GetGeneratorContent(params string[] xmlFileNames)
 	{
@@ -76,12 +76,12 @@ namespace TheBallCoreABS.TheBallCore
 				continue;
 			InstanceOfTheBallType instance = abs.InstanceOfTheBall;
 			CurrInstance = instance;
-			foreach(var interfaceView in abs.InstanceOfTheBall.DigitalInterface.InterfaceViews)
+			foreach(var interfaceObject in abs.InstanceOfTheBall.DigitalInterface.InterfaceModel)
             {
-				CurrView = interfaceView;
+				CurrObject = interfaceObject;
 				this.GenerationEnvironment.Clear();
 				string content = TransformText();
-				string outputFileName = CurrInstance.semanticDomainName + "." + CurrView.name + ".admgen.dust";
+				string outputFileName = CurrInstance.semanticDomainName + "." + CurrObject.name + ".admgen.ts";
 				//string outputFile = Path.GetFileNameWithoutExtension(xmlFileName) + ".admgen.ts";
 				result.Add(Tuple.Create(outputFileName, content));
             }
@@ -95,14 +95,14 @@ namespace TheBallCoreABS.TheBallCore
 	}
 	
 	TheBallCoreAbstractionType CurrentAbstraction;
-	InterfaceViewType CurrView;
+	InterfaceObjectType CurrObject;
 	InstanceOfTheBallType CurrInstance;
 	
 	void GenerateRoot()
 	{
-		if(CurrView == null)
+		if(CurrObject == null)
 			return;
-		GenerateInterfaceView(CurrView);
+		GenerateInterfaceObject(CurrObject);
 	}
 
 	string GetTSDataType(InterfaceItemTypeLogicalDataType logicalDataType)
@@ -123,110 +123,205 @@ namespace TheBallCoreABS.TheBallCore
 		}
     }
 
-	InterfaceObjectType GetInterfaceObjectByName(string interfaceObjectName)
+	void GenerateInterfaceObject(InterfaceObjectType iObj)
     {
-		var result = CurrInstance.DigitalInterface.InterfaceModel.FirstOrDefault(candidate => candidate.name == interfaceObjectName);
-		if(result == null)
-			throw new ArgumentException("Interface object not found with name: " + interfaceObjectName);
-		return result;
+		string objectName = iObj.name;
+
+
+        
+        #line default
+        #line hidden
+        
+        #line 86 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\KBObservableModelTypeScriptGenerator_v1_0.tt"
+this.Write("declare var ko: any;\r\n\r\nclass ");
+
+        
+        #line default
+        #line hidden
+        
+        #line 89 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\KBObservableModelTypeScriptGenerator_v1_0.tt"
+this.Write(this.ToStringHelper.ToStringWithCulture(objectName));
+
+        
+        #line default
+        #line hidden
+        
+        #line 89 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\KBObservableModelTypeScriptGenerator_v1_0.tt"
+this.Write(" {\r\n");
+
+        
+        #line default
+        #line hidden
+        
+        #line 90 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\KBObservableModelTypeScriptGenerator_v1_0.tt"
+ GenerateInterfaceItems(iObj.InterfaceItems); 
+        
+        #line default
+        #line hidden
+        
+        #line 90 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\KBObservableModelTypeScriptGenerator_v1_0.tt"
+this.Write("\r\n    constructor() {\r\n\t\t");
+
+        
+        #line default
+        #line hidden
+        
+        #line 93 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\KBObservableModelTypeScriptGenerator_v1_0.tt"
+ GenerateKOObservable(iObj.InterfaceItems); 
+        
+        #line default
+        #line hidden
+        
+        #line 93 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\KBObservableModelTypeScriptGenerator_v1_0.tt"
+this.Write("    }\r\n}\r\n\r\n");
+
+        
+        #line default
+        #line hidden
+        
+        #line 97 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\KBObservableModelTypeScriptGenerator_v1_0.tt"
+
     }
 
-	void GenerateInterfaceView(InterfaceViewType iView)
+	void GenerateKOObservable(object[] interfaceItems)
     {
-		string viewName = iView.name;
-		bool autoRecurseSubfields = iView.autoRecurseSubViews;
-
-
-        
-        #line default
-        #line hidden
-        
-        #line 95 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\DustTemplateViewGenerator_v1_0.tt"
-this.Write("\r\n<div>\r\n");
+		foreach(var item in interfaceItems)
+        {
+			dynamic dyn = item;
+			string itemName = dyn.name;
+			bool isCollection = dyn.isCollection;
+			string observableName = isCollection ? "observableArray" : "observable";
 
         
         #line default
         #line hidden
         
-        #line 98 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\DustTemplateViewGenerator_v1_0.tt"
- GenerateViewItems(iView.Items); 
-        
-        #line default
-        #line hidden
-        
-        #line 98 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\DustTemplateViewGenerator_v1_0.tt"
-this.Write("\r\n</div>\r\n\r\n\r\n");
+        #line 108 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\KBObservableModelTypeScriptGenerator_v1_0.tt"
+this.Write("\t\t\tthis.");
 
         
         #line default
         #line hidden
         
-        #line 103 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\DustTemplateViewGenerator_v1_0.tt"
+        #line 109 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\KBObservableModelTypeScriptGenerator_v1_0.tt"
+this.Write(this.ToStringHelper.ToStringWithCulture(itemName));
 
+        
+        #line default
+        #line hidden
+        
+        #line 109 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\KBObservableModelTypeScriptGenerator_v1_0.tt"
+this.Write(" = ko.");
+
+        
+        #line default
+        #line hidden
+        
+        #line 109 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\KBObservableModelTypeScriptGenerator_v1_0.tt"
+this.Write(this.ToStringHelper.ToStringWithCulture(observableName));
+
+        
+        #line default
+        #line hidden
+        
+        #line 109 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\KBObservableModelTypeScriptGenerator_v1_0.tt"
+this.Write("(this.");
+
+        
+        #line default
+        #line hidden
+        
+        #line 109 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\KBObservableModelTypeScriptGenerator_v1_0.tt"
+this.Write(this.ToStringHelper.ToStringWithCulture(itemName));
+
+        
+        #line default
+        #line hidden
+        
+        #line 109 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\KBObservableModelTypeScriptGenerator_v1_0.tt"
+this.Write(");\r\n");
+
+        
+        #line default
+        #line hidden
+        
+        #line 110 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\KBObservableModelTypeScriptGenerator_v1_0.tt"
+
+        }
     }
 
-	void GenerateViewItems(object[] interfaceItems)
+	void GenerateInterfaceItems(object[] interfaceItems)
     {
 		foreach (var item in interfaceItems)
 		{
 			string itemName;
 			string dataType;
-			ViewFieldType vField = item as ViewFieldType;
-			SubViewType subView = item as SubViewType;
+			InterfaceItemType iItem = item as InterfaceItemType;
+			ObjectInstanceType oItem = item as ObjectInstanceType;
 			dynamic dynItem = item;
 			string collectionPostFix = dynItem.isCollection ? "[]" : "";
-			if(vField != null) {
-				GenerateViewField(vField);
-            } else if(subView != null) {
-				GenerateSubView(subView);
+			if(iItem != null) {
+				dataType = GetTSDataType(iItem.logicalDataType);
+				itemName = iItem.name;
+            } else if(oItem != null) {
+				dataType = oItem.interfaceObjectName;
+				itemName = oItem.name;
             } else
 				throw new NotSupportedException("InterfaceItem type not supported: " + item.GetType().Name);
-        }
 
+
+
+        
+        #line default
+        #line hidden
+        
+        #line 134 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\KBObservableModelTypeScriptGenerator_v1_0.tt"
+this.Write("\t");
+
+        
+        #line default
+        #line hidden
+        
+        #line 135 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\KBObservableModelTypeScriptGenerator_v1_0.tt"
+this.Write(this.ToStringHelper.ToStringWithCulture(itemName));
+
+        
+        #line default
+        #line hidden
+        
+        #line 135 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\KBObservableModelTypeScriptGenerator_v1_0.tt"
+this.Write(": ");
+
+        
+        #line default
+        #line hidden
+        
+        #line 135 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\KBObservableModelTypeScriptGenerator_v1_0.tt"
+this.Write(this.ToStringHelper.ToStringWithCulture(dataType));
+
+        
+        #line default
+        #line hidden
+        
+        #line 135 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\KBObservableModelTypeScriptGenerator_v1_0.tt"
+this.Write(this.ToStringHelper.ToStringWithCulture(collectionPostFix));
+
+        
+        #line default
+        #line hidden
+        
+        #line 135 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\KBObservableModelTypeScriptGenerator_v1_0.tt"
+this.Write(";\r\n");
+
+        
+        #line default
+        #line hidden
+        
+        #line 136 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\KBObservableModelTypeScriptGenerator_v1_0.tt"
+
+		}
     }
 
-	void GenerateViewField(ViewFieldType vField)
-    {
-		string classNames = vField.classNames;
-		string modelFieldName = vField.viewItemPath;
-		string modelFieldListName = modelFieldName + "_AllowedValues";
-		string controlFormatString = null;
-		bool editable = vField.displayMode == ViewFieldTypeDisplayMode.Editable;
-		switch(vField.fieldType)
-        {
-			case ViewFieldTypeFieldType.CheckBox:
-				//if(editable)
-					controlFormatString = "<input type=\"checkbox\" data-bind=\"checked: {0}\" />";
-				//else 
-
-				break;
-			case ViewFieldTypeFieldType.DropdownList:
-				controlFormatString = "<select data-bind=\"value: {0}, options: {1}\" />";
-				break;
-			case ViewFieldTypeFieldType.MultiselectList:
-				controlFormatString = "<select multiple=\"multiple\" data-bind=\"selectedOptions: {0}, options: {1}\" />";
-				break;
-			case ViewFieldTypeFieldType.RadioButton:
-				break;
-			case ViewFieldTypeFieldType.TextBox:
-				controlFormatString = "<input data-bind=\"value: {0}\" />";
-				break;
-			case ViewFieldTypeFieldType.TextBoxHiddenChars:
-				controlFormatString = "<input type=\"password\" data-bind=\"value: {0}\" />";
-				break;
-			case ViewFieldTypeFieldType.TextBoxMultiline:
-				controlFormatString = "<textarea data-bind=\"value: {0}\"></textarea>";
-				break;
-			default:
-				throw new NotSupportedException("Field type not supported in view field generator: " + vField.ToString());
-        }
-		string controlString = string.Format(controlFormatString, modelFieldName, modelFieldListName);
-
-    }
-
-	void GenerateSubView(SubViewType subView)
-    {
-    }
 	
 
         
@@ -2880,7 +2975,7 @@ public enum InformationItemTypeLogicalDataType {
     /// Base class for this transformation
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "11.0.0.0")]
-    public class DustTemplateViewGenerator_v1_0Base
+    public class KBObservableModelTypeScriptGenerator_v1_0Base
     {
         #region Fields
         private global::System.Text.StringBuilder generationEnvironmentField;

@@ -1,0 +1,26 @@
+﻿<#@ IntelliSenseLanguage processor="tangibleT4Editor" language="C#" #>
+<#@ include file="TheBallCore_v1_0.ttinclude" #>
+<#+ 
+
+	InterfaceObjectType GetInterfaceObjectByName(string interfaceObjectName)
+    {
+		var result = CurrInstance.DigitalInterface.InterfaceModel.FirstOrDefault(candidate => candidate.name == interfaceObjectName);
+		if(result == null)
+			throw new ArgumentException("Interface object not found with name: " + interfaceObjectName);
+		return result;
+    }
+
+	bool IsObjectItemCollection(InterfaceObjectType objectType, string viewItemPath)
+    {
+		object obj = objectType.InterfaceItems.FirstOrDefault(o => {
+			dynamic dynObj = o;
+			return dynObj.name == viewItemPath;
+        });
+		if(obj == null)
+			throw new NotSupportedException(String.Format("Object type: {0} does not have requested viewItemPath: {1}",
+				objectType.name, viewItemPath));
+		dynamic dyn = obj;
+		return dyn.isCollection;
+    }
+
+#>

@@ -79,31 +79,36 @@
 		}
     }
 
-	InterfaceObjectType GetInterfaceObjectByName(string interfaceObjectName)
-    {
-		var result = CurrInstance.DigitalInterface.InterfaceModel.FirstOrDefault(candidate => candidate.name == interfaceObjectName);
-		if(result == null)
-			throw new ArgumentException("Interface object not found with name: " + interfaceObjectName);
-		return result;
-    }
-
 	void GenerateInterfaceObject(InterfaceObjectType iObj)
     {
 		string objectName = iObj.name;
 
 #>
+declare var ko: any;
+
 class <#= objectName #> {
 <#+ GenerateInterfaceItems(iObj.InterfaceItems); #>
-    testItem: Date;
 
     constructor() {
-        var test2 = new Date();
-        this.testItem = test2;
-
+		<#+ GenerateKOObservable(iObj.InterfaceItems); #>
     }
 }
 
 <#+
+    }
+
+	void GenerateKOObservable(object[] interfaceItems)
+    {
+		foreach(var item in interfaceItems)
+        {
+			dynamic dyn = item;
+			string itemName = dyn.name;
+			bool isCollection = dyn.isCollection;
+			string observableName = isCollection ? "observableArray" : "observable";
+#>
+			this.<#= itemName #> = ko.<#= observableName #>(this.<#= itemName #>);
+<#+
+        }
     }
 
 	void GenerateInterfaceItems(object[] interfaceItems)

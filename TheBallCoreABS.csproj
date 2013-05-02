@@ -50,13 +50,13 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="TheBallCore\BackboneModelTypeScriptGenerator_v1_0.cs">
-      <DependentUpon>BackboneModelTypeScriptGenerator_v1_0.tt</DependentUpon>
+    <Compile Include="TheBallCore\KBObservableModelTypeScriptGenerator_v1_0.cs">
+      <DependentUpon>KBObservableModelTypeScriptGenerator_v1_0.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="TheBallCore\DustTemplateViewGenerator_v1_0.cs">
-      <DependentUpon>DustTemplateViewGenerator_v1_0.tt</DependentUpon>
+    <Compile Include="TheBallCore\KBDustTemplateViewGenerator_v1_0.cs">
+      <DependentUpon>KBDustTemplateViewGenerator_v1_0.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
@@ -78,14 +78,15 @@
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>AzureCSharpClassGenerator_v1_0.cs</LastGenOutput>
     </None>
-    <None Include="TheBallCore\BackboneModelTypeScriptGenerator_v1_0.tt">
+    <None Include="TheBallCore\KBObservableModelTypeScriptGenerator_v1_0.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
-      <LastGenOutput>BackboneModelTypeScriptGenerator_v1_0.cs</LastGenOutput>
+      <LastGenOutput>KBObservableModelTypeScriptGenerator_v1_0.cs</LastGenOutput>
     </None>
-    <None Include="TheBallCore\DustTemplateViewGenerator_v1_0.tt">
+    <None Include="TheBallCore\KBDustTemplateViewGenerator_v1_0.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
-      <LastGenOutput>DustTemplateViewGenerator_v1_0.cs</LastGenOutput>
+      <LastGenOutput>KBDustTemplateViewGenerator_v1_0.cs</LastGenOutput>
     </None>
+    <None Include="TheBallCore\InterfaceGeneration.ttinclude" />
     <None Include="TheBallCore\TheBallCore_v1_0.ttinclude" />
   </ItemGroup>
   <ItemGroup>

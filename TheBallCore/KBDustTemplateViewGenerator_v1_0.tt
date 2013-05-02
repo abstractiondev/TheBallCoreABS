@@ -14,7 +14,7 @@
 <#@ import namespace="System.Collections" #>
 <#@ import namespace="System.Collections.Generic" #> 
 <#@ include file="..\..\abscommon\CommonInclude\Common\CommonCodeblocks.ttinclude" #>
-<#@ include file="TheBallCore_v1_0.ttinclude" #>
+<#@ include file="InterfaceGeneration.ttinclude" #>
 <#   
 	// Set abstraction specific type and single file specific extension
 	//TransformGenerator< ClassModelAbstractionType >(GenerateRoot, ".designer.cs");	
@@ -32,19 +32,19 @@
 				continue;
 			InstanceOfTheBallType instance = abs.InstanceOfTheBall;
 			CurrInstance = instance;
-			foreach(var interfaceView in abs.InstanceOfTheBall.DigitalInterface.InterfaceViews)
+			foreach(var interfaceView in abs.InstanceOfTheBall.DigitalInterface.InterfaceViews ?? new InterfaceViewType[0])
             {
 				CurrView = interfaceView;
 				this.GenerationEnvironment.Clear();
 				string content = TransformText();
-				string outputFileName = CurrInstance.semanticDomainName + "." + CurrView.name + ".admgen.dust";
+				string outputFileName = GetDustTemplateFileName(CurrInstance.semanticDomainName, CurrView.name);
 				//string outputFile = Path.GetFileNameWithoutExtension(xmlFileName) + ".admgen.ts";
 				result.Add(Tuple.Create(outputFileName, content));
             }
 		}
 		return result.ToArray();
 	}
-	
+
 	void SetCurrentAbstraction(object abs)
 	{
 		CurrentAbstraction = ( TheBallCoreAbstractionType ) abs;
@@ -59,6 +59,11 @@
 		if(CurrView == null)
 			return;
 		GenerateInterfaceView(CurrView);
+	}
+
+	string GetDustTemplateFileName(string semanticDomainName, string viewName)
+    {
+		return semanticDomainName + "." + viewName + ".admgen.dust";
 	}
 
 	string GetTSDataType(InterfaceItemTypeLogicalDataType logicalDataType)
@@ -78,15 +83,6 @@
 				throw new NotSupportedException("Logical data type not supported: " + logicalDataType);
 		}
     }
-
-	InterfaceObjectType GetInterfaceObjectByName(string interfaceObjectName)
-    {
-		var result = CurrInstance.DigitalInterface.InterfaceModel.FirstOrDefault(candidate => candidate.name == interfaceObjectName);
-		if(result == null)
-			throw new ArgumentException("Interface object not found with name: " + interfaceObjectName);
-		return result;
-    }
-
 	void GenerateInterfaceView(InterfaceViewType iView)
     {
 		string viewName = iView.name;
@@ -95,16 +91,17 @@
 #>
 
 <div>
-<#+ GenerateViewItems(iView.Items); #>
-
+<#+ GenerateViewItems(iView); #>
 </div>
 
 
 <#+
     }
 
-	void GenerateViewItems(object[] interfaceItems)
+	void GenerateViewItems(InterfaceViewType iView)
     {
+		object[] interfaceItems = iView.Items;
+		InterfaceObjectType objectType = GetInterfaceObjectByName(iView.rootObjectName);
 		foreach (var item in interfaceItems)
 		{
 			string itemName;
@@ -112,11 +109,14 @@
 			ViewFieldType vField = item as ViewFieldType;
 			SubViewType subView = item as SubViewType;
 			dynamic dynItem = item;
-			string collectionPostFix = dynItem.isCollection ? "[]" : "";
+			string viewItemPath = dynItem.viewItemPath;
+
+			bool isCollection = IsObjectItemCollection(objectType, viewItemPath);
+			//string collectionPostFix = dynItem.isCollection ? "[]" : "";
 			if(vField != null) {
 				GenerateViewField(vField);
             } else if(subView != null) {
-				GenerateSubView(subView);
+				GenerateSubView(subView, isCollection);
             } else
 				throw new NotSupportedException("InterfaceItem type not supported: " + item.GetType().Name);
         }
@@ -126,6 +126,7 @@
 	void GenerateViewField(ViewFieldType vField)
     {
 		string classNames = vField.classNames;
+		string labelText = vField.label;
 		string modelFieldName = vField.viewItemPath;
 		string modelFieldListName = modelFieldName + "_AllowedValues";
 		string controlFormatString = null;
@@ -159,11 +160,26 @@
 				throw new NotSupportedException("Field type not supported in view field generator: " + vField.ToString());
         }
 		string controlString = string.Format(controlFormatString, modelFieldName, modelFieldListName);
-
+#>
+<div>
+		<label><#= labelText #></label>
+		<#= controlString #>
+</div>
+<#+
     }
 
-	void GenerateSubView(SubViewType subView)
+	void GenerateSubView(SubViewType subView, bool isCollection)
     {
+		string viewItemPath = subView.viewItemPath;
+		string collectionBindingString = isCollection ? 
+			string.Format(" data-bind=\"foreach: {0}\"", viewItemPath) : "";
+		string dustFileName = GetDustTemplateFileName(CurrInstance.semanticDomainName,
+			subView.viewName);
+#>
+<div <#= collectionBindingString #>>
+	{>"<#= dustFileName #>"}
+</div>
+<#+
     }
 	
 #>
