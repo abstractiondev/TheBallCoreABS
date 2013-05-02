@@ -50,6 +50,16 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="TheBallCore\BackboneModelTypeScriptGenerator_v1_0.cs">
+      <DependentUpon>BackboneModelTypeScriptGenerator_v1_0.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="TheBallCore\DustTemplateViewGenerator_v1_0.cs">
+      <DependentUpon>DustTemplateViewGenerator_v1_0.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="TheBallCore\TheBallCore_v1_0_namespace.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -67,6 +77,14 @@
     <None Include="TheBallCore\AzureCSharpClassGenerator_v1_0.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>AzureCSharpClassGenerator_v1_0.cs</LastGenOutput>
+    </None>
+    <None Include="TheBallCore\BackboneModelTypeScriptGenerator_v1_0.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>BackboneModelTypeScriptGenerator_v1_0.cs</LastGenOutput>
+    </None>
+    <None Include="TheBallCore\DustTemplateViewGenerator_v1_0.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>DustTemplateViewGenerator_v1_0.cs</LastGenOutput>
     </None>
     <None Include="TheBallCore\TheBallCore_v1_0.ttinclude" />
   </ItemGroup>

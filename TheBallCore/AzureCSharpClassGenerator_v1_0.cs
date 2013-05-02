@@ -3980,6 +3980,8 @@ public partial class InstanceOfTheBallType {
     
     private CoreInfrastructureType coreInfrastructureField;
     
+    private DigitalInterfaceType digitalInterfaceField;
+    
     private InformationObjectType[] informationModelField;
     
     private OperationType[] operationsField;
@@ -3997,6 +3999,16 @@ public partial class InstanceOfTheBallType {
         }
         set {
             this.coreInfrastructureField = value;
+        }
+    }
+    
+    /// <remarks/>
+    public DigitalInterfaceType DigitalInterface {
+        get {
+            return this.digitalInterfaceField;
+        }
+        set {
+            this.digitalInterfaceField = value;
         }
     }
     
@@ -4572,6 +4584,277 @@ public partial class InformationObjectTargetType {
         }
         set {
             this.objectNameField = value;
+        }
+    }
+}
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.3038")]
+[System.SerializableAttribute()]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
+public partial class ObjectInstanceType {
+    
+    private string nameField;
+    
+    private string interfaceObjectNameField;
+    
+    private bool isCollectionField;
+    
+    public ObjectInstanceType() {
+        this.isCollectionField = false;
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    public string name {
+        get {
+            return this.nameField;
+        }
+        set {
+            this.nameField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    public string interfaceObjectName {
+        get {
+            return this.interfaceObjectNameField;
+        }
+        set {
+            this.interfaceObjectNameField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    [System.ComponentModel.DefaultValueAttribute(false)]
+    public bool isCollection {
+        get {
+            return this.isCollectionField;
+        }
+        set {
+            this.isCollectionField = value;
+        }
+    }
+}
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.3038")]
+[System.SerializableAttribute()]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
+public partial class InterfaceFieldType {
+    
+    private string nameField;
+    
+    private string labelField;
+    
+    private InterfaceFieldTypeLogicalDataType logicalDataTypeField;
+    
+    private bool isCollectionField;
+    
+    private InterfaceFieldTypeFieldType fieldTypeField;
+    
+    private string classNamesField;
+    
+    public InterfaceFieldType() {
+        this.isCollectionField = false;
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    public string name {
+        get {
+            return this.nameField;
+        }
+        set {
+            this.nameField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    public string label {
+        get {
+            return this.labelField;
+        }
+        set {
+            this.labelField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    public InterfaceFieldTypeLogicalDataType logicalDataType {
+        get {
+            return this.logicalDataTypeField;
+        }
+        set {
+            this.logicalDataTypeField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    [System.ComponentModel.DefaultValueAttribute(false)]
+    public bool isCollection {
+        get {
+            return this.isCollectionField;
+        }
+        set {
+            this.isCollectionField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    public InterfaceFieldTypeFieldType fieldType {
+        get {
+            return this.fieldTypeField;
+        }
+        set {
+            this.fieldTypeField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    public string classNames {
+        get {
+            return this.classNamesField;
+        }
+        set {
+            this.classNamesField = value;
+        }
+    }
+}
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.3038")]
+[System.SerializableAttribute()]
+[System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
+public enum InterfaceFieldTypeLogicalDataType {
+    
+    /// <remarks/>
+    TrueOrFalse_Boolean,
+    
+    /// <remarks/>
+    Text_Short,
+    
+    /// <remarks/>
+    Text_Long,
+    
+    /// <remarks/>
+    Number,
+    
+    /// <remarks/>
+    Time_Date,
+    
+    /// <remarks/>
+    Time_Time,
+    
+    /// <remarks/>
+    Time_DateTime,
+    
+    /// <remarks/>
+    Data_Binary,
+}
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.3038")]
+[System.SerializableAttribute()]
+[System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
+public enum InterfaceFieldTypeFieldType {
+    
+    /// <remarks/>
+    TextBox,
+    
+    /// <remarks/>
+    TextBoxMultiline,
+    
+    /// <remarks/>
+    TextBoxHiddenChars,
+    
+    /// <remarks/>
+    CheckBox,
+    
+    /// <remarks/>
+    DropdownList,
+    
+    /// <remarks/>
+    MultiselectList,
+    
+    /// <remarks/>
+    RadioButton,
+}
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.3038")]
+[System.SerializableAttribute()]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
+public partial class InterfaceObjectType {
+    
+    private object[] interfaceItemsField;
+    
+    private string nameField;
+    
+    private string designDescField;
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlArrayItemAttribute("InterfaceField", typeof(InterfaceFieldType), IsNullable=false)]
+    [System.Xml.Serialization.XmlArrayItemAttribute("ObjectInstance", typeof(ObjectInstanceType), IsNullable=false)]
+    public object[] InterfaceItems {
+        get {
+            return this.interfaceItemsField;
+        }
+        set {
+            this.interfaceItemsField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    public string name {
+        get {
+            return this.nameField;
+        }
+        set {
+            this.nameField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    public string designDesc {
+        get {
+            return this.designDescField;
+        }
+        set {
+            this.designDescField = value;
+        }
+    }
+}
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.3038")]
+[System.SerializableAttribute()]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
+public partial class DigitalInterfaceType {
+    
+    private InterfaceObjectType[] interfaceModelField;
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlArrayItemAttribute("InterfaceObject", IsNullable=false)]
+    public InterfaceObjectType[] InterfaceModel {
+        get {
+            return this.interfaceModelField;
+        }
+        set {
+            this.interfaceModelField = value;
         }
     }
 }

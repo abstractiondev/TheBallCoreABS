@@ -45,6 +45,8 @@ namespace TheBallCore_v1_0 {
         
         private CoreInfrastructureType coreInfrastructureField;
         
+        private DigitalInterfaceType digitalInterfaceField;
+        
         private InformationObjectType[] informationModelField;
         
         private OperationType[] operationsField;
@@ -62,6 +64,16 @@ namespace TheBallCore_v1_0 {
             }
             set {
                 this.coreInfrastructureField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public DigitalInterfaceType DigitalInterface {
+            get {
+                return this.digitalInterfaceField;
+            }
+            set {
+                this.digitalInterfaceField = value;
             }
         }
         
@@ -637,6 +649,458 @@ namespace TheBallCore_v1_0 {
             }
             set {
                 this.objectNameField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.3038")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class SubViewType {
+        
+        private string nameField;
+        
+        private string viewNameField;
+        
+        private string viewItemPathField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string name {
+            get {
+                return this.nameField;
+            }
+            set {
+                this.nameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string viewName {
+            get {
+                return this.viewNameField;
+            }
+            set {
+                this.viewNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string viewItemPath {
+            get {
+                return this.viewItemPathField;
+            }
+            set {
+                this.viewItemPathField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.3038")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class ViewFieldType {
+        
+        private string labelField;
+        
+        private ViewFieldTypeFieldType fieldTypeField;
+        
+        private ViewFieldTypeDisplayMode displayModeField;
+        
+        private string classNamesField;
+        
+        private string viewItemPathField;
+        
+        public ViewFieldType() {
+            this.displayModeField = ViewFieldTypeDisplayMode.Display;
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string label {
+            get {
+                return this.labelField;
+            }
+            set {
+                this.labelField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public ViewFieldTypeFieldType fieldType {
+            get {
+                return this.fieldTypeField;
+            }
+            set {
+                this.fieldTypeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        [System.ComponentModel.DefaultValueAttribute(ViewFieldTypeDisplayMode.Display)]
+        public ViewFieldTypeDisplayMode displayMode {
+            get {
+                return this.displayModeField;
+            }
+            set {
+                this.displayModeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string classNames {
+            get {
+                return this.classNamesField;
+            }
+            set {
+                this.classNamesField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string viewItemPath {
+            get {
+                return this.viewItemPathField;
+            }
+            set {
+                this.viewItemPathField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.3038")]
+    [System.SerializableAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
+    public enum ViewFieldTypeFieldType {
+        
+        /// <remarks/>
+        TextBox,
+        
+        /// <remarks/>
+        TextBoxMultiline,
+        
+        /// <remarks/>
+        TextBoxHiddenChars,
+        
+        /// <remarks/>
+        CheckBox,
+        
+        /// <remarks/>
+        DropdownList,
+        
+        /// <remarks/>
+        MultiselectList,
+        
+        /// <remarks/>
+        RadioButton,
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.3038")]
+    [System.SerializableAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
+    public enum ViewFieldTypeDisplayMode {
+        
+        /// <remarks/>
+        Display,
+        
+        /// <remarks/>
+        Editable,
+        
+        /// <remarks/>
+        ToggleEditable,
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.3038")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class InterfaceViewType {
+        
+        private object[] itemsField;
+        
+        private string nameField;
+        
+        private string rootObjectNameField;
+        
+        private bool autoRecurseSubViewsField;
+        
+        public InterfaceViewType() {
+            this.autoRecurseSubViewsField = true;
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("SubView", typeof(SubViewType))]
+        [System.Xml.Serialization.XmlElementAttribute("ViewField", typeof(ViewFieldType))]
+        public object[] Items {
+            get {
+                return this.itemsField;
+            }
+            set {
+                this.itemsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string name {
+            get {
+                return this.nameField;
+            }
+            set {
+                this.nameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string rootObjectName {
+            get {
+                return this.rootObjectNameField;
+            }
+            set {
+                this.rootObjectNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        [System.ComponentModel.DefaultValueAttribute(true)]
+        public bool autoRecurseSubViews {
+            get {
+                return this.autoRecurseSubViewsField;
+            }
+            set {
+                this.autoRecurseSubViewsField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.3038")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class ObjectInstanceType {
+        
+        private string nameField;
+        
+        private string interfaceObjectNameField;
+        
+        private bool isCollectionField;
+        
+        public ObjectInstanceType() {
+            this.isCollectionField = false;
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string name {
+            get {
+                return this.nameField;
+            }
+            set {
+                this.nameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string interfaceObjectName {
+            get {
+                return this.interfaceObjectNameField;
+            }
+            set {
+                this.interfaceObjectNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        [System.ComponentModel.DefaultValueAttribute(false)]
+        public bool isCollection {
+            get {
+                return this.isCollectionField;
+            }
+            set {
+                this.isCollectionField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.3038")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class InterfaceItemType {
+        
+        private string nameField;
+        
+        private InterfaceItemTypeLogicalDataType logicalDataTypeField;
+        
+        private bool isCollectionField;
+        
+        public InterfaceItemType() {
+            this.isCollectionField = false;
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string name {
+            get {
+                return this.nameField;
+            }
+            set {
+                this.nameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public InterfaceItemTypeLogicalDataType logicalDataType {
+            get {
+                return this.logicalDataTypeField;
+            }
+            set {
+                this.logicalDataTypeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        [System.ComponentModel.DefaultValueAttribute(false)]
+        public bool isCollection {
+            get {
+                return this.isCollectionField;
+            }
+            set {
+                this.isCollectionField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.3038")]
+    [System.SerializableAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
+    public enum InterfaceItemTypeLogicalDataType {
+        
+        /// <remarks/>
+        TrueOrFalse_Boolean,
+        
+        /// <remarks/>
+        Text_Short,
+        
+        /// <remarks/>
+        Text_Long,
+        
+        /// <remarks/>
+        Number,
+        
+        /// <remarks/>
+        Time_Date,
+        
+        /// <remarks/>
+        Time_Time,
+        
+        /// <remarks/>
+        Time_DateTime,
+        
+        /// <remarks/>
+        Data_Binary,
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.3038")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class InterfaceObjectType {
+        
+        private object[] interfaceItemsField;
+        
+        private string nameField;
+        
+        private string designDescField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayItemAttribute("InterfaceItem", typeof(InterfaceItemType), IsNullable=false)]
+        [System.Xml.Serialization.XmlArrayItemAttribute("ObjectInstance", typeof(ObjectInstanceType), IsNullable=false)]
+        public object[] InterfaceItems {
+            get {
+                return this.interfaceItemsField;
+            }
+            set {
+                this.interfaceItemsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string name {
+            get {
+                return this.nameField;
+            }
+            set {
+                this.nameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string designDesc {
+            get {
+                return this.designDescField;
+            }
+            set {
+                this.designDescField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.3038")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class DigitalInterfaceType {
+        
+        private InterfaceObjectType[] interfaceModelField;
+        
+        private InterfaceViewType[] interfaceViewsField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayItemAttribute("InterfaceObject", IsNullable=false)]
+        public InterfaceObjectType[] InterfaceModel {
+            get {
+                return this.interfaceModelField;
+            }
+            set {
+                this.interfaceModelField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayItemAttribute("InterfaceView", IsNullable=false)]
+        public InterfaceViewType[] InterfaceViews {
+            get {
+                return this.interfaceViewsField;
+            }
+            set {
+                this.interfaceViewsField = value;
             }
         }
     }
