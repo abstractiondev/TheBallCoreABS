@@ -50,6 +50,16 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="TheBallCore\InterfaceModelCSharpClassGenerator_v1_0.cs">
+      <DependentUpon>InterfaceModelCSharpClassGenerator_v1_0.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="TheBallCore\KBObservableModelJSGenerator_v1_0.cs">
+      <DependentUpon>KBObservableModelJSGenerator_v1_0.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="TheBallCore\KBObservableModelTypeScriptGenerator_v1_0.cs">
       <DependentUpon>KBObservableModelTypeScriptGenerator_v1_0.tt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -77,6 +87,14 @@
     <None Include="TheBallCore\AzureCSharpClassGenerator_v1_0.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>AzureCSharpClassGenerator_v1_0.cs</LastGenOutput>
+    </None>
+    <None Include="TheBallCore\InterfaceModelCSharpClassGenerator_v1_0.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>InterfaceModelCSharpClassGenerator_v1_0.cs</LastGenOutput>
+    </None>
+    <None Include="TheBallCore\KBObservableModelJSGenerator_v1_0.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>KBObservableModelJSGenerator_v1_0.cs</LastGenOutput>
     </None>
     <None Include="TheBallCore\KBObservableModelTypeScriptGenerator_v1_0.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
