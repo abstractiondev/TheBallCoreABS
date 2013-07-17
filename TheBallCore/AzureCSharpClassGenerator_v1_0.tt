@@ -906,6 +906,7 @@ using TheBall.CORE;
 					//Type collType = masterInstance.GetType();
 					//string typeName = collType.Name;
 <#+
+		string domainName = CurrentAbstraction.InstanceOfTheBall.semanticDomainName;
 		foreach(InformationItemType informationItem in nonMasterInformationObjects)
 		{
 			//var childItem = GetInformationObjectByName(informationItem.informationObjectName);
@@ -915,7 +916,7 @@ using TheBall.CORE;
 			if(isMasterCollItem) {
 #>
 					if(masterInstance is <#= itemTypeName #>) {
-						CollectionUpdateImplementation.Update_<#= informationObjectName #>_<#= itemName #>(this, localCollection:<#= itemName #>, masterCollection:(<#= itemTypeName #>) masterInstance);
+						<#= domainName #>.CollectionUpdateImplementation.Update_<#= informationObjectName #>_<#= itemName #>(this, localCollection:<#= itemName #>, masterCollection:(<#= itemTypeName #>) masterInstance);
 					} else if(<#= itemName  #> != null) {
 						((IInformationObject) <#= itemName #>).UpdateCollections(masterInstance);
 					}
