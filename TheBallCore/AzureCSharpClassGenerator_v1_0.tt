@@ -120,6 +120,7 @@ using TheBall.CORE;
 
 
 <#+
+		GenerateInterfaceModel(instance);
 		GenerateDomainInitializer(instance);
 		foreach(var informationObject in instance.InformationModel)
         {
@@ -131,7 +132,72 @@ using TheBall.CORE;
 
 <#+
 	}
-	
+
+	string GetTypeFromInterfaceType(InterfaceItemTypeLogicalDataType logicalInterfaceDataType)
+    {
+		//InterfaceItemTypeLogicalDataType dataType = (InterfaceItemTypeLogicalDataType) System.Enum.Parse(typeof(InterfaceItemTypeLogicalDataType), logicalInterfaceDataType);
+		switch(logicalInterfaceDataType)
+        {
+			case InterfaceItemTypeLogicalDataType.Data_Binary:
+				return "byte[]";
+			case InterfaceItemTypeLogicalDataType.Number:
+				return "double";
+			case InterfaceItemTypeLogicalDataType.Text_Long:
+			case InterfaceItemTypeLogicalDataType.Text_Short:
+				return "string";
+			case InterfaceItemTypeLogicalDataType.Time_Date:
+			case InterfaceItemTypeLogicalDataType.Time_DateTime:
+			case InterfaceItemTypeLogicalDataType.Time_Time:
+				return "DateTime";
+			default:
+				throw new NotSupportedException("Logical interface data type not supported: " + logicalInterfaceDataType);
+        }
+    }
+
+	void GenerateInterfaceModel(InstanceOfTheBallType instance)
+    {
+		if(instance.DigitalInterface == null)
+			return;
+		foreach(InterfaceObjectType interfaceObject in instance.DigitalInterface.InterfaceModel ?? new InterfaceObjectType[0])
+        {
+#>
+			[DataContract]
+			public class <#= interfaceObject.name #>
+			{
+<#+
+			foreach(var informationField in interfaceObject.InterfaceItems ?? new object[0]) 
+			{
+				string fieldName;
+				string typeName;
+				bool isCollection;
+				InterfaceItemType iItem = informationField as InterfaceItemType;
+				ObjectInstanceType oItem = informationField as ObjectInstanceType;
+				if(iItem != null)
+                {
+					fieldName = iItem.name;
+					typeName = GetTypeFromInterfaceType(iItem.logicalDataType);
+					isCollection = iItem.isCollection;
+                } else if(oItem != null)
+                {
+					fieldName = oItem.name;
+					typeName = oItem.interfaceObjectName;
+					isCollection = oItem.isCollection;
+                } else 
+					throw new NotSupportedException("Field type: " + informationField.GetType().Name + " not supported");
+				if(isCollection)
+					typeName = typeName + "[]";
+#>
+				[DataMember]
+				public <#= typeName #> <#= fieldName #> { get; set; }
+<#+
+            }
+#>
+			}
+
+<#+
+        }
+    }
+
 	void GenerateDomainInitializer(InstanceOfTheBallType instance)
     {
 		var masterCollections = GetMasterCollections(instance);
@@ -650,6 +716,12 @@ using TheBall.CORE;
 						this.OrderFilterIDList.Select(id => CollectionContent.FirstOrDefault(item => item.ID == id)).Where(item => item != null).ToArray();
 				}
 
+				public void RefreshOrderAndFilterListFromContent()
+                {
+                    if (OrderFilterIDList == null)
+                        return;
+                    OrderFilterIDList.RemoveAll(item => CollectionContent.Any(colItem => colItem.ID == item) == false);
+                }
 
 				public void ParsePropertyValue(string propertyName, string propertyValue)
 				{
