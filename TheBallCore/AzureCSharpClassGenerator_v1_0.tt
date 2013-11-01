@@ -263,6 +263,7 @@ using TheBall.CORE;
 		bool isIndependentMaster = informationObject.isIndependentMaster;
 #>
 			[DataContract]
+			[Serializable]
 			public partial class <#= informationObjectName #> : IInformationObject <#= isCollection ? ", IInformationCollection" : "" #>
 			{
 		        public static StorageSerializationType ClassStorageSerializationType { 

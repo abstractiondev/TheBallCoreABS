@@ -542,34 +542,34 @@ this.Write("            }\r\n\t\t}\r\n");
         #line hidden
         
         #line 264 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
-this.Write("\t\t\t[DataContract]\r\n\t\t\tpublic partial class ");
+this.Write("\t\t\t[DataContract]\r\n\t\t\t[Serializable]\r\n\t\t\tpublic partial class ");
 
         
         #line default
         #line hidden
         
-        #line 266 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 267 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(informationObjectName));
 
         
         #line default
         #line hidden
         
-        #line 266 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 267 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(" : IInformationObject ");
 
         
         #line default
         #line hidden
         
-        #line 266 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 267 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(isCollection ? ", IInformationCollection" : ""));
 
         
         #line default
         #line hidden
         
-        #line 266 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 267 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write("\r\n\t\t\t{\r\n\t\t        public static StorageSerializationType ClassStorageSerializatio" +
         "nType { \r\n\t\t\t\t\tget {\r\n\t\t\t\t\t\treturn ");
 
@@ -577,28 +577,28 @@ this.Write("\r\n\t\t\t{\r\n\t\t        public static StorageSerializationType Cl
         #line default
         #line hidden
         
-        #line 270 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 271 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(GetStorageSerializationReturnValue(informationObject)));
 
         
         #line default
         #line hidden
         
-        #line 270 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 271 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(";\r\n\t\t\t\t\t}\r\n\t\t\t\t}\r\n\r\n\t\t\t\tpublic ");
 
         
         #line default
         #line hidden
         
-        #line 274 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 275 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(informationObjectName));
 
         
         #line default
         #line hidden
         
-        #line 274 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 275 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write("()\r\n\t\t\t\t{\r\n\t\t\t\t\tthis.ID = Guid.NewGuid().ToString();\r\n\t\t\t\t    this.OwnerID = Stor" +
         "ageSupport.ActiveOwnerID;\r\n\t\t\t\t    this.SemanticDomainName = \"");
 
@@ -606,28 +606,28 @@ this.Write("()\r\n\t\t\t\t{\r\n\t\t\t\t\tthis.ID = Guid.NewGuid().ToString();\r\
         #line default
         #line hidden
         
-        #line 278 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 279 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(semanticDomainName));
 
         
         #line default
         #line hidden
         
-        #line 278 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 279 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write("\";\r\n\t\t\t\t    this.Name = \"");
 
         
         #line default
         #line hidden
         
-        #line 279 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 280 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(objectName));
 
         
         #line default
         #line hidden
         
-        #line 279 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 280 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(@""";
 					RelativeLocation = GetRelativeLocationFromID(ID);
 				}
@@ -641,28 +641,28 @@ this.Write(@""";
         #line default
         #line hidden
         
-        #line 286 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 287 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(semanticDomainName));
 
         
         #line default
         #line hidden
         
-        #line 286 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 287 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write("/");
 
         
         #line default
         #line hidden
         
-        #line 286 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 287 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(objectName));
 
         
         #line default
         #line hidden
         
-        #line 286 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 287 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(@"/"";
 					List<IInformationObject> informationObjects = new List<IInformationObject>();
 					var blobListing = StorageSupport.GetContentBlobListing(owner, contentType: contentTypeName);
@@ -676,14 +676,14 @@ this.Write(@"/"";
         #line default
         #line hidden
         
-        #line 293 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 294 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(objectName));
 
         
         #line default
         #line hidden
         
-        #line 293 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 294 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(@"), null, owner);
 					    informationObject.MasterETag = informationObject.ETag;
 						informationObjects.Add(informationObject);
@@ -699,28 +699,28 @@ this.Write(@"), null, owner);
         #line default
         #line hidden
         
-        #line 302 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 303 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(semanticDomainName));
 
         
         #line default
         #line hidden
         
-        #line 302 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 303 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write("\", \"");
 
         
         #line default
         #line hidden
         
-        #line 302 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 303 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(objectName));
 
         
         #line default
         #line hidden
         
-        #line 302 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 303 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write("\", id).Replace(\"\\\\\", \"/\");\r\n                }\r\n\r\n\t\t\t\tpublic void UpdateRelativeLo" +
         "cationFromID()\r\n\t\t\t\t{\r\n\t\t\t\t\tRelativeLocation = GetRelativeLocationFromID(ID);\r\n\t" +
         "\t\t\t}\r\n\r\n\t\t\t\tpublic static ");
@@ -729,14 +729,14 @@ this.Write("\", id).Replace(\"\\\\\", \"/\");\r\n                }\r\n\r\n\t\t\t
         #line default
         #line hidden
         
-        #line 310 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 311 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(informationObjectName));
 
         
         #line default
         #line hidden
         
-        #line 310 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 311 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(" RetrieveFromDefaultLocation(string id, IContainerOwner owner = null)\r\n\t\t\t\t{\r\n\t\t\t" +
         "\t\tstring relativeLocation = GetRelativeLocationFromID(id);\r\n\t\t\t\t\treturn Retrieve" +
         "");
@@ -745,14 +745,14 @@ this.Write(" RetrieveFromDefaultLocation(string id, IContainerOwner owner = null
         #line default
         #line hidden
         
-        #line 313 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 314 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(informationObjectName));
 
         
         #line default
         #line hidden
         
-        #line 313 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 314 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(@"(relativeLocation, owner);
 				}
 
@@ -766,14 +766,14 @@ this.Write(@"(relativeLocation, owner);
         #line default
         #line hidden
         
-        #line 320 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 321 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(informationObjectName));
 
         
         #line default
         #line hidden
         
-        #line 320 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 321 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write("\");\r\n\t\t\t\t\tinitiated = false;\r\n\t\t\t\t\tVirtualOwner owner = VirtualOwner.FigureOwner(" +
         "this);\r\n\t\t\t\t\tvar master = StorageSupport.RetrieveInformation(RelativeLocation, t" +
         "ypeof(");
@@ -782,14 +782,14 @@ this.Write("\");\r\n\t\t\t\t\tinitiated = false;\r\n\t\t\t\t\tVirtualOwner owner
         #line default
         #line hidden
         
-        #line 323 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 324 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(informationObjectName));
 
         
         #line default
         #line hidden
         
-        #line 323 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 324 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(@"), null, owner);
 					if(master == null && initiateIfMissing)
 					{
@@ -815,28 +815,28 @@ this.Write(@"), null, owner);
         #line default
         #line hidden
         
-        #line 342 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 343 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(informationObjectName));
 
         
         #line default
         #line hidden
         
-        #line 342 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 343 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(" Retrieve");
 
         
         #line default
         #line hidden
         
-        #line 342 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 343 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(informationObjectName));
 
         
         #line default
         #line hidden
         
-        #line 342 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 343 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write("(string relativeLocation, IContainerOwner owner = null)\r\n                {\r\n     " +
         "               var result = (");
 
@@ -844,28 +844,28 @@ this.Write("(string relativeLocation, IContainerOwner owner = null)\r\n         
         #line default
         #line hidden
         
-        #line 344 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 345 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(informationObjectName));
 
         
         #line default
         #line hidden
         
-        #line 344 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 345 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(") StorageSupport.RetrieveInformation(relativeLocation, typeof(");
 
         
         #line default
         #line hidden
         
-        #line 344 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 345 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(informationObjectName));
 
         
         #line default
         #line hidden
         
-        #line 344 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 345 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write("), null, owner);\r\n                    return result;\r\n                }\r\n\r\n\t\t\t\tpu" +
         "blic static ");
 
@@ -873,14 +873,14 @@ this.Write("), null, owner);\r\n                    return result;\r\n          
         #line default
         #line hidden
         
-        #line 348 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 349 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(informationObjectName));
 
         
         #line default
         #line hidden
         
-        #line 348 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 349 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(" RetrieveFromOwnerContent(IContainerOwner containerOwner, string contentName)\r\n\t\t" +
         "\t\t{\r\n\t\t\t\t\t// var result = ");
 
@@ -888,112 +888,112 @@ this.Write(" RetrieveFromOwnerContent(IContainerOwner containerOwner, string con
         #line default
         #line hidden
         
-        #line 350 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 351 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(informationObjectName));
 
         
         #line default
         #line hidden
         
-        #line 350 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 351 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(".Retrieve");
 
         
         #line default
         #line hidden
         
-        #line 350 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 351 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(informationObjectName));
 
         
         #line default
         #line hidden
         
-        #line 350 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 351 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write("(\"Content/");
 
         
         #line default
         #line hidden
         
-        #line 350 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 351 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(semanticDomainName));
 
         
         #line default
         #line hidden
         
-        #line 350 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 351 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write("/");
 
         
         #line default
         #line hidden
         
-        #line 350 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 351 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(informationObjectName));
 
         
         #line default
         #line hidden
         
-        #line 350 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 351 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write("/\" + contentName, containerOwner);\r\n\t\t\t\t\tvar result = ");
 
         
         #line default
         #line hidden
         
-        #line 351 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 352 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(informationObjectName));
 
         
         #line default
         #line hidden
         
-        #line 351 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 352 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(".Retrieve");
 
         
         #line default
         #line hidden
         
-        #line 351 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 352 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(informationObjectName));
 
         
         #line default
         #line hidden
         
-        #line 351 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 352 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write("(\"");
 
         
         #line default
         #line hidden
         
-        #line 351 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 352 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(semanticDomainName));
 
         
         #line default
         #line hidden
         
-        #line 351 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 352 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write("/");
 
         
         #line default
         #line hidden
         
-        #line 351 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 352 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(informationObjectName));
 
         
         #line default
         #line hidden
         
-        #line 351 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 352 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(@"/"" + contentName, containerOwner);
 					return result;
 				}
@@ -1006,28 +1006,28 @@ this.Write(@"/"" + contentName, containerOwner);
         #line default
         #line hidden
         
-        #line 357 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 358 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(semanticDomainName));
 
         
         #line default
         #line hidden
         
-        #line 357 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 358 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write("/");
 
         
         #line default
         #line hidden
         
-        #line 357 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 358 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(informationObjectName));
 
         
         #line default
         #line hidden
         
-        #line 357 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 358 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write("/\" + contentName);\r\n                    RelativeLocation = StorageSupport.GetBlob" +
         "OwnerAddress(containerOwner, \"");
 
@@ -1035,28 +1035,28 @@ this.Write("/\" + contentName);\r\n                    RelativeLocation = Storag
         #line default
         #line hidden
         
-        #line 358 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 359 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(semanticDomainName));
 
         
         #line default
         #line hidden
         
-        #line 358 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 359 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write("/");
 
         
         #line default
         #line hidden
         
-        #line 358 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 359 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(informationObjectName));
 
         
         #line default
         #line hidden
         
-        #line 358 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 359 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write("/\" + contentName);\r\n                }\r\n\r\n\t\t\t\tpartial void DoInitializeDefaultSubs" +
         "cribers(IContainerOwner owner);\r\n\r\n\t\t\t    public void InitializeDefaultSubscribe" +
         "rs(IContainerOwner owner)\r\n\t\t\t    {\r\n\t\t\t\t\tDoInitializeDefaultSubscribers(owner);" +
@@ -1086,14 +1086,14 @@ this.Write("/\" + contentName);\r\n                }\r\n\r\n\t\t\t\tpartial void
         #line default
         #line hidden
         
-        #line 412 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 413 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(isIndependentMaster ? "true" : "false"));
 
         
         #line default
         #line hidden
         
-        #line 412 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 413 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(@";
 					}
 				}
@@ -1115,14 +1115,14 @@ this.Write(@";
         #line default
         #line hidden
         
-        #line 427 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 428 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(informationObjectName));
 
         
         #line default
         #line hidden
         
-        #line 427 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 428 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(@") sourceMaster);
 				}
 
@@ -1143,14 +1143,14 @@ this.Write(@") sourceMaster);
         #line default
         #line hidden
         
-        #line 441 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 442 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(informationObjectName));
 
         
         #line default
         #line hidden
         
-        #line 441 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 442 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(@"));
 					using (var output = new StringWriter())
 					{
@@ -1170,14 +1170,14 @@ this.Write(@"));
         #line default
         #line hidden
         
-        #line 454 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 455 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(informationObjectName));
 
         
         #line default
         #line hidden
         
-        #line 454 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 455 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(" DeserializeFromXml(string xmlString)\r\n\t\t\t\t{\r\n\t\t\t\t\tDataContractSerializer seriali" +
         "zer = new DataContractSerializer(typeof(");
 
@@ -1185,14 +1185,14 @@ this.Write(" DeserializeFromXml(string xmlString)\r\n\t\t\t\t{\r\n\t\t\t\t\tData
         #line default
         #line hidden
         
-        #line 456 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 457 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(informationObjectName));
 
         
         #line default
         #line hidden
         
-        #line 456 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 457 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write("));\r\n\t\t\t\t\tusing(StringReader reader = new StringReader(xmlString))\r\n\t\t\t\t\t{\r\n\t\t\t\t\t" +
         "\tusing (var xmlReader = new XmlTextReader(reader))\r\n\t\t\t\t\t\t\treturn (");
 
@@ -1200,14 +1200,14 @@ this.Write("));\r\n\t\t\t\t\tusing(StringReader reader = new StringReader(xmlStr
         #line default
         #line hidden
         
-        #line 460 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 461 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(informationObjectName));
 
         
         #line default
         #line hidden
         
-        #line 460 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 461 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(@") serializer.ReadObject(xmlReader);
 					}
             
@@ -1247,28 +1247,28 @@ this.Write(@") serializer.ReadObject(xmlReader);
         #line default
         #line hidden
         
-        #line 493 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 494 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(semanticDomainName));
 
         
         #line default
         #line hidden
         
-        #line 493 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 494 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write("\", \"");
 
         
         #line default
         #line hidden
         
-        #line 493 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 494 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(objectName));
 
         
         #line default
         #line hidden
         
-        #line 493 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 494 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(@""", masterRelativeLocation + "".metadata"").Replace(""\\"", ""/""); 
 				}
 
@@ -1289,28 +1289,28 @@ this.Write(@""", masterRelativeLocation + "".metadata"").Replace(""\\"", ""/"");
         #line default
         #line hidden
         
-        #line 507 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 508 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(semanticDomainName));
 
         
         #line default
         #line hidden
         
-        #line 507 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 508 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write("\", \"");
 
         
         #line default
         #line hidden
         
-        #line 507 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 508 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(objectName));
 
         
         #line default
         #line hidden
         
-        #line 507 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 508 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write("\", sourceName).Replace(\"\\\\\", \"/\");\r\n                    return relativeLocation;\r" +
         "\n                }\r\n\r\n\t\t\t\tstatic partial void CreateCustomDemo(ref ");
 
@@ -1318,21 +1318,21 @@ this.Write("\", sourceName).Replace(\"\\\\\", \"/\");\r\n                    ret
         #line default
         #line hidden
         
-        #line 511 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 512 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(informationObjectName));
 
         
         #line default
         #line hidden
         
-        #line 511 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 512 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(" customDemoObject);\r\n\r\n\r\n");
 
         
         #line default
         #line hidden
         
-        #line 514 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 515 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 
 		if(isCollection) {
 			CollectionForType collectionItem = informationObject.Item as CollectionForType;
@@ -1349,7 +1349,7 @@ this.Write(" customDemoObject);\r\n\r\n\r\n");
         #line default
         #line hidden
         
-        #line 525 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 526 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write("\t\t\t\t\r\n\t\t\t\tvoid IInformationObject.UpdateCollections(IInformationCollection master" +
         "Instance)\r\n\t\t\t\t{\r\n");
 
@@ -1357,13 +1357,13 @@ this.Write("\t\t\t\t\r\n\t\t\t\tvoid IInformationObject.UpdateCollections(IInfor
         #line default
         #line hidden
         
-        #line 529 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 530 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 			if(isContentItemMaster == false) { 
         
         #line default
         #line hidden
         
-        #line 529 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 530 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write("\t\t\t\t\tforeach(IInformationObject item in CollectionContent)\r\n\t\t\t\t\t{\r\n\t\t\t\t\t\tif(item" +
         " != null)\r\n\t\t\t\t\t\t\titem.UpdateCollections(masterInstance);\r\n\t\t\t\t\t}\r\n");
 
@@ -1371,13 +1371,13 @@ this.Write("\t\t\t\t\tforeach(IInformationObject item in CollectionContent)\r\n\
         #line default
         #line hidden
         
-        #line 535 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 536 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 			} 
         
         #line default
         #line hidden
         
-        #line 535 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 536 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write("\t\t\t\t}\r\n\r\n\r\n\r\n\t\t\t\tbool IInformationCollection.IsMasterCollection {\r\n\t\t\t\t\tget {\r\n\t\t" +
         "\t\t\t\treturn ");
 
@@ -1385,14 +1385,14 @@ this.Write("\t\t\t\t}\r\n\r\n\r\n\r\n\t\t\t\tbool IInformationCollection.IsMaste
         #line default
         #line hidden
         
-        #line 542 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 543 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(isMasterCollection.ToString().ToLower()));
 
         
         #line default
         #line hidden
         
-        #line 542 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 543 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(";\r\n\t\t\t\t\t}\r\n\t\t\t\t}\r\n\r\n\t\t\t\tstring IInformationCollection.GetMasterLocation()\r\n\t\t\t\t{\r" +
         "\n");
 
@@ -1400,13 +1400,13 @@ this.Write(";\r\n\t\t\t\t\t}\r\n\t\t\t\t}\r\n\r\n\t\t\t\tstring IInformationColl
         #line default
         #line hidden
         
-        #line 548 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 549 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 			if(isMasterCollection) { 
         
         #line default
         #line hidden
         
-        #line 548 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 549 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write("\t\t\t\t\tVirtualOwner owner = VirtualOwner.FigureOwner(this);\r\n\t\t\t\t\treturn GetMasterC" +
         "ollectionLocation(owner);\r\n");
 
@@ -1414,13 +1414,13 @@ this.Write("\t\t\t\t\tVirtualOwner owner = VirtualOwner.FigureOwner(this);\r\n\t
         #line default
         #line hidden
         
-        #line 551 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 552 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 			} else { 
         
         #line default
         #line hidden
         
-        #line 551 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 552 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write("\t\t\t\t\tthrow new NotSupportedException(\"Master collection location only supported f" +
         "or master collections\");\r\n");
 
@@ -1428,13 +1428,13 @@ this.Write("\t\t\t\t\tthrow new NotSupportedException(\"Master collection locati
         #line default
         #line hidden
         
-        #line 553 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 554 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 			} 
         
         #line default
         #line hidden
         
-        #line 553 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 554 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write("\t\t\t\t\t\r\n\t\t\t\t}\r\n\r\n\t\t\t\tIInformationCollection IInformationCollection.GetMasterInstan" +
         "ce()\r\n\t\t\t\t{\r\n");
 
@@ -1442,13 +1442,13 @@ this.Write("\t\t\t\t\t\r\n\t\t\t\t}\r\n\r\n\t\t\t\tIInformationCollection IInfor
         #line default
         #line hidden
         
-        #line 559 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 560 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 			if(isMasterCollection) { 
         
         #line default
         #line hidden
         
-        #line 559 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 560 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write("\t\t\t\t\tVirtualOwner owner = VirtualOwner.FigureOwner(this);\r\n\t\t\t\t\treturn GetMasterC" +
         "ollectionInstance(owner);\r\n");
 
@@ -1456,13 +1456,13 @@ this.Write("\t\t\t\t\tVirtualOwner owner = VirtualOwner.FigureOwner(this);\r\n\t
         #line default
         #line hidden
         
-        #line 562 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 563 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 			} else { 
         
         #line default
         #line hidden
         
-        #line 562 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 563 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write("\t\t\t\t\tthrow new NotSupportedException(\"Master collection instance only supported f" +
         "or master collections\");\r\n");
 
@@ -1470,13 +1470,13 @@ this.Write("\t\t\t\t\tthrow new NotSupportedException(\"Master collection instan
         #line default
         #line hidden
         
-        #line 564 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 565 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 			} 
         
         #line default
         #line hidden
         
-        #line 564 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 565 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write("\t\t\t\t\t\r\n\t\t\t\t}\r\n\r\n\r\n\t\t\t\tpublic string GetItemDirectory()\r\n\t\t\t\t{\r\n\t\t\t\t\tstring dummyI" +
         "temLocation = ");
 
@@ -1484,14 +1484,14 @@ this.Write("\t\t\t\t\t\r\n\t\t\t\t}\r\n\r\n\r\n\t\t\t\tpublic string GetItemDire
         #line default
         #line hidden
         
-        #line 571 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 572 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(contentObjectName));
 
         
         #line default
         #line hidden
         
-        #line 571 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 572 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(@".GetRelativeLocationFromID(""dummy"");
 					string nonOwnerDirectoryLocation = SubscribeSupport.GetParentDirectoryTarget(dummyItemLocation);
 					VirtualOwner owner = VirtualOwner.FigureOwner(this);
@@ -1507,7 +1507,7 @@ this.Write(@".GetRelativeLocationFromID(""dummy"");
         #line default
         #line hidden
         
-        #line 580 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 581 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 
 			if(isMasterCollection)
             {
@@ -1516,7 +1516,7 @@ this.Write(@".GetRelativeLocationFromID(""dummy"");
         #line default
         #line hidden
         
-        #line 583 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 584 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write("\t\t\t\t\t// DirectoryToMaster\r\n\t\t\t\t\tstring itemDirectory = GetItemDirectory();\r\n\t\t\t\t\t" +
         "IInformationObject[] informationObjects = StorageSupport.RetrieveInformationObje" +
         "cts(itemDirectory,\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t typeof(");
@@ -1525,14 +1525,14 @@ this.Write("\t\t\t\t\t// DirectoryToMaster\r\n\t\t\t\t\tstring itemDirectory = G
         #line default
         #line hidden
         
-        #line 587 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 588 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(contentObjectName));
 
         
         #line default
         #line hidden
         
-        #line 587 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 588 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write("));\r\n                    Array.ForEach(informationObjects, io => io.MasterETag = " +
         "io.ETag);\r\n\t\t\t\t\tCollectionContent.Clear();\r\n\t\t\t\t\tCollectionContent.AddRange(info" +
         "rmationObjects.Select(obj => (");
@@ -1541,21 +1541,21 @@ this.Write("));\r\n                    Array.ForEach(informationObjects, io => i
         #line default
         #line hidden
         
-        #line 590 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 591 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(contentObjectName));
 
         
         #line default
         #line hidden
         
-        #line 590 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 591 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(") obj));\r\n            \r\n");
 
         
         #line default
         #line hidden
         
-        #line 592 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 593 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 
             } else if(isDerivedCollection) {
 
@@ -1563,7 +1563,7 @@ this.Write(") obj));\r\n            \r\n");
         #line default
         #line hidden
         
-        #line 594 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 595 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write("\t\t\t\t\t// CollectionToCollection\r\n\t\t\t\t\tVirtualOwner owner = VirtualOwner.FigureOwne" +
         "r(this);\r\n\t\t\t\t\tvar masterCollection = ");
 
@@ -1571,14 +1571,14 @@ this.Write("\t\t\t\t\t// CollectionToCollection\r\n\t\t\t\t\tVirtualOwner owner 
         #line default
         #line hidden
         
-        #line 597 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 598 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(derivedMasterCollName));
 
         
         #line default
         #line hidden
         
-        #line 597 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 598 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(".GetMasterCollectionInstance(owner);\r\n\t\t\t\t\tthis.RefreshContentFromMaster(masterCo" +
         "llection);\r\n");
 
@@ -1586,7 +1586,7 @@ this.Write(".GetMasterCollectionInstance(owner);\r\n\t\t\t\t\tthis.RefreshConten
         #line default
         #line hidden
         
-        #line 599 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 600 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 
             }
 
@@ -1594,14 +1594,14 @@ this.Write(".GetMasterCollectionInstance(owner);\r\n\t\t\t\t\tthis.RefreshConten
         #line default
         #line hidden
         
-        #line 601 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 602 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write("\t\t\t\t}\r\n\r\n");
 
         
         #line default
         #line hidden
         
-        #line 604 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 605 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 
 			if(isMasterCollection)
             {
@@ -1610,42 +1610,42 @@ this.Write("\t\t\t\t}\r\n\r\n");
         #line default
         #line hidden
         
-        #line 607 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 608 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write("\t\t\t\tpublic static ");
 
         
         #line default
         #line hidden
         
-        #line 608 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 609 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(informationObjectName));
 
         
         #line default
         #line hidden
         
-        #line 608 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 609 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(" GetMasterCollectionInstance(IContainerOwner owner)\r\n\t\t\t\t{\r\n\t\t\t\t\treturn ");
 
         
         #line default
         #line hidden
         
-        #line 610 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 611 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(informationObjectName));
 
         
         #line default
         #line hidden
         
-        #line 610 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 611 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(".RetrieveFromOwnerContent(owner, \"MasterCollection\");\r\n\t\t\t\t}\r\n");
 
         
         #line default
         #line hidden
         
-        #line 612 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 613 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 
             }
 
@@ -1653,14 +1653,14 @@ this.Write(".RetrieveFromOwnerContent(owner, \"MasterCollection\");\r\n\t\t\t\t}
         #line default
         #line hidden
         
-        #line 614 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 615 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write("\r\n\t\t\t\tpublic void SubscribeToContentSource()\r\n\t\t\t\t{\r\n");
 
         
         #line default
         #line hidden
         
-        #line 618 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 619 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 
 			if(isMasterCollection)
             {
@@ -1669,7 +1669,7 @@ this.Write("\r\n\t\t\t\tpublic void SubscribeToContentSource()\r\n\t\t\t\t{\r\n"
         #line default
         #line hidden
         
-        #line 621 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 622 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write("\t\t\t\t\t// DirectoryToCollection\r\n\t\t\t\t\tstring itemDirectory = GetItemDirectory();\r\n\t" +
         "\t\t\t\tSubscribeSupport.AddSubscriptionToObject(itemDirectory, RelativeLocation,\r\n\t" +
         "\t\t\t\t\t\t\t\t\t\t\t\t\t\t SubscribeSupport.SubscribeType_DirectoryToCollection, null, typeo" +
@@ -1679,21 +1679,21 @@ this.Write("\t\t\t\t\t// DirectoryToCollection\r\n\t\t\t\t\tstring itemDirectory
         #line default
         #line hidden
         
-        #line 625 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 626 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(informationObjectName));
 
         
         #line default
         #line hidden
         
-        #line 625 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 626 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(").FullName);\r\n");
 
         
         #line default
         #line hidden
         
-        #line 626 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 627 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 
             } else if(isDerivedCollection) {
 
@@ -1701,7 +1701,7 @@ this.Write(").FullName);\r\n");
         #line default
         #line hidden
         
-        #line 628 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 629 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(@"					// CollectionToCollection
 					VirtualOwner owner = VirtualOwner.FigureOwner(this);
 					string masterLocation = GetMasterCollectionLocation(owner);
@@ -1712,7 +1712,7 @@ this.Write(@"					// CollectionToCollection
         #line default
         #line hidden
         
-        #line 633 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 634 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 
             }
 
@@ -1720,14 +1720,14 @@ this.Write(@"					// CollectionToCollection
         #line default
         #line hidden
         
-        #line 635 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 636 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write("\t\t\t\t}\r\n\r\n");
 
         
         #line default
         #line hidden
         
-        #line 638 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 639 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 
 			if(isMasterCollection)
             {
@@ -1736,7 +1736,7 @@ this.Write("\t\t\t\t}\r\n\r\n");
         #line default
         #line hidden
         
-        #line 641 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 642 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write("\t\t\t\tpublic static string GetMasterCollectionLocation(IContainerOwner owner)\r\n\t\t\t\t" +
         "{\r\n\t\t\t\t\treturn StorageSupport.GetBlobOwnerAddress(owner, \"");
 
@@ -1744,35 +1744,35 @@ this.Write("\t\t\t\tpublic static string GetMasterCollectionLocation(IContainerO
         #line default
         #line hidden
         
-        #line 644 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 645 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(semanticDomainName));
 
         
         #line default
         #line hidden
         
-        #line 644 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 645 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write("/");
 
         
         #line default
         #line hidden
         
-        #line 644 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 645 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(informationObjectName));
 
         
         #line default
         #line hidden
         
-        #line 644 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 645 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write("/\" + \"MasterCollection\");\r\n\t\t\t\t}\r\n");
 
         
         #line default
         #line hidden
         
-        #line 646 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 647 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 
             }
 
@@ -1780,7 +1780,7 @@ this.Write("/\" + \"MasterCollection\");\r\n\t\t\t\t}\r\n");
         #line default
         #line hidden
         
-        #line 648 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 649 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(@"
 
 
@@ -1801,83 +1801,83 @@ this.Write(@"
         #line default
         #line hidden
         
-        #line 663 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 664 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
  if(provideDefaultCreate) { 
         
         #line default
         #line hidden
         
-        #line 663 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 664 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write("\r\n\t\t\t\tpublic static ");
 
         
         #line default
         #line hidden
         
-        #line 665 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 666 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(informationObjectName));
 
         
         #line default
         #line hidden
         
-        #line 665 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 666 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(" CreateDefault()\r\n\t\t\t\t{\r\n\t\t\t\t\tvar result = new ");
 
         
         #line default
         #line hidden
         
-        #line 667 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 668 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(informationObjectName));
 
         
         #line default
         #line hidden
         
-        #line 667 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 668 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write("();\r\n\t\t\t\t\treturn result;\r\n\t\t\t\t}\r\n\r\n\t\t\t\tpublic static ");
 
         
         #line default
         #line hidden
         
-        #line 671 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 672 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(informationObjectName));
 
         
         #line default
         #line hidden
         
-        #line 671 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 672 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(" CreateDemoDefault()\r\n\t\t\t\t{\r\n\t\t\t\t\t");
 
         
         #line default
         #line hidden
         
-        #line 673 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 674 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(informationObjectName));
 
         
         #line default
         #line hidden
         
-        #line 673 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 674 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(" customDemo = null;\r\n\t\t\t\t\t");
 
         
         #line default
         #line hidden
         
-        #line 674 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 675 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(informationObjectName));
 
         
         #line default
         #line hidden
         
-        #line 674 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 675 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(".CreateCustomDemo(ref customDemo);\r\n\t\t\t\t\tif(customDemo != null)\r\n\t\t\t\t\t\treturn cus" +
         "tomDemo;\r\n\t\t\t\t\tvar result = new ");
 
@@ -1885,34 +1885,20 @@ this.Write(".CreateCustomDemo(ref customDemo);\r\n\t\t\t\t\tif(customDemo != nul
         #line default
         #line hidden
         
-        #line 677 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 678 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(informationObjectName));
 
         
         #line default
         #line hidden
         
-        #line 677 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 678 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write("();\r\n\t\t\t\t\tresult.CollectionContent.Add(");
 
         
         #line default
         #line hidden
         
-        #line 678 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
-this.Write(this.ToStringHelper.ToStringWithCulture(contentObjectName));
-
-        
-        #line default
-        #line hidden
-        
-        #line 678 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
-this.Write(".CreateDemoDefault());\r\n\t\t\t\t\t//result.CollectionContent.Add(");
-
-        
-        #line default
-        #line hidden
-        
         #line 679 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(contentObjectName));
 
@@ -1935,61 +1921,75 @@ this.Write(this.ToStringHelper.ToStringWithCulture(contentObjectName));
         #line hidden
         
         #line 680 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+this.Write(".CreateDemoDefault());\r\n\t\t\t\t\t//result.CollectionContent.Add(");
+
+        
+        #line default
+        #line hidden
+        
+        #line 681 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+this.Write(this.ToStringHelper.ToStringWithCulture(contentObjectName));
+
+        
+        #line default
+        #line hidden
+        
+        #line 681 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(".CreateDemoDefault());\r\n\t\t\t\t\treturn result;\r\n\t\t\t\t}\r\n\r\n\t\t");
 
         
         #line default
         #line hidden
         
-        #line 684 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 685 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
  } 
         
         #line default
         #line hidden
         
-        #line 684 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 685 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write("\r\n\t\t\t\t[DataMember] public List<");
 
         
         #line default
         #line hidden
         
-        #line 686 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 687 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(contentObjectName));
 
         
         #line default
         #line hidden
         
-        #line 686 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 687 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write("> CollectionContent = new List<");
 
         
         #line default
         #line hidden
         
-        #line 686 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 687 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(contentObjectName));
 
         
         #line default
         #line hidden
         
-        #line 686 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 687 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(">();\r\n\t\t\t\tprivate ");
 
         
         #line default
         #line hidden
         
-        #line 687 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 688 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(contentObjectName));
 
         
         #line default
         #line hidden
         
-        #line 687 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 688 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(@"[] _unmodified_CollectionContent;
 
 				[DataMember] public bool IsCollectionFiltered;
@@ -2026,14 +2026,14 @@ this.Write(@"[] _unmodified_CollectionContent;
         #line default
         #line hidden
         
-        #line 717 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 718 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(contentObjectName));
 
         
         #line default
         #line hidden
         
-        #line 717 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 718 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(@"[] GetIDSelectedArray()
 				{
 					if (IsCollectionFiltered == false || this.OrderFilterIDList == null)
@@ -2076,14 +2076,14 @@ this.Write(@"[] GetIDSelectedArray()
         #line default
         #line hidden
         
-        #line 753 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 754 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(contentObjectName));
 
         
         #line default
         #line hidden
         
-        #line 753 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 754 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(@" )replacingObject;
 						else { // Cannot have circular reference, so can be in else branch
 							IInformationObject iObject = CollectionContent[i];
@@ -2107,7 +2107,7 @@ this.Write(@" )replacingObject;
         #line default
         #line hidden
         
-        #line 770 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 771 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 
 	if(isContentItemMaster == false)
     {
@@ -2116,7 +2116,7 @@ this.Write(@" )replacingObject;
         #line default
         #line hidden
         
-        #line 773 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 774 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write("\t\t\t\t\t\t// For non-master content\r\n\t\t\t\t\t\tforeach(IInformationObject item in Collect" +
         "ionContent)\r\n\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\tbool itemTreeModified = item.IsInstanceTreeModified" +
         ";\r\n\t\t\t\t\t\t\tif(itemTreeModified)\r\n\t\t\t\t\t\t\t\treturn true;\r\n\t\t\t\t\t\t}\r\n\t\t\t\t\t\t\t\r\n");
@@ -2125,7 +2125,7 @@ this.Write("\t\t\t\t\t\t// For non-master content\r\n\t\t\t\t\t\tforeach(IInform
         #line default
         #line hidden
         
-        #line 782 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 783 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 
     }
 
@@ -2133,7 +2133,7 @@ this.Write("\t\t\t\t\t\t// For non-master content\r\n\t\t\t\t\t\tforeach(IInform
         #line default
         #line hidden
         
-        #line 784 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 785 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(@"						return false;
 					}
 				}
@@ -2155,14 +2155,14 @@ this.Write(@"						return false;
         #line default
         #line hidden
         
-        #line 800 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 801 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(informationObjectName));
 
         
         #line default
         #line hidden
         
-        #line 800 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 801 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(@" sourceObject)
 				{
 					CollectionContent = sourceObject.CollectionContent;
@@ -2190,7 +2190,7 @@ this.Write(@" sourceObject)
         #line default
         #line hidden
         
-        #line 821 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 822 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 
 	if(isContentItemMaster == false)
     {
@@ -2200,7 +2200,7 @@ this.Write(@" sourceObject)
         #line default
         #line hidden
         
-        #line 825 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 826 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write("\t\t\t\t\tforeach(IInformationObject iObject in CollectionContent)\r\n\t\t\t\t\t\tiObject.Find" +
         "ObjectsFromTree(result, filterOnFalse, searchWithinCurrentMasterOnly);\r\n");
 
@@ -2208,7 +2208,7 @@ this.Write("\t\t\t\t\tforeach(IInformationObject iObject in CollectionContent)\r
         #line default
         #line hidden
         
-        #line 828 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 829 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 
     } else { // Content item is master, thus we need to filter
 
@@ -2216,7 +2216,7 @@ this.Write("\t\t\t\t\tforeach(IInformationObject iObject in CollectionContent)\r
         #line default
         #line hidden
         
-        #line 830 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 831 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write("\t\t\t\t\tif(searchWithinCurrentMasterOnly == false) {\r\n\t\t\t\t\t\tforeach(IInformationObje" +
         "ct iObject in CollectionContent)\r\n\t\t\t\t\t\t\tiObject.FindObjectsFromTree(result, fil" +
         "terOnFalse, searchWithinCurrentMasterOnly);\r\n\t\t\t\t\t}\r\n");
@@ -2225,7 +2225,7 @@ this.Write("\t\t\t\t\tif(searchWithinCurrentMasterOnly == false) {\r\n\t\t\t\t\t
         #line default
         #line hidden
         
-        #line 835 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 836 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 
     }
 
@@ -2233,7 +2233,7 @@ this.Write("\t\t\t\t\tif(searchWithinCurrentMasterOnly == false) {\r\n\t\t\t\t\t
         #line default
         #line hidden
         
-        #line 837 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 838 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(@"				}
 
 
@@ -2270,7 +2270,7 @@ this.Write(@"				}
         #line default
         #line hidden
         
-        #line 868 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 869 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 
 		} else {
 			GenerateInformationObjectChoice(informationObject, informationObjectName, informationObject.Item);
@@ -2280,14 +2280,14 @@ this.Write(@"				}
         #line default
         #line hidden
         
-        #line 872 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 873 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write("\t\t\t\r\n\t\t\t}\r\n");
 
         
         #line default
         #line hidden
         
-        #line 874 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 875 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 
 	}
 
@@ -2311,35 +2311,35 @@ this.Write("\t\t\t\r\n\t\t\t}\r\n");
         #line default
         #line hidden
         
-        #line 892 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 893 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write("\t\t\t\t// Properties to map to handle the file: ");
 
         
         #line default
         #line hidden
         
-        #line 893 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 894 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(objectContent.originalFileName));
 
         
         #line default
         #line hidden
         
-        #line 893 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 894 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(".");
 
         
         #line default
         #line hidden
         
-        #line 893 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 894 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(objectContent.fileExtension));
 
         
         #line default
         #line hidden
         
-        #line 893 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 894 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write("\r\n\t\t\t\t// TODO: Handle object collections\r\n\t\t\t\tprivate object FindFromObjectTree(s" +
         "tring objectId)\r\n\t\t\t\t{\r\n\t\t\t\t\treturn null;\r\n\t\t\t\t}\r\n\r\n\t\t\t\tvoid IInformationObject." +
         "UpdateCollections(IInformationCollection masterInstance)\r\n\t\t\t\t{\r\n\t\t\t\t}\r\n\r\n\r\n\t\t\t\t" +
@@ -2366,14 +2366,14 @@ this.Write("\r\n\t\t\t\t// TODO: Handle object collections\r\n\t\t\t\tprivate ob
         #line default
         #line hidden
         
-        #line 946 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 947 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(informationObjectName));
 
         
         #line default
         #line hidden
         
-        #line 946 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 947 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(" sourceObject)\r\n\t\t\t\t{\r\n\t\t\t\t\tthrow new NotImplementedException(\"Media masters are " +
         "not currently supported\");\r\n\t\t\t\t}\r\n\r\n\r\n");
 
@@ -2381,83 +2381,83 @@ this.Write(" sourceObject)\r\n\t\t\t\t{\r\n\t\t\t\t\tthrow new NotImplementedExc
         #line default
         #line hidden
         
-        #line 952 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 953 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 		if(informationObject.provideCreateMethod) {  
         
         #line default
         #line hidden
         
-        #line 952 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 953 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write("\t\t\t\tpublic static ");
 
         
         #line default
         #line hidden
         
-        #line 953 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 954 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(informationObjectName));
 
         
         #line default
         #line hidden
         
-        #line 953 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 954 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(" CreateDefault()\r\n\t\t\t\t{\r\n\t\t\t\t\tvar result = new ");
 
         
         #line default
         #line hidden
         
-        #line 955 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 956 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(informationObjectName));
 
         
         #line default
         #line hidden
         
-        #line 955 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 956 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write("();\r\n\t\t\t\t\treturn result;\r\n\t\t\t\t}\r\n\r\n\t\t\t\tpublic static ");
 
         
         #line default
         #line hidden
         
-        #line 959 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 960 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(informationObjectName));
 
         
         #line default
         #line hidden
         
-        #line 959 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 960 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(" CreateDemoDefault()\r\n\t\t\t\t{\r\n\t\t\t\t\t");
 
         
         #line default
         #line hidden
         
-        #line 961 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 962 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(informationObjectName));
 
         
         #line default
         #line hidden
         
-        #line 961 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 962 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(" customDemo = null;\r\n\t\t\t\t\t");
 
         
         #line default
         #line hidden
         
-        #line 962 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 963 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(informationObjectName));
 
         
         #line default
         #line hidden
         
-        #line 962 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 963 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(".CreateCustomDemo(ref customDemo);\r\n\t\t\t\t\tif(customDemo != null)\r\n\t\t\t\t\t\treturn cus" +
         "tomDemo;\r\n\t\t\t\t\tvar result = new ");
 
@@ -2465,21 +2465,21 @@ this.Write(".CreateCustomDemo(ref customDemo);\r\n\t\t\t\t\tif(customDemo != nul
         #line default
         #line hidden
         
-        #line 965 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 966 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(informationObjectName));
 
         
         #line default
         #line hidden
         
-        #line 965 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 966 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write("();\r\n\t\t\t\t\treturn result;\r\n\t\t\t\t}\r\n\r\n\r\n");
 
         
         #line default
         #line hidden
         
-        #line 970 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 971 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 
 		}
 	}
@@ -2495,7 +2495,7 @@ this.Write("();\r\n\t\t\t\t\treturn result;\r\n\t\t\t\t}\r\n\r\n\r\n");
         #line default
         #line hidden
         
-        #line 980 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 981 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write("\r\n\t\t\t\tvoid IInformationObject.UpdateCollections(IInformationCollection masterInst" +
         "ance)\r\n\t\t\t\t{\r\n\t\t\t\t\t//Type collType = masterInstance.GetType();\r\n\t\t\t\t\t//string ty" +
         "peName = collType.Name;\r\n");
@@ -2504,7 +2504,7 @@ this.Write("\r\n\t\t\t\tvoid IInformationObject.UpdateCollections(IInformationCo
         #line default
         #line hidden
         
-        #line 986 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 987 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 
 		string domainName = CurrentAbstraction.InstanceOfTheBall.semanticDomainName;
 		foreach(InformationItemType informationItem in nonMasterInformationObjects)
@@ -2519,179 +2519,179 @@ this.Write("\r\n\t\t\t\tvoid IInformationObject.UpdateCollections(IInformationCo
         #line default
         #line hidden
         
-        #line 995 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 996 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write("\t\t\t\t\tif(masterInstance is ");
 
         
         #line default
         #line hidden
         
-        #line 996 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 997 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(itemTypeName));
 
         
         #line default
         #line hidden
         
-        #line 996 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 997 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(") {\r\n\t\t\t\t\t\t");
 
         
         #line default
         #line hidden
         
-        #line 997 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 998 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(domainName));
 
         
         #line default
         #line hidden
         
-        #line 997 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 998 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(".CollectionUpdateImplementation.Update_");
 
         
         #line default
         #line hidden
         
-        #line 997 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 998 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(informationObjectName));
 
         
         #line default
         #line hidden
         
-        #line 997 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 998 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write("_");
 
         
         #line default
         #line hidden
         
-        #line 997 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 998 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(itemName));
 
         
         #line default
         #line hidden
         
-        #line 997 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 998 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write("(this, localCollection:");
 
         
         #line default
         #line hidden
         
-        #line 997 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 998 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(itemName));
 
         
         #line default
         #line hidden
         
-        #line 997 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 998 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(", masterCollection:(");
 
         
         #line default
         #line hidden
         
-        #line 997 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 998 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(itemTypeName));
 
         
         #line default
         #line hidden
         
-        #line 997 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 998 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(") masterInstance);\r\n\t\t\t\t\t} else if(");
 
         
         #line default
         #line hidden
         
-        #line 998 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 999 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(itemName));
 
         
         #line default
         #line hidden
         
-        #line 998 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 999 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(" != null) {\r\n\t\t\t\t\t\t((IInformationObject) ");
 
         
         #line default
         #line hidden
         
-        #line 999 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1000 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(itemName));
 
         
         #line default
         #line hidden
         
-        #line 999 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1000 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(").UpdateCollections(masterInstance);\r\n\t\t\t\t\t}\r\n");
 
         
         #line default
         #line hidden
         
-        #line 1001 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1002 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 			} else { 
         
         #line default
         #line hidden
         
-        #line 1001 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1002 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write("\t\t\t\t\tif(");
 
         
         #line default
         #line hidden
         
-        #line 1002 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1003 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(itemName));
 
         
         #line default
         #line hidden
         
-        #line 1002 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1003 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(" != null) {\r\n\t\t\t\t\t\t((IInformationObject) ");
 
         
         #line default
         #line hidden
         
-        #line 1003 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1004 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(itemName));
 
         
         #line default
         #line hidden
         
-        #line 1003 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1004 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(").UpdateCollections(masterInstance);\r\n\t\t\t\t\t}\r\n\r\n");
 
         
         #line default
         #line hidden
         
-        #line 1006 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1007 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 			} 
         
         #line default
         #line hidden
         
-        #line 1007 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1008 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 		} 
         
         #line default
         #line hidden
         
-        #line 1007 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1008 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(@"				}
 
 
@@ -2715,7 +2715,7 @@ this.Write(@"				}
         #line default
         #line hidden
         
-        #line 1025 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1026 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 
 		foreach(InformationItemType informationItem in nonMasterInformationObjects)
 		{
@@ -2724,7 +2724,7 @@ this.Write(@"				}
         #line default
         #line hidden
         
-        #line 1028 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1029 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write("\t\t\t\t\t{ // Scoping block for variable name reusability\r\n\t\t\t\t\t\tIInformationObject i" +
         "tem = ");
 
@@ -2732,14 +2732,14 @@ this.Write("\t\t\t\t\t{ // Scoping block for variable name reusability\r\n\t\t\t
         #line default
         #line hidden
         
-        #line 1030 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1031 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(informationItem.name));
 
         
         #line default
         #line hidden
         
-        #line 1030 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1031 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(";\r\n\t\t\t\t\t\tif(item != null)\r\n\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\titem.FindObjectsFromTree(result, filte" +
         "rOnFalse, searchWithinCurrentMasterOnly);\r\n\t\t\t\t\t\t}\r\n\t\t\t\t\t} // Scoping block end\r" +
         "\n\r\n");
@@ -2748,7 +2748,7 @@ this.Write(";\r\n\t\t\t\t\t\tif(item != null)\r\n\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\t
         #line default
         #line hidden
         
-        #line 1037 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1038 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
  
 		}
 
@@ -2756,14 +2756,14 @@ this.Write(";\r\n\t\t\t\t\t\tif(item != null)\r\n\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\t
         #line default
         #line hidden
         
-        #line 1039 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1040 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write("\t\t\t\t\tif(searchWithinCurrentMasterOnly == false)\r\n\t\t\t\t\t{\r\n");
 
         
         #line default
         #line hidden
         
-        #line 1042 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1043 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 
 		foreach(InformationItemType informationItem in masterInformationObjects)
 		{
@@ -2772,21 +2772,21 @@ this.Write("\t\t\t\t\tif(searchWithinCurrentMasterOnly == false)\r\n\t\t\t\t\t{\
         #line default
         #line hidden
         
-        #line 1045 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1046 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write("\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\tIInformationObject item = ");
 
         
         #line default
         #line hidden
         
-        #line 1047 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1048 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(informationItem.name));
 
         
         #line default
         #line hidden
         
-        #line 1047 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1048 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(";\r\n\t\t\t\t\t\t\tif(item != null)\r\n\t\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\t\titem.FindObjectsFromTree(result, fi" +
         "lterOnFalse, searchWithinCurrentMasterOnly);\r\n\t\t\t\t\t\t\t}\r\n\t\t\t\t\t\t}\r\n");
 
@@ -2794,7 +2794,7 @@ this.Write(";\r\n\t\t\t\t\t\t\tif(item != null)\r\n\t\t\t\t\t\t\t{\r\n\t\t\t\t\t
         #line default
         #line hidden
         
-        #line 1053 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1054 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
  
 		}
 
@@ -2802,7 +2802,7 @@ this.Write(";\r\n\t\t\t\t\t\t\tif(item != null)\r\n\t\t\t\t\t\t\t{\r\n\t\t\t\t\t
         #line default
         #line hidden
         
-        #line 1055 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1056 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write("\t\t\t\t\t}\t\t\t\t\t\r\n\t\t\t\t}\r\n\r\n\r\n\t\t\t\tprivate object FindFromObjectTree(string objectId)\r\n\t" +
         "\t\t\t{\r\n");
 
@@ -2810,7 +2810,7 @@ this.Write("\t\t\t\t\t}\t\t\t\t\t\r\n\t\t\t\t}\r\n\r\n\r\n\t\t\t\tprivate object
         #line default
         #line hidden
         
-        #line 1062 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1063 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 
 		foreach(InformationItemType informationItem in informationObjects)
 		{
@@ -2819,21 +2819,21 @@ this.Write("\t\t\t\t\t}\t\t\t\t\t\r\n\t\t\t\t}\r\n\r\n\r\n\t\t\t\tprivate object
         #line default
         #line hidden
         
-        #line 1065 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1066 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write("\t\t\t\t\t{\r\n\t\t\t\t\t\tvar item = ");
 
         
         #line default
         #line hidden
         
-        #line 1067 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1068 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(informationItem.name));
 
         
         #line default
         #line hidden
         
-        #line 1067 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1068 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(";\r\n\t\t\t\t\t\tif(item != null)\r\n\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\tobject result = item.FindObjectByID(ob" +
         "jectId);\r\n\t\t\t\t\t\t\tif(result != null)\r\n\t\t\t\t\t\t\t\treturn result;\r\n\t\t\t\t\t\t}\r\n\t\t\t\t\t}\r\n");
 
@@ -2841,7 +2841,7 @@ this.Write(";\r\n\t\t\t\t\t\tif(item != null)\r\n\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\t
         #line default
         #line hidden
         
-        #line 1075 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1076 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
  
 		}
 
@@ -2849,7 +2849,7 @@ this.Write(";\r\n\t\t\t\t\t\tif(item != null)\r\n\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\t
         #line default
         #line hidden
         
-        #line 1077 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1078 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(@"					return null;
 				}
 
@@ -2876,7 +2876,7 @@ this.Write(@"					return null;
         #line default
         #line hidden
         
-        #line 1098 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1099 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 
 		foreach(InformationItemType informationItem in informationObjects)
 		{
@@ -2885,21 +2885,21 @@ this.Write(@"					return null;
         #line default
         #line hidden
         
-        #line 1101 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1102 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write("\t\t\t\t\t{\r\n\t\t\t\t\t\tvar item = (IInformationObject) ");
 
         
         #line default
         #line hidden
         
-        #line 1103 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1104 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(informationItem.name));
 
         
         #line default
         #line hidden
         
-        #line 1103 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1104 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(";\r\n\t\t\t\t\t\tif(item != null)\r\n\t\t\t\t\t\t\titem.CollectMasterObjectsFromTree(result, filte" +
         "rOnFalse);\r\n\t\t\t\t\t}\r\n");
 
@@ -2907,7 +2907,7 @@ this.Write(";\r\n\t\t\t\t\t\tif(item != null)\r\n\t\t\t\t\t\t\titem.CollectMaste
         #line default
         #line hidden
         
-        #line 1107 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1108 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
  
 		}
 
@@ -2915,14 +2915,14 @@ this.Write(";\r\n\t\t\t\t\t\tif(item != null)\r\n\t\t\t\t\t\t\titem.CollectMaste
         #line default
         #line hidden
         
-        #line 1109 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1110 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write("\r\n\t\t\t\t}\r\n\r\n\t\t\t\tbool IInformationObject.IsInstanceTreeModified {\r\n\t\t\t\t\tget {\r\n");
 
         
         #line default
         #line hidden
         
-        #line 1115 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1116 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 
 		foreach(var item in informationItems)
 		{
@@ -2931,42 +2931,42 @@ this.Write("\r\n\t\t\t\t}\r\n\r\n\t\t\t\tbool IInformationObject.IsInstanceTreeM
         #line default
         #line hidden
         
-        #line 1118 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1119 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write("\t\t\t\t\t\tif(");
 
         
         #line default
         #line hidden
         
-        #line 1119 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1120 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(item.name));
 
         
         #line default
         #line hidden
         
-        #line 1119 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1120 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(" != _unmodified_");
 
         
         #line default
         #line hidden
         
-        #line 1119 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1120 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(item.name));
 
         
         #line default
         #line hidden
         
-        #line 1119 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1120 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(")\r\n\t\t\t\t\t\t\treturn true;\r\n");
 
         
         #line default
         #line hidden
         
-        #line 1121 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1122 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 
 		}
 		foreach(var nonMasterItem in nonMasterInformationObjects)
@@ -2976,21 +2976,21 @@ this.Write(")\r\n\t\t\t\t\t\t\treturn true;\r\n");
         #line default
         #line hidden
         
-        #line 1125 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1126 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write("\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\tIInformationObject item = (IInformationObject) ");
 
         
         #line default
         #line hidden
         
-        #line 1127 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1128 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(nonMasterItem.name));
 
         
         #line default
         #line hidden
         
-        #line 1127 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1128 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(";\r\n\t\t\t\t\t\t\tif(item != null) \r\n\t\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\t\tbool isItemTreeModified = item.IsI" +
         "nstanceTreeModified;\r\n\t\t\t\t\t\t\t\tif(isItemTreeModified)\r\n\t\t\t\t\t\t\t\t\treturn true;\r\n\t\t\t" +
         "\t\t\t\t}\r\n\t\t\t\t\t\t}\r\n");
@@ -2999,7 +2999,7 @@ this.Write(";\r\n\t\t\t\t\t\t\tif(item != null) \r\n\t\t\t\t\t\t\t{\r\n\t\t\t\t\
         #line default
         #line hidden
         
-        #line 1135 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1136 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 
         }
 
@@ -3008,7 +3008,7 @@ this.Write(";\r\n\t\t\t\t\t\t\tif(item != null) \r\n\t\t\t\t\t\t\t{\r\n\t\t\t\t\
         #line default
         #line hidden
         
-        #line 1138 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1139 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write("\t\t\t\t\r\n\t\t\t\t\t\treturn false;\r\n\t\t\t\t\t}\r\n\t\t\t\t}\r\n\r\n\t\t\t\tvoid IInformationObject.ReplaceOb" +
         "jectInTree(IInformationObject replacingObject)\r\n\t\t\t\t{\r\n");
 
@@ -3016,7 +3016,7 @@ this.Write("\t\t\t\t\r\n\t\t\t\t\t\treturn false;\r\n\t\t\t\t\t}\r\n\t\t\t\t}\r\
         #line default
         #line hidden
         
-        #line 1145 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1146 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 
 		foreach(InformationItemType item in informationObjects)
 		{
@@ -3026,84 +3026,84 @@ this.Write("\t\t\t\t\r\n\t\t\t\t\t\treturn false;\r\n\t\t\t\t\t}\r\n\t\t\t\t}\r\
         #line default
         #line hidden
         
-        #line 1149 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1150 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write("\t\t\t\t\tif(");
 
         
         #line default
         #line hidden
         
-        #line 1150 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1151 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(item.name));
 
         
         #line default
         #line hidden
         
-        #line 1150 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1151 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(" != null) {\r\n\t\t\t\t\t\tif(");
 
         
         #line default
         #line hidden
         
-        #line 1151 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1152 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(item.name));
 
         
         #line default
         #line hidden
         
-        #line 1151 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1152 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(".ID == replacingObject.ID)\r\n\t\t\t\t\t\t\t");
 
         
         #line default
         #line hidden
         
-        #line 1152 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1153 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(item.name));
 
         
         #line default
         #line hidden
         
-        #line 1152 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1153 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(" = (");
 
         
         #line default
         #line hidden
         
-        #line 1152 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1153 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(item.informationObjectName));
 
         
         #line default
         #line hidden
         
-        #line 1152 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1153 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(") replacingObject;\r\n\t\t\t\t\t\telse {\r\n\t\t\t\t\t\t\tIInformationObject iObject = ");
 
         
         #line default
         #line hidden
         
-        #line 1154 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1155 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(item.name));
 
         
         #line default
         #line hidden
         
-        #line 1154 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1155 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(";\r\n\t\t\t\t\t\t\tiObject.ReplaceObjectInTree(replacingObject);\r\n\t\t\t\t\t\t}\r\n\t\t\t\t\t}\r\n");
 
         
         #line default
         #line hidden
         
-        #line 1158 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1159 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 
         }
 
@@ -3111,28 +3111,28 @@ this.Write(";\r\n\t\t\t\t\t\t\tiObject.ReplaceObjectInTree(replacingObject);\r\n
         #line default
         #line hidden
         
-        #line 1160 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1161 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write("\t\t\t\t}\r\n\r\n\r\n\t\t\t\tprivate void CopyContentFrom(");
 
         
         #line default
         #line hidden
         
-        #line 1164 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1165 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(informationObjectName));
 
         
         #line default
         #line hidden
         
-        #line 1164 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1165 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(" sourceObject)\r\n\t\t\t\t{\r\n");
 
         
         #line default
         #line hidden
         
-        #line 1166 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1167 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 
 		foreach(var item in informationItems)
 		{
@@ -3141,42 +3141,42 @@ this.Write(" sourceObject)\r\n\t\t\t\t{\r\n");
         #line default
         #line hidden
         
-        #line 1169 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1170 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write("\t\t\t\t\t");
 
         
         #line default
         #line hidden
         
-        #line 1170 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1171 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(item.name));
-
-        
-        #line default
-        #line hidden
-        
-        #line 1170 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
-this.Write(" = sourceObject.");
-
-        
-        #line default
-        #line hidden
-        
-        #line 1170 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
-this.Write(this.ToStringHelper.ToStringWithCulture(item.name));
-
-        
-        #line default
-        #line hidden
-        
-        #line 1170 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
-this.Write(";\r\n");
 
         
         #line default
         #line hidden
         
         #line 1171 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+this.Write(" = sourceObject.");
+
+        
+        #line default
+        #line hidden
+        
+        #line 1171 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+this.Write(this.ToStringHelper.ToStringWithCulture(item.name));
+
+        
+        #line default
+        #line hidden
+        
+        #line 1171 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+this.Write(";\r\n");
+
+        
+        #line default
+        #line hidden
+        
+        #line 1172 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 
 		}
 
@@ -3184,7 +3184,7 @@ this.Write(";\r\n");
         #line default
         #line hidden
         
-        #line 1173 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1174 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write("\t\t\t\t}\r\n\t\t\t\t\r\n\r\n\r\n\t\t\t\tvoid IInformationObject.SetInstanceTreeValuesAsUnmodified()\r" +
         "\n\t\t\t\t{\r\n");
 
@@ -3192,7 +3192,7 @@ this.Write("\t\t\t\t}\r\n\t\t\t\t\r\n\r\n\r\n\t\t\t\tvoid IInformationObject.Set
         #line default
         #line hidden
         
-        #line 1180 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1181 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 
 		foreach(var item in primitiveItems)
 		{
@@ -3202,42 +3202,42 @@ this.Write("\t\t\t\t}\r\n\t\t\t\t\r\n\r\n\r\n\t\t\t\tvoid IInformationObject.Set
         #line default
         #line hidden
         
-        #line 1184 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1185 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write("\t\t\t\t\t_unmodified_");
 
         
         #line default
         #line hidden
         
-        #line 1185 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1186 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(item.name));
-
-        
-        #line default
-        #line hidden
-        
-        #line 1185 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
-this.Write(" = ");
-
-        
-        #line default
-        #line hidden
-        
-        #line 1185 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
-this.Write(this.ToStringHelper.ToStringWithCulture(item.name));
-
-        
-        #line default
-        #line hidden
-        
-        #line 1185 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
-this.Write(";\r\n");
 
         
         #line default
         #line hidden
         
         #line 1186 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+this.Write(" = ");
+
+        
+        #line default
+        #line hidden
+        
+        #line 1186 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+this.Write(this.ToStringHelper.ToStringWithCulture(item.name));
+
+        
+        #line default
+        #line hidden
+        
+        #line 1186 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+this.Write(";\r\n");
+
+        
+        #line default
+        #line hidden
+        
+        #line 1187 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 
 		}
 
@@ -3245,14 +3245,14 @@ this.Write(";\r\n");
         #line default
         #line hidden
         
-        #line 1188 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1189 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write("\t\t\t\t\r\n");
 
         
         #line default
         #line hidden
         
-        #line 1189 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1190 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 
 		foreach(var item in informationObjects)
 		{
@@ -3262,70 +3262,70 @@ this.Write("\t\t\t\t\r\n");
         #line default
         #line hidden
         
-        #line 1193 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1194 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write("\t\t\t\t\t_unmodified_");
 
         
         #line default
         #line hidden
         
-        #line 1194 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1195 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(item.name));
 
         
         #line default
         #line hidden
         
-        #line 1194 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1195 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(" = ");
 
         
         #line default
         #line hidden
         
-        #line 1194 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1195 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(item.name));
 
         
         #line default
         #line hidden
         
-        #line 1194 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1195 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(";\r\n\t\t\t\t\tif(");
 
         
         #line default
         #line hidden
         
-        #line 1195 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1196 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(item.name));
 
         
         #line default
         #line hidden
         
-        #line 1195 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1196 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(" != null)\r\n\t\t\t\t\t\t((IInformationObject) ");
 
         
         #line default
         #line hidden
         
-        #line 1196 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1197 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(item.name));
 
         
         #line default
         #line hidden
         
-        #line 1196 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1197 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(").SetInstanceTreeValuesAsUnmodified();\r\n\r\n");
 
         
         #line default
         #line hidden
         
-        #line 1198 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1199 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 
 		}
 
@@ -3333,7 +3333,7 @@ this.Write(").SetInstanceTreeValuesAsUnmodified();\r\n\r\n");
         #line default
         #line hidden
         
-        #line 1200 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1201 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write("\t\t\t\t\r\n\t\t\t\t}\r\n\r\n\r\n\r\n\r\n\t\t\t\tpublic void ParsePropertyValue(string propertyName, stri" +
         "ng value)\r\n\t\t\t\t{\r\n\t\t\t\t\tswitch (propertyName)\r\n\t\t\t\t\t{\r\n");
 
@@ -3341,7 +3341,7 @@ this.Write("\t\t\t\t\r\n\t\t\t\t}\r\n\r\n\r\n\r\n\r\n\t\t\t\tpublic void ParsePr
         #line default
         #line hidden
         
-        #line 1210 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1211 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 
 		foreach(InformationItemType item in primitiveItems)
 		{
@@ -3355,56 +3355,56 @@ this.Write("\t\t\t\t\r\n\t\t\t\t}\r\n\r\n\r\n\r\n\r\n\t\t\t\tpublic void ParsePr
         #line default
         #line hidden
         
-        #line 1218 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1219 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write("\t\t\t\t\t\tcase \"");
 
         
         #line default
         #line hidden
         
-        #line 1219 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1220 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(item.name));
 
         
         #line default
         #line hidden
         
-        #line 1219 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1220 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write("\":\r\n\t\t\t\t\t\t\t");
 
         
         #line default
         #line hidden
         
-        #line 1220 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1221 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(item.name));
 
         
         #line default
         #line hidden
         
-        #line 1220 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1221 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(" = ");
 
         
         #line default
         #line hidden
         
-        #line 1220 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1221 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(parseExpression));
 
         
         #line default
         #line hidden
         
-        #line 1220 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1221 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(";\r\n\t\t\t\t\t\t\tbreak;\r\n");
 
         
         #line default
         #line hidden
         
-        #line 1222 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1223 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 
 		}
 
@@ -3412,7 +3412,7 @@ this.Write(";\r\n\t\t\t\t\t\t\tbreak;\r\n");
         #line default
         #line hidden
         
-        #line 1224 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1225 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write("\t\t\t\t\t\tdefault:\r\n\t\t\t\t\t\t\tthrow new InvalidDataException(\"Primitive parseable data t" +
         "ype property not found: \" + propertyName);\r\n\t\t\t\t\t}\r\n\t        }\r\n");
 
@@ -3420,7 +3420,7 @@ this.Write("\t\t\t\t\t\tdefault:\r\n\t\t\t\t\t\t\tthrow new InvalidDataException
         #line default
         #line hidden
         
-        #line 1229 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1230 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 
 	}
 	
@@ -3433,42 +3433,42 @@ this.Write("\t\t\t\t\t\tdefault:\r\n\t\t\t\t\t\t\tthrow new InvalidDataException
         #line default
         #line hidden
         
-        #line 1236 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1237 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write("\r\n\t\t\t\tpublic static ");
 
         
         #line default
         #line hidden
         
-        #line 1238 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1239 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(informationObjectName));
 
         
         #line default
         #line hidden
         
-        #line 1238 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1239 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(" CreateDefault()\r\n\t\t\t\t{\r\n\t\t\t\t\tvar result = new ");
 
         
         #line default
         #line hidden
         
-        #line 1240 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1241 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(informationObjectName));
 
         
         #line default
         #line hidden
         
-        #line 1240 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1241 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write("();\r\n");
 
         
         #line default
         #line hidden
         
-        #line 1241 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1242 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 
 		foreach(var informationItem in informationItems)
 		{
@@ -3479,42 +3479,42 @@ this.Write("();\r\n");
         #line default
         #line hidden
         
-        #line 1246 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1247 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write("\t\t\t\t\tresult.");
 
         
         #line default
         #line hidden
         
-        #line 1247 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1248 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(informationItem.name));
 
         
         #line default
         #line hidden
         
-        #line 1247 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1248 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(" = ");
 
         
         #line default
         #line hidden
         
-        #line 1247 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1248 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(informationItem.informationObjectName));
 
         
         #line default
         #line hidden
         
-        #line 1247 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1248 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(".CreateDefault();\r\n");
 
         
         #line default
         #line hidden
         
-        #line 1248 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1249 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 
 			}
 		}
@@ -3523,49 +3523,49 @@ this.Write(".CreateDefault();\r\n");
         #line default
         #line hidden
         
-        #line 1251 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1252 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write("\t\t\t\t\treturn result;\r\n\t\t\t\t}\r\n\r\n\t\t\t\tpublic static ");
 
         
         #line default
         #line hidden
         
-        #line 1255 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1256 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(informationObjectName));
 
         
         #line default
         #line hidden
         
-        #line 1255 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1256 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(" CreateDemoDefault()\r\n\t\t\t\t{\r\n\t\t\t\t\t");
 
         
         #line default
         #line hidden
         
-        #line 1257 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1258 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(informationObjectName));
 
         
         #line default
         #line hidden
         
-        #line 1257 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1258 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(" customDemo = null;\r\n\t\t\t\t\t");
 
         
         #line default
         #line hidden
         
-        #line 1258 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1259 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(informationObjectName));
 
         
         #line default
         #line hidden
         
-        #line 1258 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1259 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(".CreateCustomDemo(ref customDemo);\r\n\t\t\t\t\tif(customDemo != null)\r\n\t\t\t\t\t\treturn cus" +
         "tomDemo;\r\n\t\t\t\t\tvar result = new ");
 
@@ -3573,21 +3573,21 @@ this.Write(".CreateCustomDemo(ref customDemo);\r\n\t\t\t\t\tif(customDemo != nul
         #line default
         #line hidden
         
-        #line 1261 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1262 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(informationObjectName));
 
         
         #line default
         #line hidden
         
-        #line 1261 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1262 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write("();\r\n");
 
         
         #line default
         #line hidden
         
-        #line 1262 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1263 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 
 		foreach(var informationItem in informationItems)
 		{
@@ -3598,42 +3598,42 @@ this.Write("();\r\n");
         #line default
         #line hidden
         
-        #line 1267 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1268 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write("\t\t\t\t\tresult.");
 
         
         #line default
         #line hidden
         
-        #line 1268 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1269 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(informationItem.name));
 
         
         #line default
         #line hidden
         
-        #line 1268 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1269 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(" = ");
 
         
         #line default
         #line hidden
         
-        #line 1268 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1269 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(informationItem.informationObjectName));
 
         
         #line default
         #line hidden
         
-        #line 1268 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1269 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(".CreateDemoDefault();\r\n");
 
         
         #line default
         #line hidden
         
-        #line 1269 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1270 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 
 			}
 			if(informationItem.logicalDataType == InformationItemTypeLogicalDataType.Text_Short ||
@@ -3648,42 +3648,42 @@ this.Write(".CreateDemoDefault();\r\n");
         #line default
         #line hidden
         
-        #line 1278 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1279 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write("\t\t\t\t\tresult.");
 
         
         #line default
         #line hidden
         
-        #line 1279 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1280 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(informationItem.name));
 
         
         #line default
         #line hidden
         
-        #line 1279 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1280 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(" = @\"");
 
         
         #line default
         #line hidden
         
-        #line 1279 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1280 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(placeHolderText));
 
         
         #line default
         #line hidden
         
-        #line 1279 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1280 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write("\";\r\n\r\n");
 
         
         #line default
         #line hidden
         
-        #line 1281 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1282 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 
 			}
 		}
@@ -3692,14 +3692,14 @@ this.Write("\";\r\n\r\n");
         #line default
         #line hidden
         
-        #line 1284 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1285 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write("\t\t\t\t\r\n\t\t\t\t\treturn result;\r\n\t\t\t\t}\r\n\r\n");
 
         
         #line default
         #line hidden
         
-        #line 1288 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1289 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 
 	}
 
@@ -3713,70 +3713,70 @@ this.Write("\t\t\t\t\r\n\t\t\t\t\treturn result;\r\n\t\t\t\t}\r\n\r\n");
         #line default
         #line hidden
         
-        #line 1296 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1297 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write("\t\t\t[DataMember]\r\n\t\t\tpublic ");
 
         
         #line default
         #line hidden
         
-        #line 1298 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1299 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(dataType));
 
         
         #line default
         #line hidden
         
-        #line 1298 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1299 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(" ");
 
         
         #line default
         #line hidden
         
-        #line 1298 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1299 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(item.name));
 
         
         #line default
         #line hidden
         
-        #line 1298 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1299 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(" { get; set; }\r\n\t\t\tprivate ");
 
         
         #line default
         #line hidden
         
-        #line 1299 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1300 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(dataType));
 
         
         #line default
         #line hidden
         
-        #line 1299 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1300 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(" _unmodified_");
 
         
         #line default
         #line hidden
         
-        #line 1299 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1300 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(item.name));
 
         
         #line default
         #line hidden
         
-        #line 1299 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1300 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(";\r\n");
 
         
         #line default
         #line hidden
         
-        #line 1300 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
+        #line 1301 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 
 		}
 	}
