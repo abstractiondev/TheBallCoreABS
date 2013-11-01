@@ -265,6 +265,12 @@ using TheBall.CORE;
 			[DataContract]
 			public partial class <#= informationObjectName #> : IInformationObject <#= isCollection ? ", IInformationCollection" : "" #>
 			{
+		        public static StorageSerializationType ClassStorageSerializationType { 
+					get {
+						return <#= GetStorageSerializationReturnValue(informationObject) #>;
+					}
+				}
+
 				public <#= informationObjectName #>()
 				{
 					this.ID = Guid.NewGuid().ToString();
@@ -1324,6 +1330,11 @@ using TheBall.CORE;
 				throw new NotSupportedException("Logical data type not recognized: " + logicalDataType.ToString());
 		}
 	}
+
+	string GetStorageSerializationReturnValue(InformationObjectType iObj)
+    {
+		return "StorageSerializationType." + iObj.serializationType.ToString();
+    }
 
 	InformationObjectType[] GetMasterCollections(InstanceOfTheBallType instance)
     {
