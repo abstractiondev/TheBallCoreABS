@@ -259,6 +259,9 @@ using TheBall.CORE;
 		CollectionForType collType = informationObject.Item as CollectionForType;
 		bool isCollection = collType != null;
 
+		InformationItemsType itemsType = informationObject.Item as InformationItemsType;
+		bool containsCollection = itemsType != null && itemsType.InformationItem.Any(item => item.isCollection);
+
 		bool provideDefaultCreate = informationObject.provideCreateMethod;
 		bool isIndependentMaster = informationObject.isIndependentMaster;
 #>
@@ -381,6 +384,16 @@ using TheBall.CORE;
 				}
 
 
+				bool IInformationObject.IsIndependentMaster { 
+					get {
+						return <#= isIndependentMaster ? "true" : "false"  #>;
+					}
+				}
+
+
+<#+	
+		if(containsCollection == false) {
+#>
 			    public void SetValuesToObjects(NameValueCollection nameValueCollection)
 			    {
                     foreach(string key in nameValueCollection.AllKeys)
@@ -408,12 +421,6 @@ using TheBall.CORE;
 			        return FindFromObjectTree(objectId);
 			    }
 
-				bool IInformationObject.IsIndependentMaster { 
-					get {
-						return <#= isIndependentMaster ? "true" : "false"  #>;
-					}
-				}
-
 				void IInformationObject.UpdateMasterValueTreeFromOtherInstance(IInformationObject sourceMaster)
 				{
 					if (sourceMaster == null)
@@ -436,6 +443,23 @@ using TheBall.CORE;
 					iObject.CollectMasterObjectsFromTree(result, filterOnFalse);
 					return result;
 				}
+<#+ } else { #>
+				void IInformationObject.UpdateMasterValueTreeFromOtherInstance(IInformationObject sourceMaster)
+				{
+					throw new NotImplementedException("Collection item objects do not support tree functions for now");
+				}
+
+				Dictionary<string, List<IInformationObject>> IInformationObject.CollectMasterObjects(Predicate<IInformationObject> filterOnFalse)
+				{
+					throw new NotImplementedException("Collection item objects do not support tree functions for now");
+				}
+
+				void IInformationObject.SetValuesToObjects(NameValueCollection nameValueCollection)
+			    {
+					throw new NotImplementedException("Collection item objects do not support tree functions for now");
+				}
+
+<#+ } #>
 
 				public string SerializeToXml(bool noFormatting = false)
 				{
@@ -978,6 +1002,9 @@ using TheBall.CORE;
 		InformationItemType[] nonMasterInformationObjects = informationObjects.Where(iObject => IsObjectIndependentMaster(iObject.informationObjectName) == false).ToArray();
 		InformationItemType[] masterInformationObjects = informationObjects.Where(iObject => IsObjectIndependentMaster(iObject.informationObjectName) == true).ToArray();
 		InformationItemType[] primitiveItems = informationItems.Where(item => String.IsNullOrEmpty(item.informationObjectName)).ToArray();
+		bool containsCollection = informationItems.Any(item => item.isCollection);
+		string domainName = CurrentAbstraction.InstanceOfTheBall.semanticDomainName;
+		if(containsCollection == false) {
 #>
 
 				void IInformationObject.UpdateCollections(IInformationCollection masterInstance)
@@ -985,29 +1012,27 @@ using TheBall.CORE;
 					//Type collType = masterInstance.GetType();
 					//string typeName = collType.Name;
 <#+
-		string domainName = CurrentAbstraction.InstanceOfTheBall.semanticDomainName;
-		foreach(InformationItemType informationItem in nonMasterInformationObjects)
-		{
-			//var childItem = GetInformationObjectByName(informationItem.informationObjectName);
-			string itemName = informationItem.name;
-			string itemTypeName = informationItem.informationObjectName;
-			bool isMasterCollItem = IsItemMasterCollection(informationItem);
-			if(isMasterCollItem) {
+			foreach(InformationItemType informationItem in nonMasterInformationObjects)
+			{
+				//var childItem = GetInformationObjectByName(informationItem.informationObjectName);
+				string itemName = informationItem.name;
+				string itemTypeName = informationItem.informationObjectName;
+				bool isMasterCollItem = IsItemMasterCollection(informationItem);
+				if(isMasterCollItem) {
 #>
 					if(masterInstance is <#= itemTypeName #>) {
 						<#= domainName #>.CollectionUpdateImplementation.Update_<#= informationObjectName #>_<#= itemName #>(this, localCollection:<#= itemName #>, masterCollection:(<#= itemTypeName #>) masterInstance);
 					} else if(<#= itemName  #> != null) {
 						((IInformationObject) <#= itemName #>).UpdateCollections(masterInstance);
 					}
-<#+			} else { #>
+<#+				} else { #>
 					if(<#= itemName  #> != null) {
 						((IInformationObject) <#= itemName #>).UpdateCollections(masterInstance);
 					}
 
+<#+				} #>
 <#+			} #>
-<#+		} #>
 				}
-
 
                 public void SetMediaContent(IContainerOwner containerOwner, string contentObjectID, object mediaContent)
                 {
@@ -1018,14 +1043,24 @@ using TheBall.CORE;
 						throw new InvalidDataException("SetMediaContent referring to self (not media container)");
                     targetObject.SetMediaContent(containerOwner, contentObjectID, mediaContent);
                 }
+<#+		} #>
+
 
 				void IInformationObject.FindObjectsFromTree(List<IInformationObject> result, Predicate<IInformationObject> filterOnFalse, bool searchWithinCurrentMasterOnly)
 				{
+<#+
+		if(containsCollection) {
+#>
+					// Remove exception if basic functionality starts to have issues
+					throw new NotImplementedException("Item level collections do not support object tree operations right now");
+<#+
+        } else {
+#>
 					if(filterOnFalse(this))
 						result.Add(this);
 <#+
-		foreach(InformationItemType informationItem in nonMasterInformationObjects)
-		{
+			foreach(InformationItemType informationItem in nonMasterInformationObjects)
+			{
 #>
 					{ // Scoping block for variable name reusability
 						IInformationObject item = <#= informationItem.name #>;
@@ -1036,13 +1071,13 @@ using TheBall.CORE;
 					} // Scoping block end
 
 <#+ 
-		}
+			}
 #>
 					if(searchWithinCurrentMasterOnly == false)
 					{
 <#+
-		foreach(InformationItemType informationItem in masterInformationObjects)
-		{
+			foreach(InformationItemType informationItem in masterInformationObjects)
+			{
 #>
 						{
 							IInformationObject item = <#= informationItem.name #>;
@@ -1052,17 +1087,23 @@ using TheBall.CORE;
 							}
 						}
 <#+ 
-		}
+			}
 #>
 					}					
+<#+
+        }
+#>
 				}
 
-
+<#+		
+		if(containsCollection == false) 
+        {
+#>
 				private object FindFromObjectTree(string objectId)
 				{
 <#+
-		foreach(InformationItemType informationItem in informationObjects)
-		{
+			foreach(InformationItemType informationItem in informationObjects)
+			{
 #>
 					{
 						var item = <#= informationItem.name #>;
@@ -1074,11 +1115,10 @@ using TheBall.CORE;
 						}
 					}
 <#+ 
-		}
+			}
 #>
 					return null;
 				}
-
 				void IInformationObject.CollectMasterObjectsFromTree(Dictionary<string, List<IInformationObject>> result, Predicate<IInformationObject> filterOnFalse)
 				{
 					IInformationObject iObject = (IInformationObject) this;
@@ -1097,8 +1137,8 @@ using TheBall.CORE;
 						}
 					}
 <#+
-		foreach(InformationItemType informationItem in informationObjects)
-		{
+			foreach(InformationItemType informationItem in informationObjects)
+			{
 #>
 					{
 						var item = (IInformationObject) <#= informationItem.name #>;
@@ -1106,23 +1146,69 @@ using TheBall.CORE;
 							item.CollectMasterObjectsFromTree(result, filterOnFalse);
 					}
 <#+ 
-		}
+			}
+        } else {
 #>
+				void IInformationObject.CollectMasterObjectsFromTree(Dictionary<string, List<IInformationObject>> result, Predicate<IInformationObject> filterOnFalse)
+				{
+					throw new NotImplementedException("Object tree support not implemented for item level collection objects");
+
+<#+		} #>
 
 				}
 
-				bool IInformationObject.IsInstanceTreeModified {
-					get {
 <#+
-		foreach(var item in informationItems)
-		{
+		if(containsCollection) {
+#>
+			
+                void IInformationObject.SetMediaContent(IContainerOwner containerOwner, string contentObjectID, object mediaContent)
+                {
+					// Remove exception if some basic functionality is broken due to it
+					throw new NotImplementedException("Collection items do not support instance tree queries as of now");
+				}
+	
+
+				bool IInformationObject.IsInstanceTreeModified {
+					get { 
+						// Remove exception if some basic functionality is broken due to it
+						throw new NotImplementedException("Collection items do not support instance tree queries as of now");
+					}
+				}
+				void IInformationObject.ReplaceObjectInTree(IInformationObject replacingObject)
+				{
+					// Remove exception if some basic functionality is broken due to it
+					throw new NotImplementedException("Collection items do not support instance tree queries as of now");
+				}
+
+				void IInformationObject.SetInstanceTreeValuesAsUnmodified()
+				{
+					// Remove exception if some basic functionality is broken due to it
+					throw new NotImplementedException("Collection items do not support instance tree queries as of now");
+				}
+
+				void IInformationObject.UpdateCollections(IInformationCollection masterInstance)
+				{
+					// Remove exception if some basic functionality is broken due to it
+					throw new NotImplementedException("Collection items do not support instance tree queries as of now");
+				}
+
+<#+
+        } else {
+#>
+				bool IInformationObject.IsInstanceTreeModified {
+					get { 
+
+<#+
+			foreach(var item in informationItems)
+			{
+		
 #>
 						if(<#= item.name #> != _unmodified_<#= item.name #>)
 							return true;
 <#+
-		}
-		foreach(var nonMasterItem in nonMasterInformationObjects)
-        {
+			}
+			foreach(var nonMasterItem in nonMasterInformationObjects)
+			{
 #>
 						{
 							IInformationObject item = (IInformationObject) <#= nonMasterItem.name #>;
@@ -1133,9 +1219,7 @@ using TheBall.CORE;
 									return true;
 							}
 						}
-<#+
-        }
-
+<#+			}
 #>				
 						return false;
 					}
@@ -1144,8 +1228,8 @@ using TheBall.CORE;
 				void IInformationObject.ReplaceObjectInTree(IInformationObject replacingObject)
 				{
 <#+
-		foreach(InformationItemType item in informationObjects)
-		{
+			foreach(InformationItemType item in informationObjects)
+			{
 
 #>
 					if(<#= item.name #> != null) {
@@ -1157,7 +1241,7 @@ using TheBall.CORE;
 						}
 					}
 <#+
-        }
+			}
 #>
 				}
 
@@ -1165,12 +1249,12 @@ using TheBall.CORE;
 				private void CopyContentFrom(<#= informationObjectName #> sourceObject)
 				{
 <#+
-		foreach(var item in informationItems)
-		{
+			foreach(var item in informationItems)
+			{
 #>
 					<#= item.name #> = sourceObject.<#= item.name #>;
 <#+
-		}
+			}
 #>
 				}
 				
@@ -1179,17 +1263,17 @@ using TheBall.CORE;
 				void IInformationObject.SetInstanceTreeValuesAsUnmodified()
 				{
 <#+
-		foreach(var item in primitiveItems)
-		{
+			foreach(var item in primitiveItems)
+			{
 			
 #>
 					_unmodified_<#= item.name #> = <#= item.name #>;
 <#+
-		}
+			}
 #>				
 <#+
-		foreach(var item in informationObjects)
-		{
+			foreach(var item in informationObjects)
+			{
 			
 #>
 					_unmodified_<#= item.name #> = <#= item.name #>;
@@ -1197,12 +1281,14 @@ using TheBall.CORE;
 						((IInformationObject) <#= item.name #>).SetInstanceTreeValuesAsUnmodified();
 
 <#+
-		}
+			}
+        
 #>				
 				}
 
-
-
+<#+
+        }
+#>
 
 				public void ParsePropertyValue(string propertyName, string value)
 				{
@@ -1211,7 +1297,7 @@ using TheBall.CORE;
 <#+
 		foreach(InformationItemType item in primitiveItems)
 		{
-			string physicalType = GetPhysicalDataTypeFromLogical(item.logicalDataType, item.informationObjectName);
+			string physicalType = GetPlatformDataTypeFromLogical(item.logicalDataType, item.informationObjectName);
 			if(physicalType == "byte[]")
 				continue;
 			bool isStringType = physicalType == "string";
@@ -1293,16 +1379,25 @@ using TheBall.CORE;
 	{
 		foreach(var item in informationItems)
 		{
-			string dataType = GetPhysicalDataTypeFromLogical(item.logicalDataType, item.informationObjectName);
+			string dataType = GetPlatformDataTypeFromLogical(item.logicalDataType, item.informationObjectName);
+			bool isCollection = item.isCollection;
+			if(isCollection)
+            {
+#>
+			[DataMember]
+			public List< <#= dataType #> > <#= item.name #> = new List< <#= dataType #> >();
+<#+
+            } else {
 #>
 			[DataMember]
 			public <#= dataType #> <#= item.name #> { get; set; }
 			private <#= dataType #> _unmodified_<#= item.name #>;
 <#+
+            }
 		}
 	}
 
-	string GetPhysicalDataTypeFromLogical(InformationItemTypeLogicalDataType logicalDataType, string informationObjectName)
+	string GetPlatformDataTypeFromLogical(InformationItemTypeLogicalDataType logicalDataType, string informationObjectName)
 	{
 		switch(logicalDataType)
 		{

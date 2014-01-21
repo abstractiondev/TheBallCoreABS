@@ -2312,8 +2312,11 @@ namespace TheBallCore_v1_0 {
         
         private string informationObjectNameField;
         
+        private bool isCollectionField;
+        
         public InformationItemType() {
             this.informationObjectNameField = "";
+            this.isCollectionField = false;
         }
         
         /// <remarks/>
@@ -2347,6 +2350,18 @@ namespace TheBallCore_v1_0 {
             }
             set {
                 this.informationObjectNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        [System.ComponentModel.DefaultValueAttribute(false)]
+        public bool isCollection {
+            get {
+                return this.isCollectionField;
+            }
+            set {
+                this.isCollectionField = value;
             }
         }
     }
