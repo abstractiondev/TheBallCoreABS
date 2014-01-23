@@ -1183,7 +1183,7 @@ using TheBall.CORE;
 				void IInformationObject.SetInstanceTreeValuesAsUnmodified()
 				{
 					// Remove exception if some basic functionality is broken due to it
-					throw new NotImplementedException("Collection items do not support instance tree queries as of now");
+					//throw new NotImplementedException("Collection items do not support instance tree queries as of now");
 				}
 
 				void IInformationObject.UpdateCollections(IInformationCollection masterInstance)
