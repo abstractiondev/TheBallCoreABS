@@ -1302,11 +1302,19 @@ using TheBall.CORE;
 				continue;
 			bool isStringType = physicalType == "string";
 			string parseExpression = isStringType ? "value" : physicalType + ".Parse(value)";
+			if(item.isCollection) {
+#>
+						case "<#= item.name #>":
+							throw new NotImplementedException("Parsing collection types is not implemented for item collections");
+							break;
+<#+
+            } else {
 #>
 						case "<#= item.name #>":
 							<#= item.name #> = <#= parseExpression #>;
 							break;
 <#+
+            }
 		}
 #>
 						default:
