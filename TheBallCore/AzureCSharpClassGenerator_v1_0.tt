@@ -693,6 +693,7 @@ using TheBall.CORE;
 					return result;
 				}
 
+				/*
 				public static <#= informationObjectName #> CreateDemoDefault()
 				{
 					<#= informationObjectName #> customDemo = null;
@@ -705,6 +706,7 @@ using TheBall.CORE;
 					//result.CollectionContent.Add(<#= contentObjectName #>.CreateDemoDefault());
 					return result;
 				}
+				*/
 
 		<#+ } #>
 
@@ -1052,7 +1054,9 @@ using TheBall.CORE;
 		if(containsCollection) {
 #>
 					// Remove exception if basic functionality starts to have issues
-					throw new NotImplementedException("Item level collections do not support object tree operations right now");
+					//throw new NotImplementedException("Item level collections do not support object tree operations right now");
+					if(filterOnFalse(this))
+						result.Add(this);
 <#+
         } else {
 #>
@@ -1346,7 +1350,7 @@ using TheBall.CORE;
 #>
 					return result;
 				}
-
+				/*
 				public static <#= informationObjectName #> CreateDemoDefault()
 				{
 					<#= informationObjectName #> customDemo = null;
@@ -1379,7 +1383,7 @@ using TheBall.CORE;
 #>				
 					return result;
 				}
-
+				*/
 <#+
 	}
 
