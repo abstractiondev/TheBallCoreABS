@@ -109,6 +109,8 @@ namespace TheBallCoreABS.TheBallCore
     {
 		switch (logicalDataType)
 		{
+			case InterfaceItemTypeLogicalDataType.TrueOrFalse_Boolean:
+				return "boolean";
 			case InterfaceItemTypeLogicalDataType.Text_Long:
 			case InterfaceItemTypeLogicalDataType.Text_Short:
 				return "string";
@@ -132,54 +134,54 @@ namespace TheBallCoreABS.TheBallCore
         #line default
         #line hidden
         
-        #line 86 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\KBObservableModelJSGenerator_v1_0.tt"
+        #line 88 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\KBObservableModelJSGenerator_v1_0.tt"
 this.Write("var ");
 
         
         #line default
         #line hidden
         
-        #line 87 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\KBObservableModelJSGenerator_v1_0.tt"
+        #line 89 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\KBObservableModelJSGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(objectName));
 
         
         #line default
         #line hidden
         
-        #line 87 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\KBObservableModelJSGenerator_v1_0.tt"
+        #line 89 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\KBObservableModelJSGenerator_v1_0.tt"
 this.Write(" {\r\n");
 
         
         #line default
         #line hidden
         
-        #line 88 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\KBObservableModelJSGenerator_v1_0.tt"
+        #line 90 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\KBObservableModelJSGenerator_v1_0.tt"
  GenerateInterfaceItems(iObj.InterfaceItems); 
         
         #line default
         #line hidden
         
-        #line 88 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\KBObservableModelJSGenerator_v1_0.tt"
+        #line 90 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\KBObservableModelJSGenerator_v1_0.tt"
 this.Write("\r\n    constructor() {\r\n\t\t");
 
         
         #line default
         #line hidden
         
-        #line 91 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\KBObservableModelJSGenerator_v1_0.tt"
+        #line 93 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\KBObservableModelJSGenerator_v1_0.tt"
  GenerateKOObservable(iObj.InterfaceItems); 
         
         #line default
         #line hidden
         
-        #line 91 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\KBObservableModelJSGenerator_v1_0.tt"
+        #line 93 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\KBObservableModelJSGenerator_v1_0.tt"
 this.Write("    }\r\n}\r\n\r\n");
 
         
         #line default
         #line hidden
         
-        #line 95 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\KBObservableModelJSGenerator_v1_0.tt"
+        #line 97 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\KBObservableModelJSGenerator_v1_0.tt"
 
     }
 
@@ -196,56 +198,56 @@ this.Write("    }\r\n}\r\n\r\n");
         #line default
         #line hidden
         
-        #line 106 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\KBObservableModelJSGenerator_v1_0.tt"
+        #line 108 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\KBObservableModelJSGenerator_v1_0.tt"
 this.Write("\t\t\tthis.");
 
         
         #line default
         #line hidden
         
-        #line 107 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\KBObservableModelJSGenerator_v1_0.tt"
+        #line 109 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\KBObservableModelJSGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(itemName));
 
         
         #line default
         #line hidden
         
-        #line 107 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\KBObservableModelJSGenerator_v1_0.tt"
+        #line 109 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\KBObservableModelJSGenerator_v1_0.tt"
 this.Write(" = ko.");
 
         
         #line default
         #line hidden
         
-        #line 107 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\KBObservableModelJSGenerator_v1_0.tt"
+        #line 109 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\KBObservableModelJSGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(observableName));
 
         
         #line default
         #line hidden
         
-        #line 107 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\KBObservableModelJSGenerator_v1_0.tt"
+        #line 109 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\KBObservableModelJSGenerator_v1_0.tt"
 this.Write("(this.");
 
         
         #line default
         #line hidden
         
-        #line 107 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\KBObservableModelJSGenerator_v1_0.tt"
+        #line 109 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\KBObservableModelJSGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(itemName));
 
         
         #line default
         #line hidden
         
-        #line 107 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\KBObservableModelJSGenerator_v1_0.tt"
+        #line 109 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\KBObservableModelJSGenerator_v1_0.tt"
 this.Write(");\r\n");
 
         
         #line default
         #line hidden
         
-        #line 108 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\KBObservableModelJSGenerator_v1_0.tt"
+        #line 110 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\KBObservableModelJSGenerator_v1_0.tt"
 
         }
     }
@@ -275,49 +277,49 @@ this.Write(");\r\n");
         #line default
         #line hidden
         
-        #line 132 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\KBObservableModelJSGenerator_v1_0.tt"
+        #line 134 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\KBObservableModelJSGenerator_v1_0.tt"
 this.Write("\t");
 
         
         #line default
         #line hidden
         
-        #line 133 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\KBObservableModelJSGenerator_v1_0.tt"
+        #line 135 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\KBObservableModelJSGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(itemName));
 
         
         #line default
         #line hidden
         
-        #line 133 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\KBObservableModelJSGenerator_v1_0.tt"
+        #line 135 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\KBObservableModelJSGenerator_v1_0.tt"
 this.Write(": ");
 
         
         #line default
         #line hidden
         
-        #line 133 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\KBObservableModelJSGenerator_v1_0.tt"
+        #line 135 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\KBObservableModelJSGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(dataType));
 
         
         #line default
         #line hidden
         
-        #line 133 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\KBObservableModelJSGenerator_v1_0.tt"
+        #line 135 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\KBObservableModelJSGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(collectionPostFix));
 
         
         #line default
         #line hidden
         
-        #line 133 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\KBObservableModelJSGenerator_v1_0.tt"
+        #line 135 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\KBObservableModelJSGenerator_v1_0.tt"
 this.Write(";\r\n");
 
         
         #line default
         #line hidden
         
-        #line 134 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\KBObservableModelJSGenerator_v1_0.tt"
+        #line 136 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\KBObservableModelJSGenerator_v1_0.tt"
 
 		}
     }
@@ -588,7 +590,7 @@ public enum GeneralTypeShareLevel {
 //------------------------------------------------------------------------------
 // <auto-generated>
 //     This code was generated by a tool.
-//     Runtime Version:2.0.50727.6400
+//     Runtime Version:2.0.50727.6407
 //
 //     Changes to this file may cause incorrect behavior and will be lost if
 //     the code is regenerated.
@@ -784,9 +786,12 @@ public partial class InformationObjectType {
     
     private bool isIndependentMasterField;
     
+    private InformationObjectTypeSerializationType serializationTypeField;
+    
     public InformationObjectType() {
         this.provideCreateMethodField = true;
         this.isIndependentMasterField = false;
+        this.serializationTypeField = InformationObjectTypeSerializationType.XML;
     }
     
     /// <remarks/>
@@ -845,6 +850,18 @@ public partial class InformationObjectType {
         }
         set {
             this.isIndependentMasterField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    [System.ComponentModel.DefaultValueAttribute(InformationObjectTypeSerializationType.XML)]
+    public InformationObjectTypeSerializationType serializationType {
+        get {
+            return this.serializationTypeField;
+        }
+        set {
+            this.serializationTypeField = value;
         }
     }
 }
@@ -2884,8 +2901,11 @@ public partial class InformationItemType {
     
     private string informationObjectNameField;
     
+    private bool isCollectionField;
+    
     public InformationItemType() {
         this.informationObjectNameField = "";
+        this.isCollectionField = false;
     }
     
     /// <remarks/>
@@ -2919,6 +2939,18 @@ public partial class InformationItemType {
         }
         set {
             this.informationObjectNameField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    [System.ComponentModel.DefaultValueAttribute(false)]
+    public bool isCollection {
+        get {
+            return this.isCollectionField;
+        }
+        set {
+            this.isCollectionField = value;
         }
     }
 }
@@ -2961,6 +2993,25 @@ public enum InformationItemTypeLogicalDataType {
     
     /// <remarks/>
     InformationObject,
+}
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.3038")]
+[System.SerializableAttribute()]
+[System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
+public enum InformationObjectTypeSerializationType {
+    
+    /// <remarks/>
+    XML,
+    
+    /// <remarks/>
+    JSON,
+    
+    /// <remarks/>
+    Binary,
+    
+    /// <remarks/>
+    Custom,
 }
 
         

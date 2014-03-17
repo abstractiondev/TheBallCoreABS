@@ -138,6 +138,8 @@ using TheBall.CORE;
 		//InterfaceItemTypeLogicalDataType dataType = (InterfaceItemTypeLogicalDataType) System.Enum.Parse(typeof(InterfaceItemTypeLogicalDataType), logicalInterfaceDataType);
 		switch(logicalInterfaceDataType)
         {
+			case InterfaceItemTypeLogicalDataType.TrueOrFalse_Boolean:
+				return "bool";
 			case InterfaceItemTypeLogicalDataType.Data_Binary:
 				return "byte[]";
 			case InterfaceItemTypeLogicalDataType.Number:

@@ -65,6 +65,8 @@
     {
 		switch (logicalDataType)
 		{
+			case InterfaceItemTypeLogicalDataType.TrueOrFalse_Boolean:
+				return "boolean";
 			case InterfaceItemTypeLogicalDataType.Text_Long:
 			case InterfaceItemTypeLogicalDataType.Text_Short:
 				return "string";
