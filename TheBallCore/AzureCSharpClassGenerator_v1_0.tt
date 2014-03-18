@@ -164,7 +164,7 @@ using TheBall.CORE;
         {
 #>
 			[DataContract]
-			public class <#= interfaceObject.name #>
+			public partial class <#= interfaceObject.name #>
 			{
 <#+
 			foreach(var informationField in interfaceObject.InterfaceItems ?? new object[0]) 

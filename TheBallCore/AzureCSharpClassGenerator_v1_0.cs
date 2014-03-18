@@ -256,7 +256,7 @@ using TheBall.CORE;
         #line hidden
         
         #line 165 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
-this.Write("\t\t\t[DataContract]\r\n\t\t\tpublic class ");
+this.Write("\t\t\t[DataContract]\r\n\t\t\tpublic partial class ");
 
         
         #line default
