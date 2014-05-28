@@ -120,7 +120,9 @@ using TheBall.CORE;
 
 
 <#+
+		BeginNamespace("INT");
 		GenerateInterfaceModel(instance);
+		EndBlock(); // namespace
 		GenerateDomainInitializer(instance);
 		foreach(var informationObject in instance.InformationModel)
         {

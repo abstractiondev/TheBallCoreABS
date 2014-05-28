@@ -114,15 +114,15 @@ namespace TheBallCoreABS.TheBallCore
         #line hidden
         
         #line 66 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\InterfaceModelCSharpClassGenerator_v1_0.tt"
-this.Write("using System;\r\nusing System.Collections.Generic;\r\nusing System.Collections.Specia" +
-        "lized;\r\nusing System.IO;\r\nusing System.Xml;\r\nusing System.Linq;\r\nusing System.Ru" +
-        "ntime.Serialization;\r\n\r\n\r\n\r\n");
+this.Write("\r\nusing System;\r\nusing System.Collections.Generic;\r\nusing System.Collections.Spec" +
+        "ialized;\r\nusing System.IO;\r\nusing System.Xml;\r\nusing System.Linq;\r\nusing System." +
+        "Runtime.Serialization;\r\n\r\n\r\n\r\n");
 
         
         #line default
         #line hidden
         
-        #line 77 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\InterfaceModelCSharpClassGenerator_v1_0.tt"
+        #line 78 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\InterfaceModelCSharpClassGenerator_v1_0.tt"
 
 		foreach(var interfaceObject in instance.DigitalInterface.InterfaceModel)
         {
@@ -135,7 +135,7 @@ this.Write("using System;\r\nusing System.Collections.Generic;\r\nusing System.C
         #line default
         #line hidden
         
-        #line 86 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\InterfaceModelCSharpClassGenerator_v1_0.tt"
+        #line 87 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\InterfaceModelCSharpClassGenerator_v1_0.tt"
 
 	}
 	
@@ -149,21 +149,21 @@ this.Write("using System;\r\nusing System.Collections.Generic;\r\nusing System.C
         #line default
         #line hidden
         
-        #line 94 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\InterfaceModelCSharpClassGenerator_v1_0.tt"
+        #line 95 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\InterfaceModelCSharpClassGenerator_v1_0.tt"
 this.Write("\t\t\t[DataContract]\r\n\t\t\tpublic partial class ");
 
         
         #line default
         #line hidden
         
-        #line 96 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\InterfaceModelCSharpClassGenerator_v1_0.tt"
+        #line 97 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\InterfaceModelCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(interfaceObjectName));
 
         
         #line default
         #line hidden
         
-        #line 96 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\InterfaceModelCSharpClassGenerator_v1_0.tt"
+        #line 97 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\InterfaceModelCSharpClassGenerator_v1_0.tt"
 this.Write(" \r\n\t\t\t{\r\n\t\t\t\t[DataMember]\r\n\t\t\t\tpublic string ID { get; set; }\r\n\r\n\t\t\t    [IgnoreDa" +
         "taMember]\r\n                public string ETag { get; set; }\r\n\r\n");
 
@@ -171,7 +171,7 @@ this.Write(" \r\n\t\t\t{\r\n\t\t\t\t[DataMember]\r\n\t\t\t\tpublic string ID { g
         #line default
         #line hidden
         
-        #line 104 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\InterfaceModelCSharpClassGenerator_v1_0.tt"
+        #line 105 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\InterfaceModelCSharpClassGenerator_v1_0.tt"
 
 			GenerateInterfaceObjectFields(interfaceObject);
 
@@ -179,14 +179,14 @@ this.Write(" \r\n\t\t\t{\r\n\t\t\t\t[DataMember]\r\n\t\t\t\tpublic string ID { g
         #line default
         #line hidden
         
-        #line 106 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\InterfaceModelCSharpClassGenerator_v1_0.tt"
+        #line 107 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\InterfaceModelCSharpClassGenerator_v1_0.tt"
 this.Write("\t\t\t\r\n\t\t\t}\r\n");
 
         
         #line default
         #line hidden
         
-        #line 108 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\InterfaceModelCSharpClassGenerator_v1_0.tt"
+        #line 109 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\InterfaceModelCSharpClassGenerator_v1_0.tt"
 
 	}
 
@@ -216,49 +216,49 @@ this.Write("\t\t\t\r\n\t\t\t}\r\n");
         #line default
         #line hidden
         
-        #line 132 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\InterfaceModelCSharpClassGenerator_v1_0.tt"
+        #line 133 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\InterfaceModelCSharpClassGenerator_v1_0.tt"
 this.Write("\t\t\t[DataMember]\r\n\t\t\tpublic ");
 
         
         #line default
         #line hidden
         
-        #line 134 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\InterfaceModelCSharpClassGenerator_v1_0.tt"
+        #line 135 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\InterfaceModelCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(dataType));
 
         
         #line default
         #line hidden
         
-        #line 134 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\InterfaceModelCSharpClassGenerator_v1_0.tt"
+        #line 135 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\InterfaceModelCSharpClassGenerator_v1_0.tt"
 this.Write(" ");
 
         
         #line default
         #line hidden
         
-        #line 134 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\InterfaceModelCSharpClassGenerator_v1_0.tt"
+        #line 135 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\InterfaceModelCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(fieldName));
 
         
         #line default
         #line hidden
         
-        #line 134 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\InterfaceModelCSharpClassGenerator_v1_0.tt"
+        #line 135 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\InterfaceModelCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(initializationString));
 
         
         #line default
         #line hidden
         
-        #line 134 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\InterfaceModelCSharpClassGenerator_v1_0.tt"
+        #line 135 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\InterfaceModelCSharpClassGenerator_v1_0.tt"
 this.Write(";\r\n\r\n");
 
         
         #line default
         #line hidden
         
-        #line 136 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\InterfaceModelCSharpClassGenerator_v1_0.tt"
+        #line 137 "C:\Users\kalle\Work\abs\Caloom\Abstractions\TheBallCoreABS\TheBallCore\InterfaceModelCSharpClassGenerator_v1_0.tt"
 
         }
     }

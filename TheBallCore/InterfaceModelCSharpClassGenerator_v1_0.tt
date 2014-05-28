@@ -64,6 +64,7 @@
 		string domainNameMethodPart = domainName.Replace(".", "_");
 		BeginNamespace(instance.semanticDomainName);
 #>
+
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
