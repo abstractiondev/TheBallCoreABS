@@ -82,9 +82,11 @@ using System.IO;
 using System.Xml;
 using System.Linq;
 using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 
 <#+
 		BeginNamespace("SQLite." + instance.semanticDomainName);
+		GenerateRequiredInterfaceDefinitions(instance);
 		GenerateDataContext(instance);
 		GenerateDataClasses(instance);
 		EndBlock();
@@ -115,6 +117,18 @@ using System.Runtime.Serialization;
 			default:
 				throw new NotSupportedException("Logical interface data type not supported: " + logicalInterfaceDataType);
         }
+    }
+
+	void GenerateRequiredInterfaceDefinitions(InstanceOfTheBallType instance) 
+	{
+#>
+
+	internal interface ITheBallDataContextStorable
+	{
+		void PrepareForStoring();
+	}
+
+<#+
     }
 
 	void GenerateDataContext(InstanceOfTheBallType instance)
@@ -179,15 +193,53 @@ using System.Runtime.Serialization;
 
 #>
     [Table(Name = "<#= objectName #>")]
-	public class <#= objectName #>
+	public class <#= objectName #> : ITheBallDataContextStorable
 	{
 		[Column]
 		public string ID { get; set; }
 
 <#+
 		GenerateInformationItems(itemsType.InformationItem);
+		GenerateInterfaceImplementation(itemsType.InformationItem);
 #>
 	}
+<#+
+    }
+
+	void GenerateInterfaceImplementation(InformationItemType[] informationItems) 
+	{
+		var customsStorableObjects = informationItems.Where(iItem => iItem.isCollection);
+
+#>
+        public void PrepareForStoring()
+        {
+		
+<#+
+		foreach(var item in customsStorableObjects) 
+		{
+
+#>
+            if (_Is<#= item.name #>Used)
+            {
+                if (_<#= item.name #> == null)
+                    <#= item.name #>Data = null;
+                else
+                {
+                    BinaryFormatter bf = new BinaryFormatter();
+                    var dataToStore = _<#= item.name #>.ToArray();
+                    using (MemoryStream memStream = new MemoryStream())
+                    {
+                        bf.Serialize(memStream, dataToStore);
+                        <#= item.name #>Data = memStream.ToArray();
+                    }
+                }
+            }
+
+<#+
+        }
+
+#>
+		}
 <#+
     }
 
@@ -212,7 +264,28 @@ using System.Runtime.Serialization;
 			if(isCollection)
             {
 #>
-		public List< <#= dataType #> > <#= item.name #> = new List< <#= dataType #> >();
+        [Column(Name = "<#= item.name #>")] public byte[] <#= item.name #>Data;
+
+		private bool _Is<#= item.name #>Used = false;
+        private List<<#= dataType #>> _<#= item.name #> = null;
+        public List<<#= dataType #>> <#= item.name #>
+        {
+            get
+            {
+                if (_<#= item.name #> == null && <#= item.name #>Data != null)
+                {
+                    BinaryFormatter bf = new BinaryFormatter();
+                    <#= dataType #>[] objectArray;
+                    using (MemoryStream memStream = new MemoryStream(<#= item.name #>Data))
+                        objectArray = (<#= dataType #>[]) bf.Deserialize(memStream);
+                    _<#= item.name #> = new List<<#= dataType #>>(objectArray);
+					_Is<#= item.name #>Used = true;
+                }
+                return _<#= item.name #>;
+            }
+            set { _<#= item.name #> = value; }
+        }
+
 <#+
             } else {
 #>
