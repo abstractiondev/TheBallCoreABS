@@ -70,6 +70,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="TheBallCore\SQLiteCSharpClassGenerator_v1_0.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SQLiteCSharpClassGenerator_v1_0.tt</DependentUpon>
+    </Compile>
     <Compile Include="TheBallCore\TheBallCore_v1_0_namespace.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -105,6 +110,10 @@
       <LastGenOutput>KBDustTemplateViewGenerator_v1_0.cs</LastGenOutput>
     </None>
     <None Include="TheBallCore\InterfaceGeneration.ttinclude" />
+    <None Include="TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>SQLiteCSharpClassGenerator_v1_0.cs</LastGenOutput>
+    </None>
     <None Include="TheBallCore\TheBallCore_v1_0.ttinclude" />
   </ItemGroup>
   <ItemGroup>

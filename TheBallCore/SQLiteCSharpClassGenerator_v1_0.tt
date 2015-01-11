@@ -1,0 +1,258 @@
+﻿<#@ template debug="true" hostSpecific="true" #>
+<#@ output extension="?" #>
+<#@ Assembly Name="System.Core.dll" #>
+<#@ Assembly Name="System.Xml.dll" #>
+<#@ Assembly Name="System.Xml.Linq.dll" #>
+<#@ Assembly Name="System.Windows.Forms.dll" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Xml" #>
+<#@ import namespace="System.Xml.Serialization" #>
+<#@ import namespace="System.Diagnostics" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Xml.Linq" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #> 
+<#@ include file="..\..\abscommon\CommonInclude\Common\CommonCodeblocks.ttinclude" #>
+<#@ include file="TheBallCore_v1_0.ttinclude" #>
+<#   
+	// Set abstraction specific type and single file specific extension
+	//TransformGenerator< ClassModelAbstractionType >(GenerateRoot, ".designer.cs");	
+	GenerateRoot();
+#>
+
+<#+ 
+	public Tuple<string, string>[] GetGeneratorContent(params string[] xmlFileNames)
+	{
+		List<Tuple<string, string>> result = new List<Tuple<string, string>>();
+		foreach(string xmlFileName in xmlFileNames)
+		{
+			TheBallCoreAbstractionType abs = LoadXml<TheBallCoreAbstractionType>(xmlFileName);
+			CurrentAbstraction = abs;
+			this.GenerationEnvironment.Clear();
+			string content = TransformText();
+			string outputFile = Path.GetFileNameWithoutExtension(xmlFileName) + "_SQLite.designer.cs";
+			result.Add(Tuple.Create(outputFile, content));
+		}
+		return result.ToArray();
+	}
+	
+	void SetCurrentAbstraction(object abs)
+	{
+		CurrentAbstraction = ( TheBallCoreAbstractionType ) abs;
+	}
+	
+	TheBallCoreAbstractionType CurrentAbstraction;
+	InstanceOfTheBallType CurrInstance;
+	
+	void GenerateRoot()
+	{
+		GenerateAbstraction(CurrentAbstraction);
+	}
+
+	void GenerateAbstraction(TheBallCoreAbstractionType abstraction)
+	{
+		InstanceOfTheBallType instance = abstraction.InstanceOfTheBall;
+		CurrInstance = instance;
+		GenerateInstance(instance);
+	}	
+
+	InformationObjectType GetInformationObjectByName(string informationObjectName)
+    {
+		var result = CurrInstance.InformationModel.FirstOrDefault(candidate => candidate.name == informationObjectName);
+		if(result == null)
+			throw new ArgumentException("Information object not found with name: " + informationObjectName);
+		return result;
+    }
+
+
+	void GenerateInstance(InstanceOfTheBallType instance)
+	{
+		string domainName = instance.semanticDomainName;
+		string domainNameMethodPart = domainName.Replace(".", "_");
+#>
+
+using System;
+using System.Data;
+using System.Data.Linq;
+using System.Data.Linq.Mapping;
+using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.IO;
+using System.Xml;
+using System.Linq;
+using System.Runtime.Serialization;
+
+<#+
+		BeginNamespace("SQLite." + instance.semanticDomainName);
+		GenerateDataContext(instance);
+		GenerateDataClasses(instance);
+		EndBlock();
+#>
+
+
+<#+
+	}
+
+	string GetTypeFromInterfaceType(InterfaceItemTypeLogicalDataType logicalInterfaceDataType)
+    {
+		//InterfaceItemTypeLogicalDataType dataType = (InterfaceItemTypeLogicalDataType) System.Enum.Parse(typeof(InterfaceItemTypeLogicalDataType), logicalInterfaceDataType);
+		switch(logicalInterfaceDataType)
+        {
+			case InterfaceItemTypeLogicalDataType.TrueOrFalse_Boolean:
+				return "bool";
+			case InterfaceItemTypeLogicalDataType.Data_Binary:
+				return "byte[]";
+			case InterfaceItemTypeLogicalDataType.Number:
+				return "double";
+			case InterfaceItemTypeLogicalDataType.Text_Long:
+			case InterfaceItemTypeLogicalDataType.Text_Short:
+				return "string";
+			case InterfaceItemTypeLogicalDataType.Time_Date:
+			case InterfaceItemTypeLogicalDataType.Time_DateTime:
+			case InterfaceItemTypeLogicalDataType.Time_Time:
+				return "DateTime";
+			default:
+				throw new NotSupportedException("Logical interface data type not supported: " + logicalInterfaceDataType);
+        }
+    }
+
+	void GenerateDataContext(InstanceOfTheBallType instance)
+    {
+		var informationObjects = instance.InformationModel;
+		string instanceName = instance.semanticDomainName;
+#>
+
+		public class TheBallDataContext : DataContext
+		{
+
+            public TheBallDataContext(IDbConnection connection) : base(connection)
+		    {
+
+		    }
+
+<#+
+		foreach(var informationObject in GetTableObjects(informationObjects))
+        {
+			string iObjName = informationObject.name;
+#>
+			public Table<<#= iObjName #>> <#= iObjName #>Table {
+				get {
+					return this.GetTable<<#= iObjName #>>();
+				}
+			}
+<#+
+        }
+#>
+        }
+
+<#+
+
+    }
+
+	InformationObjectType[] GetTableObjects(InformationObjectType[] informationObjects) 
+	{
+		return informationObjects.Where(iObj => iObj.Item is InformationItemsType).ToArray();
+    }
+
+	void GenerateDataClasses(InstanceOfTheBallType instance) 
+	{
+		foreach(var iObj in GetTableObjects(instance.InformationModel)) 
+		{
+			GenerateDataClass(iObj);
+        }
+    }
+
+	void GenerateDataClass(InformationObjectType informationObject)
+	{
+		string semanticDomainName = CurrInstance.semanticDomainName;
+		string objectName = informationObject.name;
+		string informationObjectName = informationObject.name;
+		CollectionForType collType = informationObject.Item as CollectionForType;
+		bool isCollection = collType != null;
+
+		InformationItemsType itemsType = informationObject.Item as InformationItemsType;
+		bool containsCollection = itemsType != null && itemsType.InformationItem.Any(item => item.isCollection);
+
+		bool provideDefaultCreate = informationObject.provideCreateMethod;
+		bool isIndependentMaster = informationObject.isIndependentMaster;
+
+#>
+    [Table(Name = "<#= objectName #>")]
+	public class <#= objectName #>
+	{
+		[Column]
+		public string ID { get; set; }
+
+<#+
+		GenerateInformationItems(itemsType.InformationItem);
+#>
+	}
+<#+
+    }
+
+	void GenerateInformationItemsMethods(string informationObjectName, InformationItemType[] informationItems)
+	{
+		InformationItemType[] informationObjects = informationItems.Where(item => String.IsNullOrEmpty(item.informationObjectName) == false).ToArray();
+		//InformationItemType[] nonMasterInformationObjects = informationObjects.Where(iObject => IsObjectIndependentMaster(iObject.informationObjectName) == false).ToArray();
+		//InformationItemType[] masterInformationObjects = informationObjects.Where(iObject => IsObjectIndependentMaster(iObject.informationObjectName) == true).ToArray();
+		InformationItemType[] primitiveItems = informationItems.Where(item => String.IsNullOrEmpty(item.informationObjectName)).ToArray();
+		bool containsCollection = informationItems.Any(item => item.isCollection);
+		string domainName = CurrentAbstraction.InstanceOfTheBall.semanticDomainName;
+		if(containsCollection == false) {
+        }
+    }
+	
+	void GenerateInformationItems(InformationItemType[] informationItems)
+	{
+		foreach(var item in informationItems)
+		{
+			string dataType = GetPlatformDataTypeFromLogical(item.logicalDataType, item.informationObjectName);
+			bool isCollection = item.isCollection;
+			if(isCollection)
+            {
+#>
+		public List< <#= dataType #> > <#= item.name #> = new List< <#= dataType #> >();
+<#+
+            } else {
+#>
+
+		[Column]
+		public <#= dataType #> <#= item.name #> { get; set; }
+		// private <#= dataType #> _unmodified_<#= item.name #>;
+<#+
+            }
+		}
+	}
+
+	string GetPlatformDataTypeFromLogical(InformationItemTypeLogicalDataType logicalDataType, string informationObjectName)
+	{
+		switch(logicalDataType)
+		{
+			case InformationItemTypeLogicalDataType.Data_Binary:
+				return "byte[]";
+			case InformationItemTypeLogicalDataType.Number_ApproxDecimal:
+				return "double";
+			//case InformationItemTypeLogicalDataType.Number_CustomFormat:
+			//	return "string";
+			case InformationItemTypeLogicalDataType.Number_ExactDecimal:
+				return "double";
+			case InformationItemTypeLogicalDataType.Number_Integer:
+				return "long";
+			case InformationItemTypeLogicalDataType.Text_Short:
+			case InformationItemTypeLogicalDataType.Text_Long:
+				return "string";
+			case InformationItemTypeLogicalDataType.Time_Date:
+			case InformationItemTypeLogicalDataType.Time_DateTime:
+			case InformationItemTypeLogicalDataType.Time_Time:
+				return "DateTime";
+			case InformationItemTypeLogicalDataType.TrueOrFalse_Boolean:
+				return "bool";
+			case InformationItemTypeLogicalDataType.InformationObject:
+				return informationObjectName;
+			default:
+				throw new NotSupportedException("Logical data type not recognized: " + logicalDataType.ToString());
+		}
+	}
+
+#>
