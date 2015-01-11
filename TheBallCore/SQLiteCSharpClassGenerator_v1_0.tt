@@ -205,7 +205,7 @@ using Newtonsoft.Json;
     [Table(Name = "<#= objectName #>")]
 	public class <#= objectName #> : ITheBallDataContextStorable
 	{
-		[Column]
+		[Column(IsPrimaryKey = true)]
 		public string ID { get; set; }
 
 <#+

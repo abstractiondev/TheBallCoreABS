@@ -372,8 +372,8 @@ this.Write(this.ToStringHelper.ToStringWithCulture(objectName));
         #line hidden
         
         #line 206 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
-this.Write(" : ITheBallDataContextStorable\r\n\t{\r\n\t\t[Column]\r\n\t\tpublic string ID { get; set; }\r" +
-        "\n\r\n");
+this.Write(" : ITheBallDataContextStorable\r\n\t{\r\n\t\t[Column(IsPrimaryKey = true)]\r\n\t\tpublic str" +
+        "ing ID { get; set; }\r\n\r\n");
 
         
         #line default
