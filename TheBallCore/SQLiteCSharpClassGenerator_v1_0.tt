@@ -73,6 +73,7 @@
 #>
 
 using System;
+using System.Collections.ObjectModel;
 using System.Data;
 using System.Data.Linq;
 using System.Data.Linq.Mapping;
@@ -229,15 +230,10 @@ using Newtonsoft.Json;
 		{
 
 #>
-            if (_Is<#= item.name #>Used)
+            if (_Is<#= item.name #>Changed)
             {
-                if (_<#= item.name #> == null)
-                    <#= item.name #>Data = null;
-                else
-                {
-                    var dataToStore = _<#= item.name #>.ToArray();
-                    <#= item.name #>Data = JsonConvert.SerializeObject(dataToStore);
-                }
+                var dataToStore = _<#= item.name #>.ToArray();
+                <#= item.name #>Data = JsonConvert.SerializeObject(dataToStore);
             }
 
 <#+
@@ -271,21 +267,45 @@ using Newtonsoft.Json;
 #>
         [Column(Name = "<#= item.name #>")] public string <#= item.name #>Data;
 
-		private bool _Is<#= item.name #>Used = false;
-        private List<<#= dataType #>> _<#= item.name #> = null;
-        public List<<#= dataType #>> <#= item.name #>
+        private bool _Is<#= item.name #>Retrieved = false;
+        private bool _Is<#= item.name #>Changed = false;
+        private ObservableCollection<<#= dataType #>> _<#= item.name #> = null;
+        public ObservableCollection<<#= dataType #>> <#= item.name #>
         {
             get
             {
-                if (_<#= item.name #> == null && <#= item.name #>Data != null)
+                if (!_Is<#= item.name #>Retrieved)
                 {
-                    var arrayData = JsonConvert.DeserializeObject<<#= dataType #>[]>(<#= item.name #>Data);
-                    _<#= item.name #> = new List<<#= dataType #>>(arrayData);
-					_Is<#= item.name #>Used = true;
+                    if (<#= item.name #>Data != null)
+                    {
+                        var arrayData = JsonConvert.DeserializeObject<<#= dataType #>[]>(<#= item.name #>Data);
+                        _<#= item.name #> = new ObservableCollection<<#= dataType #>>(arrayData);
+                    }
+                    else
+                    {
+                        _<#= item.name #> = new ObservableCollection<<#= dataType #>>();
+						<#= item.name #>Data = Guid.NewGuid().ToString();
+						_Is<#= item.name #>Changed = true;
+                    }
+                    _Is<#= item.name #>Retrieved = true;
+                    _<#= item.name #>.CollectionChanged += (sender, args) =>
+						{
+							<#= item.name #>Data = Guid.NewGuid().ToString();
+							_Is<#= item.name #>Changed = true;
+						};
                 }
                 return _<#= item.name #>;
             }
-            set { _<#= item.name #> = value; }
+            set 
+			{ 
+				_<#= item.name #> = value; 
+                // Reset the data field to unique value
+                // to trigger change on object, just in case nothing else changed
+                _Is<#= item.name #>Retrieved = true;
+                <#= item.name #>Data = Guid.NewGuid().ToString();
+                _Is<#= item.name #>Changed = true;
+
+			}
         }
 
 <#+
