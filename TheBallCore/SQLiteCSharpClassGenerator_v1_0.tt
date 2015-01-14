@@ -75,6 +75,7 @@
 using System;
 using System.Collections.ObjectModel;
 using System.Data;
+using System.Data.SQLite;
 using System.Data.Linq;
 using System.Data.Linq.Mapping;
 using System.Collections.Generic;
@@ -127,7 +128,7 @@ using Newtonsoft.Json;
 
 	internal interface ITheBallDataContextStorable
 	{
-		void PrepareForStoring();
+		void PrepareForStoring(bool isInitialInsert);
 	}
 
 <#+
@@ -142,19 +143,45 @@ using Newtonsoft.Json;
 		public class TheBallDataContext : DataContext
 		{
 
-            public TheBallDataContext(IDbConnection connection) : base(connection)
+            public TheBallDataContext(SQLiteConnection connection) : base(connection)
 		    {
-
+                if(connection.State != ConnectionState.Open)
+                    connection.Open();
 		    }
 
             public override void SubmitChanges(ConflictMode failureMode)
             {
                 var changeSet = GetChangeSet();
-                var requiringBeforeSaveProcessing = changeSet.Inserts.Concat(changeSet.Updates).Cast<ITheBallDataContextStorable>().ToArray();
-                foreach (var itemToProcess in requiringBeforeSaveProcessing)
-                    itemToProcess.PrepareForStoring();
+                var insertsToProcess = changeSet.Inserts.Cast<ITheBallDataContextStorable>().ToArray();
+                foreach (var itemToProcess in insertsToProcess)
+                    itemToProcess.PrepareForStoring(true);
+                var updatesToProcess = changeSet.Updates.Cast<ITheBallDataContextStorable>().ToArray();
+                foreach (var itemToProcess in updatesToProcess)
+                    itemToProcess.PrepareForStoring(false);
                 base.SubmitChanges(failureMode);
             }
+
+			public void CreateDomainDatabaseTablesIfNotExists()
+			{
+				List<string> tableCreationCommands = new List<string>();
+<#+
+		foreach(var informationObject in GetTableObjects(informationObjects))
+        {
+			string iObjName = informationObject.name;
+#>
+				tableCreationCommands.Add(<#= iObjName #>.GetCreateTableSQL());
+<#+
+        }
+#>
+			    var connection = this.Connection;
+				foreach (string commandText in tableCreationCommands)
+			    {
+			        var command = connection.CreateCommand();
+			        command.CommandText = commandText;
+                    command.CommandType = CommandType.Text;
+			        command.ExecuteNonQuery();
+			    }
+			}
 
 <#+
 		foreach(var informationObject in GetTableObjects(informationObjects))
@@ -206,6 +233,10 @@ using Newtonsoft.Json;
     [Table(Name = "<#= objectName #>")]
 	public class <#= objectName #> : ITheBallDataContextStorable
 	{
+<#+
+		GenerateSQLiteCreationFunction(objectName, itemsType.InformationItem);
+#>
+
 		[Column(IsPrimaryKey = true)]
 		public string ID { get; set; }
 
@@ -222,7 +253,7 @@ using Newtonsoft.Json;
 		var customsStorableObjects = informationItems.Where(iItem => iItem.isCollection);
 
 #>
-        public void PrepareForStoring()
+        public void PrepareForStoring(bool isInitialInsert)
         {
 		
 <#+
@@ -230,9 +261,9 @@ using Newtonsoft.Json;
 		{
 
 #>
-            if (_Is<#= item.name #>Changed)
+            if (_Is<#= item.name #>Changed || isInitialInsert)
             {
-                var dataToStore = _<#= item.name #>.ToArray();
+                var dataToStore = <#= item.name #>.ToArray();
                 <#= item.name #>Data = JsonConvert.SerializeObject(dataToStore);
             }
 
@@ -241,6 +272,30 @@ using Newtonsoft.Json;
 
 #>
 		}
+<#+
+    }
+
+	void GenerateSQLiteCreationFunction(string informationObjectName, InformationItemType[] informationItems) 
+    {
+#>
+        public static string GetCreateTableSQL()
+        {
+            return
+                @"
+CREATE TABLE IF NOT EXISTS <#= informationObjectName #>(
+[ID] TEXT NOT NULL PRIMARY KEY, 
+<#+
+			var itemArray = informationItems.Select(item => {
+				string itemDataType = GetSQLiteTypeFromLogicalType(item.logicalDataType);
+				if(item.isCollection)
+					itemDataType = "TEXT";
+				return string.Format("[{0}] {1} NOT NULL", item.name, itemDataType);
+            }).ToArray();
+			string wholePart = string.Join(", " + Environment.NewLine, itemArray);
+#><#= wholePart #>
+)";
+        }
+
 <#+
     }
 
@@ -349,5 +404,34 @@ using Newtonsoft.Json;
 				throw new NotSupportedException("Logical data type not recognized: " + logicalDataType.ToString());
 		}
 	}
+
+	string GetSQLiteTypeFromLogicalType(InformationItemTypeLogicalDataType logicalDataType) 
+	{
+		switch(logicalDataType)
+		{
+			case InformationItemTypeLogicalDataType.Data_Binary:
+				return "BLOB";
+			case InformationItemTypeLogicalDataType.Number_ApproxDecimal:
+			case InformationItemTypeLogicalDataType.Number_ExactDecimal:
+				return "REAL";
+			case InformationItemTypeLogicalDataType.Number_Integer:
+				return "INTEGER";
+			case InformationItemTypeLogicalDataType.Text_Short:
+			case InformationItemTypeLogicalDataType.Text_Long:
+				return "TEXT";
+			case InformationItemTypeLogicalDataType.Time_Date:
+			case InformationItemTypeLogicalDataType.Time_DateTime:
+			case InformationItemTypeLogicalDataType.Time_Time:
+				return "TEXT";
+			case InformationItemTypeLogicalDataType.TrueOrFalse_Boolean:
+				return "INTEGER";
+			case InformationItemTypeLogicalDataType.InformationObject:
+				return "TEXT";
+			default:
+				throw new NotSupportedException("Logical data type not recognized: " + logicalDataType.ToString());
+		}
+    }
+
+
 
 #>
