@@ -86,6 +86,8 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using Newtonsoft.Json;
+using SQLiteSupport;
+
 
 <#+
 		BeginNamespace("SQLite." + instance.semanticDomainName);
@@ -138,66 +140,10 @@ using Newtonsoft.Json;
     {
 		var informationObjects = instance.InformationModel;
 		string instanceName = instance.semanticDomainName;
+		var tableObjects = GetTableObjects(instance.InformationModel);
 #>
-		[Flags]
-		public enum SerializationType 
+		public class TheBallDataContext : DataContext, IStorageSyncableDataContext
 		{
-			Undefined = 0,
-			XML = 1,
-			JSON = 2,
-			XML_AND_JSON = XML | JSON
-		}
-
-		[Table]
-		public class InformationObjectMetaData
-		{
-			[Column(IsPrimaryKey = true)]
-			public string ID { get; set; }
-
-			[Column]
-			public string SemanticDomain { get; set; }
-			[Column]
-			public string ObjectType { get; set; }
-			[Column]
-			public string ObjectID { get; set; }
-			[Column]
-			public string MD5 { get; set; }
-			[Column]
-			public string LastWriteTime { get; set; }
-			[Column]
-			public long FileLength { get; set; }
-			[Column]
-			public int SerializationType { get; set; }
-		}
-
-
-		public class TheBallDataContext : DataContext
-		{
-
-		    public static string[] GetMetaDataTableCreateSQLs()
-		    {
-		        return new string[]
-		        {
-		            @"
-CREATE TABLE IF NOT EXISTS InformationObjectMetaData(
-[ID] TEXT NOT NULL PRIMARY KEY, 
-[SemanticDomain] TEXT NOT NULL, 
-[ObjectType] TEXT NOT NULL, 
-[ObjectID] TEXT NOT NULL,
-[MD5] TEXT NOT NULL,
-[LastWriteTime] TEXT NOT NULL,
-[FileLength] INTEGER NOT NULL,
-[SerializationType] INTEGER NOT NULL
-)",
-		            @"
-CREATE UNIQUE INDEX ObjectIX ON InformationObjectMetaData (
-SemanticDomain, 
-ObjectType, 
-ObjectID
-)"
-		        };
-		    }
-
 
             public TheBallDataContext(SQLiteConnection connection) : base(connection)
 		    {
@@ -220,9 +166,9 @@ ObjectID
 			public void CreateDomainDatabaseTablesIfNotExists()
 			{
 				List<string> tableCreationCommands = new List<string>();
-                tableCreationCommands.AddRange(GetMetaDataTableCreateSQLs());
+                tableCreationCommands.AddRange(InformationObjectMetaData.GetMetaDataTableCreateSQLs());
 <#+
-		foreach(var informationObject in GetTableObjects(informationObjects))
+		foreach(var informationObject in tableObjects)
         {
 			string iObjName = informationObject.name;
 #>
@@ -245,6 +191,108 @@ ObjectID
 					return this.GetTable<InformationObjectMetaData>();
 				}
 			}
+
+			public void PerformUpdate(string storageRootPath, InformationObjectMetaData updateData)
+		    {
+                if(updateData.SemanticDomain != "TheBall.Payments")
+                    throw new InvalidDataException("Mismatch on domain data");
+<#+
+		foreach(InformationObjectType informationObject in tableObjects) 
+        {
+				InformationItemsType itemsType = informationObject.Item as InformationItemsType;
+
+#>
+		        if (updateData.ObjectType == "<#= informationObject.name #>")
+		        {
+		            string currentFullStoragePath = Path.Combine(storageRootPath, updateData.CurrentStoragePath);
+		            var serializedObject =
+		                global::TheBall.Payments.<#= informationObject.name #>.DeserializeFromXml(
+		                    ContentStorage.GetContentAsString(currentFullStoragePath));
+		            var existingObject = <#= informationObject.name #>Table.Single(item => item.ID == updateData.ObjectID);
+<#+
+			foreach(var informationItem in itemsType.InformationItem) 
+			{
+				bool isCollection = informationItem.isCollection;
+				string propertyName = informationItem.name;
+				if(!isCollection) {
+#>
+		            existingObject.<#= propertyName #> = serializedObject.<#= propertyName #>;
+<#+
+                } else {
+#>
+                    existingObject.<#= propertyName #>.Clear();
+					if(serializedObject.<#= propertyName #> != null)
+	                    serializedObject.<#= propertyName #>.ForEach(item => existingObject.<#= propertyName #>.Add(item));
+					
+<#+
+                }
+			} #>
+		            return;
+		        } 
+<#+
+        }
+#>
+		    }
+
+		    public void PerformInsert(string storageRootPath, InformationObjectMetaData insertData)
+		    {
+                if (insertData.SemanticDomain != "TheBall.Payments")
+                    throw new InvalidDataException("Mismatch on domain data");
+                InformationObjectMetaDataTable.InsertOnSubmit(insertData);
+<#+
+		foreach(InformationObjectType informationObject in tableObjects) 
+        {
+				InformationItemsType itemsType = informationObject.Item as InformationItemsType;
+
+#>
+                if (insertData.ObjectType == "<#= informationObject.name #>")
+                {
+                    string currentFullStoragePath = Path.Combine(storageRootPath, insertData.CurrentStoragePath);
+                    var serializedObject =
+                        global::TheBall.Payments.<#= informationObject.name #>.DeserializeFromXml(
+                            ContentStorage.GetContentAsString(currentFullStoragePath));
+                    var objectToAdd = new <#= informationObject.name #> {ID = insertData.ObjectID};
+<#+
+			foreach(var informationItem in itemsType.InformationItem) 
+			{
+				bool isCollection = informationItem.isCollection;
+				string propertyName = informationItem.name;
+				if(!isCollection) {
+#>
+		            objectToAdd.<#= propertyName #> = serializedObject.<#= propertyName #>;
+<#+
+                } else {
+#>
+					if(serializedObject.<#= propertyName #> != null)
+						serializedObject.<#= propertyName #>.ForEach(item => objectToAdd.<#= propertyName #>.Add(item));
+<#+
+                }
+			} #>
+					<#= informationObject.name #>Table.InsertOnSubmit(objectToAdd);
+                    return;
+                }
+<#+	} #>
+            }
+
+		    public void PerformDelete(string storageRootPath, InformationObjectMetaData deleteData)
+		    {
+                if (deleteData.SemanticDomain != "TheBall.Payments")
+                    throw new InvalidDataException("Mismatch on domain data");
+				InformationObjectMetaDataTable.DeleteOnSubmit(deleteData);
+<#+
+		foreach(InformationObjectType informationObject in tableObjects) 
+        {
+				InformationItemsType itemsType = informationObject.Item as InformationItemsType;
+
+#>
+		        if (deleteData.ObjectType == "<#= informationObject.name #>")
+		        {
+                    <#= informationObject.name #>Table.DeleteOnSubmit(new <#= informationObject.name #> { ID = deleteData.ObjectID });
+		            return;
+		        }
+<#+		} #>
+		    }
+
 
 <#+
 		foreach(var informationObject in GetTableObjects(informationObjects))
@@ -313,13 +361,21 @@ ObjectID
 
 	void GenerateInterfaceImplementation(InformationItemType[] informationItems) 
 	{
-		var customsStorableObjects = informationItems.Where(iItem => iItem.isCollection);
+		var customsStorableObjects = informationItems.Where(iItem => iItem.isCollection).ToArray();
+		var stringItems = informationItems.Where(iItem => iItem.isCollection == false && GetPlatformDataTypeFromLogical(iItem.logicalDataType, iItem.informationObjectName) == "string").ToArray();
 
 #>
         public void PrepareForStoring(bool isInitialInsert)
         {
 		
 <#+
+		foreach(var stringItem in stringItems) 
+		{
+#>
+			if(<#= stringItem.name #> == null)
+				<#= stringItem.name #> = string.Empty;
+<#+			
+        }
 		foreach(var item in customsStorableObjects) 
 		{
 
