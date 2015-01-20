@@ -1220,7 +1220,7 @@ this.Write("\t\t}\r\n");
         
         #line 428 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write("        public static string GetCreateTableSQL()\r\n        {\r\n            return\r\n" +
-        "                @\"\r\nCREATE TABLE IF NOT EXISTS ");
+        "                @\"\r\nCREATE TABLE IF NOT EXISTS [");
 
         
         #line default
@@ -1234,7 +1234,7 @@ this.Write(this.ToStringHelper.ToStringWithCulture(informationObjectName));
         #line hidden
         
         #line 433 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
-this.Write("(\r\n[ID] TEXT NOT NULL PRIMARY KEY, \r\n");
+this.Write("](\r\n[ID] TEXT NOT NULL PRIMARY KEY, \r\n");
 
         
         #line default

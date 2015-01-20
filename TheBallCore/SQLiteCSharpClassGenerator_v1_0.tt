@@ -430,7 +430,7 @@ using SQLiteSupport;
         {
             return
                 @"
-CREATE TABLE IF NOT EXISTS <#= informationObjectName #>(
+CREATE TABLE IF NOT EXISTS [<#= informationObjectName #>](
 [ID] TEXT NOT NULL PRIMARY KEY, 
 <#+
 			var itemArray = informationItems.Select(item => {
