@@ -335,7 +335,8 @@ using SQLiteSupport;
 
 	InformationObjectType[] GetTableObjects(InformationObjectType[] informationObjects) 
 	{
-		return informationObjects.Where(iObj => iObj.Item is InformationItemsType).ToArray();
+		return informationObjects.Where(iObj => iObj.Item is InformationItemsType)
+			.Where(iObj => GetSupportedInformationItems(((InformationItemsType) iObj.Item).InformationItem).Length > 0).ToArray();
     }
 
 	void GenerateDataClasses(InstanceOfTheBallType instance) 
