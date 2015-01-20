@@ -213,23 +213,23 @@ using SQLiteSupport;
 
 			public void PerformUpdate(string storageRootPath, InformationObjectMetaData updateData)
 		    {
-                if(updateData.SemanticDomain != "TheBall.Payments")
+                if(updateData.SemanticDomain != "<#= CurrInstance.semanticDomainName #>")
                     throw new InvalidDataException("Mismatch on domain data");
 <#+
 		foreach(InformationObjectType informationObject in tableObjects) 
         {
 				InformationItemsType itemsType = informationObject.Item as InformationItemsType;
-
+				var currentSupportedItems = GetSupportedInformationItems(itemsType.InformationItem);
 #>
 		        if (updateData.ObjectType == "<#= informationObject.name #>")
 		        {
 		            string currentFullStoragePath = Path.Combine(storageRootPath, updateData.CurrentStoragePath);
 		            var serializedObject =
-		                global::SER.TheBall.Payments.<#= informationObject.name #>.DeserializeFromXml(
+		                global::SER.<#= CurrInstance.semanticDomainName #>.<#= informationObject.name #>.DeserializeFromXml(
 		                    ContentStorage.GetContentAsString(currentFullStoragePath));
 		            var existingObject = <#= informationObject.name #>Table.Single(item => item.ID == updateData.ObjectID);
 <#+
-			foreach(var informationItem in itemsType.InformationItem) 
+			foreach(var informationItem in currentSupportedItems) 
 			{
 				bool isCollection = informationItem.isCollection;
 				string propertyName = informationItem.name;
@@ -255,24 +255,25 @@ using SQLiteSupport;
 
 		    public void PerformInsert(string storageRootPath, InformationObjectMetaData insertData)
 		    {
-                if (insertData.SemanticDomain != "TheBall.Payments")
+                if (insertData.SemanticDomain != "<#= CurrInstance.semanticDomainName #>")
                     throw new InvalidDataException("Mismatch on domain data");
                 InformationObjectMetaDataTable.InsertOnSubmit(insertData);
 <#+
 		foreach(InformationObjectType informationObject in tableObjects) 
         {
 				InformationItemsType itemsType = informationObject.Item as InformationItemsType;
+				var currentSupportedItems = GetSupportedInformationItems(itemsType.InformationItem);
 
 #>
                 if (insertData.ObjectType == "<#= informationObject.name #>")
                 {
                     string currentFullStoragePath = Path.Combine(storageRootPath, insertData.CurrentStoragePath);
                     var serializedObject =
-                        global::SER.TheBall.Payments.<#= informationObject.name #>.DeserializeFromXml(
+                        global::SER.<#= CurrInstance.semanticDomainName #>.<#= informationObject.name #>.DeserializeFromXml(
                             ContentStorage.GetContentAsString(currentFullStoragePath));
                     var objectToAdd = new <#= informationObject.name #> {ID = insertData.ObjectID};
 <#+
-			foreach(var informationItem in itemsType.InformationItem) 
+			foreach(var informationItem in currentSupportedItems) 
 			{
 				bool isCollection = informationItem.isCollection;
 				string propertyName = informationItem.name;
@@ -295,7 +296,7 @@ using SQLiteSupport;
 
 		    public void PerformDelete(string storageRootPath, InformationObjectMetaData deleteData)
 		    {
-                if (deleteData.SemanticDomain != "TheBall.Payments")
+                if (deleteData.SemanticDomain != "<#= CurrInstance.semanticDomainName #>")
                     throw new InvalidDataException("Mismatch on domain data");
 				InformationObjectMetaDataTable.DeleteOnSubmit(deleteData);
 <#+
@@ -345,6 +346,12 @@ using SQLiteSupport;
         }
     }
 
+	InformationItemType[] GetSupportedInformationItems(InformationItemType[] sourceItems) 
+	{
+		var currentSupportedItems = sourceItems.Where(item => string.IsNullOrEmpty(item.informationObjectName)).ToArray();
+		return currentSupportedItems;
+    }
+
 	void GenerateDataClass(InformationObjectType informationObject)
 	{
 		string semanticDomainName = CurrInstance.semanticDomainName;
@@ -354,7 +361,7 @@ using SQLiteSupport;
 		bool isCollection = collType != null;
 
 		InformationItemsType itemsType = informationObject.Item as InformationItemsType;
-		bool containsCollection = itemsType != null && itemsType.InformationItem.Any(item => item.isCollection);
+		//bool containsCollection = itemsType != null && itemsType.InformationItem.Any(item => item.isCollection);
 
 		bool provideDefaultCreate = informationObject.provideCreateMethod;
 		bool isIndependentMaster = informationObject.isIndependentMaster;
@@ -364,15 +371,16 @@ using SQLiteSupport;
 	public class <#= objectName #> : ITheBallDataContextStorable
 	{
 <#+
-		GenerateSQLiteCreationFunction(objectName, itemsType.InformationItem);
+		var currentSupportedItems = GetSupportedInformationItems(itemsType.InformationItem);
+		GenerateSQLiteCreationFunction(objectName, currentSupportedItems);
 #>
 
 		[Column(IsPrimaryKey = true)]
 		public string ID { get; set; }
 
 <#+
-		GenerateInformationItems(itemsType.InformationItem);
-		GenerateInterfaceImplementation(itemsType.InformationItem);
+		GenerateInformationItems(currentSupportedItems);
+		GenerateInterfaceImplementation(currentSupportedItems);
 #>
 	}
 <#+
@@ -380,8 +388,9 @@ using SQLiteSupport;
 
 	void GenerateInterfaceImplementation(InformationItemType[] informationItems) 
 	{
-		var customsStorableObjects = informationItems.Where(iItem => iItem.isCollection).ToArray();
-		var stringItems = informationItems.Where(iItem => iItem.isCollection == false && GetPlatformDataTypeFromLogical(iItem.logicalDataType, iItem.informationObjectName) == "string").ToArray();
+		var currentSupportedItems = GetSupportedInformationItems(informationItems);
+		var customsStorableObjects = currentSupportedItems.Where(iItem => iItem.isCollection).ToArray();
+		var stringItems = currentSupportedItems.Where(iItem => iItem.isCollection == false && GetPlatformDataTypeFromLogical(iItem.logicalDataType, iItem.informationObjectName) == "string").ToArray();
 
 #>
         public void PrepareForStoring(bool isInitialInsert)
