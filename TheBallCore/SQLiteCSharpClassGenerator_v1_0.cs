@@ -338,7 +338,7 @@ this.Write(this.ToStringHelper.ToStringWithCulture(informationObject.name));
         #line 224 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write("\")\r\n\t\t        {\r\n\t\t            string currentFullStoragePath = Path.Combine(stora" +
         "geRootPath, updateData.CurrentStoragePath);\r\n\t\t            var serializedObject " +
-        "=\r\n\t\t                global::TheBall.Payments.");
+        "=\r\n\t\t                global::SER.TheBall.Payments.");
 
         
         #line default
@@ -556,7 +556,7 @@ this.Write(this.ToStringHelper.ToStringWithCulture(informationObject.name));
         #line 267 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write("\")\r\n                {\r\n                    string currentFullStoragePath = Path.C" +
         "ombine(storageRootPath, insertData.CurrentStoragePath);\r\n                    var" +
-        " serializedObject =\r\n                        global::TheBall.Payments.");
+        " serializedObject =\r\n                        global::SER.TheBall.Payments.");
 
         
         #line default

@@ -225,7 +225,7 @@ using SQLiteSupport;
 		        {
 		            string currentFullStoragePath = Path.Combine(storageRootPath, updateData.CurrentStoragePath);
 		            var serializedObject =
-		                global::TheBall.Payments.<#= informationObject.name #>.DeserializeFromXml(
+		                global::SER.TheBall.Payments.<#= informationObject.name #>.DeserializeFromXml(
 		                    ContentStorage.GetContentAsString(currentFullStoragePath));
 		            var existingObject = <#= informationObject.name #>Table.Single(item => item.ID == updateData.ObjectID);
 <#+
@@ -268,7 +268,7 @@ using SQLiteSupport;
                 {
                     string currentFullStoragePath = Path.Combine(storageRootPath, insertData.CurrentStoragePath);
                     var serializedObject =
-                        global::TheBall.Payments.<#= informationObject.name #>.DeserializeFromXml(
+                        global::SER.TheBall.Payments.<#= informationObject.name #>.DeserializeFromXml(
                             ContentStorage.GetContentAsString(currentFullStoragePath));
                     var objectToAdd = new <#= informationObject.name #> {ID = insertData.ObjectID};
 <#+

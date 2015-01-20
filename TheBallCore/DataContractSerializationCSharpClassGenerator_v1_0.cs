@@ -119,7 +119,7 @@ namespace TheBallCoreABS.TheBallCore
         
         #line 74 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
 
-		BeginNamespace(instance.semanticDomainName);
+		BeginNamespace("SER." + instance.semanticDomainName);
 
         
         #line default
@@ -189,7 +189,21 @@ this.Write("using System;\r\nusing System.Collections.Generic;\r\nusing System.C
         #line hidden
         
         #line 130 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
-this.Write("\t\t\t[DataContract]\r\n\t\t\tpublic partial class ");
+this.Write("            [DataContract(Namespace = \"http://schemas.datacontract.org/2004/07/");
+
+        
+        #line default
+        #line hidden
+        
+        #line 131 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
+this.Write(this.ToStringHelper.ToStringWithCulture(instance.semanticDomainName));
+
+        
+        #line default
+        #line hidden
+        
+        #line 131 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
+this.Write(".INT\")]\r\n\t\t\tpublic partial class ");
 
         
         #line default
@@ -311,7 +325,21 @@ this.Write("\t\t\t}\r\n\r\n");
         #line hidden
         
         #line 181 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
-this.Write("\t\t\t[DataContract]\r\n\t\t\t[Serializable]\r\n\t\t\tpublic partial class ");
+this.Write("            [DataContract(Namespace = \"http://schemas.datacontract.org/2004/07/");
+
+        
+        #line default
+        #line hidden
+        
+        #line 182 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
+this.Write(this.ToStringHelper.ToStringWithCulture(semanticDomainName));
+
+        
+        #line default
+        #line hidden
+        
+        #line 182 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
+this.Write("\")]\r\n\t\t\t[Serializable]\r\n\t\t\tpublic partial class ");
 
         
         #line default

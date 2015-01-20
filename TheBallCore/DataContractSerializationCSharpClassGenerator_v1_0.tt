@@ -72,7 +72,7 @@
 
 
 <#+
-		BeginNamespace(instance.semanticDomainName);
+		BeginNamespace("SER." + instance.semanticDomainName);
 #>
 using System;
 using System.Collections.Generic;
@@ -128,7 +128,7 @@ using System.Runtime.Serialization;
 		foreach(InterfaceObjectType interfaceObject in instance.DigitalInterface.InterfaceModel ?? new InterfaceObjectType[0])
         {
 #>
-			[DataContract]
+            [DataContract(Namespace = "http://schemas.datacontract.org/2004/07/<#= instance.semanticDomainName #>.INT")]
 			public partial class <#= interfaceObject.name #>
 			{
 <#+
@@ -179,7 +179,7 @@ using System.Runtime.Serialization;
 		bool provideDefaultCreate = informationObject.provideCreateMethod;
 		bool isIndependentMaster = informationObject.isIndependentMaster;
 #>
-			[DataContract]
+            [DataContract(Namespace = "http://schemas.datacontract.org/2004/07/<#= semanticDomainName #>")]
 			[Serializable]
 			public partial class <#= informationObjectName #> 
 			{
