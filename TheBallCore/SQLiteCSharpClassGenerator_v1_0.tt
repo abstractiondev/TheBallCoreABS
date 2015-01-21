@@ -307,7 +307,9 @@ using SQLiteSupport;
 #>
 		        if (deleteData.ObjectType == "<#= informationObject.name #>")
 		        {
-                    <#= informationObject.name #>Table.DeleteOnSubmit(new <#= informationObject.name #> { ID = deleteData.ObjectID });
+		            var objectToDelete = new <#= informationObject.name #> {ID = deleteData.ID};
+                    <#= informationObject.name #>Table.Attach(objectToDelete);
+                    <#= informationObject.name #>Table.DeleteOnSubmit(objectToDelete);
 		            return;
 		        }
 <#+		} #>
