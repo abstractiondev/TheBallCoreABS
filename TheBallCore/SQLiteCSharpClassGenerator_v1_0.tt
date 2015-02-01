@@ -236,6 +236,7 @@ using System.ComponentModel.DataAnnotations;
 		                global::SER.<#= CurrInstance.semanticDomainName #>.<#= informationObject.name #>.DeserializeFromXml(
 		                    ContentStorage.GetContentAsString(currentFullStoragePath));
 		            var existingObject = <#= informationObject.name #>Table.Single(item => item.ID == updateData.ObjectID);
+					existingObject.ETag = updateData.ETag;
 <#+
 			foreach(var informationItem in currentSupportedItems) 
 			{
@@ -391,9 +392,16 @@ using System.ComponentModel.DataAnnotations;
         [Editable(false)]
 		public string ID { get; set; }
 
+		[Column]
+        [ScaffoldColumn(true)]
+        [Editable(false)]
+		public string ETag { get; set; }
+
+
 		public <#= objectName #>() 
 		{
 			ID = Guid.NewGuid().ToString();
+			ETag = String.Empty;
 		}
 
 <#+
@@ -449,6 +457,7 @@ using System.ComponentModel.DataAnnotations;
                 @"
 CREATE TABLE IF NOT EXISTS [<#= informationObjectName #>](
 [ID] TEXT NOT NULL PRIMARY KEY, 
+[ETag] TEXT NOT NULL,
 <#+
 			var itemArray = informationItems.Select(item => {
 				string itemDataType = GetSQLiteTypeFromLogicalType(item.logicalDataType);
