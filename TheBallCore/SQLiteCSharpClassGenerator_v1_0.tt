@@ -87,6 +87,7 @@ using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using Newtonsoft.Json;
 using SQLiteSupport;
+using System.ComponentModel.DataAnnotations;
 
 
 <#+
@@ -154,6 +155,13 @@ using SQLiteSupport;
                 GC.Collect();
                 GC.WaitForPendingFinalizers();
 		        disposed = true;
+		    }
+
+		    public static SQLiteConnection CurrentConnection { get; set; }
+
+		    public TheBallDataContext() : base(CurrentConnection)
+		    {
+		        
 		    }
 
 		    public static TheBallDataContext CreateOrAttachToExistingDB(string pathToDBFile)
@@ -379,7 +387,14 @@ using SQLiteSupport;
 #>
 
 		[Column(IsPrimaryKey = true)]
+        [ScaffoldColumn(true)]
+        [Editable(false)]
 		public string ID { get; set; }
+
+		public <#= objectName #>() 
+		{
+			ID = Guid.NewGuid().ToString();
+		}
 
 <#+
 		GenerateInformationItems(currentSupportedItems);
@@ -470,7 +485,9 @@ CREATE TABLE IF NOT EXISTS [<#= informationObjectName #>](
 			if(isCollection)
             {
 #>
-        [Column(Name = "<#= item.name #>")] public string <#= item.name #>Data;
+        [Column(Name = "<#= item.name #>")] 
+        [ScaffoldColumn(true)]
+		public string <#= item.name #>Data { get; set; }
 
         private bool _Is<#= item.name #>Retrieved = false;
         private bool _Is<#= item.name #>Changed = false;
@@ -518,6 +535,7 @@ CREATE TABLE IF NOT EXISTS [<#= informationObjectName #>](
 #>
 
 		[Column]
+        [ScaffoldColumn(true)]
 		public <#= dataType #> <#= item.name #> { get; set; }
 		// private <#= dataType #> _unmodified_<#= item.name #>;
 <#+
