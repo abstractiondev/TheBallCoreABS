@@ -641,7 +641,7 @@ this.Write(this.ToStringHelper.ToStringWithCulture(informationObject.name));
         #line hidden
         
         #line 283 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
-this.Write(" {ID = insertData.ObjectID};\r\n");
+this.Write(" {ID = insertData.ObjectID, ETag = insertData.ETag};\r\n");
 
         
         #line default

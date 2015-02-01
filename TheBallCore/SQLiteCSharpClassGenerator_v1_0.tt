@@ -280,7 +280,7 @@ using System.ComponentModel.DataAnnotations;
                     var serializedObject =
                         global::SER.<#= CurrInstance.semanticDomainName #>.<#= informationObject.name #>.DeserializeFromXml(
                             ContentStorage.GetContentAsString(currentFullStoragePath));
-                    var objectToAdd = new <#= informationObject.name #> {ID = insertData.ObjectID};
+                    var objectToAdd = new <#= informationObject.name #> {ID = insertData.ObjectID, ETag = insertData.ETag};
 <#+
 			foreach(var informationItem in currentSupportedItems) 
 			{
