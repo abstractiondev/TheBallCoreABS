@@ -75,6 +75,7 @@
 using System;
 using System.Collections.ObjectModel;
 using System.Data;
+using System.Data.Common;
 using System.Data.SQLite;
 using System.Data.Linq;
 using System.Data.Linq.Mapping;
@@ -157,9 +158,9 @@ using System.ComponentModel.DataAnnotations;
 		        disposed = true;
 		    }
 
-		    public static SQLiteConnection CurrentConnection { get; set; }
+            public static Func<DbConnection> GetCurrentConnectionFunc { get; set; }
 
-		    public TheBallDataContext() : base(CurrentConnection)
+		    public TheBallDataContext() : base(GetCurrentConnectionFunc())
 		    {
 		        
 		    }
@@ -380,6 +381,7 @@ using System.ComponentModel.DataAnnotations;
 
 #>
     [Table(Name = "<#= objectName #>")]
+	[ScaffoldTable(true)]
 	public class <#= objectName #> : ITheBallDataContextStorable
 	{
 <#+
