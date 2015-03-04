@@ -72,6 +72,27 @@
     }
 
 
+	enum ObjectType {
+		Items,
+		Collection,
+		MediaContent
+    }
+
+	ObjectType GetInformationObjectType(string informationObjectName) 
+	{
+		var iObj = CurrInstance.InformationModel.Single(item => item.name == informationObjectName);
+		Type objType = iObj.Item.GetType();
+		if(objType == typeof(InformationItemsType))
+			return ObjectType.Items;
+		if(objType == typeof(CollectionForType))
+			return ObjectType.Collection;
+		if(objType == typeof(InformationObjectContentType))
+			return ObjectType.MediaContent;
+		throw new NotSupportedException("Not supported object type: " + objType.Name);
+    }
+
+
+
 	void GenerateInstance(InstanceOfTheBallType instance)
 	{
 		string domainName = instance.semanticDomainName;
@@ -251,7 +272,7 @@ using Editable=System.ComponentModel.DataAnnotations.EditableAttribute;
 			{
 				bool isImplicitCollection = informationItem.isCollection;
 				bool isObjectItem = informationItem.logicalDataType == InformationItemTypeLogicalDataType.InformationObject;
-				bool isObjectCollection = informationItem.informationObjectName.EndsWith("Collection");
+				bool isObjectCollection = isObjectItem && GetInformationObjectType(informationItem.informationObjectName) == ObjectType.Collection;
 				string sourcePropertyName = informationItem.name;
 				string targetPropertyName = informationItem.name;
 				if(isObjectItem) {
@@ -315,7 +336,7 @@ using Editable=System.ComponentModel.DataAnnotations.EditableAttribute;
 			{
 				bool isImplicitCollection = informationItem.isCollection;
 				bool isObjectItem = informationItem.logicalDataType == InformationItemTypeLogicalDataType.InformationObject;
-				bool isObjectCollection = informationItem.informationObjectName.EndsWith("Collection");
+				bool isObjectCollection = isObjectItem && GetInformationObjectType(informationItem.informationObjectName) == ObjectType.Collection;
 				string sourcePropertyName = informationItem.name;
 				string targetPropertyName = informationItem.name;
 				if(isObjectItem) {
@@ -410,7 +431,7 @@ using Editable=System.ComponentModel.DataAnnotations.EditableAttribute;
 	InformationItemType[] GetSupportedInformationItems(InformationItemType[] sourceItems) 
 	{
 		//var currentSupportedItems = sourceItems.Where(item => string.IsNullOrEmpty(item.informationObjectName)).ToArray();
-		var currentSupportedItems = sourceItems.Where(item => item.informationObjectName != "MediaContent" && item.name != "ParentCategoryID").ToArray();
+		var currentSupportedItems = sourceItems.Where(item => item.name != "ParentCategoryID").ToArray();
 		return currentSupportedItems;
     }
 
@@ -508,23 +529,50 @@ using Editable=System.ComponentModel.DataAnnotations.EditableAttribute;
                 @"
 CREATE TABLE IF NOT EXISTS [<#= informationObjectName #>](
 [ID] TEXT NOT NULL PRIMARY KEY, 
-[ETag] TEXT NOT NULL,
+[ETag] TEXT NOT NULL
 <#+
 			var itemArray = informationItems.Select(item => {
-				bool isObjectType = item.logicalDataType == InformationItemTypeLogicalDataType.InformationObject;
-				string itemDataType = GetSQLiteTypeFromLogicalType(item.logicalDataType);
-				string fieldName = isObjectType ? item.name + "ID" : item.name;
-				if(item.isCollection || isObjectType)
-					itemDataType = "TEXT";
-				string notNullClause = isObjectType ? "NULL" : "NOT NULL";
-				return string.Format("[{0}] {1} {2}", fieldName, itemDataType, notNullClause);
-            }).ToArray();
+				Tuple<string, string, string> fieldData = GetSQLFieldNameDataTypeNullDeclaration(item);
+				if(fieldData == null)
+					return null;
+				var fieldName = fieldData.Item1;
+				var dataType = fieldData.Item2;
+				var notNullClause = fieldData.Item3;
+				return string.Format("[{0}] {1} {2}", fieldName, dataType, notNullClause);
+            }).Where(clause => clause != null).ToArray();
 			string wholePart = string.Join(", " + Environment.NewLine, itemArray);
+			if(wholePart != string.Empty)
+				wholePart = ", " + Environment.NewLine + wholePart;
 #><#= wholePart #>
 )";
         }
 
 <#+
+    }
+
+	Tuple<string, string, string> GetSQLFieldNameDataTypeNullDeclaration(InformationItemType item) {
+		bool isObjectType = item.logicalDataType == InformationItemTypeLogicalDataType.InformationObject;
+		string fieldName;
+		string dataType;
+		string notNullClause;
+		if(!isObjectType) 
+		{
+			fieldName = item.name;
+			dataType = GetSQLiteTypeFromLogicalType(item.logicalDataType);
+			if(item.isCollection || isObjectType)
+				dataType = "TEXT";
+			notNullClause = "NOT NULL";
+			return new Tuple<string, string, string>(fieldName, dataType, notNullClause);
+        } else {
+			ObjectType objType = GetInformationObjectType(item.informationObjectName);
+			dataType = "TEXT";
+			if(objType == ObjectType.Items || objType == ObjectType.MediaContent)
+				fieldName = item.name + "ID";
+			else 
+				return null;
+			notNullClause = "NULL";
+        }
+		return new Tuple<string, string, string>(fieldName, dataType, notNullClause);
     }
 
 	void GenerateInformationItemsMethods(string informationObjectName, InformationItemType[] informationItems)
@@ -552,21 +600,33 @@ CREATE TABLE IF NOT EXISTS [<#= informationObjectName #>](
 
 	void GenerateEntityItem(InformationObjectType iObj, InformationItemType item)
     {
-		string objectType = item.informationObjectName;
-		if(ItemTypesToIgnore.Contains(objectType))
+		string objectName = item.informationObjectName;
+		//if(ItemTypesToIgnore.Contains(objectName))
+		//	return;
+		if(item.isCollection)  // Generated as data item with serializable type
 			return;
-		bool isCollection = item.isCollection || objectType.EndsWith("Collection");
-		if(isCollection) {
+		ObjectType objectType = GetInformationObjectType(objectName);
+		if(objectType == ObjectType.Collection) {
+			var collectionObject = GetInformationObjectByName(objectName);
+			var collectionFor = (CollectionForType) collectionObject.Item;
+			var linkedObjectName = collectionFor.contentInformationObjectName;
 
-        } else {
+        } else if(objectType == ObjectType.MediaContent) {
 			string objectPropName = item.name;
 			string idPropName = objectPropName + "ID";
 #>
 			[Column]
 			public string <#= idPropName #> { get; set; }
-			private EntityRef< <#= objectType #> > _<#= objectPropName #>;
+<#+
+        } else { // items
+			string objectPropName = item.name;
+			string idPropName = objectPropName + "ID";
+#>
+			[Column]
+			public string <#= idPropName #> { get; set; }
+			private EntityRef< <#= objectName #> > _<#= objectPropName #>;
 			[Association(Storage = "_<#= objectPropName  #>", ThisKey = "<#= idPropName #>")]
-			public <#= objectType #> <#= objectPropName #>
+			public <#= objectName #> <#= objectPropName #>
 			{
 				get { return this._<#= objectPropName #>.Entity; }
 				set { this._<#= objectPropName #>.Entity = value; }
@@ -582,11 +642,11 @@ CREATE TABLE IF NOT EXISTS [<#= informationObjectName #>](
 			return;
 		string dataType = GetPlatformDataTypeFromLogical(item.logicalDataType, item.informationObjectName);
 		bool isObjectItem = item.logicalDataType == InformationItemTypeLogicalDataType.InformationObject;
-		string dataTypePrefix = isObjectItem ? "SER." + CurrentAbstraction.InstanceOfTheBall.semanticDomainName + "." : "";
-		dataType = dataTypePrefix + dataType;
 		bool isCollection = item.isCollection;
 		if(isCollection)
         {
+			string dataTypePrefix = isObjectItem ? "SER." + CurrentAbstraction.InstanceOfTheBall.semanticDomainName + "." : "";
+			dataType = dataTypePrefix + dataType;
 #>
         [Column(Name = "<#= item.name #>")] 
         [ScaffoldColumn(true)]
