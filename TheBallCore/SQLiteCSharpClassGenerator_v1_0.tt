@@ -29,7 +29,10 @@
 		{
 			TheBallCoreAbstractionType abs = LoadXml<TheBallCoreAbstractionType>(xmlFileName);
 			CurrentAbstraction = abs;
+			InstanceRelationsTableList.Clear();
 			this.GenerationEnvironment.Clear();
+			ItemTypesToIgnore.Clear();
+			ItemTypesToIgnore.Add("MediaContent");
 			string content = TransformText();
 			string outputFile = Path.GetFileNameWithoutExtension(xmlFileName) + "_SQLite.designer.cs";
 			result.Add(Tuple.Create(outputFile, content));
@@ -44,6 +47,9 @@
 	
 	TheBallCoreAbstractionType CurrentAbstraction;
 	InstanceOfTheBallType CurrInstance;
+
+	List<string> ItemTypesToIgnore = new List<string>();
+	List< Tuple<string, string, string> > InstanceRelationsTableList = new List< Tuple<string, string, string> >();
 	
 	void GenerateRoot()
 	{
@@ -88,7 +94,9 @@ using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using Newtonsoft.Json;
 using SQLiteSupport;
-using System.ComponentModel.DataAnnotations;
+using ScaffoldColumn=System.ComponentModel.DataAnnotations.ScaffoldColumnAttribute;
+using ScaffoldTable=System.ComponentModel.DataAnnotations.ScaffoldTableAttribute;
+using Editable=System.ComponentModel.DataAnnotations.EditableAttribute;
 
 
 <#+
@@ -241,17 +249,37 @@ using System.ComponentModel.DataAnnotations;
 <#+
 			foreach(var informationItem in currentSupportedItems) 
 			{
-				bool isCollection = informationItem.isCollection;
-				string propertyName = informationItem.name;
-				if(!isCollection) {
+				bool isImplicitCollection = informationItem.isCollection;
+				bool isObjectItem = informationItem.logicalDataType == InformationItemTypeLogicalDataType.InformationObject;
+				bool isObjectCollection = informationItem.informationObjectName.EndsWith("Collection");
+				string sourcePropertyName = informationItem.name;
+				string targetPropertyName = informationItem.name;
+				if(isObjectItem) {
+					if(isObjectCollection)
+						continue;
+					//sourcePropertyName = informationItem.name + ".ID";
+					//targetPropertyName = informationItem.name + "ID";
+                } else {
+					//sourcePropertyName = informationItem.name;
+					//targetPropertyName = informationItem.name;
+                }
+				if(isObjectItem && !isImplicitCollection) {
 #>
-		            existingObject.<#= propertyName #> = serializedObject.<#= propertyName #>;
+					if(serializedObject.<#= sourcePropertyName #> != null)
+						existingObject.<#= targetPropertyName #>ID = serializedObject.<#= sourcePropertyName #>.ID;
+					else
+						existingObject.<#= targetPropertyName #>ID = null;
+<#+
+
+                } else if(!isImplicitCollection) {
+#>
+		            existingObject.<#= targetPropertyName #> = serializedObject.<#= sourcePropertyName #>;
 <#+
                 } else {
 #>
-                    existingObject.<#= propertyName #>.Clear();
-					if(serializedObject.<#= propertyName #> != null)
-	                    serializedObject.<#= propertyName #>.ForEach(item => existingObject.<#= propertyName #>.Add(item));
+                    existingObject.<#= targetPropertyName #>.Clear();
+					if(serializedObject.<#= sourcePropertyName #> != null)
+	                    serializedObject.<#= sourcePropertyName #>.ForEach(item => existingObject.<#= targetPropertyName #>.Add(item));
 					
 <#+
                 }
@@ -285,16 +313,36 @@ using System.ComponentModel.DataAnnotations;
 <#+
 			foreach(var informationItem in currentSupportedItems) 
 			{
-				bool isCollection = informationItem.isCollection;
-				string propertyName = informationItem.name;
-				if(!isCollection) {
+				bool isImplicitCollection = informationItem.isCollection;
+				bool isObjectItem = informationItem.logicalDataType == InformationItemTypeLogicalDataType.InformationObject;
+				bool isObjectCollection = informationItem.informationObjectName.EndsWith("Collection");
+				string sourcePropertyName = informationItem.name;
+				string targetPropertyName = informationItem.name;
+				if(isObjectItem) {
+					if(isObjectCollection)
+						continue;
+					//sourcePropertyName = informationItem.name + ".ID";
+					//targetPropertyName = informationItem.name + "ID";
+                } else {
+					//sourcePropertyName = informationItem.name;
+					//targetPropertyName = informationItem.name;
+                }
+				if(isObjectItem && !isImplicitCollection) {
 #>
-		            objectToAdd.<#= propertyName #> = serializedObject.<#= propertyName #>;
+					if(serializedObject.<#= sourcePropertyName #> != null)
+						objectToAdd.<#= targetPropertyName #>ID = serializedObject.<#= sourcePropertyName #>.ID;
+					else
+						objectToAdd.<#= targetPropertyName #>ID = null;
+<#+
+
+                } else if(!isImplicitCollection) {
+#>
+		            objectToAdd.<#= targetPropertyName #> = serializedObject.<#= sourcePropertyName #>;
 <#+
                 } else {
 #>
-					if(serializedObject.<#= propertyName #> != null)
-						serializedObject.<#= propertyName #>.ForEach(item => objectToAdd.<#= propertyName #>.Add(item));
+					if(serializedObject.<#= sourcePropertyName #> != null)
+						serializedObject.<#= sourcePropertyName #>.ForEach(item => objectToAdd.<#= targetPropertyName #>.Add(item));
 <#+
                 }
 			} #>
@@ -361,7 +409,8 @@ using System.ComponentModel.DataAnnotations;
 
 	InformationItemType[] GetSupportedInformationItems(InformationItemType[] sourceItems) 
 	{
-		var currentSupportedItems = sourceItems.Where(item => string.IsNullOrEmpty(item.informationObjectName)).ToArray();
+		//var currentSupportedItems = sourceItems.Where(item => string.IsNullOrEmpty(item.informationObjectName)).ToArray();
+		var currentSupportedItems = sourceItems.Where(item => item.informationObjectName != "MediaContent" && item.name != "ParentCategoryID").ToArray();
 		return currentSupportedItems;
     }
 
@@ -407,7 +456,7 @@ using System.ComponentModel.DataAnnotations;
 		}
 
 <#+
-		GenerateInformationItems(currentSupportedItems);
+		GenerateInformationItems(informationObject, currentSupportedItems);
 		GenerateInterfaceImplementation(currentSupportedItems);
 #>
 	}
@@ -462,10 +511,13 @@ CREATE TABLE IF NOT EXISTS [<#= informationObjectName #>](
 [ETag] TEXT NOT NULL,
 <#+
 			var itemArray = informationItems.Select(item => {
+				bool isObjectType = item.logicalDataType == InformationItemTypeLogicalDataType.InformationObject;
 				string itemDataType = GetSQLiteTypeFromLogicalType(item.logicalDataType);
-				if(item.isCollection)
+				string fieldName = isObjectType ? item.name + "ID" : item.name;
+				if(item.isCollection || isObjectType)
 					itemDataType = "TEXT";
-				return string.Format("[{0}] {1} NOT NULL", item.name, itemDataType);
+				string notNullClause = isObjectType ? "NULL" : "NOT NULL";
+				return string.Format("[{0}] {1} {2}", fieldName, itemDataType, notNullClause);
             }).ToArray();
 			string wholePart = string.Join(", " + Environment.NewLine, itemArray);
 #><#= wholePart #>
@@ -487,14 +539,54 @@ CREATE TABLE IF NOT EXISTS [<#= informationObjectName #>](
         }
     }
 	
-	void GenerateInformationItems(InformationItemType[] informationItems)
+	void GenerateInformationItems(InformationObjectType iObj, InformationItemType[] informationItems)
 	{
 		foreach(var item in informationItems)
 		{
-			string dataType = GetPlatformDataTypeFromLogical(item.logicalDataType, item.informationObjectName);
-			bool isCollection = item.isCollection;
-			if(isCollection)
-            {
+			if(item.logicalDataType != InformationItemTypeLogicalDataType.InformationObject || item.isCollection) 
+				GenerateDataItem(iObj, item);
+			else
+				GenerateEntityItem(iObj, item);
+        }
+    }
+
+	void GenerateEntityItem(InformationObjectType iObj, InformationItemType item)
+    {
+		string objectType = item.informationObjectName;
+		if(ItemTypesToIgnore.Contains(objectType))
+			return;
+		bool isCollection = item.isCollection || objectType.EndsWith("Collection");
+		if(isCollection) {
+
+        } else {
+			string objectPropName = item.name;
+			string idPropName = objectPropName + "ID";
+#>
+			[Column]
+			public string <#= idPropName #> { get; set; }
+			private EntityRef< <#= objectType #> > _<#= objectPropName #>;
+			[Association(Storage = "_<#= objectPropName  #>", ThisKey = "<#= idPropName #>")]
+			public <#= objectType #> <#= objectPropName #>
+			{
+				get { return this._<#= objectPropName #>.Entity; }
+				set { this._<#= objectPropName #>.Entity = value; }
+			}
+
+<#+
+        }
+    }
+
+	void GenerateDataItem(InformationObjectType iObj, InformationItemType item) 
+	{
+		if(iObj.name == "Category" && item.name == "ParentCategoryID")
+			return;
+		string dataType = GetPlatformDataTypeFromLogical(item.logicalDataType, item.informationObjectName);
+		bool isObjectItem = item.logicalDataType == InformationItemTypeLogicalDataType.InformationObject;
+		string dataTypePrefix = isObjectItem ? "SER." + CurrentAbstraction.InstanceOfTheBall.semanticDomainName + "." : "";
+		dataType = dataTypePrefix + dataType;
+		bool isCollection = item.isCollection;
+		if(isCollection)
+        {
 #>
         [Column(Name = "<#= item.name #>")] 
         [ScaffoldColumn(true)]
@@ -542,7 +634,7 @@ CREATE TABLE IF NOT EXISTS [<#= informationObjectName #>](
         }
 
 <#+
-            } else {
+        } else {
 #>
 
 		[Column]
@@ -550,8 +642,7 @@ CREATE TABLE IF NOT EXISTS [<#= informationObjectName #>](
 		public <#= dataType #> <#= item.name #> { get; set; }
 		// private <#= dataType #> _unmodified_<#= item.name #>;
 <#+
-            }
-		}
+        }
 	}
 
 	string GetPlatformDataTypeFromLogical(InformationItemTypeLogicalDataType logicalDataType, string informationObjectName)
