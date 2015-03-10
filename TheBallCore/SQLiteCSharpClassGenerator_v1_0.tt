@@ -260,7 +260,8 @@ using Editable=System.ComponentModel.DataAnnotations.EditableAttribute;
 <#+
 		foreach(InformationObjectType informationObject in tableObjects) 
         {
-				InformationItemsType itemsType = informationObject.Item as InformationItemsType;
+			InformationItemsType itemsType = informationObject.Item as InformationItemsType;
+			if(itemsType != null) {
 				var currentSupportedItems = GetSupportedInformationItems(itemsType.InformationItem);
 #>
 		        if (updateData.ObjectType == "<#= informationObject.name #>")
@@ -272,46 +273,40 @@ using Editable=System.ComponentModel.DataAnnotations.EditableAttribute;
 		            var existingObject = <#= informationObject.name #>Table.Single(item => item.ID == updateData.ObjectID);
 					existingObject.ETag = updateData.ETag;
 <#+
-			foreach(var informationItem in currentSupportedItems) 
-			{
-				bool isImplicitCollection = informationItem.isCollection;
-				bool isObjectItem = informationItem.logicalDataType == InformationItemTypeLogicalDataType.InformationObject;
-				bool isObjectCollection = isObjectItem && GetInformationObjectType(informationItem.informationObjectName) == ObjectType.Collection;
-				string sourcePropertyName = informationItem.name;
-				string targetPropertyName = informationItem.name;
-				if(isObjectItem) {
-					if(isObjectCollection)
-						continue;
-					//sourcePropertyName = informationItem.name + ".ID";
-					//targetPropertyName = informationItem.name + "ID";
-                } else {
-					//sourcePropertyName = informationItem.name;
-					//targetPropertyName = informationItem.name;
-                }
-				if(isObjectItem && !isImplicitCollection) {
+				foreach(var informationItem in currentSupportedItems) 
+				{
+					bool isImplicitCollection = informationItem.isCollection;
+					bool isObjectItem = informationItem.logicalDataType == InformationItemTypeLogicalDataType.InformationObject;
+					string objectName = informationItem.informationObjectName;
+					bool isObjectCollection = isObjectItem && GetInformationObjectType(informationItem.informationObjectName) == ObjectType.Collection;
+					string sourcePropertyName = informationItem.name;
+					string targetPropertyName = informationItem.name;
+
+					if(isObjectItem && !isImplicitCollection) {
 #>
 					if(serializedObject.<#= sourcePropertyName #> != null)
 						existingObject.<#= targetPropertyName #>ID = serializedObject.<#= sourcePropertyName #>.ID;
 					else
 						existingObject.<#= targetPropertyName #>ID = null;
 <#+
-
-                } else if(!isImplicitCollection) {
+					} else if(!isImplicitCollection) {
 #>
 		            existingObject.<#= targetPropertyName #> = serializedObject.<#= sourcePropertyName #>;
 <#+
-                } else {
+					} else {
 #>
                     existingObject.<#= targetPropertyName #>.Clear();
 					if(serializedObject.<#= sourcePropertyName #> != null)
 	                    serializedObject.<#= sourcePropertyName #>.ForEach(item => existingObject.<#= targetPropertyName #>.Add(item));
 					
 <#+
+					}
                 }
-			} #>
+			#>
 		            return;
 		        } 
 <#+
+            }
         }
 #>
 		    }
@@ -324,9 +319,9 @@ using Editable=System.ComponentModel.DataAnnotations.EditableAttribute;
 <#+
 		foreach(InformationObjectType informationObject in tableObjects) 
         {
-				InformationItemsType itemsType = informationObject.Item as InformationItemsType;
+			InformationItemsType itemsType = informationObject.Item as InformationItemsType;
+			if(itemsType != null) {
 				var currentSupportedItems = GetSupportedInformationItems(itemsType.InformationItem);
-
 #>
                 if (insertData.ObjectType == "<#= informationObject.name #>")
                 {
@@ -336,45 +331,41 @@ using Editable=System.ComponentModel.DataAnnotations.EditableAttribute;
                             ContentStorage.GetContentAsString(currentFullStoragePath));
                     var objectToAdd = new <#= informationObject.name #> {ID = insertData.ObjectID, ETag = insertData.ETag};
 <#+
-			foreach(var informationItem in currentSupportedItems) 
-			{
-				bool isImplicitCollection = informationItem.isCollection;
-				bool isObjectItem = informationItem.logicalDataType == InformationItemTypeLogicalDataType.InformationObject;
-				bool isObjectCollection = isObjectItem && GetInformationObjectType(informationItem.informationObjectName) == ObjectType.Collection;
-				string sourcePropertyName = informationItem.name;
-				string targetPropertyName = informationItem.name;
-				if(isObjectItem) {
-					if(isObjectCollection)
-						continue;
-					//sourcePropertyName = informationItem.name + ".ID";
-					//targetPropertyName = informationItem.name + "ID";
-                } else {
-					//sourcePropertyName = informationItem.name;
-					//targetPropertyName = informationItem.name;
-                }
-				if(isObjectItem && !isImplicitCollection) {
+				foreach(var informationItem in currentSupportedItems) 
+				{
+					bool isImplicitCollection = informationItem.isCollection;
+					bool isObjectItem = informationItem.logicalDataType == InformationItemTypeLogicalDataType.InformationObject;
+					bool isObjectCollection = isObjectItem && GetInformationObjectType(informationItem.informationObjectName) == ObjectType.Collection;
+					string objectName = informationItem.informationObjectName;
+
+					string sourcePropertyName = informationItem.name;
+					string targetPropertyName = informationItem.name;
+
+					if(isObjectItem && !isImplicitCollection) {
 #>
 					if(serializedObject.<#= sourcePropertyName #> != null)
 						objectToAdd.<#= targetPropertyName #>ID = serializedObject.<#= sourcePropertyName #>.ID;
 					else
 						objectToAdd.<#= targetPropertyName #>ID = null;
 <#+
-
-                } else if(!isImplicitCollection) {
+	                } else if(!isImplicitCollection) {
 #>
 		            objectToAdd.<#= targetPropertyName #> = serializedObject.<#= sourcePropertyName #>;
 <#+
-                } else {
+		            } else {
 #>
 					if(serializedObject.<#= sourcePropertyName #> != null)
 						serializedObject.<#= sourcePropertyName #>.ForEach(item => objectToAdd.<#= targetPropertyName #>.Add(item));
 <#+
+			        }
                 }
-			} #>
+			 #>
 					<#= informationObject.name #>Table.InsertOnSubmit(objectToAdd);
                     return;
                 }
-<#+	} #>
+<#+			}
+        }
+ #>
             }
 
 		    public void PerformDelete(string storageRootPath, InformationObjectMetaData deleteData)
@@ -420,8 +411,10 @@ using Editable=System.ComponentModel.DataAnnotations.EditableAttribute;
 
 	InformationObjectType[] GetTableObjects(InformationObjectType[] informationObjects) 
 	{
-		return informationObjects.Where(iObj => iObj.Item is InformationItemsType)
+		var informationItemObjects = informationObjects.Where(iObj => iObj.Item is InformationItemsType)
 			.Where(iObj => GetSupportedInformationItems(((InformationItemsType) iObj.Item).InformationItem).Length > 0).ToArray();
+		var collectionObjects = informationObjects.Where(iObj => GetInformationObjectType(iObj.name) == ObjectType.Collection);
+		return informationItemObjects.Concat(collectionObjects).ToArray();
     }
 
 	void GenerateDataClasses(InstanceOfTheBallType instance) 
@@ -447,7 +440,6 @@ using Editable=System.ComponentModel.DataAnnotations.EditableAttribute;
 		CollectionForType collType = informationObject.Item as CollectionForType;
 		bool isCollection = collType != null;
 
-		InformationItemsType itemsType = informationObject.Item as InformationItemsType;
 		//bool containsCollection = itemsType != null && itemsType.InformationItem.Any(item => item.isCollection);
 
 		bool provideDefaultCreate = informationObject.provideCreateMethod;
@@ -458,10 +450,6 @@ using Editable=System.ComponentModel.DataAnnotations.EditableAttribute;
 	[ScaffoldTable(true)]
 	public class <#= objectName #> : ITheBallDataContextStorable
 	{
-<#+
-		var currentSupportedItems = GetSupportedInformationItems(itemsType.InformationItem);
-		GenerateSQLiteCreationFunction(objectName, currentSupportedItems);
-#>
 
 		[Column(IsPrimaryKey = true)]
         [ScaffoldColumn(true)]
@@ -481,10 +469,28 @@ using Editable=System.ComponentModel.DataAnnotations.EditableAttribute;
 		}
 
 <#+
-		GenerateInformationItems(informationObject, currentSupportedItems);
-		GenerateInterfaceImplementation(currentSupportedItems);
+		InformationItemsType itemsType = informationObject.Item as InformationItemsType;
+		CollectionForType collectionType = informationObject.Item as CollectionForType;
+		if(itemsType != null) {
+			var currentSupportedItems = GetSupportedInformationItems(itemsType.InformationItem);
+			GenerateSQLiteCreationFunction(objectName, currentSupportedItems);
+			GenerateInformationItems(informationObject, currentSupportedItems);
+			GenerateInterfaceImplementation(currentSupportedItems);
+        } else if(collectionType != null) {
+			GenerateSQLiteCreationFunction(objectName, collectionType);
+			GenerateInterfaceImplementation(collectionType);
+        }
 #>
 	}
+<#+
+    }
+
+	void GenerateInterfaceImplementation(CollectionForType collection) 
+	{
+#>
+        public void PrepareForStoring(bool isInitialInsert)
+        {
+		}
 <#+
     }
 
@@ -523,6 +529,22 @@ using Editable=System.ComponentModel.DataAnnotations.EditableAttribute;
 		}
 <#+
     }
+
+	void GenerateSQLiteCreationFunction(string informationObjectName, CollectionForType collectionType)
+    { 
+#>
+        public static string GetCreateTableSQL()
+        {
+            return
+                @"
+CREATE TABLE IF NOT EXISTS [<#= informationObjectName #>](
+[ID] TEXT NOT NULL PRIMARY KEY, 
+[CollectionItemID] TEXT NOT NULL PRIMARY KEY, 
+[ETag] TEXT NOT NULL)";
+        }
+
+<#+
+	}
 
 	void GenerateSQLiteCreationFunction(string informationObjectName, InformationItemType[] informationItems) 
     {
@@ -612,8 +634,21 @@ CREATE TABLE IF NOT EXISTS [<#= informationObjectName #>](
 		ObjectType objectType = GetInformationObjectType(objectName);
 		if(objectType == ObjectType.Collection) {
 			var collectionObject = GetInformationObjectByName(objectName);
+			string objectPropName = item.name;
+			string idPropName = objectPropName + "ID";
 			var collectionFor = (CollectionForType) collectionObject.Item;
 			var linkedObjectName = collectionFor.contentInformationObjectName;
+#>
+			[Column]
+			public string <#= idPropName #> { get; set; }
+			private EntityRef< <#= objectName #> > _<#= objectPropName #>;
+			[Association(Storage = "_<#= objectPropName  #>", ThisKey = "<#= idPropName #>")]
+			public <#= objectName #> <#= objectPropName #>
+			{
+				get { return this._<#= objectPropName #>.Entity; }
+				set { this._<#= objectPropName #>.Entity = value; }
+			}
+<#+
 
         } else if(objectType == ObjectType.MediaContent) {
 			string objectPropName = item.name;
