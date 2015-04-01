@@ -118,6 +118,7 @@ using SQLiteSupport;
 using ScaffoldColumn=System.ComponentModel.DataAnnotations.ScaffoldColumnAttribute;
 using ScaffoldTable=System.ComponentModel.DataAnnotations.ScaffoldTableAttribute;
 using Editable=System.ComponentModel.DataAnnotations.EditableAttribute;
+using System.Diagnostics;
 
 
 <#+
@@ -448,6 +449,7 @@ using Editable=System.ComponentModel.DataAnnotations.EditableAttribute;
 #>
     [Table(Name = "<#= objectName #>")]
 	[ScaffoldTable(true)]
+	[DebuggerDisplay("<#= objectName #>: {ID}")]
 	public class <#= objectName #> : ITheBallDataContextStorable
 	{
 
@@ -479,6 +481,12 @@ using Editable=System.ComponentModel.DataAnnotations.EditableAttribute;
         } else if(collectionType != null) {
 			GenerateSQLiteCreationFunction(objectName, collectionType);
 			GenerateInterfaceImplementation(collectionType);
+#>
+		//[Column(IsPrimaryKey = true)]
+        [ScaffoldColumn(true)]
+        [Editable(false)]
+		public string CollectionItemID { get; set; }
+<#+
         }
 #>
 	}
@@ -538,9 +546,10 @@ using Editable=System.ComponentModel.DataAnnotations.EditableAttribute;
             return
                 @"
 CREATE TABLE IF NOT EXISTS [<#= informationObjectName #>](
-[ID] TEXT NOT NULL PRIMARY KEY, 
-[CollectionItemID] TEXT NOT NULL PRIMARY KEY, 
-[ETag] TEXT NOT NULL)";
+[ID] TEXT NOT NULL, 
+[CollectionItemID] TEXT NOT NULL, 
+[ETag] TEXT NOT NULL,
+	PRIMARY KEY (ID) )";
         }
 
 <#+
@@ -592,10 +601,10 @@ CREATE TABLE IF NOT EXISTS [<#= informationObjectName #>](
         } else {
 			ObjectType objType = GetInformationObjectType(item.informationObjectName);
 			dataType = "TEXT";
-			if(objType == ObjectType.Items || objType == ObjectType.MediaContent)
+			//if(objType == ObjectType.Items || objType == ObjectType.MediaContent)
 				fieldName = item.name + "ID";
-			else 
-				return null;
+			//else 
+			//	return null;
 			notNullClause = "NULL";
         }
 		return new Tuple<string, string, string>(fieldName, dataType, notNullClause);
