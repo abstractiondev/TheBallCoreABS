@@ -1432,6 +1432,7 @@ using TheBall.CORE;
 				return "long";
 			case InformationItemTypeLogicalDataType.Text_Short:
 			case InformationItemTypeLogicalDataType.Text_Long:
+			case InformationItemTypeLogicalDataType.ObjectLink:
 				return "string";
 			case InformationItemTypeLogicalDataType.Time_Date:
 			case InformationItemTypeLogicalDataType.Time_DateTime:
