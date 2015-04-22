@@ -126,6 +126,7 @@ using System.Diagnostics;
 		GenerateRequiredInterfaceDefinitions(instance);
 		GenerateDataContext(instance);
 		GenerateDataClasses(instance);
+		GenerateM2MRelationClasses(instance);
 		EndBlock();
 #>
 
@@ -282,8 +283,50 @@ using System.Diagnostics;
 					bool isObjectCollection = isObjectItem && GetInformationObjectType(informationItem.informationObjectName) == ObjectType.Collection;
 					string sourcePropertyName = informationItem.name;
 					string targetPropertyName = informationItem.name;
+					bool isCollection = informationItem.isCollection;
+					bool isObjectLink = informationItem.logicalDataType == InformationItemTypeLogicalDataType.ObjectLink;
 
-					if(isObjectItem && !isImplicitCollection) {
+					if(isObjectLink) {
+						string linkClassName = informationObject.name + informationItem.name;
+						string sourceIDName = informationObject.name + "ID";
+						string targetIDName = informationItem.objectLinkTargetType + "ID";
+						string propertyName = informationItem.name;
+#>
+                    if (serializedObject.<#= sourcePropertyName #> != null)
+                    {
+<#+
+						if(isCollection) {
+#>
+						existingObject.<#= propertyName #>.Clear();
+                        serializedObject.<#= sourcePropertyName #>.ForEach(
+                            item =>
+                            {
+                                var relationObject = new <#= linkClassName #>
+                                {
+                                    <#= sourceIDName #> = existingObject.ID,
+                                    <#= targetIDName #> = item
+                                };
+                                <#= linkClassName #>Table.InsertOnSubmit(relationObject);
+                                existingObject.<#= propertyName #>.Add(relationObject);
+
+                            });
+<#+
+                        } else {
+#>
+                            var relationObject = new <#= linkClassName #>
+                            {
+                                <#= sourceIDName #> = existingObject.ID,
+                                <#= targetIDName #> = serializedObject.<#= sourcePropertyName #>
+                            };
+                            <#= linkClassName #>Table.InsertOnSubmit(relationObject);
+							existingObject.<#= propertyName #> = new EntityRef<<#= linkClassName #>>(relationObject);
+<#+ 
+                        }
+#>
+                    }
+
+<#+
+                    } else if(isObjectItem && !isImplicitCollection) {
 #>
 					if(serializedObject.<#= sourcePropertyName #> != null)
 						existingObject.<#= targetPropertyName #>ID = serializedObject.<#= sourcePropertyName #>.ID;
@@ -337,12 +380,53 @@ using System.Diagnostics;
 					bool isImplicitCollection = informationItem.isCollection;
 					bool isObjectItem = informationItem.logicalDataType == InformationItemTypeLogicalDataType.InformationObject;
 					bool isObjectCollection = isObjectItem && GetInformationObjectType(informationItem.informationObjectName) == ObjectType.Collection;
+					bool isObjectLink = informationItem.logicalDataType == InformationItemTypeLogicalDataType.ObjectLink;
+					bool isCollection = informationItem.isCollection;
 					string objectName = informationItem.informationObjectName;
 
 					string sourcePropertyName = informationItem.name;
 					string targetPropertyName = informationItem.name;
 
-					if(isObjectItem && !isImplicitCollection) {
+					if(isObjectLink) {
+						string linkClassName = informationObject.name + informationItem.name;
+						string sourceIDName = informationObject.name + "ID";
+						string targetIDName = informationItem.objectLinkTargetType + "ID";
+						string propertyName = informationItem.name;
+#>
+                    if (serializedObject.<#= sourcePropertyName #> != null)
+                    {
+<#+
+						if(isCollection) {
+#>
+                        serializedObject.<#= sourcePropertyName #>.ForEach(
+                            item =>
+                            {
+                                var relationObject = new <#= linkClassName #>
+                                {
+                                    <#= sourceIDName #> = objectToAdd.ID,
+                                    <#= targetIDName #> = item
+                                };
+                                <#= linkClassName #>Table.InsertOnSubmit(relationObject);
+                                objectToAdd.<#= propertyName #>.Add(relationObject);
+
+                            });
+<#+
+                        } else {
+#>
+                            var relationObject = new <#= linkClassName #>
+                            {
+                                <#= sourceIDName #> = objectToAdd.ID,
+                                <#= targetIDName #> = serializedObject.<#= sourcePropertyName #>
+                            };
+                            <#= linkClassName #>Table.InsertOnSubmit(relationObject);
+                            objectToAdd.<#= propertyName #> = new EntityRef<<#= linkClassName#>>(relationObject);
+<#+ 
+                        }
+#>
+                    }
+
+<#+
+                    } else if(isObjectItem && !isImplicitCollection) {
 #>
 					if(serializedObject.<#= sourcePropertyName #> != null)
 						objectToAdd.<#= targetPropertyName #>ID = serializedObject.<#= sourcePropertyName #>.ID;
@@ -402,6 +486,19 @@ using System.Diagnostics;
 				}
 			}
 <#+
+			InformationItemType[] relationProperties = GetRelationProperties(informationObject);
+			foreach(InformationItemType relProp in relationProperties)
+            {
+				string tableClassName = informationObject.name + relProp.name;
+#>
+			public Table<<#= tableClassName #>> <#= tableClassName #>Table {
+				get {
+					return this.GetTable<<#= tableClassName #>>();
+				}
+			}
+
+<#+
+            }
         }
 #>
         }
@@ -418,6 +515,14 @@ using System.Diagnostics;
 		return informationItemObjects.Concat(collectionObjects).ToArray();
     }
 
+	InformationItemType[] GetRelationProperties(InformationObjectType iObj)
+    {
+		InformationItemsType informationItems = iObj.Item as InformationItemsType;
+		if(informationItems == null)
+			return new InformationItemType[0];
+		return informationItems.InformationItem.Where(item => item.logicalDataType == InformationItemTypeLogicalDataType.ObjectLink).ToArray();
+    }
+
 	void GenerateDataClasses(InstanceOfTheBallType instance) 
 	{
 		foreach(var iObj in GetTableObjects(instance.InformationModel)) 
@@ -426,11 +531,64 @@ using System.Diagnostics;
         }
     }
 
+	void GenerateM2MRelationClasses(InstanceOfTheBallType instance)
+    {
+		foreach(var iObj in GetTableObjects(instance.InformationModel))
+        {
+			InformationItemType[] relationProperties = GetRelationProperties(iObj);
+			foreach(var relProp in relationProperties)
+            {
+				var targetObj = GetInformationObjectByName(relProp.objectLinkTargetType);
+				GenerateM2MRelationClass(iObj, targetObj, relProp.name, relProp.isCollection);
+            }
+        }
+    }
+
 	InformationItemType[] GetSupportedInformationItems(InformationItemType[] sourceItems) 
 	{
 		//var currentSupportedItems = sourceItems.Where(item => string.IsNullOrEmpty(item.informationObjectName)).ToArray();
 		var currentSupportedItems = sourceItems.Where(item => item.name != "ParentCategoryID").ToArray();
 		return currentSupportedItems;
+    }
+
+	void GenerateM2MRelationClass(InformationObjectType sourceObject, InformationObjectType targetObject, string sourcePropertyName, bool isCollection)
+    {
+		string sourceClassName = sourceObject.name;
+		string targetClassName = targetObject.name;
+		//string tableName = sourceClassName + sourcePropertyName + "LNK";
+		string className = sourceClassName + sourcePropertyName;
+		string sourceIDName = sourceClassName + "ID";
+		string targetIDName = targetClassName + "ID";
+#>
+    [Table(Name = "<#= className #>")]
+	[ScaffoldTable(true)]
+	[DebuggerDisplay("<#= className #>: {<#= sourceIDName #>} - {<#= targetIDName #>}")]
+	public class <#= className #> // : ITheBallDataContextStorable
+	{
+        public static string GetCreateTableSQL()
+        {
+            return
+                @"
+CREATE TABLE IF NOT EXISTS [<#= className #>](
+[<#= sourceIDName #>] TEXT NOT NULL, 
+[<#= targetIDName #>] TEXT NOT NULL,
+PRIMARY KEY (<#= sourceIDName #>, <#= targetIDName #>)
+)";
+        }
+
+
+        [Column(IsPrimaryKey = true)]
+        public string <#= sourceIDName #> { get; set; }
+        [Column(IsPrimaryKey = true)]
+        public string <#= targetIDName #> { get; set; }
+
+        [Association(DeleteOnNull = true, IsForeignKey = true, ThisKey = "<#= sourceIDName #>", OtherKey = "ID", IsUnique = <#= (!isCollection).ToString().ToLower() #>)]
+        public EntityRef<<#= sourceClassName #>> <#= sourceClassName #> { get; set; }
+        [Association(DeleteOnNull = true, IsForeignKey = true, ThisKey = "<#= targetIDName #>", OtherKey = "ID")]
+        public EntityRef<<#= targetClassName #>> <#= targetClassName #> { get; set; } 
+    }
+
+<#+
     }
 
 	void GenerateDataClass(InformationObjectType informationObject)
@@ -505,8 +663,8 @@ using System.Diagnostics;
 	void GenerateInterfaceImplementation(InformationItemType[] informationItems) 
 	{
 		var currentSupportedItems = GetSupportedInformationItems(informationItems);
-		var customsStorableObjects = currentSupportedItems.Where(iItem => iItem.isCollection).ToArray();
-		var stringItems = currentSupportedItems.Where(iItem => iItem.isCollection == false && GetPlatformDataTypeFromLogical(iItem.logicalDataType, iItem.informationObjectName) == "string").ToArray();
+		var customsStorableObjects = currentSupportedItems.Where(iItem => iItem.isCollection && iItem.logicalDataType != InformationItemTypeLogicalDataType.ObjectLink).ToArray();
+		var stringItems = currentSupportedItems.Where(iItem => iItem.isCollection == false && String.IsNullOrEmpty(iItem.objectLinkTargetType) && GetPlatformDataTypeFromLogical(iItem.logicalDataType, iItem.informationObjectName) == "string").ToArray();
 
 #>
         public void PrepareForStoring(bool isInitialInsert)
@@ -626,11 +784,30 @@ CREATE TABLE IF NOT EXISTS [<#= informationObjectName #>](
 	{
 		foreach(var item in informationItems)
 		{
-			if(item.logicalDataType != InformationItemTypeLogicalDataType.InformationObject || item.isCollection) 
-				GenerateDataItem(iObj, item);
-			else
-				GenerateEntityItem(iObj, item);
+			if(item.logicalDataType == InformationItemTypeLogicalDataType.ObjectLink) {
+				GenerateObjectLinkEntityItem(iObj, item);
+            } else {
+				if(item.logicalDataType != InformationItemTypeLogicalDataType.InformationObject || item.isCollection) 
+					GenerateDataItem(iObj, item);
+				else
+					GenerateEntityItem(iObj, item);
+            }
         }
+    }
+
+	void GenerateObjectLinkEntityItem(InformationObjectType iObj, InformationItemType item)
+    {
+		bool isCollection = item.isCollection;
+		string entityRefType = isCollection ? "EntitySet" : "EntityRef";
+		string sourceName = iObj.name;
+		string sourceIDName = sourceName + "ID";
+		string propertyName = item.name;
+		string targetClassName = sourceName + propertyName;
+#>
+        [Association(ThisKey = "ID", OtherKey = "<#= sourceIDName #>")]
+        public <#= entityRefType #><<#= targetClassName #>> <#= propertyName #> { get; set; }
+
+<#+
     }
 
 	void GenerateEntityItem(InformationObjectType iObj, InformationItemType item)
