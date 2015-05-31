@@ -231,12 +231,22 @@ using System.Diagnostics;
 				List<string> tableCreationCommands = new List<string>();
                 tableCreationCommands.AddRange(InformationObjectMetaData.GetMetaDataTableCreateSQLs());
 <#+
-		foreach(var informationObject in tableObjects)
+		foreach(var iObj in tableObjects)
         {
-			string iObjName = informationObject.name;
+			string iObjName = iObj.name;
 #>
 				tableCreationCommands.Add(<#= iObjName #>.GetCreateTableSQL());
 <#+
+			InformationItemType[] relationProperties = GetRelationProperties(iObj);
+			foreach(var relProp in relationProperties)
+            {
+				string m2mTableClassName = iObj.name + relProp.name;
+#>
+				tableCreationCommands.Add(<#= m2mTableClassName #>.GetCreateTableSQL());
+<#+
+
+            }
+
         }
 #>
 			    var connection = this.Connection;
@@ -319,7 +329,7 @@ using System.Diagnostics;
                                 <#= targetIDName #> = serializedObject.<#= sourcePropertyName #>
                             };
                             <#= linkClassName #>Table.InsertOnSubmit(relationObject);
-							existingObject.<#= propertyName #> = new EntityRef<<#= linkClassName #>>(relationObject);
+							existingObject.<#= propertyName #> = relationObject;
 <#+ 
                         }
 #>
@@ -419,7 +429,7 @@ using System.Diagnostics;
                                 <#= targetIDName #> = serializedObject.<#= sourcePropertyName #>
                             };
                             <#= linkClassName #>Table.InsertOnSubmit(relationObject);
-                            objectToAdd.<#= propertyName #> = new EntityRef<<#= linkClassName#>>(relationObject);
+                            objectToAdd.<#= propertyName #> = relationObject;
 <#+ 
                         }
 #>
@@ -577,15 +587,30 @@ PRIMARY KEY (<#= sourceIDName #>, <#= targetIDName #>)
         }
 
 
-        [Column(IsPrimaryKey = true)]
+        [Column(IsPrimaryKey = true, CanBeNull = false)]
         public string <#= sourceIDName #> { get; set; }
-        [Column(IsPrimaryKey = true)]
+        [Column(IsPrimaryKey = true, CanBeNull = false)]
         public string <#= targetIDName #> { get; set; }
 
-        [Association(DeleteOnNull = true, IsForeignKey = true, ThisKey = "<#= sourceIDName #>", OtherKey = "ID", IsUnique = <#= (!isCollection).ToString().ToLower() #>)]
-        public EntityRef<<#= sourceClassName #>> <#= sourceClassName #> { get; set; }
-        [Association(DeleteOnNull = true, IsForeignKey = true, ThisKey = "<#= targetIDName #>", OtherKey = "ID")]
-        public EntityRef<<#= targetClassName #>> <#= targetClassName #> { get; set; } 
+
+        private EntityRef<<#= sourceClassName #>> _<#= sourceClassName #> = new EntityRef<<#= sourceClassName #>>();
+        [Association(DeleteOnNull = true, IsForeignKey = true, ThisKey = "<#= sourceIDName #>", OtherKey = "ID", 
+			Storage = "_<#= sourceClassName #>", IsUnique = <#= (!isCollection).ToString().ToLower() #>)]
+        public <#= sourceClassName #> <#= sourceClassName #> 
+		{ 
+			get { return _<#= sourceClassName #>.Entity; }
+			set { _<#= sourceClassName #>.Entity = value; }
+		}
+
+        private EntityRef<<#= targetClassName #>> _<#= targetClassName #> = new EntityRef<<#= targetClassName #>>();
+        [Association(DeleteOnNull = true, IsForeignKey = true, ThisKey = "<#= targetIDName #>", OtherKey = "ID", 
+			Storage = "_<#= targetClassName #>")]
+		public <#= targetClassName #> <#= targetClassName #> 
+		{ 
+			get { return _<#= targetClassName #>.Entity; }
+			set { _<#= targetClassName #>.Entity = value; }
+		}
+
     }
 
 <#+
@@ -745,9 +770,13 @@ CREATE TABLE IF NOT EXISTS [<#= informationObjectName #>](
 
 	Tuple<string, string, string> GetSQLFieldNameDataTypeNullDeclaration(InformationItemType item) {
 		bool isObjectType = item.logicalDataType == InformationItemTypeLogicalDataType.InformationObject;
+		bool isObjectLinkType = item.logicalDataType == InformationItemTypeLogicalDataType.ObjectLink;
 		string fieldName;
 		string dataType;
 		string notNullClause;
+		if(isObjectLinkType) // no SQL at all for link types; handled with ID references and additional classes
+			return null;
+
 		if(!isObjectType) 
 		{
 			fieldName = item.name;
@@ -757,10 +786,10 @@ CREATE TABLE IF NOT EXISTS [<#= informationObjectName #>](
 			notNullClause = "NOT NULL";
 			return new Tuple<string, string, string>(fieldName, dataType, notNullClause);
         } else {
-			ObjectType objType = GetInformationObjectType(item.informationObjectName);
+			//ObjectType objType = GetInformationObjectType(item.informationObjectName);
 			dataType = "TEXT";
 			//if(objType == ObjectType.Items || objType == ObjectType.MediaContent)
-				fieldName = item.name + "ID";
+			fieldName = item.name + "ID";
 			//else 
 			//	return null;
 			notNullClause = "NULL";
@@ -802,12 +831,31 @@ CREATE TABLE IF NOT EXISTS [<#= informationObjectName #>](
 		string sourceName = iObj.name;
 		string sourceIDName = sourceName + "ID";
 		string propertyName = item.name;
+		string fieldName = "_" + propertyName;
 		string targetClassName = sourceName + propertyName;
+		if(isCollection) {
 #>
-        [Association(ThisKey = "ID", OtherKey = "<#= sourceIDName #>")]
-        public <#= entityRefType #><<#= targetClassName #>> <#= propertyName #> { get; set; }
+		private <#= entityRefType #><<#= targetClassName #>> <#= fieldName #> = new <#= entityRefType #><<#= targetClassName #>>();
+        [Association(ThisKey = "ID", OtherKey = "<#= sourceIDName #>", Storage="<#= fieldName #>")]
+        public <#= entityRefType #><<#= targetClassName #>> <#= propertyName #> { 
+			get { return <#= fieldName #>; }
+			set { <#= fieldName #>.Assign(value); }
+		}
 
 <#+
+        } else {
+
+#>
+		private <#= entityRefType #><<#= targetClassName #>> <#= fieldName #> = new <#= entityRefType #><<#= targetClassName #>>();
+        [Association(ThisKey = "ID", OtherKey = "<#= sourceIDName #>", Storage="<#= fieldName #>")]
+        public <#= targetClassName #> <#= propertyName #> 
+		{ 
+			get { return <#= fieldName #>.Entity; }
+			set { <#= fieldName #>.Entity = value; }
+		}
+
+<#+
+        }
     }
 
 	void GenerateEntityItem(InformationObjectType iObj, InformationItemType item)
