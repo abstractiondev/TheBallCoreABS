@@ -81,6 +81,7 @@ using System.IO;
 using System.Xml;
 using System.Linq;
 using System.Runtime.Serialization;
+using ProtoBuf;
 
 
 <#+
@@ -90,7 +91,6 @@ using System.Runtime.Serialization;
 		foreach(var informationObject in instance.InformationModel)
         {
 			GenerateInformationObject(informationObject);
-
         }
 		EndBlock(); // namespace
 #>
@@ -178,8 +178,11 @@ using System.Runtime.Serialization;
 
 		bool provideDefaultCreate = informationObject.provideCreateMethod;
 		bool isIndependentMaster = informationObject.isIndependentMaster;
+		bool isProtoBuf = informationObject.serializationType == InformationObjectTypeSerializationType.ProtoBuf;
+		string protoBufClassAttribute = isProtoBuf ? "[ProtoContract]" : "";
+		string protoBufMemberFormat = isProtoBuf ? "[ProtoMember({0})]" : "";
 #>
-            [DataContract(Namespace = "http://schemas.datacontract.org/2004/07/<#= semanticDomainName #>")]
+            [DataContract(Namespace = "http://schemas.datacontract.org/2004/07/<#= semanticDomainName #>")] <#= protoBufClassAttribute #>
 			[Serializable]
 			public partial class <#= informationObjectName #> 
 			{
@@ -224,7 +227,7 @@ using System.Runtime.Serialization;
             
 				}
 
-				[DataMember]
+				[DataMember] <#= string.Format(protoBufMemberFormat, 2000) #>
 				public string ID { get; set; }
 
 			    [IgnoreDataMember]
@@ -236,10 +239,10 @@ using System.Runtime.Serialization;
                 [DataMember]
                 public string RelativeLocation { get; set; }
 
-                [DataMember]
+                [DataMember] <#= string.Format(protoBufMemberFormat, 2001) #>
                 public string Name { get; set; }
 
-                [DataMember]
+                [DataMember] <#= string.Format(protoBufMemberFormat, 2002) #>
                 public string SemanticDomainName { get; set; }
 
 				[DataMember]
@@ -387,15 +390,17 @@ using System.Runtime.Serialization;
 		{
 			string dataType = GetPlatformDataTypeFromLogical(item.logicalDataType, item.informationObjectName);
 			bool isCollection = item.isCollection;
+			int protoBufTagNumber = item.fieldOrderNumber;
+			string protoBufAttribute = protoBufTagNumber > 0 ? string.Format("[ProtoMember({0})]", protoBufTagNumber) : "";
 			if(isCollection)
             {
 #>
-			[DataMember]
+			[DataMember] <#= protoBufAttribute #>
 			public List< <#= dataType #> > <#= item.name #> = new List< <#= dataType #> >();
 <#+
             } else {
 #>
-			[DataMember]
+			[DataMember] <#= protoBufAttribute #>
 			public <#= dataType #> <#= item.name #> { get; set; }
 			private <#= dataType #> _unmodified_<#= item.name #>;
 <#+

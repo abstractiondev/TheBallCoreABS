@@ -114,6 +114,7 @@ using System.Xml;
 using System.Linq;
 using System.Runtime.Serialization;
 using Microsoft.WindowsAzure.StorageClient;
+using ProtoBuf;
 using TheBall;
 using TheBall.CORE;
 
@@ -268,8 +269,11 @@ using TheBall.CORE;
 
 		bool provideDefaultCreate = informationObject.provideCreateMethod;
 		bool isIndependentMaster = informationObject.isIndependentMaster;
+		bool isProtoBuf = informationObject.serializationType == InformationObjectTypeSerializationType.ProtoBuf;
+		string protoBufClassAttribute = isProtoBuf ? "[ProtoContract]" : "";
+		string protoBufMemberFormat = isProtoBuf ? "[ProtoMember({0})]" : "";
 #>
-			[DataContract]
+			[DataContract] <#= protoBufClassAttribute #>
 			[Serializable]
 			public partial class <#= informationObjectName #> : IInformationObject <#= isCollection ? ", IInformationCollection" : "" #>
 			{
@@ -491,7 +495,7 @@ using TheBall.CORE;
             
 				}
 
-				[DataMember]
+				[DataMember] <#= string.Format(protoBufMemberFormat, 2000) #>
 				public string ID { get; set; }
 
 			    [IgnoreDataMember]
@@ -503,10 +507,10 @@ using TheBall.CORE;
                 [DataMember]
                 public string RelativeLocation { get; set; }
 
-                [DataMember]
+                [DataMember] <#= string.Format(protoBufMemberFormat, 2001) #>
                 public string Name { get; set; }
 
-                [DataMember]
+                [DataMember] <#= string.Format(protoBufMemberFormat, 2002) #>
                 public string SemanticDomainName { get; set; }
 
 				[DataMember]
@@ -1400,15 +1404,17 @@ using TheBall.CORE;
 		{
 			string dataType = GetPlatformDataTypeFromLogical(item.logicalDataType, item.informationObjectName);
 			bool isCollection = item.isCollection;
+			int protoBufTagNumber = item.fieldOrderNumber;
+			string protoBufAttribute = protoBufTagNumber > 0 ? string.Format("[ProtoMember({0})]", protoBufTagNumber) : "";
 			if(isCollection)
             {
 #>
-			[DataMember]
+			[DataMember] <#= protoBufAttribute #>
 			public List< <#= dataType #> > <#= item.name #> = new List< <#= dataType #> >();
 <#+
             } else {
 #>
-			[DataMember]
+			[DataMember] <#= protoBufAttribute #>
 			public <#= dataType #> <#= item.name #> { get; set; }
 			private <#= dataType #> _unmodified_<#= item.name #>;
 <#+

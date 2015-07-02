@@ -2903,10 +2903,13 @@ public partial class InformationItemType {
     
     private bool isCollectionField;
     
+    private int fieldOrderNumberField;
+    
     public InformationItemType() {
         this.informationObjectNameField = "";
         this.objectLinkTargetTypeField = "";
         this.isCollectionField = false;
+        this.fieldOrderNumberField = 0;
     }
     
     /// <remarks/>
@@ -2964,6 +2967,18 @@ public partial class InformationItemType {
         }
         set {
             this.isCollectionField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    [System.ComponentModel.DefaultValueAttribute(0)]
+    public int fieldOrderNumber {
+        get {
+            return this.fieldOrderNumberField;
+        }
+        set {
+            this.fieldOrderNumberField = value;
         }
     }
 }
@@ -3028,6 +3043,9 @@ public enum InformationObjectTypeSerializationType {
     
     /// <remarks/>
     Custom,
+    
+    /// <remarks/>
+    ProtoBuf,
 }
 
         

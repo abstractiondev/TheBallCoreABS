@@ -2316,10 +2316,13 @@ namespace TheBallCore_v1_0 {
         
         private bool isCollectionField;
         
+        private int fieldOrderNumberField;
+        
         public InformationItemType() {
             this.informationObjectNameField = "";
             this.objectLinkTargetTypeField = "";
             this.isCollectionField = false;
+            this.fieldOrderNumberField = 0;
         }
         
         /// <remarks/>
@@ -2377,6 +2380,18 @@ namespace TheBallCore_v1_0 {
             }
             set {
                 this.isCollectionField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        [System.ComponentModel.DefaultValueAttribute(0)]
+        public int fieldOrderNumber {
+            get {
+                return this.fieldOrderNumberField;
+            }
+            set {
+                this.fieldOrderNumberField = value;
             }
         }
     }
@@ -2441,5 +2456,8 @@ namespace TheBallCore_v1_0 {
         
         /// <remarks/>
         Custom,
+        
+        /// <remarks/>
+        ProtoBuf,
     }
 }
