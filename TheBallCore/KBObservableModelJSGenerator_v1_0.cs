@@ -776,6 +776,8 @@ public partial class CoreInfrastructureType {
 [System.ComponentModel.DesignerCategoryAttribute("code")]
 public partial class InformationObjectType {
     
+    private AutomationDefinitionsType automationDefinitionField;
+    
     private object itemField;
     
     private string nameField;
@@ -792,6 +794,16 @@ public partial class InformationObjectType {
         this.provideCreateMethodField = true;
         this.isIndependentMasterField = false;
         this.serializationTypeField = InformationObjectTypeSerializationType.XML;
+    }
+    
+    /// <remarks/>
+    public AutomationDefinitionsType AutomationDefinition {
+        get {
+            return this.automationDefinitionField;
+        }
+        set {
+            this.automationDefinitionField = value;
+        }
     }
     
     /// <remarks/>
@@ -871,54 +883,25 @@ public partial class InformationObjectType {
 [System.SerializableAttribute()]
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
-public partial class CollectionForType {
+public partial class AutomationDefinitionsType {
     
-    private string contentInformationObjectNameField;
+    private bool customIDProviderField;
     
-    private CollectionForTypeCollectionType collectionTypeField;
-    
-    public CollectionForType() {
-        this.collectionTypeField = CollectionForTypeCollectionType.Independent;
+    public AutomationDefinitionsType() {
+        this.customIDProviderField = false;
     }
     
     /// <remarks/>
     [System.Xml.Serialization.XmlAttributeAttribute()]
-    public string contentInformationObjectName {
+    [System.ComponentModel.DefaultValueAttribute(false)]
+    public bool customIDProvider {
         get {
-            return this.contentInformationObjectNameField;
+            return this.customIDProviderField;
         }
         set {
-            this.contentInformationObjectNameField = value;
+            this.customIDProviderField = value;
         }
     }
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlAttributeAttribute()]
-    [System.ComponentModel.DefaultValueAttribute(CollectionForTypeCollectionType.Independent)]
-    public CollectionForTypeCollectionType collectionType {
-        get {
-            return this.collectionTypeField;
-        }
-        set {
-            this.collectionTypeField = value;
-        }
-    }
-}
-
-/// <remarks/>
-[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.3038")]
-[System.SerializableAttribute()]
-[System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
-public enum CollectionForTypeCollectionType {
-    
-    /// <remarks/>
-    Independent,
-    
-    /// <remarks/>
-    Master,
-    
-    /// <remarks/>
-    DerivedFromMaster,
 }
 
 /// <remarks/>
@@ -1634,11 +1617,23 @@ public enum InterfaceItemTypeLogicalDataType {
 [System.ComponentModel.DesignerCategoryAttribute("code")]
 public partial class InterfaceObjectType {
     
+    private AutomationDefinitionsType automationDefinitionField;
+    
     private object[] interfaceItemsField;
     
     private string nameField;
     
     private string designDescField;
+    
+    /// <remarks/>
+    public AutomationDefinitionsType AutomationDefinition {
+        get {
+            return this.automationDefinitionField;
+        }
+        set {
+            this.automationDefinitionField = value;
+        }
+    }
     
     /// <remarks/>
     [System.Xml.Serialization.XmlArrayItemAttribute("InterfaceItem", typeof(InterfaceItemType), IsNullable=false)]
@@ -2865,6 +2860,61 @@ public partial class InformationObjectContentType {
             this.originalFileNameField = value;
         }
     }
+}
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.3038")]
+[System.SerializableAttribute()]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
+public partial class CollectionForType {
+    
+    private string contentInformationObjectNameField;
+    
+    private CollectionForTypeCollectionType collectionTypeField;
+    
+    public CollectionForType() {
+        this.collectionTypeField = CollectionForTypeCollectionType.Independent;
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    public string contentInformationObjectName {
+        get {
+            return this.contentInformationObjectNameField;
+        }
+        set {
+            this.contentInformationObjectNameField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    [System.ComponentModel.DefaultValueAttribute(CollectionForTypeCollectionType.Independent)]
+    public CollectionForTypeCollectionType collectionType {
+        get {
+            return this.collectionTypeField;
+        }
+        set {
+            this.collectionTypeField = value;
+        }
+    }
+}
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.3038")]
+[System.SerializableAttribute()]
+[System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
+public enum CollectionForTypeCollectionType {
+    
+    /// <remarks/>
+    Independent,
+    
+    /// <remarks/>
+    Master,
+    
+    /// <remarks/>
+    DerivedFromMaster,
 }
 
 /// <remarks/>

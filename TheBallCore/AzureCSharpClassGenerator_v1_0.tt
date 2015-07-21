@@ -165,10 +165,23 @@ using TheBall.CORE;
 			return;
 		foreach(InterfaceObjectType interfaceObject in instance.DigitalInterface.InterfaceModel ?? new InterfaceObjectType[0])
         {
+			bool customIDGeneration = interfaceObject.AutomationDefinition != null ? interfaceObject.AutomationDefinition.customIDProvider : false;
+			string className = interfaceObject.name;
 #>
 			[DataContract]
 			public partial class <#= interfaceObject.name #>
 			{
+<#+
+			if(customIDGeneration) {
+#>
+				public <#= className #>() 
+				{
+					ID = <#= className #>Implementation.GetID();
+				}
+<#+
+            }
+#>
+
 <#+
 			foreach(var informationField in interfaceObject.InterfaceItems ?? new object[0]) 
 			{
@@ -272,6 +285,7 @@ using TheBall.CORE;
 		bool isProtoBuf = informationObject.serializationType == InformationObjectTypeSerializationType.ProtoBuf;
 		string protoBufClassAttribute = isProtoBuf ? "[ProtoContract]" : "";
 		string protoBufMemberFormat = isProtoBuf ? "[ProtoMember({0})]" : "";
+		bool customIDGeneration = informationObject.AutomationDefinition != null ? informationObject.AutomationDefinition.customIDProvider : false;
 #>
 			[DataContract] <#= protoBufClassAttribute #>
 			[Serializable]
@@ -285,7 +299,7 @@ using TheBall.CORE;
 
 				public <#= informationObjectName #>()
 				{
-					this.ID = Guid.NewGuid().ToString();
+					this.ID = <#= customIDGeneration ? informationObjectName + "Implementation.GetID()" : "Guid.NewGuid().ToString()" #>;
 				    this.OwnerID = StorageSupport.ActiveOwnerID;
 				    this.SemanticDomainName = "<#= semanticDomainName #>";
 				    this.Name = "<#= objectName #>";
