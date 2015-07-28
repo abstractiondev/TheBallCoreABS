@@ -353,20 +353,6 @@ using TheBall.CORE;
 					return iObject.RetrieveMaster(initiateIfMissing, out initiated);
 				}
 
-
-                public static <#= informationObjectName #> Retrieve<#= informationObjectName #>(string relativeLocation, IContainerOwner owner = null)
-                {
-                    var result = (<#= informationObjectName #>) StorageSupport.RetrieveInformation(relativeLocation, typeof(<#= informationObjectName #>), null, owner);
-                    return result;
-                }
-
-				public static <#= informationObjectName #> RetrieveFromOwnerContent(IContainerOwner containerOwner, string contentName)
-				{
-					// var result = <#= informationObjectName #>.Retrieve<#= informationObjectName #>("Content/<#= semanticDomainName #>/<#= informationObjectName #>/" + contentName, containerOwner);
-					var result = <#= informationObjectName #>.Retrieve<#= informationObjectName #>("<#= semanticDomainName #>/<#= informationObjectName #>/" + contentName, containerOwner);
-					return result;
-				}
-
 				public void SetLocationAsOwnerContent(IContainerOwner containerOwner, string contentName)
                 {
                     // RelativeLocation = StorageSupport.GetOwnerContentLocation(containerOwner, "Content/<#= semanticDomainName #>/<#= informationObjectName #>/" + contentName);
@@ -646,7 +632,7 @@ using TheBall.CORE;
 #>
 				public static <#= informationObjectName #> GetMasterCollectionInstance(IContainerOwner owner)
 				{
-					return <#= informationObjectName #>.RetrieveFromOwnerContent(owner, "MasterCollection");
+					return ObjectStorage.RetrieveFromOwnerContent<<#= informationObjectName #>>(owner, "MasterCollection");
 				}
 <#+
             }
