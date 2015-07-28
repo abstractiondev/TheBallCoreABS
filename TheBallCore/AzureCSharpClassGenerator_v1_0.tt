@@ -325,18 +325,12 @@ using TheBall.CORE;
 
                 public static string GetRelativeLocationFromID(string id)
                 {
-                    return Path.Combine("<#= semanticDomainName #>", "<#= objectName #>", id).Replace("\\", "/");
+					return ObjectStorage.GetRelativeLocationFromID<<#= objectName #>>(id);
                 }
 
 				public void UpdateRelativeLocationFromID()
 				{
 					RelativeLocation = GetRelativeLocationFromID(ID);
-				}
-
-				public static <#= informationObjectName #> RetrieveFromDefaultLocation(string id, IContainerOwner owner = null)
-				{
-					string relativeLocation = GetRelativeLocationFromID(id);
-					return Retrieve<#= informationObjectName #>(relativeLocation, owner);
 				}
 
 				IInformationObject IInformationObject.RetrieveMaster(bool initiateIfMissing, out bool initiated)
