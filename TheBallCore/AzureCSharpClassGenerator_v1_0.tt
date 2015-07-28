@@ -303,7 +303,7 @@ using TheBall.CORE;
 				    this.OwnerID = StorageSupport.ActiveOwnerID;
 				    this.SemanticDomainName = "<#= semanticDomainName #>";
 				    this.Name = "<#= objectName #>";
-					RelativeLocation = GetRelativeLocationFromID(ID);
+					UpdateRelativeLocationFromID();
 				}
 
 				public static IInformationObject[] RetrieveCollectionFromOwnerContent(IContainerOwner owner)
@@ -323,14 +323,9 @@ using TheBall.CORE;
 					return informationObjects.ToArray();
 				}
 
-                public static string GetRelativeLocationFromID(string id)
-                {
-					return ObjectStorage.GetRelativeLocationFromID<<#= objectName #>>(id);
-                }
-
 				public void UpdateRelativeLocationFromID()
 				{
-					RelativeLocation = GetRelativeLocationFromID(ID);
+					RelativeLocation = ObjectStorage.GetRelativeLocationFromID<<#= objectName #>>(ID);
 				}
 
 				IInformationObject IInformationObject.RetrieveMaster(bool initiateIfMissing, out bool initiated)
@@ -612,7 +607,7 @@ using TheBall.CORE;
 
 				public string GetItemDirectory()
 				{
-					string dummyItemLocation = <#= contentObjectName #>.GetRelativeLocationFromID("dummy");
+					string dummyItemLocation = ObjectStorage.GetRelativeLocationFromID<<#= contentObjectName #>>("dummy");
 					string nonOwnerDirectoryLocation = SubscribeSupport.GetParentDirectoryTarget(dummyItemLocation);
 					VirtualOwner owner = VirtualOwner.FigureOwner(this);
 					string ownerDirectoryLocation = StorageSupport.GetOwnerContentLocation(owner, nonOwnerDirectoryLocation);
