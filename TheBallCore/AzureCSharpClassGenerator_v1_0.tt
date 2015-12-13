@@ -239,7 +239,6 @@ using TheBall.CORE;
                         StorageSupport.StoreInformation(masterCollection, owner);
                     }
 					IInformationCollection collection = masterCollection;
-					collection.SubscribeToContentSource();
                 }
 <#+
         }
@@ -358,13 +357,6 @@ using TheBall.CORE;
                     // RelativeLocation = StorageSupport.GetOwnerContentLocation(containerOwner, "Content/<#= semanticDomainName #>/<#= informationObjectName #>/" + contentName);
                     RelativeLocation = StorageSupport.GetOwnerContentLocation(containerOwner, "<#= semanticDomainName #>/<#= informationObjectName #>/" + contentName);
                 }
-
-				partial void DoInitializeDefaultSubscribers(IContainerOwner owner);
-
-			    public void InitializeDefaultSubscribers(IContainerOwner owner)
-			    {
-					DoInitializeDefaultSubscribers(owner);
-			    }
 
 				partial void DoPostStoringExecute(IContainerOwner owner);
 
@@ -594,7 +586,7 @@ using TheBall.CORE;
 				public string GetItemDirectory()
 				{
 					string dummyItemLocation = ObjectStorage.GetRelativeLocationFromID<<#= contentObjectName #>>("dummy");
-					string nonOwnerDirectoryLocation = SubscribeSupport.GetParentDirectoryTarget(dummyItemLocation);
+					string nonOwnerDirectoryLocation = StorageSupport.GetParentDirectoryTarget(dummyItemLocation);
 					VirtualOwner owner = VirtualOwner.FigureOwner(this);
 					string ownerDirectoryLocation = StorageSupport.GetOwnerContentLocation(owner, nonOwnerDirectoryLocation);
 					return ownerDirectoryLocation;
@@ -638,27 +630,6 @@ using TheBall.CORE;
             }
 #>
 
-				public void SubscribeToContentSource()
-				{
-<#+
-			if(isMasterCollection)
-            {
-#>
-					// DirectoryToCollection
-					string itemDirectory = GetItemDirectory();
-					SubscribeSupport.AddSubscriptionToObject(itemDirectory, RelativeLocation,
-															 SubscribeSupport.SubscribeType_DirectoryToCollection, null, typeof(<#= informationObjectName #>).FullName);
-<#+
-            } else if(isDerivedCollection) {
-#>
-					// CollectionToCollection
-					VirtualOwner owner = VirtualOwner.FigureOwner(this);
-					string masterLocation = GetMasterCollectionLocation(owner);
-					SubscribeSupport.AddSubscriptionToObject(masterLocation, RelativeLocation, SubscribeSupport.SubscribeType_CollectionToCollectionUpdate);
-<#+
-            }
-#>
-				}
 
 <#+
 			if(isMasterCollection)
