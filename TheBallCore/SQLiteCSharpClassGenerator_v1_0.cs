@@ -1967,40 +1967,41 @@ this.Write(this.ToStringHelper.ToStringWithCulture(informationObject.name));
         #line hidden
         
         #line 563 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
-this.Write("Table.Single(item => item.ID == deleteData.ObjectID);\r\n\t\t\t\t\t\t");
+this.Write("Table.SingleOrDefault(item => item.ID == deleteData.ObjectID);\r\n\t\t\t\t\t\tif(objectTo" +
+        "Delete != null)\r\n\t\t\t\t\t\t\t");
 
         
         #line default
         #line hidden
         
-        #line 564 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 565 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(informationObject.name));
 
         
         #line default
         #line hidden
         
-        #line 564 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 565 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write("Table.DeleteOnSubmit(objectToDelete);\r\n\t\t\t\t\t\tbreak;\r\n\t\t\t\t\t}\r\n");
 
         
         #line default
         #line hidden
         
-        #line 567 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 568 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 		} 
         
         #line default
         #line hidden
         
-        #line 567 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 568 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write("\t\t\t\t}\r\n\t\t\t}\r\n\r\n\r\n\r\n");
 
         
         #line default
         #line hidden
         
-        #line 573 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 574 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 
     }
 
@@ -2061,77 +2062,77 @@ this.Write("\t\t\t\t}\r\n\t\t\t}\r\n\r\n\r\n\r\n");
         #line default
         #line hidden
         
-        #line 628 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 629 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write("    [Table(Name = \"");
 
         
         #line default
         #line hidden
         
-        #line 629 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 630 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(className));
 
         
         #line default
         #line hidden
         
-        #line 629 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 630 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write("\")]\r\n\t[ScaffoldTable(true)]\r\n\t[DebuggerDisplay(\"");
 
         
         #line default
         #line hidden
         
-        #line 631 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 632 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(className));
 
         
         #line default
         #line hidden
         
-        #line 631 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 632 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(": {");
 
         
         #line default
         #line hidden
         
-        #line 631 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 632 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(sourceIDName));
 
         
         #line default
         #line hidden
         
-        #line 631 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 632 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write("} - {");
 
         
         #line default
         #line hidden
         
-        #line 631 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 632 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(targetIDName));
 
         
         #line default
         #line hidden
         
-        #line 631 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 632 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write("}\")]\r\n\tpublic class ");
 
         
         #line default
         #line hidden
         
-        #line 632 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 633 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(className));
 
         
         #line default
         #line hidden
         
-        #line 632 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 633 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(" // : ITheBallDataContextStorable\r\n\t{\r\n        public static string GetCreateTabl" +
         "eSQL()\r\n        {\r\n            return\r\n                @\"\r\nCREATE TABLE IF NOT E" +
         "XISTS [");
@@ -2140,70 +2141,70 @@ this.Write(" // : ITheBallDataContextStorable\r\n\t{\r\n        public static st
         #line default
         #line hidden
         
-        #line 638 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 639 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(className));
 
         
         #line default
         #line hidden
         
-        #line 638 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 639 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write("](\r\n[");
 
         
         #line default
         #line hidden
         
-        #line 639 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 640 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(sourceIDName));
 
         
         #line default
         #line hidden
         
-        #line 639 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 640 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write("] TEXT NOT NULL, \r\n[");
 
         
         #line default
         #line hidden
         
-        #line 640 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 641 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(targetIDName));
 
         
         #line default
         #line hidden
         
-        #line 640 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 641 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write("] TEXT NOT NULL,\r\nPRIMARY KEY (");
 
         
         #line default
         #line hidden
         
-        #line 641 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 642 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(sourceIDName));
 
         
         #line default
         #line hidden
         
-        #line 641 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 642 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(", ");
 
         
         #line default
         #line hidden
         
-        #line 641 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 642 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(targetIDName));
 
         
         #line default
         #line hidden
         
-        #line 641 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 642 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(")\r\n)\";\r\n        }\r\n\r\n\r\n        [Column(IsPrimaryKey = true, CanBeNull = false)]\r\n" +
         "        public string ");
 
@@ -2211,14 +2212,14 @@ this.Write(")\r\n)\";\r\n        }\r\n\r\n\r\n        [Column(IsPrimaryKey = tru
         #line default
         #line hidden
         
-        #line 647 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 648 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(sourceIDName));
 
         
         #line default
         #line hidden
         
-        #line 647 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 648 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(" { get; set; }\r\n        [Column(IsPrimaryKey = true, CanBeNull = false)]\r\n       " +
         " public string ");
 
@@ -2226,287 +2227,287 @@ this.Write(" { get; set; }\r\n        [Column(IsPrimaryKey = true, CanBeNull = f
         #line default
         #line hidden
         
-        #line 649 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 650 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(targetIDName));
 
         
         #line default
         #line hidden
         
-        #line 649 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 650 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(" { get; set; }\r\n\r\n\r\n        private EntityRef<");
 
         
         #line default
         #line hidden
         
-        #line 652 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 653 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(sourceClassName));
-
-        
-        #line default
-        #line hidden
-        
-        #line 652 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
-this.Write("> _");
-
-        
-        #line default
-        #line hidden
-        
-        #line 652 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
-this.Write(this.ToStringHelper.ToStringWithCulture(sourceClassName));
-
-        
-        #line default
-        #line hidden
-        
-        #line 652 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
-this.Write(" = new EntityRef<");
-
-        
-        #line default
-        #line hidden
-        
-        #line 652 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
-this.Write(this.ToStringHelper.ToStringWithCulture(sourceClassName));
-
-        
-        #line default
-        #line hidden
-        
-        #line 652 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
-this.Write(">();\r\n        [Association(DeleteOnNull = true, IsForeignKey = true, ThisKey = \"");
 
         
         #line default
         #line hidden
         
         #line 653 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+this.Write("> _");
+
+        
+        #line default
+        #line hidden
+        
+        #line 653 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+this.Write(this.ToStringHelper.ToStringWithCulture(sourceClassName));
+
+        
+        #line default
+        #line hidden
+        
+        #line 653 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+this.Write(" = new EntityRef<");
+
+        
+        #line default
+        #line hidden
+        
+        #line 653 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+this.Write(this.ToStringHelper.ToStringWithCulture(sourceClassName));
+
+        
+        #line default
+        #line hidden
+        
+        #line 653 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+this.Write(">();\r\n        [Association(DeleteOnNull = true, IsForeignKey = true, ThisKey = \"");
+
+        
+        #line default
+        #line hidden
+        
+        #line 654 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(sourceIDName));
 
         
         #line default
         #line hidden
         
-        #line 653 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 654 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write("\", OtherKey = \"ID\", \r\n\t\t\tStorage = \"_");
 
         
         #line default
         #line hidden
         
-        #line 654 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 655 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(sourceClassName));
 
         
         #line default
         #line hidden
         
-        #line 654 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 655 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write("\", IsUnique = ");
 
         
         #line default
         #line hidden
         
-        #line 654 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 655 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture((!isCollection).ToString().ToLower()));
 
         
         #line default
         #line hidden
         
-        #line 654 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 655 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(")]\r\n        public ");
 
         
         #line default
         #line hidden
         
-        #line 655 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 656 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(sourceClassName));
 
         
         #line default
         #line hidden
         
-        #line 655 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 656 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(" ");
 
         
         #line default
         #line hidden
         
-        #line 655 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 656 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(sourceClassName));
 
         
         #line default
         #line hidden
         
-        #line 655 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 656 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(" \r\n\t\t{ \r\n\t\t\tget { return _");
 
         
         #line default
         #line hidden
         
-        #line 657 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 658 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(sourceClassName));
 
         
         #line default
         #line hidden
         
-        #line 657 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 658 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(".Entity; }\r\n\t\t\tset { _");
 
         
         #line default
         #line hidden
         
-        #line 658 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 659 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(sourceClassName));
 
         
         #line default
         #line hidden
         
-        #line 658 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 659 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(".Entity = value; }\r\n\t\t}\r\n\r\n        private EntityRef<");
 
         
         #line default
         #line hidden
         
-        #line 661 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 662 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(targetClassName));
 
         
         #line default
         #line hidden
         
-        #line 661 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 662 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write("> _");
 
         
         #line default
         #line hidden
         
-        #line 661 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 662 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(targetClassName));
 
         
         #line default
         #line hidden
         
-        #line 661 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 662 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(" = new EntityRef<");
 
         
         #line default
         #line hidden
         
-        #line 661 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 662 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(targetClassName));
 
         
         #line default
         #line hidden
         
-        #line 661 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 662 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(">();\r\n        [Association(DeleteOnNull = true, IsForeignKey = true, ThisKey = \"");
 
         
         #line default
         #line hidden
         
-        #line 662 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 663 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(targetIDName));
 
         
         #line default
         #line hidden
         
-        #line 662 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 663 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write("\", OtherKey = \"ID\", \r\n\t\t\tStorage = \"_");
 
         
         #line default
         #line hidden
         
-        #line 663 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 664 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(targetClassName));
 
         
         #line default
         #line hidden
         
-        #line 663 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 664 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write("\")]\r\n\t\tpublic ");
 
         
         #line default
         #line hidden
         
-        #line 664 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 665 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(targetClassName));
 
         
         #line default
         #line hidden
         
-        #line 664 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 665 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(" ");
 
         
         #line default
         #line hidden
         
-        #line 664 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 665 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(targetClassName));
 
         
         #line default
         #line hidden
         
-        #line 664 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 665 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(" \r\n\t\t{ \r\n\t\t\tget { return _");
 
         
         #line default
         #line hidden
         
-        #line 666 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 667 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(targetClassName));
 
         
         #line default
         #line hidden
         
-        #line 666 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 667 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(".Entity; }\r\n\t\t\tset { _");
 
         
         #line default
         #line hidden
         
-        #line 667 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 668 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(targetClassName));
 
         
         #line default
         #line hidden
         
-        #line 667 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 668 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(".Entity = value; }\r\n\t\t}\r\n\r\n    }\r\n\r\n");
 
         
         #line default
         #line hidden
         
-        #line 672 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 673 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 
     }
 
@@ -2528,49 +2529,49 @@ this.Write(".Entity = value; }\r\n\t\t}\r\n\r\n    }\r\n\r\n");
         #line default
         #line hidden
         
-        #line 688 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 689 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write("    [Table(Name = \"");
 
         
         #line default
         #line hidden
         
-        #line 689 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 690 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(objectName));
 
         
         #line default
         #line hidden
         
-        #line 689 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 690 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write("\")]\r\n\t[ScaffoldTable(true)]\r\n\t[DebuggerDisplay(\"");
 
         
         #line default
         #line hidden
         
-        #line 691 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 692 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(objectName));
 
         
         #line default
         #line hidden
         
-        #line 691 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 692 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(": {ID}\")]\r\n\tpublic class ");
 
         
         #line default
         #line hidden
         
-        #line 692 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 693 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(objectName));
 
         
         #line default
         #line hidden
         
-        #line 692 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 693 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(@" : ITheBallDataContextStorable
 	{
 
@@ -2591,21 +2592,21 @@ this.Write(@" : ITheBallDataContextStorable
         #line default
         #line hidden
         
-        #line 706 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 707 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(objectName));
 
         
         #line default
         #line hidden
         
-        #line 706 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 707 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write("() \r\n\t\t{\r\n\t\t\tID = Guid.NewGuid().ToString();\r\n\t\t\tETag = String.Empty;\r\n\t\t}\r\n\r\n");
 
         
         #line default
         #line hidden
         
-        #line 712 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 713 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 
 		InformationItemsType itemsType = informationObject.Item as InformationItemsType;
 		CollectionForType collectionType = informationObject.Item as CollectionForType;
@@ -2622,7 +2623,7 @@ this.Write("() \r\n\t\t{\r\n\t\t\tID = Guid.NewGuid().ToString();\r\n\t\t\tETag 
         #line default
         #line hidden
         
-        #line 723 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 724 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write("\t\t//[Column(IsPrimaryKey = true)]\r\n        [ScaffoldColumn(true)]\r\n        [Edita" +
         "ble(false)]\r\n\t\tpublic string CollectionItemID { get; set; }\r\n");
 
@@ -2630,7 +2631,7 @@ this.Write("\t\t//[Column(IsPrimaryKey = true)]\r\n        [ScaffoldColumn(true)
         #line default
         #line hidden
         
-        #line 728 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 729 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 
         }
 
@@ -2638,14 +2639,14 @@ this.Write("\t\t//[Column(IsPrimaryKey = true)]\r\n        [ScaffoldColumn(true)
         #line default
         #line hidden
         
-        #line 730 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 731 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write("\t}\r\n");
 
         
         #line default
         #line hidden
         
-        #line 732 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 733 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 
     }
 
@@ -2656,14 +2657,14 @@ this.Write("\t}\r\n");
         #line default
         #line hidden
         
-        #line 737 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 738 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write("        public void PrepareForStoring(bool isInitialInsert)\r\n        {\r\n\t\t}\r\n");
 
         
         #line default
         #line hidden
         
-        #line 741 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 742 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 
     }
 
@@ -2678,14 +2679,14 @@ this.Write("        public void PrepareForStoring(bool isInitialInsert)\r\n     
         #line default
         #line hidden
         
-        #line 750 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 751 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write("        public void PrepareForStoring(bool isInitialInsert)\r\n        {\r\n\t\t\r\n");
 
         
         #line default
         #line hidden
         
-        #line 754 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 755 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 
 		foreach(var stringItem in stringItems) 
 		{
@@ -2694,42 +2695,42 @@ this.Write("        public void PrepareForStoring(bool isInitialInsert)\r\n     
         #line default
         #line hidden
         
-        #line 757 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 758 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write("\t\t\tif(");
 
         
         #line default
         #line hidden
         
-        #line 758 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 759 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(stringItem.name));
 
         
         #line default
         #line hidden
         
-        #line 758 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 759 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(" == null)\r\n\t\t\t\t");
 
         
         #line default
         #line hidden
         
-        #line 759 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 760 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(stringItem.name));
 
         
         #line default
         #line hidden
         
-        #line 759 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 760 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(" = string.Empty;\r\n");
 
         
         #line default
         #line hidden
         
-        #line 760 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 761 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 			
         }
 		foreach(var item in customsStorableObjects) 
@@ -2740,56 +2741,56 @@ this.Write(" = string.Empty;\r\n");
         #line default
         #line hidden
         
-        #line 765 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 766 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write("            if (_Is");
 
         
         #line default
         #line hidden
         
-        #line 766 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 767 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(item.name));
 
         
         #line default
         #line hidden
         
-        #line 766 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 767 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write("Changed || isInitialInsert)\r\n            {\r\n                var dataToStore = ");
 
         
         #line default
         #line hidden
         
-        #line 768 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 769 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(item.name));
 
         
         #line default
         #line hidden
         
-        #line 768 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 769 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(".ToArray();\r\n                ");
 
         
         #line default
         #line hidden
         
-        #line 769 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 770 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(item.name));
 
         
         #line default
         #line hidden
         
-        #line 769 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 770 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write("Data = JsonConvert.SerializeObject(dataToStore);\r\n            }\r\n\r\n");
 
         
         #line default
         #line hidden
         
-        #line 772 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 773 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 
         }
 
@@ -2798,14 +2799,14 @@ this.Write("Data = JsonConvert.SerializeObject(dataToStore);\r\n            }\r\
         #line default
         #line hidden
         
-        #line 775 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 776 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write("\t\t}\r\n");
 
         
         #line default
         #line hidden
         
-        #line 777 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 778 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 
     }
 
@@ -2816,7 +2817,7 @@ this.Write("\t\t}\r\n");
         #line default
         #line hidden
         
-        #line 782 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 783 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write("        public static string GetCreateTableSQL()\r\n        {\r\n            return\r\n" +
         "                @\"\r\nCREATE TABLE IF NOT EXISTS [");
 
@@ -2824,14 +2825,14 @@ this.Write("        public static string GetCreateTableSQL()\r\n        {\r\n   
         #line default
         #line hidden
         
-        #line 787 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 788 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(informationObjectName));
 
         
         #line default
         #line hidden
         
-        #line 787 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 788 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write("](\r\n[ID] TEXT NOT NULL, \r\n[CollectionItemID] TEXT NOT NULL, \r\n[ETag] TEXT NOT NUL" +
         "L,\r\n\tPRIMARY KEY (ID) )\";\r\n        }\r\n\r\n");
 
@@ -2839,7 +2840,7 @@ this.Write("](\r\n[ID] TEXT NOT NULL, \r\n[CollectionItemID] TEXT NOT NULL, \r\n
         #line default
         #line hidden
         
-        #line 794 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 795 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 
 	}
 
@@ -2850,7 +2851,7 @@ this.Write("](\r\n[ID] TEXT NOT NULL, \r\n[CollectionItemID] TEXT NOT NULL, \r\n
         #line default
         #line hidden
         
-        #line 799 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 800 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write("        public static string GetCreateTableSQL()\r\n        {\r\n            return\r\n" +
         "                @\"\r\nCREATE TABLE IF NOT EXISTS [");
 
@@ -2858,21 +2859,21 @@ this.Write("        public static string GetCreateTableSQL()\r\n        {\r\n   
         #line default
         #line hidden
         
-        #line 804 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 805 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(informationObjectName));
 
         
         #line default
         #line hidden
         
-        #line 804 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 805 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write("](\r\n[ID] TEXT NOT NULL PRIMARY KEY, \r\n[ETag] TEXT NOT NULL\r\n");
 
         
         #line default
         #line hidden
         
-        #line 807 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 808 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 
 			var itemArray = informationItems.Select(item => {
 				Tuple<string, string, string> fieldData = GetSQLFieldNameDataTypeNullDeclaration(item);
@@ -2891,21 +2892,21 @@ this.Write("](\r\n[ID] TEXT NOT NULL PRIMARY KEY, \r\n[ETag] TEXT NOT NULL\r\n")
         #line default
         #line hidden
         
-        #line 820 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 821 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(wholePart));
 
         
         #line default
         #line hidden
         
-        #line 820 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 821 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write("\r\n)\";\r\n        }\r\n\r\n");
 
         
         #line default
         #line hidden
         
-        #line 824 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 825 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 
     }
 
@@ -2980,182 +2981,182 @@ this.Write("\r\n)\";\r\n        }\r\n\r\n");
         #line default
         #line hidden
         
-        #line 893 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 894 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write("\t\tprivate ");
 
         
         #line default
         #line hidden
         
-        #line 894 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 895 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(entityRefType));
 
         
         #line default
         #line hidden
         
-        #line 894 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 895 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write("<");
 
         
         #line default
         #line hidden
         
-        #line 894 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 895 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(targetClassName));
 
         
         #line default
         #line hidden
         
-        #line 894 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 895 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write("> ");
 
         
         #line default
         #line hidden
         
-        #line 894 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 895 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(fieldName));
 
         
         #line default
         #line hidden
         
-        #line 894 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 895 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(" = new ");
 
         
         #line default
         #line hidden
         
-        #line 894 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 895 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(entityRefType));
 
         
         #line default
         #line hidden
         
-        #line 894 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 895 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write("<");
 
         
         #line default
         #line hidden
         
-        #line 894 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 895 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(targetClassName));
 
         
         #line default
         #line hidden
         
-        #line 894 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 895 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(">();\r\n        [Association(ThisKey = \"ID\", OtherKey = \"");
 
         
         #line default
         #line hidden
         
-        #line 895 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 896 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(sourceIDName));
 
         
         #line default
         #line hidden
         
-        #line 895 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 896 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write("\", Storage=\"");
 
         
         #line default
         #line hidden
         
-        #line 895 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 896 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(fieldName));
 
         
         #line default
         #line hidden
         
-        #line 895 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 896 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write("\")]\r\n        public ");
 
         
         #line default
         #line hidden
         
-        #line 896 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 897 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(entityRefType));
 
         
         #line default
         #line hidden
         
-        #line 896 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 897 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write("<");
 
         
         #line default
         #line hidden
         
-        #line 896 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 897 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(targetClassName));
 
         
         #line default
         #line hidden
         
-        #line 896 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 897 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write("> ");
 
         
         #line default
         #line hidden
         
-        #line 896 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 897 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(propertyName));
 
         
         #line default
         #line hidden
         
-        #line 896 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 897 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(" { \r\n\t\t\tget { return ");
 
         
         #line default
         #line hidden
         
-        #line 897 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 898 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(fieldName));
 
         
         #line default
         #line hidden
         
-        #line 897 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 898 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write("; }\r\n\t\t\tset { ");
 
         
         #line default
         #line hidden
         
-        #line 898 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 899 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(fieldName));
 
         
         #line default
         #line hidden
         
-        #line 898 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 899 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(".Assign(value); }\r\n\t\t}\r\n\r\n");
 
         
         #line default
         #line hidden
         
-        #line 901 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 902 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 
         } else {
 
@@ -3164,168 +3165,168 @@ this.Write(".Assign(value); }\r\n\t\t}\r\n\r\n");
         #line default
         #line hidden
         
-        #line 904 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 905 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write("\t\tprivate ");
 
         
         #line default
         #line hidden
         
-        #line 905 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 906 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(entityRefType));
 
         
         #line default
         #line hidden
         
-        #line 905 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 906 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write("<");
 
         
         #line default
         #line hidden
         
-        #line 905 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 906 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(targetClassName));
 
         
         #line default
         #line hidden
         
-        #line 905 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 906 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write("> ");
 
         
         #line default
         #line hidden
         
-        #line 905 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 906 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(fieldName));
 
         
         #line default
         #line hidden
         
-        #line 905 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 906 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(" = new ");
 
         
         #line default
         #line hidden
         
-        #line 905 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 906 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(entityRefType));
 
         
         #line default
         #line hidden
         
-        #line 905 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 906 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write("<");
 
         
         #line default
         #line hidden
         
-        #line 905 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 906 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(targetClassName));
 
         
         #line default
         #line hidden
         
-        #line 905 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 906 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(">();\r\n        [Association(ThisKey = \"ID\", OtherKey = \"");
 
         
         #line default
         #line hidden
         
-        #line 906 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 907 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(sourceIDName));
 
         
         #line default
         #line hidden
         
-        #line 906 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 907 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write("\", Storage=\"");
 
         
         #line default
         #line hidden
         
-        #line 906 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 907 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(fieldName));
 
         
         #line default
         #line hidden
         
-        #line 906 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 907 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write("\")]\r\n        public ");
 
         
         #line default
         #line hidden
         
-        #line 907 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 908 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(targetClassName));
 
         
         #line default
         #line hidden
         
-        #line 907 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 908 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(" ");
 
         
         #line default
         #line hidden
         
-        #line 907 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 908 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(propertyName));
 
         
         #line default
         #line hidden
         
-        #line 907 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 908 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(" \r\n\t\t{ \r\n\t\t\tget { return ");
 
         
         #line default
         #line hidden
         
-        #line 909 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 910 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(fieldName));
 
         
         #line default
         #line hidden
         
-        #line 909 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 910 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(".Entity; }\r\n\t\t\tset { ");
 
         
         #line default
         #line hidden
         
-        #line 910 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 911 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(fieldName));
 
         
         #line default
         #line hidden
         
-        #line 910 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 911 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(".Entity = value; }\r\n\t\t}\r\n\r\n");
 
         
         #line default
         #line hidden
         
-        #line 913 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 914 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 
         }
     }
@@ -3349,140 +3350,140 @@ this.Write(".Entity = value; }\r\n\t\t}\r\n\r\n");
         #line default
         #line hidden
         
-        #line 931 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 932 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write("\t\t\t[Column]\r\n\t\t\tpublic string ");
 
         
         #line default
         #line hidden
         
-        #line 933 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 934 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(idPropName));
 
         
         #line default
         #line hidden
         
-        #line 933 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 934 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(" { get; set; }\r\n\t\t\tprivate EntityRef< ");
 
         
         #line default
         #line hidden
         
-        #line 934 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 935 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(objectName));
 
         
         #line default
         #line hidden
         
-        #line 934 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 935 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(" > _");
 
         
         #line default
         #line hidden
         
-        #line 934 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 935 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(objectPropName));
 
         
         #line default
         #line hidden
         
-        #line 934 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 935 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(";\r\n\t\t\t[Association(Storage = \"_");
 
         
         #line default
         #line hidden
         
-        #line 935 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 936 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(objectPropName));
 
         
         #line default
         #line hidden
         
-        #line 935 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 936 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write("\", ThisKey = \"");
 
         
         #line default
         #line hidden
         
-        #line 935 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 936 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(idPropName));
 
         
         #line default
         #line hidden
         
-        #line 935 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 936 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write("\")]\r\n\t\t\tpublic ");
 
         
         #line default
         #line hidden
         
-        #line 936 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 937 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(objectName));
 
         
         #line default
         #line hidden
         
-        #line 936 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 937 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(" ");
 
         
         #line default
         #line hidden
         
-        #line 936 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 937 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(objectPropName));
 
         
         #line default
         #line hidden
         
-        #line 936 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 937 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write("\r\n\t\t\t{\r\n\t\t\t\tget { return this._");
 
         
         #line default
         #line hidden
         
-        #line 938 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 939 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(objectPropName));
 
         
         #line default
         #line hidden
         
-        #line 938 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 939 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(".Entity; }\r\n\t\t\t\tset { this._");
 
         
         #line default
         #line hidden
         
-        #line 939 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 940 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(objectPropName));
 
         
         #line default
         #line hidden
         
-        #line 939 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 940 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(".Entity = value; }\r\n\t\t\t}\r\n");
 
         
         #line default
         #line hidden
         
-        #line 941 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 942 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 
 
         } else if(objectType == ObjectType.MediaContent) {
@@ -3493,28 +3494,28 @@ this.Write(".Entity = value; }\r\n\t\t\t}\r\n");
         #line default
         #line hidden
         
-        #line 946 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 947 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write("\t\t\t[Column]\r\n\t\t\tpublic string ");
 
         
         #line default
         #line hidden
         
-        #line 948 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 949 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(idPropName));
 
         
         #line default
         #line hidden
         
-        #line 948 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 949 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(" { get; set; }\r\n");
 
         
         #line default
         #line hidden
         
-        #line 949 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 950 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 
         } else { // items
 			string objectPropName = item.name;
@@ -3524,140 +3525,140 @@ this.Write(" { get; set; }\r\n");
         #line default
         #line hidden
         
-        #line 953 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 954 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write("\t\t\t[Column]\r\n\t\t\tpublic string ");
 
         
         #line default
         #line hidden
         
-        #line 955 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 956 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(idPropName));
 
         
         #line default
         #line hidden
         
-        #line 955 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 956 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(" { get; set; }\r\n\t\t\tprivate EntityRef< ");
 
         
         #line default
         #line hidden
         
-        #line 956 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 957 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(objectName));
 
         
         #line default
         #line hidden
         
-        #line 956 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 957 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(" > _");
 
         
         #line default
         #line hidden
         
-        #line 956 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 957 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(objectPropName));
 
         
         #line default
         #line hidden
         
-        #line 956 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 957 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(";\r\n\t\t\t[Association(Storage = \"_");
 
         
         #line default
         #line hidden
         
-        #line 957 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 958 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(objectPropName));
 
         
         #line default
         #line hidden
         
-        #line 957 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 958 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write("\", ThisKey = \"");
 
         
         #line default
         #line hidden
         
-        #line 957 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 958 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(idPropName));
 
         
         #line default
         #line hidden
         
-        #line 957 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 958 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write("\")]\r\n\t\t\tpublic ");
 
         
         #line default
         #line hidden
         
-        #line 958 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 959 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(objectName));
 
         
         #line default
         #line hidden
         
-        #line 958 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 959 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(" ");
 
         
         #line default
         #line hidden
         
-        #line 958 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 959 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(objectPropName));
 
         
         #line default
         #line hidden
         
-        #line 958 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 959 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write("\r\n\t\t\t{\r\n\t\t\t\tget { return this._");
 
         
         #line default
         #line hidden
         
-        #line 960 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 961 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(objectPropName));
 
         
         #line default
         #line hidden
         
-        #line 960 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 961 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(".Entity; }\r\n\t\t\t\tset { this._");
 
         
         #line default
         #line hidden
         
-        #line 961 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 962 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(objectPropName));
 
         
         #line default
         #line hidden
         
-        #line 961 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 962 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(".Entity = value; }\r\n\t\t\t}\r\n\r\n");
 
         
         #line default
         #line hidden
         
-        #line 964 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 965 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 
         }
     }
@@ -3678,147 +3679,147 @@ this.Write(".Entity = value; }\r\n\t\t\t}\r\n\r\n");
         #line default
         #line hidden
         
-        #line 979 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 980 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write("        [Column(Name = \"");
 
         
         #line default
         #line hidden
         
-        #line 980 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 981 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(item.name));
 
         
         #line default
         #line hidden
         
-        #line 980 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 981 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write("\")] \r\n        [ScaffoldColumn(true)]\r\n\t\tpublic string ");
 
         
         #line default
         #line hidden
         
-        #line 982 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 983 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(item.name));
 
         
         #line default
         #line hidden
         
-        #line 982 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 983 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write("Data { get; set; }\r\n\r\n        private bool _Is");
 
         
         #line default
         #line hidden
         
-        #line 984 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 985 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(item.name));
 
         
         #line default
         #line hidden
         
-        #line 984 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 985 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write("Retrieved = false;\r\n        private bool _Is");
 
         
         #line default
         #line hidden
         
-        #line 985 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 986 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(item.name));
 
         
         #line default
         #line hidden
         
-        #line 985 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 986 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write("Changed = false;\r\n        private ObservableCollection<");
 
         
         #line default
         #line hidden
         
-        #line 986 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 987 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(dataType));
 
         
         #line default
         #line hidden
         
-        #line 986 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 987 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write("> _");
 
         
         #line default
         #line hidden
         
-        #line 986 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 987 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(item.name));
 
         
         #line default
         #line hidden
         
-        #line 986 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 987 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(" = null;\r\n        public ObservableCollection<");
 
         
         #line default
         #line hidden
         
-        #line 987 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 988 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(dataType));
 
         
         #line default
         #line hidden
         
-        #line 987 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 988 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write("> ");
 
         
         #line default
         #line hidden
         
-        #line 987 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 988 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(item.name));
 
         
         #line default
         #line hidden
         
-        #line 987 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 988 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write("\r\n        {\r\n            get\r\n            {\r\n                if (!_Is");
 
         
         #line default
         #line hidden
         
-        #line 991 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 992 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(item.name));
 
         
         #line default
         #line hidden
         
-        #line 991 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 992 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write("Retrieved)\r\n                {\r\n                    if (");
 
         
         #line default
         #line hidden
         
-        #line 993 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 994 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(item.name));
 
         
         #line default
         #line hidden
         
-        #line 993 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 994 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write("Data != null)\r\n                    {\r\n                        var arrayData = Jso" +
         "nConvert.DeserializeObject<");
 
@@ -3826,56 +3827,56 @@ this.Write("Data != null)\r\n                    {\r\n                        va
         #line default
         #line hidden
         
-        #line 995 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 996 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(dataType));
 
         
         #line default
         #line hidden
         
-        #line 995 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 996 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write("[]>(");
 
         
         #line default
         #line hidden
         
-        #line 995 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 996 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(item.name));
 
         
         #line default
         #line hidden
         
-        #line 995 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 996 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write("Data);\r\n                        _");
 
         
         #line default
         #line hidden
         
-        #line 996 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 997 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(item.name));
 
         
         #line default
         #line hidden
         
-        #line 996 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 997 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(" = new ObservableCollection<");
 
         
         #line default
         #line hidden
         
-        #line 996 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 997 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(dataType));
 
         
         #line default
         #line hidden
         
-        #line 996 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 997 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(">(arrayData);\r\n                    }\r\n                    else\r\n                 " +
         "   {\r\n                        _");
 
@@ -3883,140 +3884,140 @@ this.Write(">(arrayData);\r\n                    }\r\n                    else\r
         #line default
         #line hidden
         
-        #line 1000 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 1001 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(item.name));
 
         
         #line default
         #line hidden
         
-        #line 1000 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 1001 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(" = new ObservableCollection<");
 
         
         #line default
         #line hidden
         
-        #line 1000 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 1001 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(dataType));
 
         
         #line default
         #line hidden
         
-        #line 1000 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 1001 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(">();\r\n\t\t\t\t\t\t");
 
         
         #line default
         #line hidden
         
-        #line 1001 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 1002 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(item.name));
 
         
         #line default
         #line hidden
         
-        #line 1001 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 1002 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write("Data = Guid.NewGuid().ToString();\r\n\t\t\t\t\t\t_Is");
 
         
         #line default
         #line hidden
         
-        #line 1002 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 1003 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(item.name));
 
         
         #line default
         #line hidden
         
-        #line 1002 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 1003 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write("Changed = true;\r\n                    }\r\n                    _Is");
 
         
         #line default
         #line hidden
         
-        #line 1004 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 1005 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(item.name));
 
         
         #line default
         #line hidden
         
-        #line 1004 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 1005 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write("Retrieved = true;\r\n                    _");
 
         
         #line default
         #line hidden
         
-        #line 1005 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 1006 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(item.name));
 
         
         #line default
         #line hidden
         
-        #line 1005 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 1006 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(".CollectionChanged += (sender, args) =>\r\n\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\t");
 
         
         #line default
         #line hidden
         
-        #line 1007 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 1008 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(item.name));
 
         
         #line default
         #line hidden
         
-        #line 1007 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 1008 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write("Data = Guid.NewGuid().ToString();\r\n\t\t\t\t\t\t\t_Is");
 
         
         #line default
         #line hidden
         
-        #line 1008 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 1009 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(item.name));
 
         
         #line default
         #line hidden
         
-        #line 1008 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 1009 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write("Changed = true;\r\n\t\t\t\t\t\t};\r\n                }\r\n                return _");
 
         
         #line default
         #line hidden
         
-        #line 1011 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 1012 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(item.name));
 
         
         #line default
         #line hidden
         
-        #line 1011 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 1012 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(";\r\n            }\r\n            set \r\n\t\t\t{ \r\n\t\t\t\t_");
 
         
         #line default
         #line hidden
         
-        #line 1015 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 1016 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(item.name));
 
         
         #line default
         #line hidden
         
-        #line 1015 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 1016 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(" = value; \r\n                // Reset the data field to unique value\r\n            " +
         "    // to trigger change on object, just in case nothing else changed\r\n         " +
         "       _Is");
@@ -4025,49 +4026,49 @@ this.Write(" = value; \r\n                // Reset the data field to unique valu
         #line default
         #line hidden
         
-        #line 1018 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 1019 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(item.name));
 
         
         #line default
         #line hidden
         
-        #line 1018 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 1019 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write("Retrieved = true;\r\n                ");
 
         
         #line default
         #line hidden
         
-        #line 1019 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 1020 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(item.name));
 
         
         #line default
         #line hidden
         
-        #line 1019 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 1020 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write("Data = Guid.NewGuid().ToString();\r\n                _Is");
 
         
         #line default
         #line hidden
         
-        #line 1020 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 1021 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(item.name));
 
         
         #line default
         #line hidden
         
-        #line 1020 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 1021 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write("Changed = true;\r\n\r\n\t\t\t}\r\n        }\r\n\r\n");
 
         
         #line default
         #line hidden
         
-        #line 1025 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 1026 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 
         } else {
 
@@ -4075,70 +4076,70 @@ this.Write("Changed = true;\r\n\r\n\t\t\t}\r\n        }\r\n\r\n");
         #line default
         #line hidden
         
-        #line 1027 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 1028 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write("\r\n\t\t[Column]\r\n        [ScaffoldColumn(true)]\r\n\t\tpublic ");
 
         
         #line default
         #line hidden
         
-        #line 1031 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 1032 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(dataType));
 
         
         #line default
         #line hidden
         
-        #line 1031 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 1032 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(" ");
 
         
         #line default
         #line hidden
         
-        #line 1031 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 1032 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(item.name));
 
         
         #line default
         #line hidden
         
-        #line 1031 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 1032 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(" { get; set; }\r\n\t\t// private ");
 
         
         #line default
         #line hidden
         
-        #line 1032 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 1033 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(dataType));
 
         
         #line default
         #line hidden
         
-        #line 1032 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 1033 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(" _unmodified_");
 
         
         #line default
         #line hidden
         
-        #line 1032 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 1033 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(item.name));
 
         
         #line default
         #line hidden
         
-        #line 1032 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 1033 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 this.Write(";\r\n");
 
         
         #line default
         #line hidden
         
-        #line 1033 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
+        #line 1034 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt"
 
         }
 	}

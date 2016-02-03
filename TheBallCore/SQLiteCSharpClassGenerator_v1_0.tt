@@ -560,8 +560,9 @@ using System.Threading.Tasks;
 					{
 						//var objectToDelete = new <#= informationObject.name #> {ID = deleteData.ObjectID};
 						//<#= informationObject.name #>Table.Attach(objectToDelete);
-						var objectToDelete = <#= informationObject.name #>Table.Single(item => item.ID == deleteData.ObjectID);
-						<#= informationObject.name #>Table.DeleteOnSubmit(objectToDelete);
+						var objectToDelete = <#= informationObject.name #>Table.SingleOrDefault(item => item.ID == deleteData.ObjectID);
+						if(objectToDelete != null)
+							<#= informationObject.name #>Table.DeleteOnSubmit(objectToDelete);
 						break;
 					}
 <#+		} #>
