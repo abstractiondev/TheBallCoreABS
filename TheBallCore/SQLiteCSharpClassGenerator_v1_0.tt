@@ -321,6 +321,9 @@ using System.Threading.Tasks;
 		    {
                 if(updateData.SemanticDomain != "<#= CurrInstance.semanticDomainName #>")
                     throw new InvalidDataException("Mismatch on domain data");
+
+				switch(updateData.ObjectType)
+				{
 <#+
 		foreach(InformationObjectType informationObject in tableObjects) 
         {
@@ -328,7 +331,7 @@ using System.Threading.Tasks;
 			if(itemsType != null) {
 				var currentSupportedItems = GetSupportedInformationItems(itemsType.InformationItem);
 #>
-		        if (updateData.ObjectType == "<#= informationObject.name #>")
+		        case "<#= informationObject.name #>":
 		        {
 		            string currentFullStoragePath = Path.Combine(storageRootPath, updateData.CurrentStoragePath);
 		            var serializedObject = 
@@ -409,12 +412,13 @@ using System.Threading.Tasks;
 					}
                 }
 			#>
-		            return;
+		            break;
 		        } 
 <#+
             }
         }
 #>
+				}
 		    }
 
 <#+
@@ -431,6 +435,9 @@ using System.Threading.Tasks;
                 if (insertData.SemanticDomain != "<#= CurrInstance.semanticDomainName #>")
                     throw new InvalidDataException("Mismatch on domain data");
                 InformationObjectMetaDataTable.InsertOnSubmit(insertData);
+
+				switch(insertData.ObjectType)
+				{
 <#+
 		foreach(InformationObjectType informationObject in tableObjects) 
         {
@@ -438,7 +445,7 @@ using System.Threading.Tasks;
 			if(itemsType != null) {
 				var currentSupportedItems = GetSupportedInformationItems(itemsType.InformationItem);
 #>
-                if (insertData.ObjectType == "<#= informationObject.name #>")
+                case "<#= informationObject.name #>":
                 {
                     string currentFullStoragePath = Path.Combine(storageRootPath, insertData.CurrentStoragePath);
                     var serializedObject =
@@ -517,11 +524,12 @@ using System.Threading.Tasks;
                 }
 			 #>
 					<#= informationObject.name #>Table.InsertOnSubmit(objectToAdd);
-                    return;
+                    break;
                 }
 <#+			}
         }
  #>
+				}
             }
 
 
@@ -539,21 +547,26 @@ using System.Threading.Tasks;
                 if (deleteData.SemanticDomain != "<#= CurrInstance.semanticDomainName #>")
                     throw new InvalidDataException("Mismatch on domain data");
 				InformationObjectMetaDataTable.DeleteOnSubmit(deleteData);
+
+				switch(deleteData.ObjectType)
+				{
 <#+
 		foreach(InformationObjectType informationObject in tableObjects) 
         {
 				InformationItemsType itemsType = informationObject.Item as InformationItemsType;
 
 #>
-		        if (deleteData.ObjectType == "<#= informationObject.name #>")
-		        {
-		            var objectToDelete = new <#= informationObject.name #> {ID = deleteData.ID};
-                    <#= informationObject.name #>Table.Attach(objectToDelete);
-                    <#= informationObject.name #>Table.DeleteOnSubmit(objectToDelete);
-		            return;
-		        }
+					case "<#= informationObject.name #>":
+					{
+						//var objectToDelete = new <#= informationObject.name #> {ID = deleteData.ObjectID};
+						//<#= informationObject.name #>Table.Attach(objectToDelete);
+						var objectToDelete = <#= informationObject.name #>Table.Single(item => item.ID == deleteData.ObjectID);
+						<#= informationObject.name #>Table.DeleteOnSubmit(objectToDelete);
+						break;
+					}
 <#+		} #>
-		    }
+				}
+			}
 
 
 
