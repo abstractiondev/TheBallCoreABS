@@ -333,7 +333,7 @@ using TheBall.CORE;
 					if(iObject.IsIndependentMaster == false)
 						throw new NotSupportedException("Cannot retrieve master for non-master type: <#= informationObjectName #>");
 					initiated = false;
-					VirtualOwner owner = VirtualOwner.FigureOwner(this);
+					var owner = VirtualOwner.FigureOwner(this);
 					var master = StorageSupport.RetrieveInformation(RelativeLocation, typeof(<#= informationObjectName #>), null, owner);
 					if(master == null && initiateIfMissing)
 					{
@@ -563,7 +563,7 @@ using TheBall.CORE;
 				string IInformationCollection.GetMasterLocation()
 				{
 <#+			if(isMasterCollection) { #>
-					VirtualOwner owner = VirtualOwner.FigureOwner(this);
+					var owner = VirtualOwner.FigureOwner(this);
 					return GetMasterCollectionLocation(owner);
 <#+			} else { #>
 					throw new NotSupportedException("Master collection location only supported for master collections");
@@ -574,7 +574,7 @@ using TheBall.CORE;
 				IInformationCollection IInformationCollection.GetMasterInstance()
 				{
 <#+			if(isMasterCollection) { #>
-					VirtualOwner owner = VirtualOwner.FigureOwner(this);
+					var owner = VirtualOwner.FigureOwner(this);
 					return GetMasterCollectionInstance(owner);
 <#+			} else { #>
 					throw new NotSupportedException("Master collection instance only supported for master collections");
@@ -587,7 +587,7 @@ using TheBall.CORE;
 				{
 					string dummyItemLocation = ObjectStorage.GetRelativeLocationFromID<<#= contentObjectName #>>("dummy");
 					string nonOwnerDirectoryLocation = StorageSupport.GetParentDirectoryTarget(dummyItemLocation);
-					VirtualOwner owner = VirtualOwner.FigureOwner(this);
+					var owner = VirtualOwner.FigureOwner(this);
 					string ownerDirectoryLocation = StorageSupport.GetOwnerContentLocation(owner, nonOwnerDirectoryLocation);
 					return ownerDirectoryLocation;
 				}
@@ -610,7 +610,7 @@ using TheBall.CORE;
             } else if(isDerivedCollection) {
 #>
 					// CollectionToCollection
-					VirtualOwner owner = VirtualOwner.FigureOwner(this);
+					var owner = VirtualOwner.FigureOwner(this);
 					var masterCollection = <#= derivedMasterCollName #>.GetMasterCollectionInstance(owner);
 					this.RefreshContentFromMaster(masterCollection);
 <#+

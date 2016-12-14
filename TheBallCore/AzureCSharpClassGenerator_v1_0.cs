@@ -817,9 +817,8 @@ this.Write(this.ToStringHelper.ToStringWithCulture(informationObjectName));
         #line hidden
         
         #line 334 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
-this.Write("\");\r\n\t\t\t\t\tinitiated = false;\r\n\t\t\t\t\tVirtualOwner owner = VirtualOwner.FigureOwner(" +
-        "this);\r\n\t\t\t\t\tvar master = StorageSupport.RetrieveInformation(RelativeLocation, t" +
-        "ypeof(");
+this.Write("\");\r\n\t\t\t\t\tinitiated = false;\r\n\t\t\t\t\tvar owner = VirtualOwner.FigureOwner(this);\r\n\t" +
+        "\t\t\t\tvar master = StorageSupport.RetrieveInformation(RelativeLocation, typeof(");
 
         
         #line default
@@ -1358,8 +1357,8 @@ this.Write(";\r\n\t\t\t\t\t}\r\n\t\t\t\t}\r\n\r\n\t\t\t\tstring IInformationColl
         #line hidden
         
         #line 565 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
-this.Write("\t\t\t\t\tVirtualOwner owner = VirtualOwner.FigureOwner(this);\r\n\t\t\t\t\treturn GetMasterC" +
-        "ollectionLocation(owner);\r\n");
+this.Write("\t\t\t\t\tvar owner = VirtualOwner.FigureOwner(this);\r\n\t\t\t\t\treturn GetMasterCollection" +
+        "Location(owner);\r\n");
 
         
         #line default
@@ -1400,8 +1399,8 @@ this.Write("\t\t\t\t\t\r\n\t\t\t\t}\r\n\r\n\t\t\t\tIInformationCollection IInfor
         #line hidden
         
         #line 576 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
-this.Write("\t\t\t\t\tVirtualOwner owner = VirtualOwner.FigureOwner(this);\r\n\t\t\t\t\treturn GetMasterC" +
-        "ollectionInstance(owner);\r\n");
+this.Write("\t\t\t\t\tvar owner = VirtualOwner.FigureOwner(this);\r\n\t\t\t\t\treturn GetMasterCollection" +
+        "Instance(owner);\r\n");
 
         
         #line default
@@ -1445,7 +1444,7 @@ this.Write(this.ToStringHelper.ToStringWithCulture(contentObjectName));
         #line 588 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
 this.Write(@">(""dummy"");
 					string nonOwnerDirectoryLocation = StorageSupport.GetParentDirectoryTarget(dummyItemLocation);
-					VirtualOwner owner = VirtualOwner.FigureOwner(this);
+					var owner = VirtualOwner.FigureOwner(this);
 					string ownerDirectoryLocation = StorageSupport.GetOwnerContentLocation(owner, nonOwnerDirectoryLocation);
 					return ownerDirectoryLocation;
 				}
@@ -1515,8 +1514,8 @@ this.Write(") obj));\r\n            \r\n");
         #line hidden
         
         #line 611 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\AzureCSharpClassGenerator_v1_0.tt"
-this.Write("\t\t\t\t\t// CollectionToCollection\r\n\t\t\t\t\tVirtualOwner owner = VirtualOwner.FigureOwne" +
-        "r(this);\r\n\t\t\t\t\tvar masterCollection = ");
+this.Write("\t\t\t\t\t// CollectionToCollection\r\n\t\t\t\t\tvar owner = VirtualOwner.FigureOwner(this);\r" +
+        "\n\t\t\t\t\tvar masterCollection = ");
 
         
         #line default
