@@ -1,0 +1,154 @@
+﻿<#@ template debug="true" hostSpecific="true" #>
+<#@ output extension="?" #>
+<#@ Assembly Name="System.Core.dll" #>
+<#@ Assembly Name="System.Xml.dll" #>
+<#@ Assembly Name="System.Xml.Linq.dll" #>
+<#@ Assembly Name="System.Windows.Forms.dll" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Xml" #>
+<#@ import namespace="System.Xml.Serialization" #>
+<#@ import namespace="System.Diagnostics" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Xml.Linq" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #> 
+<#@ include file="..\..\abscommon\CommonInclude\Common\CommonCodeblocks.ttinclude" #>
+<#@ include file="TheBallCore_v1_0.ttinclude" #>
+<#   
+	// Set abstraction specific type and single file specific extension
+	//TransformGenerator< ClassModelAbstractionType >(GenerateRoot, ".designer.cs");	
+	GenerateRoot();
+#>
+<#+ 
+	public Tuple<string, string>[] GetGeneratorContent(params string[] xmlFileNames)
+	{
+		List<Tuple<string, string>> result = new List<Tuple<string, string>>();
+		foreach(string xmlFileName in xmlFileNames)
+		{
+			TheBallCoreAbstractionType abs = LoadXml<TheBallCoreAbstractionType>(xmlFileName);
+			CurrentAbstraction = abs;
+			this.GenerationEnvironment.Clear();
+			string content = TransformText();
+			string outputFile = Path.GetFileNameWithoutExtension(xmlFileName) + ".nggen.ts";
+			result.Add(Tuple.Create(outputFile, content));
+		}
+		return result.ToArray();
+	}
+	
+	void SetCurrentAbstraction(object abs)
+	{
+		CurrentAbstraction = ( TheBallCoreAbstractionType ) abs;
+	}
+	
+	TheBallCoreAbstractionType CurrentAbstraction;
+	InstanceOfTheBallType CurrInstance;
+	
+	void GenerateRoot()
+	{
+		GenerateAbstraction(CurrentAbstraction);
+	}
+
+	InformationObjectType GetInformationObjectByName(string informationObjectName)
+    {
+		var result = CurrInstance.InformationModel.FirstOrDefault(candidate => candidate.name == informationObjectName);
+		if(result == null)
+			throw new ArgumentException("Information object not found with name: " + informationObjectName);
+		return result;
+    }
+
+	void GenerateAbstraction(TheBallCoreAbstractionType abstraction)
+	{
+		InstanceOfTheBallType instance = abstraction.InstanceOfTheBall;
+		CurrInstance = instance;
+		GenerateInstance(instance);
+	}	
+
+	void GenerateInstance(InstanceOfTheBallType instance)
+	{
+		string domainName = instance.semanticDomainName;
+		string domainNameMethodPart = domainName.Replace(".", "_");
+#>
+
+<#+
+		GenerateInterfaceModel(instance);
+		/*
+		foreach(var informationObject in instance.InformationModel)
+        {
+			GenerateInformationObject(informationObject);
+        }
+		*/
+#>
+
+<#+
+	}
+
+	string GetTypeFromInterfaceType(InterfaceItemTypeLogicalDataType logicalInterfaceDataType)
+    {
+		//InterfaceItemTypeLogicalDataType dataType = (InterfaceItemTypeLogicalDataType) System.Enum.Parse(typeof(InterfaceItemTypeLogicalDataType), logicalInterfaceDataType);
+		switch(logicalInterfaceDataType)
+        {
+			case InterfaceItemTypeLogicalDataType.TrueOrFalse_Boolean:
+				return "boolean";
+			case InterfaceItemTypeLogicalDataType.Data_Binary:
+				return "any";
+			case InterfaceItemTypeLogicalDataType.Number:
+				return "number";
+			case InterfaceItemTypeLogicalDataType.Text_Long:
+			case InterfaceItemTypeLogicalDataType.Text_Short:
+				return "string";
+			case InterfaceItemTypeLogicalDataType.Time_Date:
+			case InterfaceItemTypeLogicalDataType.Time_DateTime:
+			case InterfaceItemTypeLogicalDataType.Time_Time:
+				return "Date";
+			default:
+				throw new NotSupportedException("Logical interface data type not supported: " + logicalInterfaceDataType);
+        }
+    }
+
+	void GenerateInterfaceModel(InstanceOfTheBallType instance)
+    {
+		if(instance.DigitalInterface == null)
+			return;
+		foreach(InterfaceObjectType interfaceObject in instance.DigitalInterface.InterfaceModel ?? new InterfaceObjectType[0])
+        {
+#>
+
+export class <#= interfaceObject.name #> {
+<#+
+			foreach(var informationField in interfaceObject.InterfaceItems ?? new object[0]) 
+			{
+				string fieldName;
+				string typeName;
+				bool isCollection;
+				InterfaceItemType iItem = informationField as InterfaceItemType;
+				ObjectInstanceType oItem = informationField as ObjectInstanceType;
+				if(iItem != null)
+                {
+					fieldName = iItem.name;
+					typeName = GetTypeFromInterfaceType(iItem.logicalDataType);
+					isCollection = iItem.isCollection;
+                } else if(oItem != null)
+                {
+					fieldName = oItem.name;
+					typeName = oItem.interfaceObjectName;
+					isCollection = oItem.isCollection;
+                } else 
+					throw new NotSupportedException("Field type: " + informationField.GetType().Name + " not supported");
+				if(isCollection)
+					typeName = typeName + "[]";
+#>
+	public <#= fieldName#>: <#= typeName #>;
+<#+
+            }
+#>
+	public constructor(init?:Partial<<#= interfaceObject.name #>>) {
+		Object.assign(this, init);
+	}
+}
+
+<#+
+        }
+    }
+
+#>
