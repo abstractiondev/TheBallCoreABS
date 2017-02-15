@@ -68,9 +68,7 @@
 	{
 		string domainName = instance.semanticDomainName;
 		string domainNameMethodPart = domainName.Replace(".", "_");
-#>
-
-<#+
+		GenerateOperationService(instance);
 		GenerateInterfaceModel(instance);
 		/*
 		foreach(var informationObject in instance.InformationModel)
@@ -78,9 +76,6 @@
 			GenerateInformationObject(informationObject);
         }
 		*/
-#>
-
-<#+
 	}
 
 	string GetTypeFromInterfaceType(InterfaceItemTypeLogicalDataType logicalInterfaceDataType)
@@ -104,6 +99,46 @@
 			default:
 				throw new NotSupportedException("Logical interface data type not supported: " + logicalInterfaceDataType);
         }
+    }
+
+	void GenerateOperationService(InstanceOfTheBallType instance) 
+	{
+		var serviceName = instance.semanticDomainName.Replace(".", "");
+#>
+
+import {Injectable} from "@angular/core";
+import {TheBallService} from "./theball.service";
+
+@Injectable()
+export class <#= serviceName #>Service {
+
+	constructor(private tbService:TheBallService) {
+	}
+<#+
+		if(instance.Operations == null)
+			return;
+		foreach(OperationType operation in instance.Operations) 
+		{
+			var operationName = operation.name;
+			VariableType[] parameters = operation.Parameters?.Parameter ?? new VariableType[0];
+			if(parameters.Any(item => item.dataType.StartsWith("INT.") == false) || parameters.Length > 1)
+				continue;
+			var parameter = parameters.FirstOrDefault();
+			var paramString = parameter != null ? "param:" + parameter.dataType.Substring("INT.".Length) : "";
+			var paramStringPart = parameter != null ? ", param" : "";
+			var operationFullName = instance.semanticDomainName + "." + operationName;
+
+#>
+
+	async <#= operationName #>(<#=  paramString #>) : Promise<any> {
+		let result = await this.tbService.ExecuteOperation("<#= operationFullName #>"<#= paramStringPart #>);
+		return result;
+	}
+<#+
+        }
+#>
+}
+<#+
     }
 
 	void GenerateInterfaceModel(InstanceOfTheBallType instance)

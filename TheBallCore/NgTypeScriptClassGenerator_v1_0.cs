@@ -112,13 +112,7 @@ namespace TheBallCoreABS.TheBallCore
 	{
 		string domainName = instance.semanticDomainName;
 		string domainNameMethodPart = domainName.Replace(".", "_");
-
-        
-        #line default
-        #line hidden
-        
-        #line 73 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\NgTypeScriptClassGenerator_v1_0.tt"
-
+		GenerateOperationService(instance);
 		GenerateInterfaceModel(instance);
 		/*
 		foreach(var informationObject in instance.InformationModel)
@@ -126,13 +120,6 @@ namespace TheBallCoreABS.TheBallCore
 			GenerateInformationObject(informationObject);
         }
 		*/
-
-        
-        #line default
-        #line hidden
-        
-        #line 83 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\NgTypeScriptClassGenerator_v1_0.tt"
-
 	}
 
 	string GetTypeFromInterfaceType(InterfaceItemTypeLogicalDataType logicalInterfaceDataType)
@@ -158,6 +145,138 @@ namespace TheBallCoreABS.TheBallCore
         }
     }
 
+	void GenerateOperationService(InstanceOfTheBallType instance) 
+	{
+		var serviceName = instance.semanticDomainName.Replace(".", "");
+
+        
+        #line default
+        #line hidden
+        
+        #line 107 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\NgTypeScriptClassGenerator_v1_0.tt"
+this.Write("\r\nimport {Injectable} from \"@angular/core\";\r\nimport {TheBallService} from \"./theb" +
+        "all.service\";\r\n\r\n@Injectable()\r\nexport class ");
+
+        
+        #line default
+        #line hidden
+        
+        #line 113 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\NgTypeScriptClassGenerator_v1_0.tt"
+this.Write(this.ToStringHelper.ToStringWithCulture(serviceName));
+
+        
+        #line default
+        #line hidden
+        
+        #line 113 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\NgTypeScriptClassGenerator_v1_0.tt"
+this.Write("Service {\r\n\r\n\tconstructor(private tbService:TheBallService) {\r\n\t}\r\n");
+
+        
+        #line default
+        #line hidden
+        
+        #line 117 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\NgTypeScriptClassGenerator_v1_0.tt"
+
+		if(instance.Operations == null)
+			return;
+		foreach(OperationType operation in instance.Operations) 
+		{
+			var operationName = operation.name;
+			VariableType[] parameters = operation.Parameters?.Parameter ?? new VariableType[0];
+			if(parameters.Any(item => item.dataType.StartsWith("INT.") == false) || parameters.Length > 1)
+				continue;
+			var parameter = parameters.FirstOrDefault();
+			var paramString = parameter != null ? "param:" + parameter.dataType.Substring("INT.".Length) : "";
+			var paramStringPart = parameter != null ? ", param" : "";
+			var operationFullName = instance.semanticDomainName + "." + operationName;
+
+
+        
+        #line default
+        #line hidden
+        
+        #line 131 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\NgTypeScriptClassGenerator_v1_0.tt"
+this.Write("\r\n\tasync ");
+
+        
+        #line default
+        #line hidden
+        
+        #line 133 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\NgTypeScriptClassGenerator_v1_0.tt"
+this.Write(this.ToStringHelper.ToStringWithCulture(operationName));
+
+        
+        #line default
+        #line hidden
+        
+        #line 133 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\NgTypeScriptClassGenerator_v1_0.tt"
+this.Write("(");
+
+        
+        #line default
+        #line hidden
+        
+        #line 133 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\NgTypeScriptClassGenerator_v1_0.tt"
+this.Write(this.ToStringHelper.ToStringWithCulture(paramString));
+
+        
+        #line default
+        #line hidden
+        
+        #line 133 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\NgTypeScriptClassGenerator_v1_0.tt"
+this.Write(") : Promise<any> {\r\n\t\tlet result = await this.tbService.ExecuteOperation(\"");
+
+        
+        #line default
+        #line hidden
+        
+        #line 134 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\NgTypeScriptClassGenerator_v1_0.tt"
+this.Write(this.ToStringHelper.ToStringWithCulture(operationFullName));
+
+        
+        #line default
+        #line hidden
+        
+        #line 134 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\NgTypeScriptClassGenerator_v1_0.tt"
+this.Write("\"");
+
+        
+        #line default
+        #line hidden
+        
+        #line 134 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\NgTypeScriptClassGenerator_v1_0.tt"
+this.Write(this.ToStringHelper.ToStringWithCulture(paramStringPart));
+
+        
+        #line default
+        #line hidden
+        
+        #line 134 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\NgTypeScriptClassGenerator_v1_0.tt"
+this.Write(");\r\n\t\treturn result;\r\n\t}\r\n");
+
+        
+        #line default
+        #line hidden
+        
+        #line 137 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\NgTypeScriptClassGenerator_v1_0.tt"
+
+        }
+
+        
+        #line default
+        #line hidden
+        
+        #line 139 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\NgTypeScriptClassGenerator_v1_0.tt"
+this.Write("}\r\n");
+
+        
+        #line default
+        #line hidden
+        
+        #line 141 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\NgTypeScriptClassGenerator_v1_0.tt"
+
+    }
+
 	void GenerateInterfaceModel(InstanceOfTheBallType instance)
     {
 		if(instance.DigitalInterface == null)
@@ -169,28 +288,28 @@ namespace TheBallCoreABS.TheBallCore
         #line default
         #line hidden
         
-        #line 115 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\NgTypeScriptClassGenerator_v1_0.tt"
+        #line 150 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\NgTypeScriptClassGenerator_v1_0.tt"
 this.Write("\r\nexport class ");
 
         
         #line default
         #line hidden
         
-        #line 117 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\NgTypeScriptClassGenerator_v1_0.tt"
+        #line 152 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\NgTypeScriptClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(interfaceObject.name));
 
         
         #line default
         #line hidden
         
-        #line 117 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\NgTypeScriptClassGenerator_v1_0.tt"
+        #line 152 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\NgTypeScriptClassGenerator_v1_0.tt"
 this.Write(" {\r\n");
 
         
         #line default
         #line hidden
         
-        #line 118 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\NgTypeScriptClassGenerator_v1_0.tt"
+        #line 153 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\NgTypeScriptClassGenerator_v1_0.tt"
 
 			foreach(var informationField in interfaceObject.InterfaceItems ?? new object[0]) 
 			{
@@ -218,42 +337,42 @@ this.Write(" {\r\n");
         #line default
         #line hidden
         
-        #line 140 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\NgTypeScriptClassGenerator_v1_0.tt"
+        #line 175 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\NgTypeScriptClassGenerator_v1_0.tt"
 this.Write("\tpublic ");
 
         
         #line default
         #line hidden
         
-        #line 141 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\NgTypeScriptClassGenerator_v1_0.tt"
+        #line 176 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\NgTypeScriptClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(fieldName));
 
         
         #line default
         #line hidden
         
-        #line 141 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\NgTypeScriptClassGenerator_v1_0.tt"
+        #line 176 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\NgTypeScriptClassGenerator_v1_0.tt"
 this.Write(": ");
 
         
         #line default
         #line hidden
         
-        #line 141 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\NgTypeScriptClassGenerator_v1_0.tt"
+        #line 176 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\NgTypeScriptClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(typeName));
 
         
         #line default
         #line hidden
         
-        #line 141 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\NgTypeScriptClassGenerator_v1_0.tt"
+        #line 176 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\NgTypeScriptClassGenerator_v1_0.tt"
 this.Write(";\r\n");
 
         
         #line default
         #line hidden
         
-        #line 142 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\NgTypeScriptClassGenerator_v1_0.tt"
+        #line 177 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\NgTypeScriptClassGenerator_v1_0.tt"
 
             }
 
@@ -261,28 +380,28 @@ this.Write(";\r\n");
         #line default
         #line hidden
         
-        #line 144 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\NgTypeScriptClassGenerator_v1_0.tt"
+        #line 179 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\NgTypeScriptClassGenerator_v1_0.tt"
 this.Write("\tpublic constructor(init?:Partial<");
 
         
         #line default
         #line hidden
         
-        #line 145 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\NgTypeScriptClassGenerator_v1_0.tt"
+        #line 180 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\NgTypeScriptClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(interfaceObject.name));
 
         
         #line default
         #line hidden
         
-        #line 145 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\NgTypeScriptClassGenerator_v1_0.tt"
+        #line 180 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\NgTypeScriptClassGenerator_v1_0.tt"
 this.Write(">) {\r\n\t\tObject.assign(this, init);\r\n\t}\r\n}\r\n\r\n");
 
         
         #line default
         #line hidden
         
-        #line 150 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\NgTypeScriptClassGenerator_v1_0.tt"
+        #line 185 "D:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\NgTypeScriptClassGenerator_v1_0.tt"
 
         }
     }
