@@ -45,8 +45,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TheBallCore\TypeScriptClassGenerator_v1_0.cs">
-      <DependentUpon>TypeScriptClassGenerator_v1_0.tt</DependentUpon>
+    <Compile Include="TheBallCore\NgTypeScriptClassGenerator_v1_0.cs">
+      <DependentUpon>NgTypeScriptClassGenerator_v1_0.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
@@ -65,21 +65,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="TheBallCore\KBObservableModelJSGenerator_v1_0.cs">
-      <DependentUpon>KBObservableModelJSGenerator_v1_0.tt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="TheBallCore\KBObservableModelTypeScriptGenerator_v1_0.cs">
-      <DependentUpon>KBObservableModelTypeScriptGenerator_v1_0.tt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="TheBallCore\KBDustTemplateViewGenerator_v1_0.cs">
-      <DependentUpon>KBDustTemplateViewGenerator_v1_0.tt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <Compile Include="TheBallCore\SQLiteCSharpClassGenerator_v1_0.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -88,9 +73,9 @@
     <Compile Include="TheBallCore\TheBallCore_v1_0_namespace.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="TheBallCore\TypeScriptClassGenerator_v1_0.tt">
+    <None Include="TheBallCore\NgTypeScriptClassGenerator_v1_0.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
-      <LastGenOutput>TypeScriptClassGenerator_v1_0.cs</LastGenOutput>
+      <LastGenOutput>NgTypeScriptClassGenerator_v1_0.cs</LastGenOutput>
     </None>
     <None Include="TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
@@ -114,18 +99,6 @@
     <None Include="TheBallCore\InterfaceModelCSharpClassGenerator_v1_0.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>InterfaceModelCSharpClassGenerator_v1_0.cs</LastGenOutput>
-    </None>
-    <None Include="TheBallCore\KBObservableModelJSGenerator_v1_0.tt">
-      <Generator>TextTemplatingFilePreprocessor</Generator>
-      <LastGenOutput>KBObservableModelJSGenerator_v1_0.cs</LastGenOutput>
-    </None>
-    <None Include="TheBallCore\KBObservableModelTypeScriptGenerator_v1_0.tt">
-      <Generator>TextTemplatingFilePreprocessor</Generator>
-      <LastGenOutput>KBObservableModelTypeScriptGenerator_v1_0.cs</LastGenOutput>
-    </None>
-    <None Include="TheBallCore\KBDustTemplateViewGenerator_v1_0.tt">
-      <Generator>TextTemplatingFilePreprocessor</Generator>
-      <LastGenOutput>KBDustTemplateViewGenerator_v1_0.cs</LastGenOutput>
     </None>
     <None Include="TheBallCore\InterfaceGeneration.ttinclude" />
     <None Include="TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt">
