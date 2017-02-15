@@ -207,7 +207,7 @@ this.Write(" {\r\n");
                 } else if(oItem != null)
                 {
 					fieldName = oItem.name;
-					typeName = oItem.interfaceObjectName;
+					typeName = oItem.interfaceObjectName != "System.Dynamic.ExpandoObject" ? oItem.interfaceObjectName : "any";
 					isCollection = oItem.isCollection;
                 } else 
 					throw new NotSupportedException("Field type: " + informationField.GetType().Name + " not supported");
