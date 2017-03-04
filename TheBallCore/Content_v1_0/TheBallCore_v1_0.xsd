@@ -143,10 +143,8 @@ Useful to NOT have in system-internal objects such as queue operations where the
 		<xs:sequence>
 			<xs:element name="CoreInfrastructure" type="CoreInfrastructureType" minOccurs="0"/>
 			<xs:element name="DigitalInterface" type="DigitalInterfaceType" minOccurs="0"/>
-			<xs:element name="InformationModel" type="InformationModelType"/>
-			<xs:element name="Operations" type="OperationsType"/>
-			<xs:element name="Subscriptions" type="SubscriptionsType"/>
-			<xs:element name="Monitoring" type="MonitoringType"/>
+			<xs:element name="InformationModel" type="InformationModelType" minOccurs="0"/>
+			<xs:element name="Operations" type="OperationsType" minOccurs="0"/>
 		</xs:sequence>
 		<xs:attribute name="semanticDomainName" type="xs:string" use="required">
 			<xs:annotation>
@@ -312,7 +310,7 @@ This is required for operations that take part of requirement and provider depen
 					<xs:field xpath="@name"/>
 				</xs:keyref>
 			</xs:element>
-			<xs:element name="Execution" type="ExecutionType"/>
+			<xs:element name="Execution" type="ExecutionType" minOccurs="0"/>
 			<xs:element name="OperationReturnValues" type="OperationReturnValuesType" minOccurs="0">
 				<xs:key name="PKOperationResult">
 					<xs:selector xpath="ReturnValue"/>

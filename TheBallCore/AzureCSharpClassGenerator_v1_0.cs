@@ -209,7 +209,7 @@ using TheBall.CORE;
 		GenerateInterfaceModel(instance);
 		EndBlock(); // namespace
 		GenerateDomainInitializer(instance);
-		foreach(var informationObject in instance.InformationModel)
+		foreach(var informationObject in instance.InformationModel ?? new InformationObjectType[0])
         {
 			GenerateInformationObject(informationObject);
 
@@ -3987,6 +3987,8 @@ this.Write(";\r\n");
 
 	InformationObjectType[] GetMasterCollections(InstanceOfTheBallType instance)
     {
+		if(instance.InformationModel == null)
+			return new InformationObjectType[0];
 		var results = instance.InformationModel.Where(obj => {
 				CollectionForType coll = obj.Item as CollectionForType;
 				return coll != null && coll.collectionType == CollectionForTypeCollectionType.Master;
