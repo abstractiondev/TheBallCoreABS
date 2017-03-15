@@ -101,11 +101,7 @@ using System.Collections.Specialized;
 using System.IO;
 using System.Xml;
 using System.Linq;
-#if !DEVEMU
 using System.Runtime.Serialization;
-using ProtoBuf;
-#endif
-
 
 <#+
 		BeginNamespace("INT");
@@ -210,7 +206,7 @@ using ProtoBuf;
 		bool customIDGeneration = informationObject.AutomationDefinition != null ? informationObject.AutomationDefinition.customIDProvider : false;
 #>
 			[DataContract] <#= protoBufClassAttribute #>
-			[Serializable]
+			//[Serializable]
 			public partial class <#= informationObjectName #> 
 			{
 				public <#= informationObjectName #>() 
