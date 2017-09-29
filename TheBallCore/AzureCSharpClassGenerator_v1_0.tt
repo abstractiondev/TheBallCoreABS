@@ -90,14 +90,15 @@
 #>
 
 using DOM=<#= instance.semanticDomainName #>;
+using System.Threading.Tasks;
 
 namespace TheBall.CORE {
 	public static partial class OwnerInitializer
 	{
-		private static void DOMAININIT_<#= domainNameMethodPart #>(IContainerOwner owner)
+		private static async Task DOMAININIT_<#= domainNameMethodPart #>(IContainerOwner owner)
 		{
-			DOM.DomainInformationSupport.EnsureMasterCollections(owner);
-			DOM.DomainInformationSupport.RefreshMasterCollections(owner);
+			await DOM.DomainInformationSupport.EnsureMasterCollections(owner);
+			await DOM.DomainInformationSupport.RefreshMasterCollections(owner);
 		}
 	}
 }
@@ -222,7 +223,7 @@ using TheBall.CORE;
 #>
 		public static class DomainInformationSupport
 		{
-            public static void EnsureMasterCollections(IContainerOwner owner)
+            public static async Task EnsureMasterCollections(IContainerOwner owner)
             {
 <#+
 		foreach(var masterColl in masterCollections)
@@ -230,13 +231,13 @@ using TheBall.CORE;
 			string masterCollName = masterColl.name;
 #>
                 {
-                    var masterCollection = <#= masterCollName #>.GetMasterCollectionInstance(owner);
+                    var masterCollection = await <#= masterCollName #>.GetMasterCollectionInstanceAsync(owner);
                     if(masterCollection == null)
                     {
                         masterCollection = <#= masterCollName #>.CreateDefault();
                         masterCollection.RelativeLocation =
                             <#= masterCollName #>.GetMasterCollectionLocation(owner);
-                        StorageSupport.StoreInformation(masterCollection, owner);
+                        await StorageSupport.StoreInformationAsync(masterCollection, owner);
                     }
 					IInformationCollection collection = masterCollection;
                 }
@@ -245,7 +246,7 @@ using TheBall.CORE;
 #>
             }
 
-            public static void RefreshMasterCollections(IContainerOwner owner)
+            public static async Task RefreshMasterCollections(IContainerOwner owner)
             {
 <#+
 		foreach(var masterColl in masterCollections)
@@ -253,11 +254,11 @@ using TheBall.CORE;
 			string masterCollName = masterColl.name;
 #>
                 {
-                    IInformationCollection masterCollection = <#= masterCollName #>.GetMasterCollectionInstance(owner);
+                    IInformationCollection masterCollection = await <#= masterCollName #>.GetMasterCollectionInstanceAsync(owner);
                     if (masterCollection == null)
                         throw new InvalidDataException("Master collection <#= masterCollName #> missing for owner");
-                    masterCollection.RefreshContent();
-                    StorageSupport.StoreInformation((IInformationObject) masterCollection, owner);
+                    await masterCollection.RefreshContentAsync();
+                    await StorageSupport.StoreInformationAsync((IInformationObject) masterCollection, owner);
                 }
 <#+
         }
@@ -305,7 +306,7 @@ using TheBall.CORE;
 					UpdateRelativeLocationFromID();
 				}
 
-				public static IInformationObject[] RetrieveCollectionFromOwnerContent(IContainerOwner owner)
+				public static async Task<IInformationObject[]> RetrieveCollectionFromOwnerContentAsync(IContainerOwner owner)
 				{
 					//string contentTypeName = ""; // SemanticDomainName + "." + Name
 					string contentTypeName = "<#= semanticDomainName #>/<#= objectName #>/";
@@ -315,7 +316,7 @@ using TheBall.CORE;
 					{
 						if (blob.GetBlobInformationType() != StorageSupport.InformationType_InformationObjectValue)
 							continue;
-						IInformationObject informationObject = StorageSupport.RetrieveInformation(blob.Name, typeof(<#= objectName #>), null, owner);
+						IInformationObject informationObject = await StorageSupport.RetrieveInformationA(blob.Name, typeof(<#= objectName #>), null, owner);
 					    informationObject.MasterETag = informationObject.ETag;
 						informationObjects.Add(informationObject);
 					}
@@ -327,30 +328,31 @@ using TheBall.CORE;
 					RelativeLocation = ObjectStorage.GetRelativeLocationFromID<<#= objectName #>>(ID);
 				}
 
-				IInformationObject IInformationObject.RetrieveMaster(bool initiateIfMissing, out bool initiated)
+				async Task<IInformationObject> IInformationObject.RetrieveMasterAsync(bool initiateIfMissing)
 				{
+					bool initiated = false;
 					IInformationObject iObject = (IInformationObject) this;
 					if(iObject.IsIndependentMaster == false)
 						throw new NotSupportedException("Cannot retrieve master for non-master type: <#= informationObjectName #>");
 					initiated = false;
 					var owner = VirtualOwner.FigureOwner(this);
-					var master = StorageSupport.RetrieveInformation(RelativeLocation, typeof(<#= informationObjectName #>), null, owner);
+					var master = await StorageSupport.RetrieveInformationA(RelativeLocation, typeof(<#= informationObjectName #>), null, owner);
 					if(master == null && initiateIfMissing)
 					{
-						StorageSupport.StoreInformation(this, owner);
+						await StorageSupport.StoreInformationAsync(this, owner);
 						master = this;
 						initiated = true;
 					}
 					return master;
 				}
 
-
-				IInformationObject IInformationObject.RetrieveMaster(bool initiateIfMissing)
+				/*
+				async Task<IInformationObject> IInformationObject.RetrieveMasterAsync(bool initiateIfMissing)
 				{
 					bool initiated;
 					IInformationObject iObject = this;
-					return iObject.RetrieveMaster(initiateIfMissing, out initiated);
-				}
+					return await iObject.RetrieveMasterAsync(initiateIfMissing, out initiated);
+				}*/
 
 				public void SetLocationAsOwnerContent(IContainerOwner containerOwner, string contentName)
                 {
@@ -398,8 +400,9 @@ using TheBall.CORE;
                             continue;
                         string propertyName = key.Substring(indexOfUnderscore + 1);
                         string propertyValue = nameValueCollection[key];
-                        dynamic dyn = targetObject;
-                        dyn.ParsePropertyValue(propertyName, propertyValue);
+						throw new NotSupportedException("Fix dynamic call");
+                        //dynamic dyn = targetObject;
+                        //dyn.ParsePropertyValue(propertyName, propertyValue);
                     }
 			    }
 
@@ -571,11 +574,11 @@ using TheBall.CORE;
 					
 				}
 
-				IInformationCollection IInformationCollection.GetMasterInstance()
+				async Task<IInformationCollection> IInformationCollection.GetMasterInstanceAsync()
 				{
 <#+			if(isMasterCollection) { #>
 					var owner = VirtualOwner.FigureOwner(this);
-					return GetMasterCollectionInstance(owner);
+					return await GetMasterCollectionInstanceAsync(owner);
 <#+			} else { #>
 					throw new NotSupportedException("Master collection instance only supported for master collections");
 <#+			} #>
@@ -592,7 +595,7 @@ using TheBall.CORE;
 					return ownerDirectoryLocation;
 				}
 
-				public void RefreshContent()
+				public async Task RefreshContentAsync()
 				{
 <#+
 			if(isMasterCollection)
@@ -600,7 +603,7 @@ using TheBall.CORE;
 #>
 					// DirectoryToMaster
 					string itemDirectory = GetItemDirectory();
-					IInformationObject[] informationObjects = StorageSupport.RetrieveInformationObjects(itemDirectory,
+					IInformationObject[] informationObjects = await StorageSupport.RetrieveInformationObjectsAsync(itemDirectory,
 																								 typeof(<#= contentObjectName #>));
                     Array.ForEach(informationObjects, io => io.MasterETag = io.ETag);
 					CollectionContent.Clear();
@@ -611,8 +614,8 @@ using TheBall.CORE;
 #>
 					// CollectionToCollection
 					var owner = VirtualOwner.FigureOwner(this);
-					var masterCollection = <#= derivedMasterCollName #>.GetMasterCollectionInstance(owner);
-					this.RefreshContentFromMaster(masterCollection);
+					var masterCollection = await <#= derivedMasterCollName #>.GetMasterCollectionInstanceAsync(owner);
+					await this.RefreshContentFromMasterAsync(masterCollection);
 <#+
             }
 #>
@@ -622,9 +625,9 @@ using TheBall.CORE;
 			if(isMasterCollection)
             {
 #>
-				public static <#= informationObjectName #> GetMasterCollectionInstance(IContainerOwner owner)
+				public static async Task<<#= informationObjectName #>> GetMasterCollectionInstanceAsync(IContainerOwner owner)
 				{
-					return ObjectStorage.RetrieveFromOwnerContent<<#= informationObjectName #>>(owner, "MasterCollection");
+					return await ObjectStorage.RetrieveFromOwnerContentA<<#= informationObjectName #>>(owner, "MasterCollection");
 				}
 <#+
             }
@@ -645,14 +648,14 @@ using TheBall.CORE;
 
 
 
-                public void SetMediaContent(IContainerOwner containerOwner, string contentObjectID, object mediaContent)
+                public async Task SetMediaContent(IContainerOwner containerOwner, string contentObjectID, object mediaContent)
                 {
                     IInformationObject targetObject = (IInformationObject) FindObjectByID(contentObjectID);
                     if (targetObject == null)
                         return;
 					if(targetObject == this)
 						throw new InvalidDataException("SetMediaContent referring to self (not media container)");
-                    targetObject.SetMediaContent(containerOwner, contentObjectID, mediaContent);
+                    await targetObject.SetMediaContent(containerOwner, contentObjectID, mediaContent);
                 }
 
 				
@@ -1007,14 +1010,14 @@ using TheBall.CORE;
 <#+			} #>
 				}
 
-                public void SetMediaContent(IContainerOwner containerOwner, string contentObjectID, object mediaContent)
+                public async Task SetMediaContent(IContainerOwner containerOwner, string contentObjectID, object mediaContent)
                 {
                     IInformationObject targetObject = (IInformationObject) FindObjectByID(contentObjectID);
                     if (targetObject == null)
                         return;
 					if(targetObject == this)
 						throw new InvalidDataException("SetMediaContent referring to self (not media container)");
-                    targetObject.SetMediaContent(containerOwner, contentObjectID, mediaContent);
+                    await targetObject.SetMediaContent(containerOwner, contentObjectID, mediaContent);
                 }
 <#+		} #>
 
@@ -1136,7 +1139,7 @@ using TheBall.CORE;
 		if(containsCollection) {
 #>
 			
-                void IInformationObject.SetMediaContent(IContainerOwner containerOwner, string contentObjectID, object mediaContent)
+                Task IInformationObject.SetMediaContent(IContainerOwner containerOwner, string contentObjectID, object mediaContent)
                 {
 					// Remove exception if some basic functionality is broken due to it
 					throw new NotImplementedException("Collection items do not support instance tree queries as of now");
