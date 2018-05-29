@@ -81,7 +81,8 @@ using System.IO;
 using System.Xml;
 using System.Linq;
 using System.Runtime.Serialization;
-using ProtoBuf;
+//using ProtoBuf;
+using System.Threading.Tasks;
 
 
 <#+
@@ -92,6 +93,7 @@ using ProtoBuf;
         {
 			GenerateInformationObject(informationObject);
         }
+		GenerateOperationService(instance);
 		EndBlock(); // namespace
 #>
 
@@ -324,6 +326,73 @@ using ProtoBuf;
 			}
 <#+
 	}
+
+	void GenerateOperationService(InstanceOfTheBallType instance) 
+	{
+		var serviceName = instance.semanticDomainName.Replace(".", "");
+#>
+	#region Operation Calls
+	public partial class Server 
+	{
+
+		// TODO: Implement in partial 
+		//public static async Task ExecuteOperation(string operationName, object parameters) 
+
+		// TODO: Implement in partial 
+
+		// TODO: Implement in partial 
+
+<#+
+		if(instance.Operations == null)
+			return;
+		foreach(OperationType operation in instance.Operations) 
+		{
+			var operationName = operation.name;
+			VariableType[] parameters = operation.Parameters?.Parameter ?? new VariableType[0];
+			if(parameters.Any(item => item.dataType.StartsWith("INT.") == false) || parameters.Length > 1)
+				continue;
+			var parameter = parameters.FirstOrDefault();
+			var paramString = parameter != null ? parameter.dataType + " param" : "";
+			var paramStringPart = parameter != null ? ", param" : "";
+			var operationFullName = instance.semanticDomainName + "." + operationName;
+#>
+
+		public static async Task <#= operationName #>(<#=  paramString #>) 
+		{
+			await ExecuteOperation("<#= operationFullName #>"<#= paramStringPart #>);
+		}
+<#+
+        }
+
+		foreach(var iObj in instance.InformationModel)
+		{
+			var name = iObj.name;
+#>
+		public static async Task<<#= name #>> Get<#= name #>(string id = null)
+		{
+			var result = await GetInformationObject<<#= name #>>(id);
+			return result;
+		}
+<#+
+		}
+		foreach(var iObj in instance.DigitalInterface?.InterfaceModel ?? new InterfaceObjectType[0])
+		{
+			var name = iObj.name;
+#>
+		public static async Task<INT.<#= name #>> Get<#= name #>(string id = null)
+		{
+			var result = await GetInterfaceObject<INT.<#= name #>>(id);
+			return result;
+		}
+<#+
+		}
+
+#>
+	}
+#endregion
+<#+
+    }
+
 
 	void GenerateInformationObjectChoice(InformationObjectType informationObject, string informationObjectName, object contentItem)
 	{
