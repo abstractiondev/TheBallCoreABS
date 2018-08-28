@@ -103,9 +103,6 @@ using System;
 using System.Collections.ObjectModel;
 using System.Data;
 using System.Data.Common;
-using System.Data.SQLite;
-using System.Data.Linq;
-using System.Data.Linq.Mapping;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.IO;
@@ -115,11 +112,13 @@ using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using Newtonsoft.Json;
 using SQLiteSupport;
-using ScaffoldColumn=System.ComponentModel.DataAnnotations.ScaffoldColumnAttribute;
-using ScaffoldTable=System.ComponentModel.DataAnnotations.ScaffoldTableAttribute;
-using Editable=System.ComponentModel.DataAnnotations.EditableAttribute;
+using Key=System.ComponentModel.DataAnnotations.KeyAttribute;
+//using ScaffoldColumn=System.ComponentModel.DataAnnotations.ScaffoldColumnAttribute;
+//using Editable=System.ComponentModel.DataAnnotations.EditableAttribute;
 using System.Diagnostics;
+using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 
 <#+
@@ -176,15 +175,14 @@ using System.Threading.Tasks;
 		string instanceName = instance.semanticDomainName;
 		var tableObjects = GetTableObjects(instance.InformationModel);
 #>
-		public class TheBallDataContext : DataContext, IStorageSyncableDataContext
+		public class TheBallDataContext : DbContext, IStorageSyncableDataContext
 		{
             // Track whether Dispose has been called. 
             private bool disposed = false;
-		    protected override void Dispose(bool disposing)
+		    void IDisposable.Dispose()
 		    {
 		        if (disposed)
 		            return;
-                base.Dispose(disposing);
                 GC.Collect();
                 GC.WaitForPendingFinalizers();
 		        disposed = true;
@@ -192,16 +190,24 @@ using System.Threading.Tasks;
 
             public static Func<DbConnection> GetCurrentConnectionFunc { get; set; }
 
-		    public TheBallDataContext() : base(GetCurrentConnectionFunc())
+		    public TheBallDataContext() : base(new DbContextOptions<TheBallDataContext>())
 		    {
 		        
 		    }
 
+		    public readonly string SQLiteDBPath;
+		    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+		    {
+		        optionsBuilder.UseSqlite($"Filename={SQLiteDBPath}");
+		    }
+
 		    public static TheBallDataContext CreateOrAttachToExistingDB(string pathToDBFile)
 		    {
-		        SQLiteConnection connection = new SQLiteConnection(String.Format("Data Source={0}", pathToDBFile));
-                var dataContext = new TheBallDataContext(connection);
-		        using (var transaction = connection.BeginTransaction())
+		        var sqliteConnectionString = $"{pathToDBFile}";
+                var dataContext = new TheBallDataContext(sqliteConnectionString);
+		        var db = dataContext.Database;
+                db.OpenConnection();
+		        using (var transaction = db.BeginTransaction())
 		        {
                     dataContext.CreateDomainDatabaseTablesIfNotExists();
                     transaction.Commit();
@@ -209,12 +215,19 @@ using System.Threading.Tasks;
                 return dataContext;
 		    }
 
-            public TheBallDataContext(SQLiteConnection connection) : base(connection)
+            public TheBallDataContext(string sqLiteDBPath) : base()
+            {
+                SQLiteDBPath = sqLiteDBPath;
+            }
+
+		    public override int SaveChanges(bool acceptAllChangesOnSuccess)
 		    {
-                if(connection.State != ConnectionState.Open)
-                    connection.Open();
+                //if(connection.State != ConnectionState.Open)
+                //    connection.Open();
+		        return base.SaveChanges(acceptAllChangesOnSuccess);
 		    }
 
+			/*
             public override void SubmitChanges(ConflictMode failureMode)
             {
                 var changeSet = GetChangeSet();
@@ -231,6 +244,7 @@ using System.Threading.Tasks;
 		    {
 		        await Task.Run(() => SubmitChanges());
 		    }
+			*/
 
 			public void CreateDomainDatabaseTablesIfNotExists()
 			{
@@ -255,7 +269,9 @@ using System.Threading.Tasks;
 
         }
 #>
-			    var connection = this.Connection;
+			    //var connection = this.Connection;
+			    var db = this.Database;
+			    var connection = db.GetDbConnection();
 				foreach (string commandText in tableCreationCommands)
 			    {
 			        var command = connection.CreateCommand();
@@ -265,9 +281,9 @@ using System.Threading.Tasks;
 			    }
 			}
 
-			public Table<InformationObjectMetaData> InformationObjectMetaDataTable {
+			public DbSet<InformationObjectMetaData> InformationObjectMetaDataTable {
 				get {
-					return this.GetTable<InformationObjectMetaData>();
+					return this.Set<InformationObjectMetaData>();
 				}
 			}
 
@@ -283,11 +299,7 @@ using System.Threading.Tasks;
         {
 			string iObjName = informationObject.name;
 #>
-			public Table<<#= iObjName #>> <#= iObjName #>Table {
-				get {
-					return this.GetTable<<#= iObjName #>>();
-				}
-			}
+			public DbSet<<#= iObjName #>> <#= iObjName #>Table { get; set; }
 <#+
 			InformationItemType[] relationProperties = GetRelationProperties(informationObject);
 			foreach(InformationItemType relProp in relationProperties)
@@ -371,7 +383,7 @@ using System.Threading.Tasks;
                                     <#= sourceIDName #> = existingObject.ID,
                                     <#= targetIDName #> = item
                                 };
-                                <#= linkClassName #>Table.InsertOnSubmit(relationObject);
+                                <#= linkClassName #>Table.Add(relationObject);
                                 existingObject.<#= propertyName #>.Add(relationObject);
 
                             });
@@ -383,7 +395,7 @@ using System.Threading.Tasks;
                                 <#= sourceIDName #> = existingObject.ID,
                                 <#= targetIDName #> = serializedObject.<#= sourcePropertyName #>
                             };
-                            <#= linkClassName #>Table.InsertOnSubmit(relationObject);
+                            <#= linkClassName #>Table.Add(relationObject);
 							existingObject.<#= propertyName #> = relationObject;
 <#+ 
                         }
@@ -434,7 +446,7 @@ using System.Threading.Tasks;
 		    {
                 if (insertData.SemanticDomain != "<#= CurrInstance.semanticDomainName #>")
                     throw new InvalidDataException("Mismatch on domain data");
-                InformationObjectMetaDataTable.InsertOnSubmit(insertData);
+                InformationObjectMetaDataTable.Add(insertData);
 
 				switch(insertData.ObjectType)
 				{
@@ -484,7 +496,7 @@ using System.Threading.Tasks;
                                     <#= sourceIDName #> = objectToAdd.ID,
                                     <#= targetIDName #> = item
                                 };
-                                <#= linkClassName #>Table.InsertOnSubmit(relationObject);
+                                <#= linkClassName #>Table.Add(relationObject);
                                 objectToAdd.<#= propertyName #>.Add(relationObject);
 
                             });
@@ -496,7 +508,7 @@ using System.Threading.Tasks;
                                 <#= sourceIDName #> = objectToAdd.ID,
                                 <#= targetIDName #> = serializedObject.<#= sourcePropertyName #>
                             };
-                            <#= linkClassName #>Table.InsertOnSubmit(relationObject);
+                            <#= linkClassName #>Table.Add(relationObject);
                             objectToAdd.<#= propertyName #> = relationObject;
 <#+ 
                         }
@@ -523,7 +535,7 @@ using System.Threading.Tasks;
 			        }
                 }
 			 #>
-					<#= informationObject.name #>Table.InsertOnSubmit(objectToAdd);
+					<#= informationObject.name #>Table.Add(objectToAdd);
                     break;
                 }
 <#+			}
@@ -546,7 +558,7 @@ using System.Threading.Tasks;
 		    {
                 if (deleteData.SemanticDomain != "<#= CurrInstance.semanticDomainName #>")
                     throw new InvalidDataException("Mismatch on domain data");
-				InformationObjectMetaDataTable.DeleteOnSubmit(deleteData);
+				InformationObjectMetaDataTable.Remove(deleteData);
 
 				switch(deleteData.ObjectType)
 				{
@@ -562,7 +574,7 @@ using System.Threading.Tasks;
 						//<#= informationObject.name #>Table.Attach(objectToDelete);
 						var objectToDelete = <#= informationObject.name #>Table.SingleOrDefault(item => item.ID == deleteData.ObjectID);
 						if(objectToDelete != null)
-							<#= informationObject.name #>Table.DeleteOnSubmit(objectToDelete);
+							<#= informationObject.name #>Table.Remove(objectToDelete);
 						break;
 					}
 <#+		} #>
@@ -627,8 +639,8 @@ using System.Threading.Tasks;
 		string sourceIDName = sourceClassName + "ID";
 		string targetIDName = targetClassName + "ID";
 #>
-    [Table(Name = "<#= className #>")]
-	[ScaffoldTable(true)]
+    //[Table(Name = "<#= className #>")]
+	//[ScaffoldTable(true)]
 	[DebuggerDisplay("<#= className #>: {<#= sourceIDName #>} - {<#= targetIDName #>}")]
 	public class <#= className #> // : ITheBallDataContextStorable
 	{
@@ -644,9 +656,9 @@ PRIMARY KEY (<#= sourceIDName #>, <#= targetIDName #>)
         }
 
 
-        [Column(IsPrimaryKey = true, CanBeNull = false)]
+        //[Column(IsPrimaryKey = true, CanBeNull = false)]
         public string <#= sourceIDName #> { get; set; }
-        [Column(IsPrimaryKey = true, CanBeNull = false)]
+        //[Column(IsPrimaryKey = true, CanBeNull = false)]
         public string <#= targetIDName #> { get; set; }
 
 
@@ -687,20 +699,21 @@ PRIMARY KEY (<#= sourceIDName #>, <#= targetIDName #>)
 		bool isIndependentMaster = informationObject.isIndependentMaster;
 
 #>
-    [Table(Name = "<#= objectName #>")]
-	[ScaffoldTable(true)]
+    //[Table(Name = "<#= objectName #>")]
+	//[ScaffoldTable(true)]
 	[DebuggerDisplay("<#= objectName #>: {ID}")]
 	public class <#= objectName #> : ITheBallDataContextStorable
 	{
 
-		[Column(IsPrimaryKey = true)]
-        [ScaffoldColumn(true)]
-        [Editable(false)]
+		//[Column(IsPrimaryKey = true)]
+        //[ScaffoldColumn(true)]
+		[Key]
+        //[Editable(false)]
 		public string ID { get; set; }
 
-		[Column]
-        [ScaffoldColumn(true)]
-        [Editable(false)]
+		//[Column]
+        //[ScaffoldColumn(true)]
+        //[Editable(false)]
 		public string ETag { get; set; }
 
 
@@ -723,8 +736,8 @@ PRIMARY KEY (<#= sourceIDName #>, <#= targetIDName #>)
 			GenerateInterfaceImplementation(collectionType);
 #>
 		//[Column(IsPrimaryKey = true)]
-        [ScaffoldColumn(true)]
-        [Editable(false)]
+        //[ScaffoldColumn(true)]
+        //[Editable(false)]
 		public string CollectionItemID { get; set; }
 <#+
         }
@@ -930,7 +943,7 @@ CREATE TABLE IF NOT EXISTS [<#= informationObjectName #>](
 			var collectionFor = (CollectionForType) collectionObject.Item;
 			var linkedObjectName = collectionFor.contentInformationObjectName;
 #>
-			[Column]
+			//[Column]
 			public string <#= idPropName #> { get; set; }
 			private EntityRef< <#= objectName #> > _<#= objectPropName #>;
 			[Association(Storage = "_<#= objectPropName  #>", ThisKey = "<#= idPropName #>")]
@@ -945,14 +958,14 @@ CREATE TABLE IF NOT EXISTS [<#= informationObjectName #>](
 			string objectPropName = item.name;
 			string idPropName = objectPropName + "ID";
 #>
-			[Column]
+			//[Column]
 			public string <#= idPropName #> { get; set; }
 <#+
         } else { // items
 			string objectPropName = item.name;
 			string idPropName = objectPropName + "ID";
 #>
-			[Column]
+			//[Column]
 			public string <#= idPropName #> { get; set; }
 			private EntityRef< <#= objectName #> > _<#= objectPropName #>;
 			[Association(Storage = "_<#= objectPropName  #>", ThisKey = "<#= idPropName #>")]
@@ -978,8 +991,8 @@ CREATE TABLE IF NOT EXISTS [<#= informationObjectName #>](
 			string dataTypePrefix = isObjectItem ? "SER." + CurrentAbstraction.InstanceOfTheBall.semanticDomainName + "." : "";
 			dataType = dataTypePrefix + dataType;
 #>
-        [Column(Name = "<#= item.name #>")] 
-        [ScaffoldColumn(true)]
+        //[Column(Name = "<#= item.name #>")] 
+        //[ScaffoldColumn(true)]
 		public string <#= item.name #>Data { get; set; }
 
         private bool _Is<#= item.name #>Retrieved = false;
@@ -1027,8 +1040,8 @@ CREATE TABLE IF NOT EXISTS [<#= informationObjectName #>](
         } else {
 #>
 
-		[Column]
-        [ScaffoldColumn(true)]
+		//[Column]
+        //[ScaffoldColumn(true)]
 		public <#= dataType #> <#= item.name #> { get; set; }
 		// private <#= dataType #> _unmodified_<#= item.name #>;
 <#+
