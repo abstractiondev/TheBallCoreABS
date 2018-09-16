@@ -112,6 +112,7 @@ using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using Newtonsoft.Json;
 using SQLiteSupport;
+using System.ComponentModel.DataAnnotations.Schema;
 using Key=System.ComponentModel.DataAnnotations.KeyAttribute;
 //using ScaffoldColumn=System.ComponentModel.DataAnnotations.ScaffoldColumnAttribute;
 //using Editable=System.ComponentModel.DataAnnotations.EditableAttribute;
@@ -177,6 +178,29 @@ using Microsoft.EntityFrameworkCore;
 #>
 		public class TheBallDataContext : DbContext, IStorageSyncableDataContext
 		{
+		    protected override void OnModelCreating(ModelBuilder modelBuilder)
+		    {
+<#+
+		foreach(var iObj in tableObjects)
+        {
+			string iObjName = iObj.name;
+#>
+				<#= iObjName #>.EntityConfig(modelBuilder);
+<#+
+			InformationItemType[] relationProperties = GetRelationProperties(iObj);
+			foreach(var relProp in relationProperties)
+            {
+				var targetObj = GetInformationObjectByName(relProp.objectLinkTargetType);
+				var m2mClassName = iObjName + relProp.name;
+#>
+				<#= m2mClassName #>.EntityConfig(modelBuilder);
+<#+
+            }
+		}
+#>
+
+		    }
+
             // Track whether Dispose has been called. 
             private bool disposed = false;
 		    void IDisposable.Dispose()
@@ -634,7 +658,7 @@ using Microsoft.EntityFrameworkCore;
 		string sourceIDName = sourceClassName + "ID";
 		string targetIDName = targetClassName + "ID";
 #>
-    //[Table(Name = "<#= className #>")]
+    [Table("<#= className #>")]
 	//[ScaffoldTable(true)]
 	[DebuggerDisplay("<#= className #>: {<#= sourceIDName #>} - {<#= targetIDName #>}")]
 	public class <#= className #> // : ITheBallDataContextStorable
@@ -649,6 +673,12 @@ CREATE TABLE IF NOT EXISTS [<#= className #>](
 PRIMARY KEY (<#= sourceIDName #>, <#= targetIDName #>)
 )";
         }
+
+		public static void EntityConfig(ModelBuilder modelBuilder) {
+		    modelBuilder.Entity<<#= className #>>()
+		        .HasKey(c => new { c.<#= sourceIDName #>, c.<#= targetIDName #>});
+			
+		}
 
 
         //[Column(IsPrimaryKey = true, CanBeNull = false)]
@@ -686,11 +716,13 @@ PRIMARY KEY (<#= sourceIDName #>, <#= targetIDName #>)
 		bool isIndependentMaster = informationObject.isIndependentMaster;
 
 #>
-    //[Table(Name = "<#= objectName #>")]
+    [Table("<#= objectName #>")]
 	//[ScaffoldTable(true)]
 	[DebuggerDisplay("<#= objectName #>: {ID}")]
 	public class <#= objectName #> : ITheBallDataContextStorable
 	{
+		public static void EntityConfig(ModelBuilder modelBuilder) {
+		}
 
 		//[Column(IsPrimaryKey = true)]
         //[ScaffoldColumn(true)]
@@ -812,7 +844,8 @@ CREATE TABLE IF NOT EXISTS [<#= informationObjectName #>](
 					return null;
 				var fieldName = fieldData.Item1;
 				var dataType = fieldData.Item2;
-				var notNullClause = fieldData.Item3;
+				var defaultClause = dataType == "TEXT" ? "DEFAULT ''" : null;
+				var notNullClause = defaultClause ?? fieldData.Item3;
 				return string.Format("[{0}] {1} {2}", fieldName, dataType, notNullClause);
             }).Where(clause => clause != null).ToArray();
 			string wholePart = string.Join(", " + Environment.NewLine, itemArray);
@@ -992,7 +1025,8 @@ CREATE TABLE IF NOT EXISTS [<#= informationObjectName #>](
         private bool _Is<#= item.name #>Retrieved = false;
         private bool _Is<#= item.name #>Changed = false;
         private ObservableCollection<<#= dataType #>> _<#= item.name #> = null;
-        public ObservableCollection<<#= dataType #>> <#= item.name #>
+        [NotMapped]
+		public ObservableCollection<<#= dataType #>> <#= item.name #>
         {
             get
             {
