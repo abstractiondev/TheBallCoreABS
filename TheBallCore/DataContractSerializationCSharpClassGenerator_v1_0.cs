@@ -756,13 +756,29 @@ this.Write("\t\t\t\r\n\t\t\t}\r\n");
 this.Write(@"	#region Operation Calls
 	public partial class Server 
 	{
+	    public delegate Task ExecuteOperationFunc(string operationName, object parameters = null);
 
-		// TODO: Implement in partial 
-		//public static async Task ExecuteOperation(string operationName, object parameters) 
+	    public static ExecuteOperationFunc ExecuteOperation;
 
-		// TODO: Implement in partial 
+	    public delegate Task<object> GetObjectFunc(Type type, string id);
 
-		// TODO: Implement in partial 
+	    public static GetObjectFunc GetInformationObjectImplementation;
+	    public static GetObjectFunc GetInterfaceObjectImplementation;
+
+
+        private static async Task<T> GetInformationObject<T>(string id)
+	    {
+	        Type type = typeof(T);
+	        var objResult = await GetInformationObjectImplementation(type, id);
+	        return (T) objResult;
+	    }
+
+	    private static async Task<T> GetInterfaceObject<T>(string id)
+	    {
+	        Type type = typeof(T);
+	        var objResult = await GetInterfaceObjectImplementation(type, id);
+	        return (T)objResult;
+	    }
 
 ");
 
@@ -770,7 +786,7 @@ this.Write(@"	#region Operation Calls
         #line default
         #line hidden
         
-        #line 345 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
+        #line 361 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
 
 		if(instance.Operations == null)
 			return;
@@ -789,70 +805,70 @@ this.Write(@"	#region Operation Calls
         #line default
         #line hidden
         
-        #line 358 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
+        #line 374 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
 this.Write("\r\n\t\tpublic static async Task ");
 
         
         #line default
         #line hidden
         
-        #line 360 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
+        #line 376 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(operationName));
 
         
         #line default
         #line hidden
         
-        #line 360 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
+        #line 376 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
 this.Write("(");
 
         
         #line default
         #line hidden
         
-        #line 360 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
+        #line 376 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(paramString));
 
         
         #line default
         #line hidden
         
-        #line 360 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
+        #line 376 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
 this.Write(") \r\n\t\t{\r\n\t\t\tawait ExecuteOperation(\"");
 
         
         #line default
         #line hidden
         
-        #line 362 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
+        #line 378 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(operationFullName));
 
         
         #line default
         #line hidden
         
-        #line 362 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
+        #line 378 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
 this.Write("\"");
 
         
         #line default
         #line hidden
         
-        #line 362 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
+        #line 378 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(paramStringPart));
 
         
         #line default
         #line hidden
         
-        #line 362 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
+        #line 378 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
 this.Write(");\r\n\t\t}\r\n");
 
         
         #line default
         #line hidden
         
-        #line 364 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
+        #line 380 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
 
         }
 
@@ -864,56 +880,56 @@ this.Write(");\r\n\t\t}\r\n");
         #line default
         #line hidden
         
-        #line 370 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
+        #line 386 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
 this.Write("\t\tpublic static async Task<");
 
         
         #line default
         #line hidden
         
-        #line 371 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
+        #line 387 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(name));
 
         
         #line default
         #line hidden
         
-        #line 371 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
+        #line 387 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
 this.Write("> Get");
 
         
         #line default
         #line hidden
         
-        #line 371 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
+        #line 387 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(name));
 
         
         #line default
         #line hidden
         
-        #line 371 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
+        #line 387 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
 this.Write("(string id = null)\r\n\t\t{\r\n\t\t\tvar result = await GetInformationObject<");
 
         
         #line default
         #line hidden
         
-        #line 373 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
+        #line 389 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(name));
 
         
         #line default
         #line hidden
         
-        #line 373 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
+        #line 389 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
 this.Write(">(id);\r\n\t\t\treturn result;\r\n\t\t}\r\n");
 
         
         #line default
         #line hidden
         
-        #line 376 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
+        #line 392 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
 
 		}
 		foreach(var iObj in instance.DigitalInterface?.InterfaceModel ?? new InterfaceObjectType[0])
@@ -924,56 +940,56 @@ this.Write(">(id);\r\n\t\t\treturn result;\r\n\t\t}\r\n");
         #line default
         #line hidden
         
-        #line 381 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
+        #line 397 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
 this.Write("\t\tpublic static async Task<INT.");
 
         
         #line default
         #line hidden
         
-        #line 382 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
+        #line 398 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(name));
 
         
         #line default
         #line hidden
         
-        #line 382 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
+        #line 398 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
 this.Write("> Get");
 
         
         #line default
         #line hidden
         
-        #line 382 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
+        #line 398 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(name));
 
         
         #line default
         #line hidden
         
-        #line 382 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
+        #line 398 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
 this.Write("(string id = null)\r\n\t\t{\r\n\t\t\tvar result = await GetInterfaceObject<INT.");
 
         
         #line default
         #line hidden
         
-        #line 384 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
+        #line 400 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(name));
 
         
         #line default
         #line hidden
         
-        #line 384 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
+        #line 400 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
 this.Write(">(id);\r\n\t\t\treturn result;\r\n\t\t}\r\n");
 
         
         #line default
         #line hidden
         
-        #line 387 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
+        #line 403 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
 
 		}
 
@@ -982,14 +998,14 @@ this.Write(">(id);\r\n\t\t\treturn result;\r\n\t\t}\r\n");
         #line default
         #line hidden
         
-        #line 390 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
+        #line 406 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
 this.Write("\t}\r\n#endregion\r\n");
 
         
         #line default
         #line hidden
         
-        #line 393 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
+        #line 409 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
 
     }
 
@@ -1024,13 +1040,13 @@ this.Write("\t}\r\n#endregion\r\n");
         #line default
         #line hidden
         
-        #line 423 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
+        #line 439 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
 		} 
         
         #line default
         #line hidden
         
-        #line 425 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
+        #line 441 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
 
 		if(containsCollection) {
 
@@ -1038,14 +1054,14 @@ this.Write("\t}\r\n#endregion\r\n");
         #line default
         #line hidden
         
-        #line 427 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
+        #line 443 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
 this.Write("\t\t\t\r\n\r\n");
 
         
         #line default
         #line hidden
         
-        #line 430 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
+        #line 446 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
 
         } else {
 
@@ -1053,28 +1069,28 @@ this.Write("\t\t\t\r\n\r\n");
         #line default
         #line hidden
         
-        #line 432 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
+        #line 448 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
 this.Write("\r\n\t\t\t\tprivate void CopyContentFrom(");
 
         
         #line default
         #line hidden
         
-        #line 434 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
+        #line 450 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(informationObjectName));
 
         
         #line default
         #line hidden
         
-        #line 434 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
+        #line 450 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
 this.Write(" sourceObject)\r\n\t\t\t\t{\r\n");
 
         
         #line default
         #line hidden
         
-        #line 436 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
+        #line 452 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
 
 			foreach(var item in informationItems)
 			{
@@ -1083,42 +1099,42 @@ this.Write(" sourceObject)\r\n\t\t\t\t{\r\n");
         #line default
         #line hidden
         
-        #line 439 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
+        #line 455 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
 this.Write("\t\t\t\t\t");
 
         
         #line default
         #line hidden
         
-        #line 440 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
+        #line 456 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(item.name));
 
         
         #line default
         #line hidden
         
-        #line 440 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
+        #line 456 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
 this.Write(" = sourceObject.");
 
         
         #line default
         #line hidden
         
-        #line 440 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
+        #line 456 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(item.name));
 
         
         #line default
         #line hidden
         
-        #line 440 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
+        #line 456 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
 this.Write(";\r\n");
 
         
         #line default
         #line hidden
         
-        #line 441 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
+        #line 457 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
 
 			}
 
@@ -1126,14 +1142,14 @@ this.Write(";\r\n");
         #line default
         #line hidden
         
-        #line 443 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
+        #line 459 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
 this.Write("\t\t\t\t}\r\n\t\t\t\t\r\n\r\n\r\n\r\n");
 
         
         #line default
         #line hidden
         
-        #line 449 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
+        #line 465 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
 
         }
 
@@ -1141,7 +1157,7 @@ this.Write("\t\t\t\t}\r\n\t\t\t\t\r\n\r\n\r\n\r\n");
         #line default
         #line hidden
         
-        #line 453 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
+        #line 469 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
 
 	}
 	
@@ -1160,70 +1176,70 @@ this.Write("\t\t\t\t}\r\n\t\t\t\t\r\n\r\n\r\n\r\n");
         #line default
         #line hidden
         
-        #line 466 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
+        #line 482 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
 this.Write("\t\t\t[DataMember] ");
 
         
         #line default
         #line hidden
         
-        #line 467 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
+        #line 483 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(protoBufAttribute));
 
         
         #line default
         #line hidden
         
-        #line 467 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
+        #line 483 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
 this.Write("\r\n\t\t\tpublic List< ");
 
         
         #line default
         #line hidden
         
-        #line 468 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
+        #line 484 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(dataType));
 
         
         #line default
         #line hidden
         
-        #line 468 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
+        #line 484 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
 this.Write(" > ");
 
         
         #line default
         #line hidden
         
-        #line 468 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
+        #line 484 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(item.name));
 
         
         #line default
         #line hidden
         
-        #line 468 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
+        #line 484 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
 this.Write(" = new List< ");
 
         
         #line default
         #line hidden
         
-        #line 468 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
+        #line 484 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(dataType));
 
         
         #line default
         #line hidden
         
-        #line 468 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
+        #line 484 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
 this.Write(" >();\r\n");
 
         
         #line default
         #line hidden
         
-        #line 469 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
+        #line 485 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
 
             } else {
 
@@ -1231,84 +1247,84 @@ this.Write(" >();\r\n");
         #line default
         #line hidden
         
-        #line 471 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
+        #line 487 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
 this.Write("\t\t\t[DataMember] ");
 
         
         #line default
         #line hidden
         
-        #line 472 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
+        #line 488 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(protoBufAttribute));
 
         
         #line default
         #line hidden
         
-        #line 472 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
+        #line 488 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
 this.Write("\r\n\t\t\tpublic ");
 
         
         #line default
         #line hidden
         
-        #line 473 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
+        #line 489 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(dataType));
 
         
         #line default
         #line hidden
         
-        #line 473 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
+        #line 489 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
 this.Write(" ");
 
         
         #line default
         #line hidden
         
-        #line 473 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
+        #line 489 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(item.name));
 
         
         #line default
         #line hidden
         
-        #line 473 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
+        #line 489 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
 this.Write(" { get; set; }\r\n\t\t\tprivate ");
 
         
         #line default
         #line hidden
         
-        #line 474 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
+        #line 490 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(dataType));
 
         
         #line default
         #line hidden
         
-        #line 474 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
+        #line 490 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
 this.Write(" _unmodified_");
 
         
         #line default
         #line hidden
         
-        #line 474 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
+        #line 490 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
 this.Write(this.ToStringHelper.ToStringWithCulture(item.name));
 
         
         #line default
         #line hidden
         
-        #line 474 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
+        #line 490 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
 this.Write(";\r\n");
 
         
         #line default
         #line hidden
         
-        #line 475 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
+        #line 491 "S:\UserData\Kalle\work\abs\TheBallPlatform\Abstractions\TheBallCoreABS\TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt"
 
             }
 		}

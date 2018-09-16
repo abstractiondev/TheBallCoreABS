@@ -306,12 +306,7 @@ using Microsoft.EntityFrameworkCore;
             {
 				string tableClassName = informationObject.name + relProp.name;
 #>
-			public Table<<#= tableClassName #>> <#= tableClassName #>Table {
-				get {
-					return this.GetTable<<#= tableClassName #>>();
-				}
-			}
-
+			public DbSet<<#= tableClassName #>> <#= tableClassName #>Table { get; set; }
 <#+
             }
         }
@@ -662,23 +657,15 @@ PRIMARY KEY (<#= sourceIDName #>, <#= targetIDName #>)
         public string <#= targetIDName #> { get; set; }
 
 
-        private EntityRef<<#= sourceClassName #>> _<#= sourceClassName #> = new EntityRef<<#= sourceClassName #>>();
-        [Association(DeleteOnNull = true, IsForeignKey = true, ThisKey = "<#= sourceIDName #>", OtherKey = "ID", 
-			Storage = "_<#= sourceClassName #>", IsUnique = <#= (!isCollection).ToString().ToLower() #>)]
-        public <#= sourceClassName #> <#= sourceClassName #> 
-		{ 
-			get { return _<#= sourceClassName #>.Entity; }
-			set { _<#= sourceClassName #>.Entity = value; }
-		}
+        //private EntityRef<<#= sourceClassName #>> _<#= sourceClassName #> = new EntityRef<<#= sourceClassName #>>();
+        //[Association(DeleteOnNull = true, IsForeignKey = true, ThisKey = "<#= sourceIDName #>", OtherKey = "ID", 
+		//	Storage = "_<#= sourceClassName #>", IsUnique = <#= (!isCollection).ToString().ToLower() #>)]
+        public <#= sourceClassName #> <#= sourceClassName #> { get; set; }
 
-        private EntityRef<<#= targetClassName #>> _<#= targetClassName #> = new EntityRef<<#= targetClassName #>>();
-        [Association(DeleteOnNull = true, IsForeignKey = true, ThisKey = "<#= targetIDName #>", OtherKey = "ID", 
-			Storage = "_<#= targetClassName #>")]
-		public <#= targetClassName #> <#= targetClassName #> 
-		{ 
-			get { return _<#= targetClassName #>.Entity; }
-			set { _<#= targetClassName #>.Entity = value; }
-		}
+        //private EntityRef<<#= targetClassName #>> _<#= targetClassName #> = new EntityRef<<#= targetClassName #>>();
+        //[Association(DeleteOnNull = true, IsForeignKey = true, ThisKey = "<#= targetIDName #>", OtherKey = "ID", 
+		//	Storage = "_<#= targetClassName #>")]
+		public <#= targetClassName #> <#= targetClassName #> { get; set; }
 
     }
 
@@ -897,7 +884,10 @@ CREATE TABLE IF NOT EXISTS [<#= informationObjectName #>](
 	void GenerateObjectLinkEntityItem(InformationObjectType iObj, InformationItemType item)
     {
 		bool isCollection = item.isCollection;
-		string entityRefType = isCollection ? "EntitySet" : "EntityRef";
+		Func<string, string> collectionRef = str => $"List<{str}>";
+		Func<string, string> singleRef = str => str;
+		var entityRefFunc = isCollection ?  collectionRef : singleRef;
+		string entityRefType = "obsoleted";
 		string sourceName = iObj.name;
 		string sourceIDName = sourceName + "ID";
 		string propertyName = item.name;
@@ -905,23 +895,27 @@ CREATE TABLE IF NOT EXISTS [<#= informationObjectName #>](
 		string targetClassName = sourceName + propertyName;
 		if(isCollection) {
 #>
-		private <#= entityRefType #><<#= targetClassName #>> <#= fieldName #> = new <#= entityRefType #><<#= targetClassName #>>();
-        [Association(ThisKey = "ID", OtherKey = "<#= sourceIDName #>", Storage="<#= fieldName #>")]
-        public <#= entityRefType #><<#= targetClassName #>> <#= propertyName #> { 
-			get { return <#= fieldName #>; }
-			set { <#= fieldName #>.Assign(value); }
+		//private <#= entityRefType #><<#= targetClassName #>> <#= fieldName #> = new <#= entityRefType #><<#= targetClassName #>>();
+        //[Association(ThisKey = "ID", OtherKey = "<#= sourceIDName #>", Storage="<#= fieldName #>")]
+        public <#= entityRefFunc(targetClassName) #> <#= propertyName #> { 
+			get; 
+			set;
+			//get { return <#= fieldName #>; }
+			//set { <#= fieldName #>.Assign(value); }
 		}
 
 <#+
         } else {
 
 #>
-		private <#= entityRefType #><<#= targetClassName #>> <#= fieldName #> = new <#= entityRefType #><<#= targetClassName #>>();
-        [Association(ThisKey = "ID", OtherKey = "<#= sourceIDName #>", Storage="<#= fieldName #>")]
+		//private <#= entityRefType #><<#= targetClassName #>> <#= fieldName #> = new <#= entityRefType #><<#= targetClassName #>>();
+        //[Association(ThisKey = "ID", OtherKey = "<#= sourceIDName #>", Storage="<#= fieldName #>")]
         public <#= targetClassName #> <#= propertyName #> 
 		{ 
-			get { return <#= fieldName #>.Entity; }
-			set { <#= fieldName #>.Entity = value; }
+			get;
+			set;
+			//get { return <#= fieldName #>.Entity; }
+			//set { <#= fieldName #>.Entity = value; }
 		}
 
 <#+
