@@ -331,6 +331,7 @@ using System.Threading.Tasks;
 	{
 		var serviceName = instance.semanticDomainName.Replace(".", "");
 #>
+	
 	#region Operation Calls
 	public partial class Server 
 	{
