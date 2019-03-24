@@ -1,5 +1,4 @@
-﻿<#@ IntelliSenseLanguage processor="tangibleT4Editor" language="C#" #>
-<#@ include file="TheBallCore_v1_0.ttinclude" #>
+﻿<#@ include file="TheBallCore_v1_0.ttinclude" #>
 <#+ 
 
 	InterfaceObjectType GetInterfaceObjectByName(string interfaceObjectName)

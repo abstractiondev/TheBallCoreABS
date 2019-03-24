@@ -1,137 +1,82 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>8.0.30703</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{ADFE0244-B352-4B21-AB0F-040805535C71}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>TheBallCoreABS</RootNamespace>
-    <AssemblyName>TheBallCoreABS</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
+    <TargetFrameworks>netstandard2.0</TargetFrameworks>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Mono.TextTemplating, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Mono.TextTemplating.1.1.0\lib\net45\Mono.TextTemplating.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
+    <Folder Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TheBallCore\AzureCSharpDataClassGenerator_v1_0.cs">
-      <DependentUpon>AzureCSharpDataClassGenerator_v1_0.tt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="TheBallCore\NgTypeScriptClassGenerator_v1_0.cs">
-      <DependentUpon>NgTypeScriptClassGenerator_v1_0.tt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.cs">
-      <DependentUpon>DataContractSerializationCSharpClassGenerator_v1_0.tt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="TheBallCore\AzureCSharpClassGenerator_v1_0.cs">
-      <DependentUpon>AzureCSharpClassGenerator_v1_0.tt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="TheBallCore\InterfaceModelCSharpClassGenerator_v1_0.cs">
-      <DependentUpon>InterfaceModelCSharpClassGenerator_v1_0.tt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="TheBallCore\SQLiteCSharpClassGenerator_v1_0.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SQLiteCSharpClassGenerator_v1_0.tt</DependentUpon>
-    </Compile>
-    <Compile Include="TheBallCore\TheBallCore_v1_0_namespace.cs" />
+    <PackageReference Include="Microsoft.CSharp" Version="4.5.0" />
+    <PackageReference Include="Mono.TextTemplating" Version="2.0.3" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
-    <None Include="TheBallCore\NgTypeScriptClassGenerator_v1_0.tt">
-      <Generator>TextTemplatingFilePreprocessor</Generator>
-      <LastGenOutput>NgTypeScriptClassGenerator_v1_0.cs</LastGenOutput>
-    </None>
-    <None Include="TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt">
-      <Generator>TextTemplatingFilePreprocessor</Generator>
-      <LastGenOutput>DataContractSerializationCSharpClassGenerator_v1_0.cs</LastGenOutput>
-    </None>
-    <None Include="TheBallCore\Content_v1_0\TheBallCore_v1_0.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>TheBallCore_v1_0.xsd</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </None>
-    <None Include="TheBallCore\Content_v1_0\TheBallCore_v1_0.xsd">
-      <Generator>T4ScriptFileGenerator</Generator>
-      <LastGenOutput>TheBallCore_v1_0.tt</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="TheBallCore\AzureCSharpClassGenerator_v1_0.tt">
+    <None Update="TheBallCore\AzureCSharpClassGenerator_v1_0.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>AzureCSharpClassGenerator_v1_0.cs</LastGenOutput>
     </None>
-    <None Include="TheBallCore\InterfaceModelCSharpClassGenerator_v1_0.tt">
-      <Generator>TextTemplatingFilePreprocessor</Generator>
-      <LastGenOutput>InterfaceModelCSharpClassGenerator_v1_0.cs</LastGenOutput>
-    </None>
-    <None Include="TheBallCore\InterfaceGeneration.ttinclude" />
-    <None Include="TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt">
-      <Generator>TextTemplatingFilePreprocessor</Generator>
-      <LastGenOutput>SQLiteCSharpClassGenerator_v1_0.cs</LastGenOutput>
-    </None>
-    <None Include="TheBallCore\TheBallCore_v1_0.ttinclude" />
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Options.xml" />
-    <None Include="TheBallCore\AzureCSharpDataClassGenerator_v1_0.tt">
+    <None Update="TheBallCore\AzureCSharpDataClassGenerator_v1_0.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>AzureCSharpDataClassGenerator_v1_0.cs</LastGenOutput>
     </None>
+    <None Update="TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>DataContractSerializationCSharpClassGenerator_v1_0.cs</LastGenOutput>
+    </None>
+    <None Update="TheBallCore\InterfaceModelCSharpClassGenerator_v1_0.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>InterfaceModelCSharpClassGenerator_v1_0.cs</LastGenOutput>
+    </None>
+    <None Update="TheBallCore\KnockoutDustHtmlViewGenerator_v1_0.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>KnockoutDustHtmlViewGenerator_v1_0.cs</LastGenOutput>
+    </None>
+    <None Update="TheBallCore\NgTypeScriptClassGenerator_v1_0.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>NgTypeScriptClassGenerator_v1_0.cs</LastGenOutput>
+    </None>
+    <None Update="TheBallCore\SQLiteCSharpClassGenerator_v1_0.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>SQLiteCSharpClassGenerator_v1_0.cs</LastGenOutput>
+    </None>
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="TheBallCore\AzureCSharpClassGenerator_v1_0.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>AzureCSharpClassGenerator_v1_0.tt</DependentUpon>
+    </Compile>
+    <Compile Update="TheBallCore\AzureCSharpDataClassGenerator_v1_0.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>AzureCSharpDataClassGenerator_v1_0.tt</DependentUpon>
+    </Compile>
+    <Compile Update="TheBallCore\DataContractSerializationCSharpClassGenerator_v1_0.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>DataContractSerializationCSharpClassGenerator_v1_0.tt</DependentUpon>
+    </Compile>
+    <Compile Update="TheBallCore\InterfaceModelCSharpClassGenerator_v1_0.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>InterfaceModelCSharpClassGenerator_v1_0.tt</DependentUpon>
+    </Compile>
+    <Compile Update="TheBallCore\KnockoutDustHtmlViewGenerator_v1_0.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>KnockoutDustHtmlViewGenerator_v1_0.tt</DependentUpon>
+    </Compile>
+    <Compile Update="TheBallCore\NgTypeScriptClassGenerator_v1_0.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>NgTypeScriptClassGenerator_v1_0.tt</DependentUpon>
+    </Compile>
+    <Compile Update="TheBallCore\SQLiteCSharpClassGenerator_v1_0.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>SQLiteCSharpClassGenerator_v1_0.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
 </Project>
