@@ -92,7 +92,7 @@
 using DOM=<#= instance.semanticDomainName #>;
 using System.Threading.Tasks;
 
-namespace TheBall.CORE {
+namespace TheBall.Core {
 	public static partial class OwnerInitializer
 	{
 		private static async Task DOMAININIT_<#= domainNameMethodPart #>(IContainerOwner owner)
@@ -117,8 +117,8 @@ using System.Runtime.Serialization;
 using Microsoft.WindowsAzure.Storage.Blob;
 using ProtoBuf;
 using TheBall;
-using TheBall.CORE;
-using TheBall.CORE.Storage;
+using TheBall.Core;
+using TheBall.Core.StorageCore;
 
 <#+
 		BeginNamespace("INT");
@@ -310,7 +310,8 @@ using TheBall.CORE.Storage;
 					//string contentTypeName = ""; // SemanticDomainName + "." + Name
 					string contentTypeName = "<#= semanticDomainName #>/<#= objectName #>/";
 					List<IInformationObject> informationObjects = new List<IInformationObject>();
-					var blobListing = await BlobStorage.GetBlobItemsA(owner, contentTypeName);
+                    var storageService = CoreServices.GetCurrent<IStorageService>();
+					var blobListing = await storageService.GetBlobItemsA(owner, contentTypeName);
 					foreach(var blob in blobListing)
 					{
 						if (blob.GetBlobInformationType() != StorageSupport.InformationType_InformationObjectValue)
@@ -334,7 +335,7 @@ using TheBall.CORE.Storage;
 					if(iObject.IsIndependentMaster == false)
 						throw new NotSupportedException("Cannot retrieve master for non-master type: <#= informationObjectName #>");
 					initiated = false;
-					var owner = VirtualOwner.FigureOwner(this);
+					var owner = VirtualOwner.FigureOwner(RelativeLocation);
 					var master = await StorageSupport.RetrieveInformationA(RelativeLocation, typeof(<#= informationObjectName #>), null, owner);
 					if(master == null && initiateIfMissing)
 					{
@@ -571,7 +572,7 @@ using TheBall.CORE.Storage;
 				string IInformationCollection.GetMasterLocation()
 				{
 <#+			if(isMasterCollection) { #>
-					var owner = VirtualOwner.FigureOwner(this);
+					var owner = VirtualOwner.FigureOwner(RelativeLocation);
 					return GetMasterCollectionLocation(owner);
 <#+			} else { #>
 					throw new NotSupportedException("Master collection location only supported for master collections");
@@ -582,7 +583,7 @@ using TheBall.CORE.Storage;
 				async Task<IInformationCollection> IInformationCollection.GetMasterInstanceAsync()
 				{
 <#+			if(isMasterCollection) { #>
-					var owner = VirtualOwner.FigureOwner(this);
+					var owner = VirtualOwner.FigureOwner(RelativeLocation);
 					return await GetMasterCollectionInstanceAsync(owner);
 <#+			} else { #>
 					throw new NotSupportedException("Master collection instance only supported for master collections");
@@ -595,7 +596,7 @@ using TheBall.CORE.Storage;
 				{
 					string dummyItemLocation = ObjectStorage.GetRelativeLocationFromID<<#= contentObjectName #>>("dummy");
 					string nonOwnerDirectoryLocation = StorageSupport.GetParentDirectoryTarget(dummyItemLocation);
-					var owner = VirtualOwner.FigureOwner(this);
+					var owner = VirtualOwner.FigureOwner(RelativeLocation);
 					string ownerDirectoryLocation = StorageSupport.GetOwnerContentLocation(owner, nonOwnerDirectoryLocation);
 					return ownerDirectoryLocation;
 				}
@@ -618,7 +619,7 @@ using TheBall.CORE.Storage;
             } else if(isDerivedCollection) {
 #>
 					// CollectionToCollection
-					var owner = VirtualOwner.FigureOwner(this);
+					var owner = VirtualOwner.FigureOwner(RelativeLocation);
 					var masterCollection = await <#= derivedMasterCollName #>.GetMasterCollectionInstanceAsync(owner);
 					await this.RefreshContentFromMasterAsync(masterCollection);
 <#+
